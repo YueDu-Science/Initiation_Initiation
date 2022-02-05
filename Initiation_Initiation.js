@@ -5300,6 +5300,7 @@ function Instr_CR_OldRoutineBegin(trials) {
         }
     }
 
+    block_count = block_count_cr_old;
     Instr_CR_Old_Text.setText(instr_text);
     Instr_CR_Old_Press.keys = undefined;
     Instr_CR_Old_Press.rt = undefined;
@@ -5533,8 +5534,6 @@ function Pre_TrialRoutineEnd(trials) {
     psychoJS.experiment.addData("grp_stop", grp_stop);
     psychoJS.experiment.addData("grp_swap", grp_swap);
     psychoJS.experiment.addData("block_num", block_count);
-    psychoJS.experiment.addData("block_num", block_count_cr_old);
-    psychoJS.experiment.addData("block_num", block_count_rt_old);
     psychoJS.experiment.addData("prep_time", prep_time);
     psychoJS.experiment.addData("session", session);
     
@@ -6482,22 +6481,22 @@ function Instr_RTRoutineBegin(trials) {
     Instr_RTClock.reset(); // clock
     frameN = -1;
     // update component parameters for each repeat
-    block_count_rt_old  = block_count_rt_old  + 1;
+    block_count = (block_count_cr_old - 1)*rt_block;
 
-    if (block_count_rt_old == 1) {
+    if (block_count_cr_old == 1) {
       instr_text = instr_rt_old_text_1;
     } else {
-        if (block_count_rt_old == 2) {
+        if (block_count_cr_old == 2) {
           instr_text = instr_rt_old_text_2;
         } else {
-          if (block_count_rt_old >= 3) {
+          if (block_count_cr_old >= 3) {
             instr_text = instr_rt_old_text_2;
           }
         }
     }
 
 
-    Instr_RT_Text.setText(instr_rt_text);
+    Instr_RT_Text.setText(instr_text);
     Instr_RT_Press.keys = undefined;
     Instr_RT_Press.rt = undefined;
     _Instr_RT_Press_allKeys = [];
