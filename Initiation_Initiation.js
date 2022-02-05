@@ -59,18 +59,22 @@ const TR_Hand_BoolLoopScheduler = new Scheduler(psychoJS);
 flowScheduler.add(TR_Hand_BoolLoopBegin, TR_Hand_BoolLoopScheduler);
 flowScheduler.add(TR_Hand_BoolLoopScheduler);
 flowScheduler.add(TR_Hand_BoolLoopEnd);
-const CR_Old_BoolLoopScheduler = new Scheduler(psychoJS);
-flowScheduler.add(CR_Old_BoolLoopBegin, CR_Old_BoolLoopScheduler);
-flowScheduler.add(CR_Old_BoolLoopScheduler);
-flowScheduler.add(CR_Old_BoolLoopEnd);
+//const CR_Old_BoolLoopScheduler = new Scheduler(psychoJS);
+//flowScheduler.add(CR_Old_BoolLoopBegin, CR_Old_BoolLoopScheduler);
+//flowScheduler.add(CR_Old_BoolLoopScheduler);
+//flowScheduler.add(CR_Old_BoolLoopEnd);
 const TR_Old_Pre_BoolLoopScheduler = new Scheduler(psychoJS);
 flowScheduler.add(TR_Old_Pre_BoolLoopBegin, TR_Old_Pre_BoolLoopScheduler);
 flowScheduler.add(TR_Old_Pre_BoolLoopScheduler);
 flowScheduler.add(TR_Old_Pre_BoolLoopEnd);
-const RT_BoolLoopScheduler = new Scheduler(psychoJS);
-flowScheduler.add(RT_BoolLoopBegin, RT_BoolLoopScheduler);
-flowScheduler.add(RT_BoolLoopScheduler);
-flowScheduler.add(RT_BoolLoopEnd);
+const Prac_Old_IterLoopScheduler = new Scheduler(psychoJS);
+flowScheduler.add(Prac_Old_IterLoopBegin, Prac_Old_IterLoopScheduler);
+flowScheduler.add(Prac_Old_IterLoopScheduler);
+flowScheduler.add(Prac_Old_IterLoopEnd);
+//const RT_BoolLoopScheduler = new Scheduler(psychoJS);
+//flowScheduler.add(RT_BoolLoopBegin, RT_BoolLoopScheduler);
+//flowScheduler.add(RT_BoolLoopScheduler);
+//flowScheduler.add(RT_BoolLoopEnd);
 const TR_Old_Post_BoolLoopScheduler = new Scheduler(psychoJS);
 flowScheduler.add(TR_Old_Post_BoolLoopBegin, TR_Old_Post_BoolLoopScheduler);
 flowScheduler.add(TR_Old_Post_BoolLoopScheduler);
@@ -197,20 +201,23 @@ var tr_block_hand = 4;
 var num_trials_hand = 4;
 var num_trials_cr = 2000;
 var num_criterion = 2;
-var num_trials = 8;
-var rt_block = 2;
+
 var tr_block_old = 2;
 var tr_block_new_swap = 2;
 var tr_block_new_stop = 2;
 
-var tr_hand_yes = 1;
+var prac_old_block = 5;   // set of criterion + practice (rt_blocks)
+var rt_block = 2;
+var num_trials = 8;
+
+var tr_hand_yes = 0;
 var rt_hand_yes = 1;
 var cr_old_yes = 1;
 var cr_new_yes = 1;
 var rt_yes = 1;
-var tr_old_pre_yes = 1;
-var tr_old_post_yes = 1;
-var tr_new_yes = 1;
+var tr_old_pre_yes = 0;
+var tr_old_post_yes = 0;
+var tr_new_yes = 0;
 //////////////////////////////////////
 
 var timing_tol_early = 0.1;
@@ -1837,6 +1844,44 @@ function TR_Hand_BoolLoopEnd() {
   return Scheduler.Event.NEXT;
 }
 
+
+var Prac_Old_Iter;
+function Prac_Old_IterLoopBegin(thisScheduler) {
+  // set up handler to look after randomisation of conditions etc
+  CR_Old_Bool = new TrialHandler({
+    psychoJS: psychoJS,
+    nReps: prac_old_block, method: TrialHandler.Method.SEQUENTIAL,
+    extraInfo: expInfo, originPath: undefined,
+    trialList: undefined,
+    seed: undefined, name: 'Prac_Old_Iter'
+  });
+  psychoJS.experiment.addLoop(Prac_Old_Iter); // add the loop to the experiment
+  currentLoop = Prac_Old_Iter;  // we're now the current loop
+
+  // Schedule all the trials in the trialList:
+  for (const thisPrac_Old_Iter of Prac_Old_Iter) {
+    const snapshot = Prac_Old_Iter.getSnapshot();
+    thisScheduler.add(importConditions(snapshot));
+    const Prac_Old_IterLoopScheduler = new Scheduler(psychoJS);
+    thisScheduler.add(CR_Old_BoolLoopBegin, CR_Old_BoolLoopScheduler);
+    thisScheduler.add(CR_Old_BoolLoopScheduler);
+    thisScheduler.add(CR_Old_BoolLoopEnd);
+    const RT_BoolLoopScheduler = new Scheduler(psychoJS);
+    thisScheduler.add(RT_BoolLoopBegin, RT_BoolLoopScheduler);
+    thisScheduler.add(RT_BoolLoopScheduler);
+    thisScheduler.add(RT_BoolLoopEnd);
+    thisScheduler.add(endLoopIteration(thisScheduler, snapshot));
+    
+  }
+
+  return Scheduler.Event.NEXT;
+}
+
+function Prac_Old_IterLoopEnd() {
+  psychoJS.experiment.removeLoop(Prac_Old_Iter);
+
+  return Scheduler.Event.NEXT;
+}
 
 var CR_Old_Bool;
 function CR_Old_BoolLoopBegin(thisScheduler) {
