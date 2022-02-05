@@ -1848,7 +1848,7 @@ function TR_Hand_BoolLoopEnd() {
 var Prac_Old_Iter;
 function Prac_Old_IterLoopBegin(thisScheduler) {
   // set up handler to look after randomisation of conditions etc
-  CR_Old_Bool = new TrialHandler({
+  Prac_Old_Iter = new TrialHandler({
     psychoJS: psychoJS,
     nReps: prac_old_block, method: TrialHandler.Method.SEQUENTIAL,
     extraInfo: expInfo, originPath: undefined,
@@ -1862,7 +1862,7 @@ function Prac_Old_IterLoopBegin(thisScheduler) {
   for (const thisPrac_Old_Iter of Prac_Old_Iter) {
     const snapshot = Prac_Old_Iter.getSnapshot();
     thisScheduler.add(importConditions(snapshot));
-    const Prac_Old_IterLoopScheduler = new Scheduler(psychoJS);
+    const CR_Old_BoolLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(CR_Old_BoolLoopBegin, CR_Old_BoolLoopScheduler);
     thisScheduler.add(CR_Old_BoolLoopScheduler);
     thisScheduler.add(CR_Old_BoolLoopEnd);
