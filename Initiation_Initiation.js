@@ -3312,7 +3312,7 @@ ACCURACY is the priority, so go as slowly as you need to. The more mistakes you 
 Ready? Press one of (H, U, I, L) to continue.`
     ;
 
-    instr_rt_text_1 = `Now, you are going to practice the symbol-key map you just learned:
+    instr_rt_old_text_1 = `Now, you are going to practice the symbol-key map you just learned:
 
 If you see a symbol that requires a response, press the corresponding key as quickly and as accurately as possible.            
 
@@ -3325,7 +3325,7 @@ There will be ${rt_block} blocks with short breaks in between.
 Whenever you are ready, press one of (H, U, I, L) to start.`
     ;
 
-    instr_rt_text_2 = `Now, practice the NEW symbol-key map you just learned:
+    instr_rt_old_text_2 = `Now, practice the NEW symbol-key map you just learned:
 
 If you see a symbol that requires a response, press the corresponding key as quickly and as accurately as possible.            
 
