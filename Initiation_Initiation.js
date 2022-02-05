@@ -188,6 +188,10 @@ var num_symb = 8;
 var symb_perm = permute(x_symb);
 var n_map = symb_perm.length;
 
+var block_count_cr_old = 0;
+var block_count_rt_old = 0;
+
+
 var symb_remap_ind;
 var symb_map_ind;
 var symb_map = [];
@@ -3203,8 +3207,12 @@ var instr_end_exp_text;
 var instr_exp_text;
 var instr_rt_text_hand;
 var instr_tr_text_hand;
-var instr_cr_old_text;
-var instr_rt_text;
+var instr_cr_old_text_1;
+var instr_cr_old_text_2;
+var instr_cr_old_text_3;
+var instr_rt_old_text_1;
+var instr_rt_old_text_2;
+var instr_rt_old_text_3;
 var instr_tr_old_pre_text;
 var instr_tr_old_post_text;
 var instr_cr_new_text;
@@ -3254,9 +3262,15 @@ Let’s practice for 2 blocks!
 
 Press one of (H, U, I, L) to continue.`
     ;
-    instr_cr_old_text = `Good Job! You are now ready for the tasks!
+    instr_cr_old_text_1 = `Good Job! You are now ready for the tasks!
     
-You will see eight symbols on the screen, one at a time. Each symbol corresponds to one of (H, U, I, L). Your job is to figure out which symbol corresponds with which key.
+You will see eight symbols on the screen, one at a time. You need to figure out the association between symbols and keys.
+
+Some symbols corresponds to one of (H, U, I, L). 
+
+Some of them may do not correspond with a key (H, U, I, L). DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+
+Your job is to figure out the association between symbols and keys.
 
 
 ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
@@ -3265,8 +3279,67 @@ ACCURACY is the priority, so go as slowly as you need to. The more mistakes you 
 
 Ready? Press one of (H, U, I, L) to continue.`
     ;
+
+    instr_cr_old_text_2 = ` Now, you will see the same eight symbols, but this time the association changes. 
+    
+Your job is to figure out the new association between symbols and keys.
+    
+Again, some symbols corresponds to one of (H, U, I, L). 
+
+Some of them may do not correspond with a key (H, U, I, L). DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+
+
+ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
+    
+
+
+Ready? Press one of (H, U, I, L) to continue.`
+    ;
+
+    instr_cr_old_text_3 = `The association between symbols and keys changes again. 
+    
+Take you time to figure out the new association.
+    
+Again, some symbols corresponds to one of (H, U, I, L). 
+
+Some of them may do not correspond with a key (H, U, I, L). DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+
+
+ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
+    
+
+
+Ready? Press one of (H, U, I, L) to continue.`
+    ;
+
+    instr_rt_text_1 = `Now, you are going to practice the symbol-key map you just learned:
+
+If you see a symbol that requires a response, press the corresponding key as quickly and as accurately as possible.            
+
+If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING, and simply wait for 1 second.
+    
+There will be ${rt_block} blocks with short breaks in between.
+    
+
+
+Whenever you are ready, press one of (H, U, I, L) to start.`
+    ;
+
+    instr_rt_text_2 = `Now, practice the NEW symbol-key map you just learned:
+
+If you see a symbol that requires a response, press the corresponding key as quickly and as accurately as possible.            
+
+If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING, and simply wait for 1 second.
+    
+There will be ${rt_block} blocks with short breaks in between.
+    
+
+
+Whenever you are ready, press one of (H, U, I, L) to start.`
+    ;
+
     if ((session === 1)) {
-        instr_rt_text = `Now you are going to practice the symbol-key map you learned. Your job is to press the corresponding key as quickly and as accurately as possible.
+        instr_rt_text_1 = `Now you are going to practice the symbol-key map you learned. Your job is to press the corresponding key as quickly and as accurately as possible.
     
 There will be ${rt_block} blocks with short breaks in between.
     
@@ -3275,7 +3348,7 @@ Whenever you are ready, press one of (H, U, I, L) to start.`
     ;
     } else {
         if ((1 < session)) {
-            instr_rt_text = `Today, we first continue to practice the symbol-key maps for ${rt_block} blocks.
+            instr_rt_text_1 = `Today, we first continue to practice the symbol-key maps for ${rt_block} blocks.
     
 Remember, your job is to press the corresponding key as quickly and accurately as you can.
     
@@ -5203,7 +5276,7 @@ function TR_Hand_Accuracy_BoolRoutineEnd(trials) {
   };
 }
 
-
+var instr_text;
 var _Instr_CR_Old_Press_allKeys;
 var Instr_CR_OldComponents;
 function Instr_CR_OldRoutineBegin(trials) {
@@ -5213,13 +5286,26 @@ function Instr_CR_OldRoutineBegin(trials) {
     Instr_CR_OldClock.reset(); // clock
     frameN = -1;
     // update component parameters for each repeat
-    Instr_CR_Old_Text.setText(instr_cr_old_text);
+    block_count_cr_old  = block_count_cr_old  + 1;
+
+    if (block_count_cr_old == 1) {
+      instr_text = instr_cr_old_text_1;
+    } else {
+        if (block_count_cr_old == 2) {
+          instr_text = instr_cr_old_text_2;
+        } else {
+          if (block_count_cr_old >= 3) {
+            instr_text = instr_cr_old_text_3;
+          }
+        }
+    }
+
+    Instr_CR_Old_Text.setText(instr_text);
     Instr_CR_Old_Press.keys = undefined;
     Instr_CR_Old_Press.rt = undefined;
     _Instr_CR_Old_Press_allKeys = [];
     block_type = "CR";
     stim_type = "Symb";
-    block_count = 0;
     remap = 0;
     symb = symb_map;
     symb_g = symb_g_map;
@@ -5447,6 +5533,8 @@ function Pre_TrialRoutineEnd(trials) {
     psychoJS.experiment.addData("grp_stop", grp_stop);
     psychoJS.experiment.addData("grp_swap", grp_swap);
     psychoJS.experiment.addData("block_num", block_count);
+    psychoJS.experiment.addData("block_num", block_count_cr_old);
+    psychoJS.experiment.addData("block_num", block_count_rt_old);
     psychoJS.experiment.addData("prep_time", prep_time);
     psychoJS.experiment.addData("session", session);
     
@@ -6394,6 +6482,21 @@ function Instr_RTRoutineBegin(trials) {
     Instr_RTClock.reset(); // clock
     frameN = -1;
     // update component parameters for each repeat
+    block_count_rt_old  = block_count_rt_old  + 1;
+
+    if (block_count_rt_old == 1) {
+      instr_text = instr_rt_old_text_1;
+    } else {
+        if (block_count_rt_old == 2) {
+          instr_text = instr_rt_old_text_2;
+        } else {
+          if (block_count_rt_old >= 3) {
+            instr_text = instr_rt_old_text_2;
+          }
+        }
+    }
+
+
     Instr_RT_Text.setText(instr_rt_text);
     Instr_RT_Press.keys = undefined;
     Instr_RT_Press.rt = undefined;
@@ -6401,13 +6504,7 @@ function Instr_RTRoutineBegin(trials) {
     block_type = "RT";
     stim_type = "Symb";
     remap = 0;
-    if ((session === 1)) {
-        block_count = 0;
-    } else {
-        if ((session === 2)) {
-            block_count = 5;
-        }
-    }
+    
     symb = symb_map;
     symb_g = symb_g_map;
     symb_r = symb_r_map;
