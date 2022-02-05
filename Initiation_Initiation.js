@@ -3339,7 +3339,7 @@ Whenever you are ready, press one of (H, U, I, L) to start.`
     ;
 
     if ((session === 1)) {
-        instr_rt_text_1 = `Now you are going to practice the symbol-key map you learned. Your job is to press the corresponding key as quickly and as accurately as possible.
+        instr_rt_old_text_1 = `Now you are going to practice the symbol-key map you learned. Your job is to press the corresponding key as quickly and as accurately as possible.
     
 There will be ${rt_block} blocks with short breaks in between.
     
@@ -3348,7 +3348,7 @@ Whenever you are ready, press one of (H, U, I, L) to start.`
     ;
     } else {
         if ((1 < session)) {
-            instr_rt_text_1 = `Today, we first continue to practice the symbol-key maps for ${rt_block} blocks.
+            instr_rt_old_text_1 = `Today, we first continue to practice the symbol-key maps for ${rt_block} blocks.
     
 Remember, your job is to press the corresponding key as quickly and accurately as you can.
     
