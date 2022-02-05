@@ -3268,7 +3268,7 @@ You will see eight symbols on the screen, one at a time. You need to figure out 
 
 Some symbols corresponds to one of (H, U, I, L). 
 
-Some of them may do not correspond with a key (H, U, I, L). DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+Some symbols do not correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
 Your job is to figure out the association between symbols and keys.
 
@@ -3280,13 +3280,13 @@ ACCURACY is the priority, so go as slowly as you need to. The more mistakes you 
 Ready? Press one of (H, U, I, L) to continue.`
     ;
 
-    instr_cr_old_text_2 = ` Now, you will see the same eight symbols, but this time the association changes. 
+    instr_cr_old_text_2 = `Now, you will see the same eight symbols, but this time the association changes. 
     
 Your job is to figure out the new association between symbols and keys.
     
 Again, some symbols corresponds to one of (H, U, I, L). 
 
-Some of them may do not correspond with a key (H, U, I, L). DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+Some symbols do not correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
 
 ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
@@ -3302,7 +3302,7 @@ Take you time to figure out the new association.
     
 Again, some symbols corresponds to one of (H, U, I, L). 
 
-Some of them may do not correspond with a key (H, U, I, L). DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+Some symbols do not correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
 
 ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
@@ -3338,7 +3338,7 @@ There will be ${rt_block} blocks with short breaks in between.
 Whenever you are ready, press one of (H, U, I, L) to start.`
     ;
 
-    if ((session === 1)) {
+    if ((session > 1)) {
         instr_rt_old_text_1 = `Now you are going to practice the symbol-key map you learned. Your job is to press the corresponding key as quickly and as accurately as possible.
     
 There will be ${rt_block} blocks with short breaks in between.
@@ -3347,7 +3347,7 @@ There will be ${rt_block} blocks with short breaks in between.
 Whenever you are ready, press one of (H, U, I, L) to start.`
     ;
     } else {
-        if ((1 < session)) {
+        if ((2 < session)) {
             instr_rt_old_text_1 = `Today, we first continue to practice the symbol-key maps for ${rt_block} blocks.
     
 Remember, your job is to press the corresponding key as quickly and accurately as you can.
