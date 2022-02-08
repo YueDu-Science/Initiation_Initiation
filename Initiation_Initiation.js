@@ -5325,6 +5325,7 @@ function TR_Hand_Accuracy_BoolRoutineEnd(trials) {
 var instr_text;
 var _Instr_CR_Old_Press_allKeys;
 var Instr_CR_OldComponents;
+var rng;
 function Instr_CR_OldRoutineBegin(trials) {
   return function () {
     //------Prepare to start Routine 'Instr_CR_Old'-------
@@ -5357,8 +5358,8 @@ function Instr_CR_OldRoutineBegin(trials) {
     stim_type = "Symb";
     remap = 0;
     
-    
-    symb_map_rnd_stop = Math.floor(myrng() * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
+    rng = myrng()
+    symb_map_rnd_stop = Math.floor(rng * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
     symb_map_rnd_resp = map_ind[block_count-1]// random interger between 0 and num_symb - 1 
     symb_map_ind = symb_perm_stop(symb_map_rnd_stop).concat(symb_perm_remap(symb_map_rnd_resp));
     
@@ -6829,7 +6830,8 @@ function Instr_CR_NewRoutineBegin(trials) {
     stop_pair_1 = probe_pair_1;
     stop_pair_2 = remap_pair_2;
 
-    symb_map_rnd_stop = Math.floor(myrng() * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
+    rng = myrng()
+    symb_map_rnd_stop = Math.floor(rng * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
     symb_map_rnd_resp = map_ind[symb_perm_remap.length-1]// random interger between 0 and num_symb - 1 
     symb_map_ind = symb_perm_stop(symb_map_rnd_stop).concat(symb_perm_remap(symb_map_rnd_resp));
 
