@@ -5362,7 +5362,7 @@ function Instr_CR_OldRoutineBegin(trials) {
     
     symb_map_rnd_stop = Math.floor(myrng() * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
     symb_map_rnd_resp = map_ind[block_count-1]// random interger between 0 and num_symb - 1 
-    symb_map_ind = symb_perm_stop(symb_map_rnd_stop).concat(symb_perm_remap(symb_map_rnd_resp));
+    symb_map_ind = symb_perm_stop[symb_map_rnd_stop].concat(symb_perm_resp[symb_map_rnd_resp]);
     
 
     for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
@@ -6833,7 +6833,7 @@ function Instr_CR_NewRoutineBegin(trials) {
 
     symb_map_rnd_stop = Math.floor(myrng() * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
     symb_map_rnd_resp = map_ind[symb_perm_remap.length-1]// random interger between 0 and num_symb - 1 
-    symb_map_ind = symb_perm_stop(symb_map_rnd_stop).concat(symb_perm_remap(symb_map_rnd_resp));
+    symb_map_ind = symb_perm_stop[symb_map_rnd_stop].concat(symb_perm_resp[symb_map_rnd_resp]);
 
 
     for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
