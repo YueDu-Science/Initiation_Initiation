@@ -204,6 +204,9 @@ var symb_g_map = [];
 var symb_g_remap = [];
 var symb_r_map = [];
 var symb_r_remap = [];
+var symb_creat_seq = [];
+var symb_g_creat_seq = [];
+var symb_r_creat_seq = [];
 var stop_pair_1 = [];
 var stop_pair_2 = [];
 ////////////////////////////////////
@@ -3809,9 +3812,9 @@ function Creat_StimSeqRoutineBegin(trials) {
                 i = _pj_a[_pj_c];
                 seq_stimnum.push(stimnum[i]);
                 seq_key.push(key[i]);
-                seq_symb.push(symb[i]);
-                seq_symb_g.push(symb_g[i]);
-                seq_symb_r.push(symb_r[i]);
+                seq_symb.push(symb_creat_seq[i]);
+                seq_symb_g.push(symb_g_creat_seq[i]);
+                seq_symb_r.push(symb_r_creat_seq[i]);
                 seq_keynum.push(keynum[i]);
             }
             util.shuffle(x16);
@@ -3819,9 +3822,9 @@ function Creat_StimSeqRoutineBegin(trials) {
                 i = _pj_a[_pj_c];
                 seq_stimnum.push(stimnum[i]);
                 seq_key.push(key[i]);
-                seq_symb.push(symb[i]);
-                seq_symb_g.push(symb_g[i]);
-                seq_symb_r.push(symb_r[i]);
+                seq_symb.push(symb_creat_seq[i]);
+                seq_symb_g.push(symb_g_creat_seq[i]);
+                seq_symb_r.push(symb_r_creat_seq[i]);
                 seq_keynum.push(keynum[i]);
             }
             util.shuffle(x8_new);
@@ -3829,9 +3832,9 @@ function Creat_StimSeqRoutineBegin(trials) {
                 i = _pj_a[_pj_c];
                 seq_stimnum.push(stimnum[i]);
                 seq_key.push(key[i]);
-                seq_symb.push(symb[i]);
-                seq_symb_g.push(symb_g[i]);
-                seq_symb_r.push(symb_r[i]);
+                seq_symb.push(symb_creat_seq[i]);
+                seq_symb_g.push(symb_g_creat_seq[i]);
+                seq_symb_r.push(symb_r_creat_seq[i]);
                 seq_keynum.push(keynum[i]);
             }
             count = (count + 1);
@@ -3846,9 +3849,9 @@ function Creat_StimSeqRoutineBegin(trials) {
                 i = _pj_a[_pj_c];
                 seq_stimnum.push(stimnum[i]);
                 seq_key.push(key[i]);
-                seq_symb.push(symb[i]);
-                seq_symb_g.push(symb_g[i]);
-                seq_symb_r.push(symb_r[i]);
+                seq_symb.push(symb_creat_seq[i]);
+                seq_symb_g.push(symb_g_creat_seq[i]);
+                seq_symb_r.push(symb_r_creat_seq[i]);
                 seq_keynum.push(keynum[i]);
             }
             util.shuffle(x16);
@@ -3856,9 +3859,9 @@ function Creat_StimSeqRoutineBegin(trials) {
                 i = _pj_a[_pj_c];
                 seq_stimnum.push(stimnum[i]);
                 seq_key.push(key[i]);
-                seq_symb.push(symb[i]);
-                seq_symb_g.push(symb_g[i]);
-                seq_symb_r.push(symb_r[i]);
+                seq_symb.push(symb_creat_seq[i]);
+                seq_symb_g.push(symb_g_creat_seq[i]);
+                seq_symb_r.push(symb_r_creat_seq[i]);
                 seq_keynum.push(keynum[i]);
             }
             util.shuffle(x8_new);
@@ -3866,9 +3869,9 @@ function Creat_StimSeqRoutineBegin(trials) {
                 i = _pj_a[_pj_c];
                 seq_stimnum.push(stimnum[i]);
                 seq_key.push(key[i]);
-                seq_symb.push(symb[i]);
-                seq_symb_g.push(symb_g[i]);
-                seq_symb_r.push(symb_r[i]);
+                seq_symb.push(symb_creat_seq[i]);
+                seq_symb_g.push(symb_g_creat_seq[i]);
+                seq_symb_r.push(symb_r_creat_seq[i]);
                 seq_keynum.push(keynum[i]);
             }
             count = (count + 1);
@@ -5371,9 +5374,9 @@ function Instr_CR_OldRoutineBegin(trials) {
       symb_r_map.push(symb_r[symb_map_ind[i]]);
     }
 
-    symb = symb_map;
-    symb_g = symb_g_map;
-    symb_r = symb_r_map;
+    symb_creat_seq = symb_map;
+    symb_g_creat_seq = symb_g_map;
+    symb_r_creat_seq = symb_r_map;
 
     stop_pair_1 = remap_pair_1;
     stop_pair_2 = remap_pair_2;
@@ -6027,9 +6030,9 @@ function Instr_TR_Old_PreRoutineBegin(trials) {
     stim_type = "Symb";
     remap = 0;
     block_count = 0;
-    symb = symb_map;
-    symb_g = symb_g_map;
-    symb_r = symb_r_map;
+    symb_creat_seq = symb_map;
+    symb_g_creat_seq = symb_g_map;
+    symb_r_creat_seq = symb_r_map;
     
     // keep track of which components have finished
     Instr_TR_Old_PreComponents = [];
@@ -6843,14 +6846,14 @@ function Instr_CR_NewRoutineBegin(trials) {
     }
 
     if (grp_stop === 1) {
-        symb = symb_map;
-        symb_g = symb_g_map;
-        symb_r = symb_r_map;
+        symb_creat_seq = symb_map;
+        symb_g_creat_seq = symb_g_map;
+        symb_r_creat_seq = symb_r_map;
     } else {
         if (grp_swap === 1) {
-            symb = symb_remap;
-            symb_g = symb_g_remap;
-            symb_r = symb_r_remap;
+            symb_creat_seq = symb_remap;
+            symb_g_creat_seq = symb_g_remap;
+            symb_r_creat_seq = symb_r_remap;
         }
     }
     
@@ -7190,14 +7193,14 @@ function Instr_TR_NewRoutineBegin(trials) {
     block_count = 0;
     
     if (grp_stop === 1) {
-        symb = symb_map;
-        symb_g = symb_g_map;
-        symb_r = symb_r_map;
+        symb_creat_seq = symb_map;
+        symb_g_creat_seq = symb_g_map;
+        symb_r_creat_seq = symb_r_map;
     } else {
         if (grp_swap === 1) {
-            symb = symb_remap;
-            symb_g = symb_g_remap;
-            symb_r = symb_r_remap;
+            symb_creat_seq = symb_remap;
+            symb_g_creat_seq = symb_g_remap;
+            symb_r_creat_seq = symb_r_remap;
         }
     }
     
