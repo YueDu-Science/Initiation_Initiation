@@ -163,7 +163,7 @@ var Init_StimClock;
 var block_type;
 var participant;
 var session;
-var grp_stop = 0;
+var grp_stop = 1;
 var grp_swap = 0;
 var beep_lead_in = 0.1;
 var color_p = [(- 1), 1, (- 1)];
@@ -179,6 +179,8 @@ var too_late_tol = 0.2;
 var stop_tol = 2;
 var key_list = ["h", "u", "i", "l"];
 var x_symb = [0, 1, 2, 3, 4, 5, 6, 7];
+var x_symb_stop = [0,1,2,3];
+var x_symb_resp = [4,5,6,7];
 var x_hand = [0,1,2,3,0,1,2,3];
 var x8_new = x_symb;
 var x16 = x8_new.concat(x8_new);
@@ -186,6 +188,8 @@ var remap_pairs = [[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]];
 var num_pos = 4;
 var num_symb = 8;
 var symb_perm = permute(x_symb);
+var symb_perm_stop = permute(x_symb_stop);
+var symb_perm_resp = permute(x_symb_resp);
 var n_map = symb_perm.length;
 
 var block_count_cr_old = 0;
@@ -200,6 +204,8 @@ var symb_g_map = [];
 var symb_g_remap = [];
 var symb_r_map = [];
 var symb_r_remap = [];
+var stop_pair_1 = [];
+var stop_pair_2 = [];
 ////////////////////////////////////
 var tr_block_hand = 4;
 var num_trials_hand = 4;
@@ -210,18 +216,18 @@ var tr_block_old = 2;
 var tr_block_new_swap = 2;
 var tr_block_new_stop = 2;
 
-var prac_old_block = 5;   // set of criterion + practice (rt_blocks)
-var rt_block = 2;
+var prac_old_block = 12;   // set of criterion + practice (rt_blocks)
+var rt_block = 1;
 var num_trials = 8;
 
-var tr_hand_yes = 0;
+var tr_hand_yes = 1;
 var rt_hand_yes = 1;
 var cr_old_yes = 1;
 var cr_new_yes = 1;
 var rt_yes = 1;
 var tr_old_pre_yes = 0;
 var tr_old_post_yes = 0;
-var tr_new_yes = 0;
+var tr_new_yes = 1;
 //////////////////////////////////////
 
 var timing_tol_early = 0.1;
@@ -243,6 +249,7 @@ var key = [];
 var rng1
 var rng2
 var rng3
+var rng4
 
 var prep_time_range = [0, 1.2];
 var prep_time_ind_tmp = [];
@@ -363,15 +370,15 @@ function experimentInit() {
   rng1 = myrng()
   rng2 = myrng()
   rng3 = myrng()
-  
+  rgn4 = myrng()
   //determine which group participants are in
-  if ((rng1 < 0.5)) {
+  /* if ((rng1 < 0.5)) {
       grp_stop = 1;
       tr_block_new_stop = 1;
   } else {
       grp_swap = 1;
       tr_block_new_swap = 1;
-  }
+  } */
   
   // session # determines which blocks they do
   if ((session === 1)) {
@@ -1910,10 +1917,18 @@ function CR_Old_BoolLoopBegin(thisScheduler) {
     thisScheduler.add(Creat_StimSeqRoutineBegin(snapshot));
     thisScheduler.add(Creat_StimSeqRoutineEachFrame(snapshot));
     thisScheduler.add(Creat_StimSeqRoutineEnd(snapshot));
-    const CR_Old_IterLoopScheduler = new Scheduler(psychoJS);
-    thisScheduler.add(CR_Old_IterLoopBegin, CR_Old_IterLoopScheduler);
-    thisScheduler.add(CR_Old_IterLoopScheduler);
-    thisScheduler.add(CR_Old_IterLoopEnd);
+    const CR_Grp_Stop_BoolLoopScheduler = new Scheduler(psychoJS);
+    thisScheduler.add(CR_Grp_Stop_BoolLoopBegin, CR_Grp_Stop_BoolLoopScheduler);
+    thisScheduler.add(CR_Grp_Stop_BoolLoopScheduler);
+    thisScheduler.add(CR_Grp_Stop_BoolLoopEnd);
+    const CR_Grp_Swap_BoolLoopScheduler = new Scheduler(psychoJS);
+    thisScheduler.add(CR_Grp_Swap_BoolLoopBegin, CR_Grp_Swap_BoolLoopScheduler);
+    thisScheduler.add(CR_Grp_Swap_BoolLoopScheduler);
+    thisScheduler.add(CR_Grp_Swap_BoolLoopEnd);
+    //const CR_Old_IterLoopScheduler = new Scheduler(psychoJS);
+    // thisScheduler.add(CR_Old_IterLoopBegin, CR_Old_IterLoopScheduler);
+    //thisScheduler.add(CR_Old_IterLoopScheduler);
+    //thisScheduler.add(CR_Old_IterLoopEnd);
     thisScheduler.add(endLoopIteration(thisScheduler, snapshot));
   }
 
@@ -2247,9 +2262,9 @@ function RT_IterLoopBegin(thisScheduler) {
     thisScheduler.add(Pre_TrialRoutineBegin(snapshot));
     thisScheduler.add(Pre_TrialRoutineEachFrame(snapshot));
     thisScheduler.add(Pre_TrialRoutineEnd(snapshot));
-    thisScheduler.add(RT_Enter_TrialRoutineBegin(snapshot));
-    thisScheduler.add(RT_Enter_TrialRoutineEachFrame(snapshot));
-    thisScheduler.add(RT_Enter_TrialRoutineEnd(snapshot));
+    thisScheduler.add(RT_Enter_Trial_StopRoutineBegin(snapshot));
+    thisScheduler.add(RT_Enter_Trial_StopRoutineEachFrame(snapshot));
+    thisScheduler.add(RT_Enter_Trial_StopRoutineEnd(snapshot));
     thisScheduler.add(RT_FeedbackRoutineBegin(snapshot));
     thisScheduler.add(RT_FeedbackRoutineEachFrame(snapshot));
     thisScheduler.add(RT_FeedbackRoutineEnd(snapshot));
@@ -3104,6 +3119,8 @@ var symb_map_rnd;
 var remap_pair_rnd;
 var remap_pair_1 = [];
 var remap_pair_2 = [];
+var probe_pair_1 = []
+var map_ind = [];
 var Init_StimComponents;
 function Init_StimRoutineBegin(trials) {
   return function () {
@@ -3128,22 +3145,50 @@ function Init_StimRoutineBegin(trials) {
         y.push(StimList[i]["Y_pos"]);
     }
 
-    symb_map_rnd = Math.floor(rng2 * symb_perm.length) // random interger between 0 and num_symb - 1
-    symb_map_ind = symb_perm[symb_map_rnd];
+
+    // randomize prep-time so that prep-time for each symbol spread over a good range
+    for (var i = 0, _pj_a = symb_perm_resp.length; (i < _pj_a); i += 1) {
+      map_ind.push(i);
+    }
+    util.shuffle(map_ind)
+      
+    
+    symb_map_rnd_stop = Math.floor(rng2 * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
+    symb_map_rnd_resp = Math.floor(rng4 * symb_perm_resp.length) // random interger between 0 and num_symb - 1 
+    symb_map_ind = symb_perm_stop(symb_map_rnd_stop).concat(symb_perm_remap(symb_map_rnd_resp));
+    //symb_map_ind = symb_perm[symb_map_rnd]; //random use a sym-key mapping
+
 
     remap_pair_rnd = Math.floor(rng3 * remap_pairs.length)
-    remap_pair_1 = remap_pairs[remap_pair_rnd];
-    for (i = 0, _pj_a = 4; (i < _pj_a); i += 1) {
+    remap_pair_1 = remap_pairs[remap_pair_rnd];      // do not require responses during practice
+
+    for (i = 0, _pj_a = 4; (i < _pj_a); i += 1) { // do not require responses during practice
+        if  (!(remap_pair_1.includes(i))) {
+            remap_pair_2.push((i));
+        }
+    }
+
+    //this is for remapping condition
+    /* for (i = 0, _pj_a = 4; (i < _pj_a); i += 1) {
         if  (!(remap_pair_1.includes(i))) {
             remap_pair_2.push((i + 4));
         }
-    }
+    } */
+
+    for (i = 0, _pj_a = 4; (i < _pj_a); i += 1) { // probe_pair_1 require responses during practice but not during prob
+      if  ((remap_pair_1.includes(i))) {
+          probe_pair_1.push((i + 4));
+      }
+  }
+
     symb_remap_ind = Object.assign({}, symb_map_ind);
     
     symb_remap_ind[remap_pair_1[0]] = symb_map_ind[remap_pair_1[1]];
     symb_remap_ind[remap_pair_1[1]] = symb_map_ind[remap_pair_1[0]];
     symb_remap_ind[remap_pair_2[0]] = symb_map_ind[remap_pair_2[1]];
     symb_remap_ind[remap_pair_2[1]] = symb_map_ind[remap_pair_2[0]];
+
+    symb_remap_ind = Object.values(symb_remap_ind)
 
     for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
         symb_map.push(symb[symb_map_ind[i]]);
@@ -3153,10 +3198,12 @@ function Init_StimRoutineBegin(trials) {
         symb_r_map.push(symb_r[symb_map_ind[i]]);
         symb_r_remap.push(symb_r[symb_remap_ind[i]]);
     }
-    psychoJS.experiment.addData("symb_map", symb_map_ind);
-    psychoJS.experiment.addData("symb_remap", symb_remap_ind);
+    // psychoJS.experiment.addData("symb_map", symb_map_ind);
+   // psychoJS.experiment.addData("symb_remap", symb_remap_ind);
+    psychoJS.experiment.addData("stop_ind", x_symb_stop);
     psychoJS.experiment.addData("Remap_Pair_1", remap_pair_1);
     psychoJS.experiment.addData("Remap_Pair_2", remap_pair_2);
+    psychoJS.experiment.addData("Probe_Pair_1", probe_pair_1);
     
     // keep track of which components have finished
     Init_StimComponents = [];
@@ -5288,6 +5335,8 @@ function Instr_CR_OldRoutineBegin(trials) {
     // update component parameters for each repeat
     block_count_cr_old  = block_count_cr_old  + 1;
 
+    stop_tol = 2;
+
     if (block_count_cr_old == 1) {
       instr_text = instr_cr_old_text_1;
     } else {
@@ -5308,10 +5357,26 @@ function Instr_CR_OldRoutineBegin(trials) {
     block_type = "CR";
     stim_type = "Symb";
     remap = 0;
+    
+    
+    symb_map_rnd_stop = Math.floor(myrng() * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
+    symb_map_rnd_resp = map_ind[block_count-1]// random interger between 0 and num_symb - 1 
+    symb_map_ind = symb_perm_stop(symb_map_rnd_stop).concat(symb_perm_remap(symb_map_rnd_resp));
+    
+
+    for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
+      symb_map.push(symb[symb_map_ind[i]]);
+      symb_g_map.push(symb_g[symb_map_ind[i]]);
+      symb_r_map.push(symb_r[symb_map_ind[i]]);
+    }
+
     symb = symb_map;
     symb_g = symb_g_map;
     symb_r = symb_r_map;
-    
+
+    stop_pair_1 = remap_pair_1;
+    stop_pair_2 = remap_pair_2;
+
     // keep track of which components have finished
     Instr_CR_OldComponents = [];
     Instr_CR_OldComponents.push(Instr_CR_Old_Text);
@@ -5410,6 +5475,9 @@ function Instr_CR_OldRoutineEnd(trials) {
         }
     
     Instr_CR_Old_Press.stop();
+
+    psychoJS.experiment.addData("symb_map", symb_map_ind);
+
     // the Routine "Instr_CR_Old" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -6482,6 +6550,7 @@ function Instr_RTRoutineBegin(trials) {
     frameN = -1;
     // update component parameters for each repeat
     block_count = (block_count_cr_old - 1)*rt_block;
+    stop_tol = 1;
 
     if (block_count_cr_old == 1) {
       instr_text = instr_rt_old_text_1;
@@ -6503,10 +6572,6 @@ function Instr_RTRoutineBegin(trials) {
     block_type = "RT";
     stim_type = "Symb";
     remap = 0;
-    
-    symb = symb_map;
-    symb_g = symb_g_map;
-    symb_r = symb_r_map;
     
     // keep track of which components have finished
     Instr_RTComponents = [];
@@ -6606,6 +6671,7 @@ function Instr_RTRoutineEnd(trials) {
         }
     
     Instr_RT_Press.stop();
+    psychoJS.experiment.addData("symb_map", symb_map_ind);
     // the Routine "Instr_RT" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -6759,7 +6825,22 @@ function Instr_CR_NewRoutineBegin(trials) {
     stim_type = "Symb";
     block_count = 0;
     remap = 1;
-    
+    stop_tol = 2;
+
+    stop_pair_1 = probe_pair_1;
+    stop_pair_2 = remap_pair_2;
+
+    symb_map_rnd_stop = Math.floor(myrng() * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
+    symb_map_rnd_resp = map_ind[symb_perm_remap.length-1]// random interger between 0 and num_symb - 1 
+    symb_map_ind = symb_perm_stop(symb_map_rnd_stop).concat(symb_perm_remap(symb_map_rnd_resp));
+
+
+    for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
+      symb_map.push(symb[symb_map_ind[i]]);
+      symb_g_map.push(symb_g[symb_map_ind[i]]);
+      symb_r_map.push(symb_r[symb_map_ind[i]]);
+    }
+
     if (grp_stop === 1) {
         symb = symb_map;
         symb_g = symb_g_map;
@@ -6870,6 +6951,8 @@ function Instr_CR_NewRoutineEnd(trials) {
         }
     
     Instr_CR_New_Press.stop();
+
+    psychoJS.experiment.addData("symb_map", symb_map_ind);
     // the Routine "Instr_CR_New" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -7016,7 +7099,7 @@ function RT_Enter_Trial_StopRoutineEnd(trials) {
       }
     }
     sound_vol = 0;
-    if ((remap_pair_1.includes(stimnum_item)) || (remap_pair_2.includes(stimnum_item))) {
+    if ((stop_pair_1.includes(stimnum_item)) || (stop_pair_2.includes(stimnum_item))) {
         if ((RT_Press_Stop.keys === undefined)) {
             corr = 1;
             feedback_image = symb_g_item;
@@ -7104,6 +7187,7 @@ function Instr_TR_NewRoutineBegin(trials) {
     stim_type = "Symb";
     remap = 1;
     block_count = 0;
+    
     if (grp_stop === 1) {
         symb = symb_map;
         symb_g = symb_g_map;
@@ -7214,6 +7298,7 @@ function Instr_TR_NewRoutineEnd(trials) {
         }
     
     Instr_TR_Old_Post_Press_3.stop();
+    psychoJS.experiment.addData("symb_map", symb_map_ind);
     // the Routine "Instr_TR_New" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -7394,7 +7479,7 @@ function TR_Enter_Trials_StopRoutineEnd(trials) {
     }
     //TR_Beep_Stop.stop();  // ensure sound has stopped at end of routine
     sound_vol = 0;
-    if ((remap_pair_1.includes(stimnum_item)) || (remap_pair_2.includes(stimnum_item))) {
+    if ((stop_pair_1.includes(stimnum_item)) || (stop_pair_2.includes(stimnum_item))) {
         if ((TR_Press_Stop.keys === undefined)) {
             corr = 1;
             feedback_image = symb_g_item;
