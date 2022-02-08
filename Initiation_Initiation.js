@@ -3115,6 +3115,8 @@ function Import_Stim_FileRoutineEnd(trials) {
 var coin;
 var beep;
 var symb_map_rnd;
+var symb_map_rnd_stop;
+var symb_map_rnd_resp;
 var remap_pair_rnd;
 var remap_pair_1 = [];
 var remap_pair_2 = [];
