@@ -3664,7 +3664,10 @@ function Init_StimRoutineBegin(trials) {
     }
     util.shuffle(map_ind)
       
-    
+    symb_map_rnd = Math.floor(rng1 * symb_perm.length) // random interger between 0 and num_symb - 1
+    symb_map_ind = symb_perm[symb_map_rnd];
+
+
     symb_map_rnd_stop = Math.floor(rng2 * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
     //symb_map_rnd_resp = Math.floor(rng4 * symb_perm_resp.length) // random interger between 0 and num_symb - 1 
     //symb_map_ind = symb_perm_stop(symb_map_rnd_stop).concat(symb_perm_remap(symb_map_rnd_resp));
@@ -3710,7 +3713,7 @@ function Init_StimRoutineBegin(trials) {
     //     symb_r_map.push(symb_r[symb_map_ind[i]]);
     //     symb_r_remap.push(symb_r[symb_remap_ind[i]]);
     // }
-    // psychoJS.experiment.addData("symb_map", symb_map_ind);
+    psychoJS.experiment.addData("symb_map", symb_map_ind);
    // psychoJS.experiment.addData("symb_remap", symb_remap_ind);
     psychoJS.experiment.addData("stop_ind", x_symb_stop);
     psychoJS.experiment.addData("Remap_Pair_1", remap_pair_1);
@@ -7281,7 +7284,7 @@ function Instr_CR_OldRoutineBegin(trials) {
     remap = 0;
     
     //symb_map_rnd_stop = Math.floor(myrng() * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
-    symb_map_rnd_resp = map_ind[block_count-1]// random interger between 0 and num_symb - 1 
+    symb_map_rnd_resp = map_ind[block_count]// random interger between 0 and num_symb - 1 
     symb_map_ind = symb_perm_stop[symb_map_rnd_stop].concat(symb_perm_resp[symb_map_rnd_resp]);
     
     symb_map = [];
