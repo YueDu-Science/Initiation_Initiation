@@ -169,6 +169,10 @@ var participant;
 var session;
 var grp_stop = 1;
 var grp_swap = 0;
+var sound_quit_bool = 0;
+var sound_exit_bool = 0;
+
+
 var beep_lead_in = 0.1;
 var color_p = [(- 1), 1, (- 1)];
 var color_n = [1, (- 1), (- 1)];
@@ -236,10 +240,7 @@ var tr_old_pre_yes = 0;
 var tr_old_post_yes = 0;
 var tr_new_yes = 1;
 
-var sound_check_yes = 0;
-
-var sound_quit_bool = 0;
-var sound_exit_bool = 0;
+var sound_check_yes = 1;
 var num_trials_sound_check = 20;
 
 
@@ -275,6 +276,7 @@ var Sound_Score_Hint;
 var Sound_check_Creat_StimSeq_Text;
 var Sound_check_Creat_StimSeq_Text_Press;
 var Sound_Exit_Text_Press;
+var countdown;
 //////////////////////////////////////
 
 var timing_tol_early = 0.1;
