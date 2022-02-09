@@ -7300,6 +7300,9 @@ function Instr_CR_OldRoutineBegin(trials) {
     
     //symb_map_rnd_stop = Math.floor(myrng() * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
     resp_ind_rnd = map_ind[block_count] // shuffle index of resp symbols
+    console.log(resp_ind);
+    console.log(resp_ind_rnd);
+    console.log(symb_map_ind_shuffle);
     symb_map_ind_shuffle = Object.assign({}, symb_map_ind);
     
     symb_map_ind_shuffle[resp_ind_rnd[0]] = symb_map_ind[resp_ind[0]];
@@ -7307,7 +7310,7 @@ function Instr_CR_OldRoutineBegin(trials) {
     symb_map_ind_shuffle[resp_ind_rnd[2]] = symb_map_ind[resp_ind[2]];
     symb_map_ind_shuffle[resp_ind_rnd[3]] = symb_map_ind[resp_ind[3]];
 
-    symb_map_ind_shuffle = Object.values(symb_map_ind_shuffle)
+    symb_map_ind_shuffle = Object.values(symb_map_ind_shuffle);
 
     symb_map = [];
     symb_g_map = [];
@@ -7317,8 +7320,8 @@ function Instr_CR_OldRoutineBegin(trials) {
       symb_g_map.push(symb_g[symb_map_ind_shuffle[i]]);
       symb_r_map.push(symb_r[symb_map_ind_shuffle[i]]);
     }
-    console.log(symb_map_ind)
-    console.log(symb_map_ind_shuffle)
+    console.log(symb_map_ind);
+    console.log(symb_map_ind_shuffle);
 
     symb_creat_seq = symb_map;
     symb_g_creat_seq = symb_g_map;
