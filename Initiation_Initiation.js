@@ -3633,7 +3633,7 @@ var remap_pair_rnd;
 var remap_pair_1 = [];
 var remap_pair_2 = [];
 var probe_pair_1 = []
-var map_ind = [];
+var resp_map_ind = [];
 var Init_StimComponents;
 function Init_StimRoutineBegin(trials) {
   return function () {
@@ -3667,24 +3667,11 @@ function Init_StimRoutineBegin(trials) {
     symb_map_ind = symb_perm[symb_map_rnd]; // randomize which symbols corresponds to which index 0 to 7
 
 
-    // get the index of symbols associated with stopping or responding in symb_map_ind
-    for (i = 0, _pj_a = 8; (i < _pj_a); i += 1) { // do not require responses during practice
-      if  ((x_symb_stop.includes(symb_map_ind[i]))) {
-          stop_ind.push(i);
-      }
-    }
-
-    for (i = 0, _pj_a = 8; (i < _pj_a); i += 1) { // do not require responses during practice
-      if  ((x_symb_resp.includes(symb_map_ind[i])))  {
-          resp_ind.push(i);
-      }
-    }
-
-    symb_perm_resp = permute(resp_ind)  // permute those four resp id so can use them later
+    symb_perm_resp = permute(x_symb_resp)  // permute those four resp id so can use them later
     for (var i = 0, _pj_a = symb_perm_resp.length; (i < _pj_a); i += 1) {
-      map_ind.push(i);
+      resp_map_ind.push(i);
     }
-    util.shuffle(map_ind)
+    util.shuffle(resp_map_ind)
 
     // the below two steps generate two pairs which do not require respones during practice
     // they are basically 0 to 4; but dividing to two pairs for later convenience (feedback section)
@@ -7299,7 +7286,7 @@ function Instr_CR_OldRoutineBegin(trials) {
     remap = 0;
     
     //symb_map_rnd_stop = Math.floor(myrng() * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
-    ind_rnd = map_ind[block_count];
+    ind_rnd = resp_map_ind[block_count];
     resp_ind_rnd = symb_perm_resp[ind_rnd] // shuffle index of resp symbols
     console.log(resp_ind);
     console.log(resp_ind_rnd);
@@ -7307,10 +7294,10 @@ function Instr_CR_OldRoutineBegin(trials) {
     symb_map_ind_shuffle = [];
     symb_map_ind_shuffle = Object.assign({}, symb_map_ind);
     
-    symb_map_ind_shuffle[resp_ind_rnd[0]] = symb_map_ind[resp_ind[0]];
-    symb_map_ind_shuffle[resp_ind_rnd[1]] = symb_map_ind[resp_ind[1]];
-    symb_map_ind_shuffle[resp_ind_rnd[2]] = symb_map_ind[resp_ind[2]];
-    symb_map_ind_shuffle[resp_ind_rnd[3]] = symb_map_ind[resp_ind[3]];
+    symb_map_ind_shuffle[resp_ind_rnd[0]] = symb_map_ind[x_symb_resp[0]];
+    symb_map_ind_shuffle[resp_ind_rnd[1]] = symb_map_ind[x_symb_resp[1]];
+    symb_map_ind_shuffle[resp_ind_rnd[2]] = symb_map_ind[x_symb_resp[2]];
+    symb_map_ind_shuffle[resp_ind_rnd[3]] = symb_map_ind[x_symb_resp[3]];
 
     symb_map_ind_shuffle = Object.values(symb_map_ind_shuffle);
 
@@ -7329,8 +7316,6 @@ function Instr_CR_OldRoutineBegin(trials) {
     symb_creat_seq = symb_map;
     symb_g_creat_seq = symb_g_map;
     symb_r_creat_seq = symb_r_map;
-
-    console.log(symb_creat_seq);
 
     stop_pair_1 = remap_pair_1;
     stop_pair_2 = remap_pair_2;
