@@ -217,8 +217,8 @@ var symb_g_creat_seq = [];
 var symb_r_creat_seq = [];
 var stop_pair_1 = [];
 var stop_pair_2 = [];
-var stop_ind;
-var resp_ind;
+var stop_ind = [];
+var resp_ind = [];
 var symb_map_ind_shuffle = [];
 ////////////////////////////////////
 var tr_block_hand = 4;
