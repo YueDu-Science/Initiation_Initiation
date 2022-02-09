@@ -6893,7 +6893,7 @@ function TR_Feedback_HandRoutineEachFrame(trials) {
     
     frameRemains = 0.0 + feedback_dur - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (t >= frameRemains && TR_Feedback_Coin_Hand.status === PsychoJS.Status.STARTED) {
-      //TR_Feedback_Coin_Hand.stop();  // stop the sound (if longer than duration)
+      TR_Feedback_Coin_Hand.stop();  // stop the sound (if longer than duration)
       TR_Feedback_Coin_Hand.status = PsychoJS.Status.FINISHED;
     }
     
@@ -6987,7 +6987,7 @@ function TR_Feedback_HandRoutineEnd(trials) {
         thisComponent.setAutoDraw(false);
       }
     }
-   // TR_Feedback_Coin_Hand.stop();  // ensure sound has stopped at end of routine
+    TR_Feedback_Coin_Hand.stop();  // ensure sound has stopped at end of routine
     // the Routine "TR_Feedback_Hand" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -7308,7 +7308,6 @@ function Instr_CR_OldRoutineBegin(trials) {
     symb_map_ind_shuffle[resp_ind_rnd[3]] = symb_map_ind[resp_ind[3]];
 
     symb_map_ind_shuffle = Object.values(symb_map_ind_shuffle)
-    symb_map_ind_shuffle_tmp = symb_map_ind_shuffle
 
     symb_map = [];
     symb_g_map = [];
