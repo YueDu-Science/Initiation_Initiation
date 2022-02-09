@@ -196,8 +196,7 @@ var remap_pairs = [[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]];
 var num_pos = 4;
 var num_symb = 8;
 var symb_perm = permute(x_symb);
-var symb_perm_stop = permute(x_symb_stop);
-var symb_perm_resp = permute(x_symb_resp);
+var symb_perm_resp;
 var n_map = symb_perm.length;
 
 var block_count_cr_old = 0;
@@ -3662,10 +3661,7 @@ function Init_StimRoutineBegin(trials) {
 
 
     // randomize prep-time so that prep-time for each symbol spread over a good range
-    for (var i = 0, _pj_a = symb_perm_resp.length; (i < _pj_a); i += 1) {
-      map_ind.push(i);
-    }
-    util.shuffle(map_ind)
+    
       
     symb_map_rnd = Math.floor(rng1 * symb_perm.length) // random interger between 0 and num_symb - 1
     symb_map_ind = symb_perm[symb_map_rnd]; // randomize which symbols corresponds to which index 0 to 7
@@ -3683,6 +3679,12 @@ function Init_StimRoutineBegin(trials) {
           resp_ind.push(symb_map_ind.indexOf(i));
       }
     }
+
+    symb_perm_resp = permute(resp_ind)  // permute those four resp id so can use them later
+    for (var i = 0, _pj_a = symb_perm_resp.length; (i < _pj_a); i += 1) {
+      map_ind.push(i);
+    }
+    util.shuffle(map_ind)
 
     // the below two steps generate two pairs which do not require respones during practice
     // they are basically 0 to 4; but dividing to two pairs for later convenience (feedback section)
@@ -7305,8 +7307,8 @@ function Instr_CR_OldRoutineBegin(trials) {
     symb_map_ind_shuffle[resp_ind_rnd[2]] = symb_map_ind[resp_ind[2]];
     symb_map_ind_shuffle[resp_ind_rnd[3]] = symb_map_ind[resp_ind[3]];
 
-    //symb_remap_ind = Object.values(symb_remap_ind)
-
+    symb_map_ind_shuffle = Object.values(symb_map_ind_shuffle)
+    symb_map_ind_shuffle_tmp = symb_map_ind_shuffle
 
     symb_map = [];
     symb_g_map = [];
