@@ -5374,6 +5374,8 @@ function Instr_CR_OldRoutineBegin(trials) {
       symb_r_map.push(symb_r[symb_map_ind[i]]);
     }
 
+    console.log(symb_map)
+
     symb_creat_seq = symb_map;
     symb_g_creat_seq = symb_g_map;
     symb_r_creat_seq = symb_r_map;
