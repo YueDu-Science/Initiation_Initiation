@@ -194,7 +194,7 @@ var n_map = symb_perm.length;
 
 var block_count_cr_old = 0;
 var block_count_rt_old = 0;
-
+var myrng;
 
 var symb_remap_ind;
 var symb_map_ind;
@@ -368,7 +368,7 @@ function experimentInit() {
   //session = Number.parseInt(expInfo["session"]);
   session = 1;
 
-  var myrng = new Math.seedrandom(participant);   //use new here so it does not affect Math.random()
+  myrng = new Math.seedrandom(participant);   //use new here so it does not affect Math.random()
   rng1 = myrng()
   rng2 = myrng()
   rng3 = myrng()
@@ -5329,7 +5329,7 @@ function TR_Hand_Accuracy_BoolRoutineEnd(trials) {
 var instr_text;
 var _Instr_CR_Old_Press_allKeys;
 var Instr_CR_OldComponents;
-var myrng = new Math.seedrandom(participant);   //use new here so it does not affect Math.random()
+
 function Instr_CR_OldRoutineBegin(trials) {
   return function () {
     //------Prepare to start Routine 'Instr_CR_Old'-------
@@ -5375,7 +5375,7 @@ function Instr_CR_OldRoutineBegin(trials) {
       symb_r_map.push(symb_r[symb_map_ind[i]]);
     }
 
-    console.log(symb_map)
+    console.log(symb_map_ind)
 
     symb_creat_seq = symb_map;
     symb_g_creat_seq = symb_g_map;
