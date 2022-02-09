@@ -219,7 +219,7 @@ var stop_pair_1 = [];
 var stop_pair_2 = [];
 var stop_ind = [];
 var resp_ind = [];
-var symb_map_ind_shuffle = [];
+var symb_map_ind_shuffle;
 ////////////////////////////////////
 var tr_block_hand = 4;
 var num_trials_hand = 4;
@@ -7316,7 +7316,7 @@ function Instr_CR_OldRoutineBegin(trials) {
       symb_g_map.push(symb_g[symb_map_ind_shuffle[i]]);
       symb_r_map.push(symb_r[symb_map_ind_shuffle[i]]);
     }
-
+    console.log(symb_map_ind)
     console.log(symb_map_ind_shuffle)
 
     symb_creat_seq = symb_map;
@@ -7324,7 +7324,7 @@ function Instr_CR_OldRoutineBegin(trials) {
     symb_r_creat_seq = symb_r_map;
 
     stop_pair_1 = remap_pair_1;
-    stop_pair_2 = remap_pair_1;
+    stop_pair_2 = remap_pair_2;
 
     // keep track of which components have finished
     Instr_CR_OldComponents = [];
