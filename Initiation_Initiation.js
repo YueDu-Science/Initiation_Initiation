@@ -3670,13 +3670,13 @@ function Init_StimRoutineBegin(trials) {
     // get the index of symbols associated with stopping or responding in symb_map_ind
     for (i = 0, _pj_a = 8; (i < _pj_a); i += 1) { // do not require responses during practice
       if  ((x_symb_stop.includes(symb_map_ind[i]))) {
-          stop_ind.push(symb_map_ind.indexOf(i));
+          stop_ind.push(i);
       }
     }
 
     for (i = 0, _pj_a = 8; (i < _pj_a); i += 1) { // do not require responses during practice
       if  ((x_symb_resp.includes(symb_map_ind[i])))  {
-          resp_ind.push(symb_map_ind.indexOf(i));
+          resp_ind.push(i);
       }
     }
 
