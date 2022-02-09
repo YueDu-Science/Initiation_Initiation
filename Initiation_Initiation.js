@@ -6418,7 +6418,7 @@ function Instr_Block_NumRoutineEnd(trials) {
   };
 }
 
-
+var round_count = 0
 var _Instr_Round_Num_Press_allKeys;
 var Instr_Round_NumComponents;
 function Instr_Round_NumRoutineBegin(trials) {
@@ -6427,8 +6427,10 @@ function Instr_Round_NumRoutineBegin(trials) {
     t = 0;
     Instr_Round_NumClock.reset(); // clock
     frameN = -1;
+
+    round_count = round_count + 1
     // update component parameters for each repeat
-    Instr_Round_Num_Text.setText((('Round ' + block_count + '/' + prac_old_block) + '\nPress (H, U, I, or L) to start'));
+    Instr_Round_Num_Text.setText((('Round ' + round_count + '/' + prac_old_block) + '\nPress (H, U, I, or L) to start'));
     Instr_Round_Num_Press.keys = undefined;
     Instr_Round_Num_Press.rt = undefined;
     _Instr_Round_Num_Press_allKeys = [];
