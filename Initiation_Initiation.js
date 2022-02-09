@@ -3688,7 +3688,7 @@ function Init_StimRoutineBegin(trials) {
 
     // the below two steps generate two pairs which do not require respones during practice
     // they are basically 0 to 4; but dividing to two pairs for later convenience (feedback section)
-    remap_pair_rnd = Math.floor(rng3 * remap_pairs.length)
+    remap_pair_rnd = Math.floor(rng2 * remap_pairs.length)
     remap_pair_1 = remap_pairs[remap_pair_rnd];      // do not require responses during practice
 
     for (i = 0, _pj_a = 4; (i < _pj_a); i += 1) { // do not require responses during practice
@@ -7304,6 +7304,7 @@ function Instr_CR_OldRoutineBegin(trials) {
     console.log(resp_ind);
     console.log(resp_ind_rnd);
     
+    symb_map_ind_shuffle = [];
     symb_map_ind_shuffle = Object.assign({}, symb_map_ind);
     
     symb_map_ind_shuffle[resp_ind_rnd[0]] = symb_map_ind[resp_ind[0]];
