@@ -3840,9 +3840,7 @@ There will be at least 2 blocks, depending on how well you press ON the fourth b
     
 Press (H, U, I, or L) to continue.`
     ;
-    instr_cr_old_text_1 = `Good Job! You are now ready for the tasks!
-    
-In the upcoming block, you will see eight symbols on the screen, one at a time. You job is to figure out the association between symbols and keys.
+    instr_cr_old_text_1 = `In the upcoming block, you will see eight symbols on the screen, one at a time. You job is to figure out the association between symbols and keys.
 
 
 Some symbols corresponds to (H, U, I, or L). 
@@ -6430,7 +6428,12 @@ function Instr_Round_NumRoutineBegin(trials) {
 
     round_count = round_count + 1
     // update component parameters for each repeat
-    Instr_Round_Num_Text.setText((('Round ' + round_count + '/' + prac_old_block) + '\nPress (H, U, I, or L) to start'));
+    if (round_cound == 1){
+      Instr_Round_Num_Text.setText(('Good Job! You are now ready for the tasks! \nPress (H, U, I, or L) to start the first round'));
+    } else {
+      Instr_Round_Num_Text.setText((('Round ' + round_count + '/' + prac_old_block) + '\nPress (H, U, I, or L) to start'));
+    }
+    
     Instr_Round_Num_Press.keys = undefined;
     Instr_Round_Num_Press.rt = undefined;
     _Instr_Round_Num_Press_allKeys = [];
