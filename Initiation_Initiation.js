@@ -217,6 +217,9 @@ var symb_g_creat_seq = [];
 var symb_r_creat_seq = [];
 var stop_pair_1 = [];
 var stop_pair_2 = [];
+var stop_ind;
+var resp_ind;
+var symb_map_ind_shuffle = [];
 ////////////////////////////////////
 var tr_block_hand = 4;
 var num_trials_hand = 4;
@@ -3626,7 +3629,7 @@ var beep;
 var buzz;
 var symb_map_rnd;
 var symb_map_rnd_stop;
-var symb_map_rnd_resp;
+var resp_ind_rnd;
 var remap_pair_rnd;
 var remap_pair_1 = [];
 var remap_pair_2 = [];
@@ -3665,15 +3668,24 @@ function Init_StimRoutineBegin(trials) {
     util.shuffle(map_ind)
       
     symb_map_rnd = Math.floor(rng1 * symb_perm.length) // random interger between 0 and num_symb - 1
-    symb_map_ind = symb_perm[symb_map_rnd];
+    symb_map_ind = symb_perm[symb_map_rnd]; // randomize which symbols corresponds to which index 0 to 7
 
 
-    symb_map_rnd_stop = Math.floor(rng2 * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
-    //symb_map_rnd_resp = Math.floor(rng4 * symb_perm_resp.length) // random interger between 0 and num_symb - 1 
-    //symb_map_ind = symb_perm_stop(symb_map_rnd_stop).concat(symb_perm_remap(symb_map_rnd_resp));
-    //symb_map_ind = symb_perm[symb_map_rnd]; //random use a sym-key mapping
+    // get the index of symbols associated with stopping or responding in symb_map_ind
+    for (i = 0, _pj_a = 4; (i < _pj_a); i += 1) { // do not require responses during practice
+      if  ((symb_map_ind.includes(i))) {
+          stop_ind.push(symb_map_ind.indexOf(i));
+      }
+    }
 
+    for (i = 0, _pj_a = 4; (i < _pj_a); i += 1) { // do not require responses during practice
+      if  (!(symb_map_ind.includes(i))) {
+          resp_ind.push(symb_map_ind.indexOf(i));
+      }
+    }
 
+    // the below two steps generate two pairs which do not require respones during practice
+    // they are basically 0 to 4; but dividing to two pairs for later convenience (feedback section)
     remap_pair_rnd = Math.floor(rng3 * remap_pairs.length)
     remap_pair_1 = remap_pairs[remap_pair_rnd];      // do not require responses during practice
 
@@ -3683,13 +3695,8 @@ function Init_StimRoutineBegin(trials) {
         }
     }
 
-    //this is for remapping condition
-    /* for (i = 0, _pj_a = 4; (i < _pj_a); i += 1) {
-        if  (!(remap_pair_1.includes(i))) {
-            remap_pair_2.push((i + 4));
-        }
-    } */
-
+    // remap_pair_1 is two random symbol 0 to 4
+    // generate a pair correponding to the same respones and it does not require responses during probe session
     for (i = 0, _pj_a = 4; (i < _pj_a); i += 1) { // probe_pair_1 require responses during practice but not during prob
       if  ((remap_pair_1.includes(i))) {
           probe_pair_1.push((i + 4));
@@ -3716,6 +3723,7 @@ function Init_StimRoutineBegin(trials) {
     psychoJS.experiment.addData("symb_map", symb_map_ind);
    // psychoJS.experiment.addData("symb_remap", symb_remap_ind);
     psychoJS.experiment.addData("stop_ind", x_symb_stop);
+    psychoJS.experiment.addData("resp_ind", x_symb_resp);
     psychoJS.experiment.addData("Remap_Pair_1", remap_pair_1);
     psychoJS.experiment.addData("Remap_Pair_2", remap_pair_2);
     psychoJS.experiment.addData("Probe_Pair_1", probe_pair_1);
@@ -7289,26 +7297,34 @@ function Instr_CR_OldRoutineBegin(trials) {
     remap = 0;
     
     //symb_map_rnd_stop = Math.floor(myrng() * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
-    symb_map_rnd_resp = map_ind[block_count]// random interger between 0 and num_symb - 1 
-    symb_map_ind = symb_perm_stop[symb_map_rnd_stop].concat(symb_perm_resp[symb_map_rnd_resp]);
+    resp_ind_rnd = map_ind[block_count] // shuffle index of resp symbols
+    symb_map_ind_shuffle = Object.assign({}, symb_map_ind);
     
+    symb_map_ind_shuffle[resp_ind_rnd[0]] = symb_map_ind[resp_ind[0]];
+    symb_map_ind_shuffle[resp_ind_rnd[1]] = symb_map_ind[resp_ind[1]];
+    symb_map_ind_shuffle[resp_ind_rnd[2]] = symb_map_ind[resp_ind[2]];
+    symb_map_ind_shuffle[resp_ind_rnd[3]] = symb_map_ind[resp_ind[3]];
+
+    //symb_remap_ind = Object.values(symb_remap_ind)
+
+
     symb_map = [];
     symb_g_map = [];
     symb_r_map = [];
     for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
-      symb_map.push(symb[symb_map_ind[i]]);
-      symb_g_map.push(symb_g[symb_map_ind[i]]);
-      symb_r_map.push(symb_r[symb_map_ind[i]]);
+      symb_map.push(symb[symb_map_ind_shuffle[i]]);
+      symb_g_map.push(symb_g[symb_map_ind_shuffle[i]]);
+      symb_r_map.push(symb_r[symb_map_ind_shuffle[i]]);
     }
 
-    console.log(symb_map_ind)
+    console.log(symb_map_ind_shuffle)
 
     symb_creat_seq = symb_map;
     symb_g_creat_seq = symb_g_map;
     symb_r_creat_seq = symb_r_map;
 
     stop_pair_1 = remap_pair_1;
-    stop_pair_2 = remap_pair_2;
+    stop_pair_2 = remap_pair_1;
 
     // keep track of which components have finished
     Instr_CR_OldComponents = [];
@@ -7409,7 +7425,7 @@ function Instr_CR_OldRoutineEnd(trials) {
     
     Instr_CR_Old_Press.stop();
 
-    psychoJS.experiment.addData("symb_map", symb_map_ind);
+    psychoJS.experiment.addData("symb_map_shuffle", symb_map_ind_shuffle);
 
     // the Routine "Instr_CR_Old" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
@@ -8598,7 +8614,7 @@ function Instr_RTRoutineEnd(trials) {
         }
     
     Instr_RT_Press.stop();
-    psychoJS.experiment.addData("symb_map", symb_map_ind);
+    psychoJS.experiment.addData("symb_map_shuffle", symb_map_ind_shuffle);
     // the Routine "Instr_RT" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -8755,20 +8771,25 @@ function Instr_CR_NewRoutineBegin(trials) {
     stop_tol = 2;
 
     stop_pair_1 = probe_pair_1;
-    stop_pair_2 = remap_pair_2;
+    stop_pair_2 = remap_pair_1;
 
     //symb_map_rnd_stop = Math.floor(myrng() * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
-    symb_map_rnd_resp = map_ind[symb_perm_resp.length-1]// random interger between 0 and num_symb - 1 
-    symb_map_ind = symb_perm_stop[symb_map_rnd_stop].concat(symb_perm_resp[symb_map_rnd_resp]);
+    resp_ind_rnd = map_ind[symb_perm_resp.length-1] // shuffle index of resp symbols
+    symb_map_ind_shuffle = Object.assign({}, symb_map_ind);
+    
+    symb_map_ind_shuffle[resp_ind_rnd[0]] = symb_map_ind[resp_ind[0]];
+    symb_map_ind_shuffle[resp_ind_rnd[1]] = symb_map_ind[resp_ind[1]];
+    symb_map_ind_shuffle[resp_ind_rnd[2]] = symb_map_ind[resp_ind[2]];
+    symb_map_ind_shuffle[resp_ind_rnd[3]] = symb_map_ind[resp_ind[3]];
 
 
     symb_map = [];
     symb_g_map = [];
     symb_r_map = [];
     for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
-      symb_map.push(symb[symb_map_ind[i]]);
-      symb_g_map.push(symb_g[symb_map_ind[i]]);
-      symb_r_map.push(symb_r[symb_map_ind[i]]);
+      symb_map.push(symb[symb_map_ind_shuffle[i]]);
+      symb_g_map.push(symb_g[symb_map_ind_shuffle[i]]);
+      symb_r_map.push(symb_r[symb_map_ind_shuffle[i]]);
     }
 
     if (grp_stop === 1) {
@@ -8882,7 +8903,7 @@ function Instr_CR_NewRoutineEnd(trials) {
     
     Instr_CR_New_Press.stop();
 
-    psychoJS.experiment.addData("symb_map", symb_map_ind);
+    psychoJS.experiment.addData("symb_map_shuffle", symb_map_ind_shuffle);
     // the Routine "Instr_CR_New" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -9228,7 +9249,7 @@ function Instr_TR_NewRoutineEnd(trials) {
         }
     
     Instr_TR_Old_Post_Press_3.stop();
-    psychoJS.experiment.addData("symb_map", symb_map_ind);
+    psychoJS.experiment.addData("symb_map_shuffle", symb_map_ind_shuffle);
     // the Routine "Instr_TR_New" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
