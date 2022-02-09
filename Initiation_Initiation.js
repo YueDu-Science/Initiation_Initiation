@@ -7324,6 +7324,7 @@ function Instr_CR_OldRoutineBegin(trials) {
     }
     console.log(symb_map_ind);
     console.log(symb_map_ind_shuffle);
+    console.log(symb_map);
 
     symb_creat_seq = symb_map;
     symb_g_creat_seq = symb_g_map;
