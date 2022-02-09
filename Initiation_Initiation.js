@@ -330,6 +330,9 @@ var Instr_HAND_TR_press;
 var Instr_Block_NumClock;
 var Instr_Block_Num_Text;
 var Instr_Block_Num_Press;
+var Instr_Round_NumClock;
+var Instr_Round_Num_Text;
+var Instr_Round_Num_Press;
 var TR_Enter_Trials_HandClock;
 var TR_Beep_Hand;
 var TR_Rec_Frame_Hand;
@@ -1586,6 +1589,22 @@ function experimentInit() {
   });
   
   Instr_Block_Num_Press = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
+
+  // Initialize components for Routine "Instr_Round_Num"
+  Instr_Round_NumClock = new util.Clock();
+  Instr_Round_Num_Text = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'Instr_Round_Num_Text',
+    alignHoriz: 'center',
+    text: 'default text',
+    font: 'Arial',
+    units: undefined, 
+    pos: [0, 0], height: 0.03,  wrapWidth: undefined, ori: 0,
+    color: new util.Color('white'),  opacity: 1,
+    depth: 0.0 
+  });
+  
+  Instr_Round_Num_Press = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
   
   // Initialize components for Routine "Pre_Trial"
   Pre_TrialClock = new util.Clock();
@@ -2397,6 +2416,9 @@ function CR_Old_BoolLoopBegin(thisScheduler) {
   for (const thisCR_Old_Bool of CR_Old_Bool) {
     const snapshot = CR_Old_Bool.getSnapshot();
     thisScheduler.add(importConditions(snapshot));
+    thisScheduler.add(Instr_Round_NumRoutineBegin(snapshot));
+    thisScheduler.add(Instr_Round_NumRoutineEachFrame(snapshot));
+    thisScheduler.add(Instr_Round_NumRoutineEnd(snapshot));
     thisScheduler.add(Instr_CR_OldRoutineBegin(snapshot));
     thisScheduler.add(Instr_CR_OldRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_CR_OldRoutineEnd(snapshot));
@@ -2714,9 +2736,9 @@ function RT_BlockLoopBegin(thisScheduler) {
     thisScheduler.add(Creat_StimSeqRoutineBegin(snapshot));
     thisScheduler.add(Creat_StimSeqRoutineEachFrame(snapshot));
     thisScheduler.add(Creat_StimSeqRoutineEnd(snapshot));
-    thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
-    thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
-    thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
+    //thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
+    //thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
+    //thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
     const RT_IterLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(RT_IterLoopBegin, RT_IterLoopScheduler);
     thisScheduler.add(RT_IterLoopScheduler);
@@ -3777,7 +3799,7 @@ function Init_StimRoutineEnd(trials) {
 
     instr_end_exp_text = `Great job! You have completed the task.
     
-Press (space) to proceed so that your data can be saved. The saving process may take up to 1 minute.
+Press (space bar) to proceed so that your data can be saved. The saving process may take up to 1 minute.
 
 After the data are saved, click 'OK' to exit and close the webpage.`
     ;
@@ -3790,7 +3812,7 @@ Once you start, you can take a break between rounds, Please DO NOT turn off your
     
 
 
-Press (space) to continue.`
+Press (space bar) to continue.`
     ;
     instr_rt_text_hand = `The upcoming 3 blocks are used to help you get familiar with the task.
     
@@ -3820,9 +3842,9 @@ Press (H, U, I, or L) to continue.`
 In the upcoming block, you will see eight symbols on the screen, one at a time. You job is to figure out the association between symbols and keys.
 
 
-Some symbols corresponds to one of (H, U, I, or L). 
+Some symbols corresponds to (H, U, I, or L). 
 
-Some symbols do not correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+Some symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
 
 
@@ -3840,7 +3862,7 @@ Your job is to figure out the new association between symbols and keys.
 
 Again, some symbols corresponds to (H, U, I, or L). 
 
-Some symbols do not correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+Some symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
 
 ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
@@ -3857,7 +3879,7 @@ Take you time to figure out the new association.
 
 Again, some symbols corresponds to (H, U, I, or L). 
 
-Some symbols do not correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+Some symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
 
 ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
@@ -3879,7 +3901,7 @@ If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING, and
 Whenever you are ready, press(H, U, I, or L) to start.`
     ;
 
-    instr_rt_old_text_2 = `In the upcoming block, use the NEW symbol-key map you just learned:
+    instr_rt_old_text_2 = `In the upcoming task, use the NEW symbol-key map you just learned:
 
 If you see a symbol that requires a response, press the corresponding key as quickly and as accurately as possible.            
 
@@ -6394,6 +6416,125 @@ function Instr_Block_NumRoutineEnd(trials) {
 }
 
 
+var _Instr_Round_Num_Press_allKeys;
+var Instr_Round_NumComponents;
+function Instr_Round_NumRoutineBegin(trials) {
+  return function () {
+    //------Prepare to start Routine 'Instr_Round_Num'-------
+    t = 0;
+    Instr_Round_NumClock.reset(); // clock
+    frameN = -1;
+    // update component parameters for each repeat
+    Instr_Round_Num_Text.setText((('Round ' + block_count + '/' + prac_old_block) + '\nPress (H, U, I, or L) to start'));
+    Instr_Round_Num_Press.keys = undefined;
+    Instr_Round_Num_Press.rt = undefined;
+    _Instr_Round_Num_Press_allKeys = [];
+    // keep track of which components have finished
+    Instr_Round_NumComponents = [];
+    Instr_Round_NumComponents.push(Instr_Round_Num_Text);
+    Instr_Round_NumComponents.push(Instr_Round_Num_Press);
+    
+    for (const thisComponent of Instr_Round_NumComponents)
+      if ('status' in thisComponent)
+        thisComponent.status = PsychoJS.Status.NOT_STARTED;
+    
+    return Scheduler.Event.NEXT;
+  };
+}
+
+
+function Instr_Round_NumRoutineEachFrame(trials) {
+  return function () {
+    //------Loop for each frame of Routine 'Instr_Block_Num'-------
+    let continueRoutine = true; // until we're told otherwise
+    // get current time
+    t = Instr_Round_NumClock.getTime();
+    frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
+    // update/draw components on each frame
+    
+    // *Instr_Round_Num_Text* updates
+    if (t >= 0.0 && Instr_Round_Num_Text.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      Instr_Round_Num_Text.tStart = t;  // (not accounting for frame time here)
+      Instr_Round_Num_Text.frameNStart = frameN;  // exact frame index
+      
+      Instr_Round_Num_Text.setAutoDraw(true);
+    }
+
+    
+    // *Instr_Round_Num_Press* updates
+    if (t >= 1 && Instr_Round_Num_Press.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      Instr_Round_Num_Press.tStart = t;  // (not accounting for frame time here)
+      Instr_Round_Num_Press.frameNStart = frameN;  // exact frame index
+      
+      // keyboard checking is just starting
+      psychoJS.window.callOnFlip(function() { Instr_Round_Num_Press.clock.reset(); });  // t=0 on next screen flip
+      psychoJS.window.callOnFlip(function() { Instr_Round_Num_Press.start(); }); // start on screen flip
+      psychoJS.window.callOnFlip(function() { Instr_Round_Num_Press.clearEvents(); });
+    }
+
+    if (Instr_Round_Num_Press.status === PsychoJS.Status.STARTED) {
+      let theseKeys = Instr_Round_Num_Press.getKeys({keyList: ['h', 'u', 'i', 'l'], waitRelease: false});
+      _Instr_Round_Num_Press_allKeys = _Instr_Round_Num_Press_allKeys.concat(theseKeys);
+      if (_Instr_Round_Num_Press_allKeys.length > 0) {
+        Instr_Round_Num_Press.keys = _Instr_Round_Num_Press_allKeys[0].name;  // just the first key pressed
+        Instr_Round_Num_Press.rt = _Instr_Round_Num_Press_allKeys[0].rt;
+        // a response ends the routine
+        continueRoutine = false;
+      }
+    }
+    
+    // check for quit (typically the Esc key)
+    if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
+      return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
+    }
+    
+    // check if the Routine should terminate
+    if (!continueRoutine) {  // a component has requested a forced-end of Routine
+      return Scheduler.Event.NEXT;
+    }
+    
+    continueRoutine = false;  // reverts to True if at least one component still running
+    for (const thisComponent of Instr_Round_NumComponents)
+      if ('status' in thisComponent && thisComponent.status !== PsychoJS.Status.FINISHED) {
+        continueRoutine = true;
+        break;
+      }
+    
+    // refresh the screen if continuing
+    if (continueRoutine) {
+      return Scheduler.Event.FLIP_REPEAT;
+    } else {
+      return Scheduler.Event.NEXT;
+    }
+  };
+}
+
+
+function Instr_Round_NumRoutineEnd(trials) {
+  return function () {
+    //------Ending Routine 'Instr_Round_Num'-------
+    for (const thisComponent of Instr_Round_NumComponents) {
+      if (typeof thisComponent.setAutoDraw === 'function') {
+        thisComponent.setAutoDraw(false);
+      }
+    }
+    psychoJS.experiment.addData('Instr_Round_Num_Press.keys', Instr_Round_Num_Press.keys);
+    if (typeof Instr_Round_Num_Press.keys !== 'undefined') {  // we had a response
+        psychoJS.experiment.addData('Instr_Round_Num_Press.rt', Instr_Round_Num_Press.rt);
+        routineTimer.reset();
+        }
+    
+    Instr_Round_Num_Press.stop();
+    // the Routine "Instr_Round_Num" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset();
+    
+    return Scheduler.Event.NEXT;
+  };
+}
+
+
 var tr_press_early;
 var tr_press_late;
 var tr_press_tooearly;
@@ -7130,7 +7271,7 @@ function Instr_CR_OldRoutineBegin(trials) {
         }
     }
 
-    block_count = block_count_cr_old;
+    block_count = block_count_cr_old - 1;
     Instr_CR_Old_Text.setText(instr_text);
     Instr_CR_Old_Press.keys = undefined;
     Instr_CR_Old_Press.rt = undefined;
