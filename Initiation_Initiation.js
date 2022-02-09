@@ -7330,6 +7330,8 @@ function Instr_CR_OldRoutineBegin(trials) {
     symb_g_creat_seq = symb_g_map;
     symb_r_creat_seq = symb_r_map;
 
+    console.log(symb_creat_seq);
+
     stop_pair_1 = remap_pair_1;
     stop_pair_2 = remap_pair_2;
 
