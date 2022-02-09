@@ -7265,7 +7265,7 @@ function TR_Hand_Accuracy_BoolRoutineEnd(trials) {
 var instr_text;
 var _Instr_CR_Old_Press_allKeys;
 var Instr_CR_OldComponents;
-
+var ind_rnd;
 function Instr_CR_OldRoutineBegin(trials) {
   return function () {
     //------Prepare to start Routine 'Instr_CR_Old'-------
@@ -7299,10 +7299,11 @@ function Instr_CR_OldRoutineBegin(trials) {
     remap = 0;
     
     //symb_map_rnd_stop = Math.floor(myrng() * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
-    resp_ind_rnd = map_ind[block_count] // shuffle index of resp symbols
+    ind_rnd = map_ind[block_count];
+    resp_ind_rnd = symb_perm_resp[ind_rnd] // shuffle index of resp symbols
     console.log(resp_ind);
     console.log(resp_ind_rnd);
-    console.log(symb_map_ind_shuffle);
+    
     symb_map_ind_shuffle = Object.assign({}, symb_map_ind);
     
     symb_map_ind_shuffle[resp_ind_rnd[0]] = symb_map_ind[resp_ind[0]];
