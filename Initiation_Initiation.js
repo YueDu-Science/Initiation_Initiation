@@ -3964,7 +3964,6 @@ function Pre_Trial_HandRoutineBegin(trials) {
     Pre_Trial_Rec_Frame_Hand.setLineWidth(rec_wd);
     Pre_Trial_HandShape.setImage(hand_shape);
     x_item = seq_handx[trial_count];
-    console.log(seq_handx.length);
     key_item = seq_key_hand[trial_count];
     y_item = seq_handy[trial_count];
     keynum_item = seq_keynum_hand[trial_count];
@@ -5367,7 +5366,9 @@ function Instr_CR_OldRoutineBegin(trials) {
     symb_map_rnd_resp = map_ind[block_count-1]// random interger between 0 and num_symb - 1 
     symb_map_ind = symb_perm_stop[symb_map_rnd_stop].concat(symb_perm_resp[symb_map_rnd_resp]);
     
-
+    symb_map = [];
+    symb_g_map = [];
+    symb_r_map = [];
     for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
       symb_map.push(symb[symb_map_ind[i]]);
       symb_g_map.push(symb_g[symb_map_ind[i]]);
@@ -6841,6 +6842,9 @@ function Instr_CR_NewRoutineBegin(trials) {
     symb_map_ind = symb_perm_stop[symb_map_rnd_stop].concat(symb_perm_resp[symb_map_rnd_resp]);
 
 
+    symb_map = [];
+    symb_g_map = [];
+    symb_r_map = [];
     for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
       symb_map.push(symb[symb_map_ind[i]]);
       symb_g_map.push(symb_g[symb_map_ind[i]]);
