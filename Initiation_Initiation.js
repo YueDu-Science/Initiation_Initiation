@@ -6428,8 +6428,8 @@ function Instr_Round_NumRoutineBegin(trials) {
 
     round_count = round_count + 1
     // update component parameters for each repeat
-    if (round_cound == 1){
-      Instr_Round_Num_Text.setText(('Good Job! You are now ready for the tasks! \nPress (H, U, I, or L) to start the first round'));
+    if (round_count == 1){
+      Instr_Round_Num_Text.setText(('Good Job! You are now ready for the tasks! \nPress (H, U, I, or L) to start Round ' + round_count + '/' + prac_old_block));
     } else {
       Instr_Round_Num_Text.setText((('Round ' + round_count + '/' + prac_old_block) + '\nPress (H, U, I, or L) to start'));
     }
