@@ -6062,12 +6062,8 @@ function RT_Feedback_HandRoutineBegin(trials) {
     RT_Feedback_HandClock.reset(); // clock
     frameN = -1;
     // update component parameters for each repeat
-    RT_Feedback_Coin_Hand = new sound.Sound({
-    win: psychoJS.window,
-    value: coin,
-    secs: -1,
-    });
-    RT_Feedback_Coin_Hand.setVolume(sound_vol);
+    
+    TR_Coin.setVolume(sound_vol);
     RT_Rec_Frame_Feedback_Hand.setOpacity(rec_frame_opacity);
     RT_Rec_Frame_Feedback_Hand.setLineColor(new util.Color(rec_frame_color));
     RT_Rec_Frame_Feedback_Hand.setLineWidth(rec_wd);
@@ -6077,7 +6073,7 @@ function RT_Feedback_HandRoutineBegin(trials) {
     RT_Stim_Feedback_Hand.setLineColor(new util.Color(feedback_col));
     // keep track of which components have finished
     RT_Feedback_HandComponents = [];
-    RT_Feedback_HandComponents.push(RT_Feedback_Coin_Hand);
+    RT_Feedback_HandComponents.push(TR_Coin);
     RT_Feedback_HandComponents.push(RT_Rec_Frame_Feedback_Hand);
     RT_Feedback_HandComponents.push(RT_Feedback_HandShape);
     RT_Feedback_HandComponents.push(RT_Stim_Feedback_Hand);
@@ -6100,19 +6096,19 @@ function RT_Feedback_HandRoutineEachFrame(trials) {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     // start/stop RT_Feedback_Coin_Hand
-    if (t >= 0.0 && RT_Feedback_Coin_Hand.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 0.0 && TR_Coin.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
-      RT_Feedback_Coin_Hand.tStart = t;  // (not accounting for frame time here)
-      RT_Feedback_Coin_Hand.frameNStart = frameN;  // exact frame index
+      TR_Coin.tStart = t;  // (not accounting for frame time here)
+      TR_Coin.frameNStart = frameN;  // exact frame index
       
-      psychoJS.window.callOnFlip(function(){ RT_Feedback_Coin_Hand.play(); });  // screen flip
-      RT_Feedback_Coin_Hand.status = PsychoJS.Status.STARTED;
+      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
+      TR_Coin.status = PsychoJS.Status.STARTED;
     }
     
     frameRemains = 0.0 + feedback_dur - psychoJS.window.monitorFramePeriod * 0.75;
-    if (t >= frameRemains && RT_Feedback_Coin_Hand.status === PsychoJS.Status.STARTED) {
-    //  RT_Feedback_Coin_Hand.stop();  // stop the sound (if longer than duration)
-      RT_Feedback_Coin_Hand.status = PsychoJS.Status.FINISHED;
+    if (t >= frameRemains && TR_Coin.status === PsychoJS.Status.STARTED) {
+      TR_Coin.stop();  // stop the sound (if longer than duration)
+      TR_Coin.status = PsychoJS.Status.FINISHED;
     }
     
     // *RT_Rec_Frame_Feedback_Hand* updates
@@ -6191,7 +6187,7 @@ function RT_Feedback_HandRoutineEnd(trials) {
         thisComponent.setAutoDraw(false);
       }
     }
-   // RT_Feedback_Coin_Hand.stop();  // ensure sound has stopped at end of routine
+    TR_Coin.stop();  // ensure sound has stopped at end of routine
     // the Routine "RT_Feedback_Hand" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -6878,13 +6874,8 @@ function TR_Feedback_HandRoutineBegin(trials) {
     t = 0;
     TR_Feedback_HandClock.reset(); // clock
     frameN = -1;
-    // update component parameters for each repeat
-    TR_Feedback_Coin_Hand = new sound.Sound({
-    win: psychoJS.window,
-    value: coin,
-    secs: -1,
-    });
-    TR_Feedback_Coin_Hand.setVolume(sound_vol);
+    
+    TR_Coin.setVolume(sound_vol);
     Tr_Rec_Frame_Feedback_Hand.setOpacity(rec_frame_opacity);
     Tr_Rec_Frame_Feedback_Hand.setLineColor(new util.Color(rec_frame_color));
     Tr_Rec_Frame_Feedback_Hand.setLineWidth(rec_wd);
@@ -6896,7 +6887,7 @@ function TR_Feedback_HandRoutineBegin(trials) {
     TR_Stim_Feedback_Hand.setLineColor(new util.Color(feedback_col));
     // keep track of which components have finished
     TR_Feedback_HandComponents = [];
-    TR_Feedback_HandComponents.push(TR_Feedback_Coin_Hand);
+    TR_Feedback_HandComponents.push(TR_Coin);
     TR_Feedback_HandComponents.push(Tr_Rec_Frame_Feedback_Hand);
     TR_Feedback_HandComponents.push(TR_Feedback_Text_Hand);
     TR_Feedback_HandComponents.push(TR_Feedback_HandShape);
@@ -6920,19 +6911,19 @@ function TR_Feedback_HandRoutineEachFrame(trials) {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     // start/stop TR_Feedback_Coin_Hand
-    if (t >= 0 && TR_Feedback_Coin_Hand.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 0 && TR_Coin.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
-      TR_Feedback_Coin_Hand.tStart = t;  // (not accounting for frame time here)
-      TR_Feedback_Coin_Hand.frameNStart = frameN;  // exact frame index
+      TR_Coin.tStart = t;  // (not accounting for frame time here)
+      TR_Coin.frameNStart = frameN;  // exact frame index
       
-      psychoJS.window.callOnFlip(function(){ TR_Feedback_Coin_Hand.play(); });  // screen flip
-      TR_Feedback_Coin_Hand.status = PsychoJS.Status.STARTED;
+      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
+      TR_Coin.status = PsychoJS.Status.STARTED;
     }
     
     frameRemains = 0.0 + feedback_dur - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (t >= frameRemains && TR_Feedback_Coin_Hand.status === PsychoJS.Status.STARTED) {
-      TR_Feedback_Coin_Hand.stop();  // stop the sound (if longer than duration)
-      TR_Feedback_Coin_Hand.status = PsychoJS.Status.FINISHED;
+    if (t >= frameRemains && TR_Coin.status === PsychoJS.Status.STARTED) {
+      TR_Coin.stop();  // stop the sound (if longer than duration)
+      TR_Coin.status = PsychoJS.Status.FINISHED;
     }
     
     // *Tr_Rec_Frame_Feedback_Hand* updates
@@ -7025,7 +7016,7 @@ function TR_Feedback_HandRoutineEnd(trials) {
         thisComponent.setAutoDraw(false);
       }
     }
-    TR_Feedback_Coin_Hand.stop();  // ensure sound has stopped at end of routine
+    TR_Coin.stop();  // ensure sound has stopped at end of routine
     // the Routine "TR_Feedback_Hand" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -7275,7 +7266,7 @@ function CountDownRoutineEachFrame(trials) {
       TR_Beep.status = PsychoJS.Status.STARTED;
       
     }
-    frameRemains = 2  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+    frameRemains = 2.5  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (t >= frameRemains && TR_Beep.status === PsychoJS.Status.STARTED) {
       TR_Beep.stop();  // stop the sound (if longer than duration)
       TR_Beep.status = PsychoJS.Status.FINISHED;
@@ -7292,7 +7283,7 @@ function CountDownRoutineEachFrame(trials) {
       TR_Coin.status = PsychoJS.Status.STARTED;
       
     }
-    frameRemains = 2  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+    frameRemains = 2.5  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (t >= frameRemains && TR_Coin.status === PsychoJS.Status.STARTED) {
       TR_Coin.stop();  // stop the sound (if longer than duration)
       TR_Coin.status = PsychoJS.Status.FINISHED;
@@ -7315,7 +7306,7 @@ function CountDownRoutineEachFrame(trials) {
       Number_CountDown.setAutoDraw(true);
     }
 
-    frameRemains = 2  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+    frameRemains = 3  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (Text_CountDown.status === PsychoJS.Status.STARTED && t >= frameRemains) {
       Text_CountDown.setAutoDraw(false);
     }
@@ -7943,19 +7934,15 @@ function RT_FeedbackRoutineBegin(trials) {
     RT_FeedbackClock.reset(); // clock
     frameN = -1;
     // update component parameters for each repeat
-    CR_Feedback_Coin_Old = new sound.Sound({
-    win: psychoJS.window,
-    value: coin,
-    secs: -1,
-    });
-    CR_Feedback_Coin_Old.setVolume(sound_vol);
+    
+    TR_Coin.setVolume(sound_vol);
     RT_Rec_Frame_Feedback.setOpacity(rec_frame_opacity);
     RT_Rec_Frame_Feedback.setLineColor(new util.Color(rec_frame_color));
     RT_Rec_Frame_Feedback.setLineWidth(rec_wd);
     RT_Feedback_Image.setImage(feedback_image);
     // keep track of which components have finished
     RT_FeedbackComponents = [];
-    RT_FeedbackComponents.push(CR_Feedback_Coin_Old);
+    RT_FeedbackComponents.push(TR_Coin);
     RT_FeedbackComponents.push(RT_Rec_Frame_Feedback);
     RT_FeedbackComponents.push(RT_Feedback_Image);
     
@@ -7977,18 +7964,18 @@ function RT_FeedbackRoutineEachFrame(trials) {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     // start/stop CR_Feedback_Coin_Old
-    if (t >= 0.0 && CR_Feedback_Coin_Old.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 0.0 && TR_Coin.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
-      CR_Feedback_Coin_Old.tStart = t;  // (not accounting for frame time here)
-      CR_Feedback_Coin_Old.frameNStart = frameN;  // exact frame index
+      TR_Coin.tStart = t;  // (not accounting for frame time here)
+      TR_Coin.frameNStart = frameN;  // exact frame index
       
-      psychoJS.window.callOnFlip(function(){ CR_Feedback_Coin_Old.play(); });  // screen flip
-      CR_Feedback_Coin_Old.status = PsychoJS.Status.STARTED;
+      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
+      TR_Coin.status = PsychoJS.Status.STARTED;
     }
     frameRemains = 0.0 + feedback_dur - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (t >= frameRemains && CR_Feedback_Coin_Old.status === PsychoJS.Status.STARTED) {
-      //CR_Feedback_Coin_Old.stop();  // stop the sound (if longer than duration)
-      CR_Feedback_Coin_Old.status = PsychoJS.Status.FINISHED;
+    if (t >= frameRemains && TR_Coin.status === PsychoJS.Status.STARTED) {
+      TR_Coin.stop();  // stop the sound (if longer than duration)
+      TR_Coin.status = PsychoJS.Status.FINISHED;
     }
     
     // *RT_Rec_Frame_Feedback* updates
@@ -8053,7 +8040,7 @@ function RT_FeedbackRoutineEnd(trials) {
         thisComponent.setAutoDraw(false);
       }
     }
-    //CR_Feedback_Coin_Old.stop();  // ensure sound has stopped at end of routine
+    TR_Coin.stop();  // ensure sound has stopped at end of routine
     // the Routine "RT_Feedback" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -8551,10 +8538,10 @@ function TR_FeedbackRoutineBegin(trials) {
     t = 0;
     TR_FeedbackClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(0);
+    
     // update component parameters for each repeat
 
-    TR_Feedback_Coin.setVolume(sound_vol);
+    TR_Coin.setVolume(sound_vol);
     Tr_Rec_Frame_Feedback.setOpacity(rec_frame_opacity);
     Tr_Rec_Frame_Feedback.setLineColor(new util.Color(rec_frame_color));
     Tr_Rec_Frame_Feedback.setLineWidth(rec_wd);
@@ -8563,7 +8550,7 @@ function TR_FeedbackRoutineBegin(trials) {
     TR_Feedback_Image.setImage(feedback_image);
     // keep track of which components have finished
     TR_FeedbackComponents = [];
-    TR_FeedbackComponents.push(TR_Feedback_Coin);
+    TR_FeedbackComponents.push(TR_Coin);
     TR_FeedbackComponents.push(Tr_Rec_Frame_Feedback);
     TR_FeedbackComponents.push(TR_Feedback_Text);
     TR_FeedbackComponents.push(TR_Feedback_Image);
@@ -8586,18 +8573,18 @@ function TR_FeedbackRoutineEachFrame(trials) {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     // start/stop TR_Feedback_Coin
-    if (t >= 0.0 && TR_Feedback_Coin.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 0.0 && TR_Coin.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
-      TR_Feedback_Coin.tStart = t;  // (not accounting for frame time here)
-      TR_Feedback_Coin.frameNStart = frameN;  // exact frame index
+      TR_Coin.tStart = t;  // (not accounting for frame time here)
+      TR_Coin.frameNStart = frameN;  // exact frame index
       
-      psychoJS.window.callOnFlip(function(){ TR_Feedback_Coin.play(); });  // screen flip
-      TR_Feedback_Coin.status = PsychoJS.Status.STARTED;
+      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
+      TR_Coin.status = PsychoJS.Status.STARTED;
     }
     frameRemains = 0.0 + feedback_dur - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (t >= frameRemains && TR_Feedback_Coin.status === PsychoJS.Status.STARTED) {
-      TR_Feedback_Coin.stop();  // stop the sound (if longer than duration)
-      TR_Feedback_Coin.status = PsychoJS.Status.FINISHED;
+    if (t >= frameRemains && TR_Coin.status === PsychoJS.Status.STARTED) {
+      TR_Coin.stop();  // stop the sound (if longer than duration)
+      TR_Coin.status = PsychoJS.Status.FINISHED;
     }
     
     // *Tr_Rec_Frame_Feedback* updates
@@ -8676,7 +8663,7 @@ function TR_FeedbackRoutineEnd(trials) {
         thisComponent.setAutoDraw(false);
       }
     }
-    TR_Feedback_Coin.stop();  // ensure sound has stopped at end of routine
+    TR_Coin.stop();  // ensure sound has stopped at end of routine
     // the Routine "TR_Feedback" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
