@@ -3855,7 +3855,7 @@ Ready? Press (H, U, I, or L) to continue.`
 
     instr_cr_old_text_2 = `In the upcoming block, you will see the same eight symbols, but this time the symbol-key association will change. 
     
-Your job is to figure out the new association between symbols and keys.
+Your job is to figure out the NEW association between symbols and keys.
     
 
 Again, some symbols corresponds to (H, U, I, or L). 
@@ -3872,7 +3872,7 @@ Ready? Press (H, U, I, or L) to continue.`
 
     instr_cr_old_text_3 = `In the next block, the association between symbols and keys will change again. 
     
-Take you time to figure out the new association.
+Take you time to figure out the NEW association.
   
 
 Again, some symbols corresponds to (H, U, I, or L). 
@@ -3896,7 +3896,7 @@ If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING, and
 
     
 
-Whenever you are ready, press(H, U, I, or L) to start.`
+Whenever you are ready, press (H, U, I, or L) to start.`
     ;
 
     instr_rt_old_text_2 = `In the upcoming task, use the NEW symbol-key map you just learned:
@@ -7346,8 +7346,6 @@ function Instr_CR_OldRoutineBegin(trials) {
     //symb_map_rnd_stop = Math.floor(myrng() * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
     ind_rnd = resp_map_ind[block_count];
     resp_ind_rnd = symb_perm_resp[ind_rnd] // shuffle index of resp symbols
-    console.log(resp_ind);
-    console.log(resp_ind_rnd);
     
     symb_map_ind_shuffle = [];
     symb_map_ind_shuffle = Object.assign({}, symb_map_ind);
@@ -7367,10 +7365,7 @@ function Instr_CR_OldRoutineBegin(trials) {
       symb_g_map.push(symb_g[symb_map_ind_shuffle[i]]);
       symb_r_map.push(symb_r[symb_map_ind_shuffle[i]]);
     }
-    console.log(symb_map_ind);
-    console.log(symb_map_ind_shuffle);
-    console.log(symb_map);
-
+    
     symb_creat_seq = symb_map;
     symb_g_creat_seq = symb_g_map;
     symb_r_creat_seq = symb_r_map;
@@ -8862,14 +8857,29 @@ function Instr_CR_NewRoutineBegin(trials) {
     stop_pair_1 = probe_pair_1;
     stop_pair_2 = remap_pair_1;
 
+    
     //symb_map_rnd_stop = Math.floor(myrng() * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
-    resp_ind_rnd = map_ind[symb_perm_resp.length-1] // shuffle index of resp symbols
+    ind_rnd = resp_map_ind[symb_perm_resp.length-1];
+    resp_ind_rnd = symb_perm_resp[ind_rnd] // shuffle index of resp symbols
+    
+    symb_map_ind_shuffle = [];
     symb_map_ind_shuffle = Object.assign({}, symb_map_ind);
     
-    symb_map_ind_shuffle[resp_ind_rnd[0]] = symb_map_ind[resp_ind[0]];
-    symb_map_ind_shuffle[resp_ind_rnd[1]] = symb_map_ind[resp_ind[1]];
-    symb_map_ind_shuffle[resp_ind_rnd[2]] = symb_map_ind[resp_ind[2]];
-    symb_map_ind_shuffle[resp_ind_rnd[3]] = symb_map_ind[resp_ind[3]];
+    symb_map_ind_shuffle[resp_ind_rnd[0]] = symb_map_ind[x_symb_resp[0]];
+    symb_map_ind_shuffle[resp_ind_rnd[1]] = symb_map_ind[x_symb_resp[1]];
+    symb_map_ind_shuffle[resp_ind_rnd[2]] = symb_map_ind[x_symb_resp[2]];
+    symb_map_ind_shuffle[resp_ind_rnd[3]] = symb_map_ind[x_symb_resp[3]];
+
+    symb_map_ind_shuffle = Object.values(symb_map_ind_shuffle);
+
+    symb_map = [];
+    symb_g_map = [];
+    symb_r_map = [];
+    for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
+      symb_map.push(symb[symb_map_ind_shuffle[i]]);
+      symb_g_map.push(symb_g[symb_map_ind_shuffle[i]]);
+      symb_r_map.push(symb_r[symb_map_ind_shuffle[i]]);
+    }
 
 
     symb_map = [];
