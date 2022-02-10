@@ -6417,6 +6417,7 @@ function Instr_Block_NumRoutineEachFrame(trials) {
     if (t >= frameRemains + TR_Beep.tStart && TR_Beep.status === PsychoJS.Status.STARTED) {
       TR_Beep.stop();  // stop the sound (if longer than duration)
       TR_Beep.status = PsychoJS.Status.FINISHED;
+      continueRoutine = false;
     }
 
     // check for quit (typically the Esc key)
@@ -6461,7 +6462,7 @@ function Instr_Block_NumRoutineEnd(trials) {
         }
     
     Instr_Block_Num_Press.stop();
-    TR_Coin.stop()
+    TR_Coin.stop();
     TR_Beep.stop();
     // the Routine "Instr_Block_Num" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
