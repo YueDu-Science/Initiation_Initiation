@@ -6325,7 +6325,7 @@ function Instr_Block_NumRoutineBegin(trials) {
     Instr_Block_NumClock.reset(); // clock
     frameN = -1;
     TR_Coin.setVolume(0);
-    TR_Beep.setVolume(0);
+    TR_Beep.setVolume(1);
     // update component parameters for each repeat
     Instr_Block_Num_Text.setText((('Block ' + block_count) + '\nPress (H, U, I, or L) to start'));
     Instr_Block_Num_Press.keys = undefined;
@@ -6413,7 +6413,7 @@ function Instr_Block_NumRoutineEachFrame(trials) {
       TR_Beep.status = PsychoJS.Status.STARTED;
     }
     
-    frameRemains = 0.1 - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+    frameRemains = 0.2 - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (t >= frameRemains + TR_Beep.tStart && TR_Beep.status === PsychoJS.Status.STARTED) {
       TR_Beep.stop();  // stop the sound (if longer than duration)
       TR_Beep.status = PsychoJS.Status.FINISHED;
