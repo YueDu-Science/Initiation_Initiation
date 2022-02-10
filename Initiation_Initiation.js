@@ -6379,7 +6379,7 @@ function Instr_Block_NumRoutineEachFrame(trials) {
 
     
     // *Instr_Block_Num_Press* updates
-    if (t >= 1 && Instr_Block_Num_Press.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 0.0 && Instr_Block_Num_Press.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       Instr_Block_Num_Press.tStart = t;  // (not accounting for frame time here)
       Instr_Block_Num_Press.frameNStart = frameN;  // exact frame index
@@ -7235,7 +7235,7 @@ function CountDownRoutineBegin(trials) {
     routineTimer.add(3.000000);
     // update component parameters for each repeat
     routineTimer.reset(3);
-    TR_Beep.setVolume(0);
+    TR_Beep.setVolume(1);
     countdown = 3;
     // keep track of which components have finished
     CountDownComponents = [];
@@ -7345,6 +7345,7 @@ function CountDownRoutineEnd(trials) {
         thisComponent.setAutoDraw(false);
       }
     }
+    TR_Beep.stop(); 
     return Scheduler.Event.NEXT;
   };
 }
