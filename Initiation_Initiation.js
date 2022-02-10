@@ -6404,7 +6404,7 @@ function Instr_Block_NumRoutineEachFrame(trials) {
       TR_Coin.status = PsychoJS.Status.FINISHED;
     }
 
-    if (t >= 0.0 && _Instr_Block_Num_Press_allKeys.length > 0 && TR_Beep.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= Instr_Block_Num_Press.rt && _Instr_Block_Num_Press_allKeys.length > 0 && TR_Beep.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       TR_Beep.tStart = t;  // (not accounting for frame time here)
       TR_Beep.frameNStart = frameN;  // exact frame index
@@ -6413,8 +6413,8 @@ function Instr_Block_NumRoutineEachFrame(trials) {
       TR_Beep.status = PsychoJS.Status.STARTED;
     }
     
-    frameRemains = 0.2 - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (t >= frameRemains + TR_Beep.tStart && TR_Beep.status === PsychoJS.Status.STARTED) {
+    
+    if (t - Instr_Block_Num_Press.rt >= 0.2 && TR_Beep.status === PsychoJS.Status.STARTED) {
       TR_Beep.stop();  // stop the sound (if longer than duration)
       TR_Beep.status = PsychoJS.Status.FINISHED;
       continueRoutine = false;
