@@ -6447,7 +6447,6 @@ function Instr_Block_NumRoutineEnd(trials) {
     
     Instr_Block_Num_Press.stop();
     TR_Coin.stop();
-    TR_Beep.stop();
     // the Routine "Instr_Block_Num" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
