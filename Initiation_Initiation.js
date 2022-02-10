@@ -3701,7 +3701,7 @@ function Init_StimRoutineBegin(trials) {
     // remap_pair_1 is two random symbol 0 to 4
     // generate a pair correponding to the same respones and it does not require responses during probe session
     for (i = 0, _pj_a = 4; (i < _pj_a); i += 1) { // probe_pair_1 require responses during practice but not during prob
-      if  ((remap_pair_1.includes(i))) {
+      if  (!(remap_pair_1.includes(i))) {
           probe_pair_1.push((i + 4));
       }
   }
