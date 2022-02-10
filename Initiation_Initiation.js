@@ -3836,7 +3836,7 @@ You will see a hand appear on the screen. One of the fingers on the screen will 
     
 
 
-Press (H, U, I, or L) to continue.`
+Press (H, U, I, or L) to start.`
     ;
     instr_tr_text_hand = `Great Job!
     
@@ -3849,7 +3849,7 @@ Sometimes, the finger will light up at the very last second. You will not have e
 There will be at least 2 blocks, depending on how well you press ON the fourth beep.
     
     
-Press (H, U, I, or L) to continue.`
+Press (H, U, I, or L) to proceed.`
     ;
     instr_cr_old_text_1 = `In the upcoming block, you will see eight symbols on the screen, one at a time. You job is to figure out the association between symbols and keys.
 
@@ -3864,7 +3864,7 @@ ACCURACY is the priority, so go as slowly as you need to. The more mistakes you 
     
 
 
-Ready? Press (H, U, I, or L) to continue.`
+Ready? Press (H, U, I, or L) to start.`
     ;
 
     instr_cr_old_text_2 = `In the upcoming block, your job is to figure out a NEW association between symbols and keys.
@@ -3879,7 +3879,7 @@ ACCURACY is the priority, so go as slowly as you need to. The more mistakes you 
     
 
 
-Ready? Press (H, U, I, or L) to continue.`
+Ready? Press (H, U, I, or L) to start.`
     ;
 
     instr_cr_old_text_3 = `In the next block, take you time to figure out a NEW association again.
@@ -3894,7 +3894,7 @@ ACCURACY is the priority, so go as slowly as you need to. The more mistakes you 
     
 
 
-Ready? Press (H, U, I, or L) to continue.`
+Ready? Press (H, U, I, or L) to start.`
     ;
 
     instr_rt_old_text_1 = `Now, use the symbol-key map you just learned:
@@ -3918,7 +3918,7 @@ If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING, and
     
 
 
-Whenever you are ready, press (H, U, I, or L) to proceed.`
+Whenever you are ready, press (H, U, I, or L) to start.`
     ;
 
     if ((session > 1)) {
@@ -5481,7 +5481,7 @@ function Instr_RT_HandRoutineEachFrame(trials) {
       TR_Coin.status = PsychoJS.Status.STARTED;
     }
     
-    frameRemains = 0.1 - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+    frameRemains = TR_Coin.getDuration - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
       TR_Coin.stop();  // stop the sound (if longer than duration)
       TR_Coin.status = PsychoJS.Status.FINISHED;
@@ -6402,7 +6402,7 @@ function Instr_Block_NumRoutineEachFrame(trials) {
       TR_Coin.status = PsychoJS.Status.STARTED;
     }
     
-    frameRemains = 0.1 - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+    frameRemains = TR_Coin.getDuration - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
       TR_Coin.stop();  // stop the sound (if longer than duration)
       TR_Coin.status = PsychoJS.Status.FINISHED;
@@ -6922,7 +6922,7 @@ function TR_Feedback_HandRoutineEachFrame(trials) {
     
     frameRemains = 0.0 + feedback_dur - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (t >= frameRemains && TR_Coin.status === PsychoJS.Status.STARTED) {
-      TR_Coin.stop();  // stop the sound (if longer than duration)
+      //TR_Coin.stop();  // stop the sound (if longer than duration)
       TR_Coin.status = PsychoJS.Status.FINISHED;
     }
     
@@ -7567,7 +7567,7 @@ function Instr_CR_OldRoutineEachFrame(trials) {
       TR_Coin.status = PsychoJS.Status.STARTED;
     }
     
-    frameRemains = 0.1 - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+    frameRemains = TR_Coin.getDuration - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
       TR_Coin.stop();  // stop the sound (if longer than duration)
       TR_Coin.status = PsychoJS.Status.FINISHED;
@@ -7974,7 +7974,7 @@ function RT_FeedbackRoutineEachFrame(trials) {
     }
     frameRemains = 0.0 + feedback_dur - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (t >= frameRemains && TR_Coin.status === PsychoJS.Status.STARTED) {
-      TR_Coin.stop();  // stop the sound (if longer than duration)
+      //TR_Coin.stop();  // stop the sound (if longer than duration)
       TR_Coin.status = PsychoJS.Status.FINISHED;
     }
     
@@ -8583,7 +8583,7 @@ function TR_FeedbackRoutineEachFrame(trials) {
     }
     frameRemains = 0.0 + feedback_dur - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (t >= frameRemains && TR_Coin.status === PsychoJS.Status.STARTED) {
-      TR_Coin.stop();  // stop the sound (if longer than duration)
+      //TR_Coin.stop();  // stop the sound (if longer than duration)
       TR_Coin.status = PsychoJS.Status.FINISHED;
     }
     
@@ -8772,7 +8772,7 @@ function Instr_RTRoutineEachFrame(trials) {
       TR_Coin.status = PsychoJS.Status.STARTED;
     }
     
-    frameRemains = 0.1 - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+    frameRemains = TR_Coin.getDuration - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
       TR_Coin.stop();  // stop the sound (if longer than duration)
       TR_Coin.status = PsychoJS.Status.FINISHED;
@@ -9093,7 +9093,7 @@ function Instr_CR_NewRoutineEachFrame(trials) {
       TR_Coin.status = PsychoJS.Status.STARTED;
     }
     
-    frameRemains = 0.1 - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+    frameRemains = TR_Coin.getDuration - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
       TR_Coin.stop();  // stop the sound (if longer than duration)
       TR_Coin.status = PsychoJS.Status.FINISHED;
@@ -9508,13 +9508,7 @@ function TR_Enter_Trials_StopRoutineBegin(trials) {
     t = 0;
     TR_Enter_Trials_StopClock.reset(); // clock
     frameN = -1;
-    // update component parameters for each repeat
-    /* TR_Beep_Stop = new sound.Sound({
-    win: psychoJS.window,
-    value: beep,
-    secs: -1,
-    });
-    TR_Beep_Stop.setVolume(1); */
+    TR_Beep.setVolume(1);
     routineTimer.reset(time_limit);
     tr_text = 0;
     tr_sound = 0;
@@ -9569,7 +9563,7 @@ function TR_Enter_Trials_StopRoutineEachFrame(trials) {
     
     frameRemains = time_limit  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (t >= frameRemains && TR_Beep.status === PsychoJS.Status.STARTED) {
-      //TR_Beep_Stop.stop();  // stop the sound (if longer than duration)
+      TR_Beep_Stop.stop();  // stop the sound (if longer than duration)
       TR_Beep.status = PsychoJS.Status.FINISHED;
     }
     
@@ -9795,6 +9789,7 @@ function TR_Enter_Trials_StopRoutineEnd(trials) {
         }
     
     TR_Press_Stop.stop();
+    TR_Beep.stop();
     // the Routine "TR_Enter_Trials_Stop" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
