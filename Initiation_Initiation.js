@@ -3854,9 +3854,9 @@ Press (H, U, I, or L) to continue.`
     instr_cr_old_text_1 = `In the upcoming block, you will see eight symbols on the screen, one at a time. You job is to figure out the association between symbols and keys.
 
 
-Some symbols corresponds to (H, U, I, or L). 
+Four symbols corresponds to (H, U, I, or L). 
 
-Some symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+Four symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
 
 
@@ -3872,9 +3872,9 @@ Ready? Press (H, U, I, or L) to continue.`
 Your job is to figure out the NEW association between symbols and keys.
     
 
-Again, some symbols corresponds to (H, U, I, or L). 
+The same four symbols corresponds to (H, U, I, or L). 
 
-Some symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+The other four symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
 
 ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
@@ -3889,9 +3889,9 @@ Ready? Press (H, U, I, or L) to continue.`
 Take you time to figure out the NEW association.
   
 
-Again, some symbols corresponds to (H, U, I, or L). 
+Again, the same four symbols that corresponded to (H, U, I, or L) . 
 
-Some symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+The other four symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
 
 ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
@@ -3905,7 +3905,7 @@ Ready? Press (H, U, I, or L) to continue.`
 
 If you see a symbol that requires a response, press the corresponding key as quickly and as accurately as possible.            
 
-If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING, and simply wait for 1 second.
+If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING, and simply wait for 2 second.
     
 
     
@@ -3917,7 +3917,7 @@ Whenever you are ready, press (H, U, I, or L) to start.`
 
 If you see a symbol that requires a response, press the corresponding key as quickly and as accurately as possible.            
 
-If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING, and simply wait for 1 second.
+If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING, and simply wait for 2 second.
     
     
 
@@ -3958,22 +3958,22 @@ In the following 2 blocks, you will hear four beeps again. Press the correspondi
 Press one of (H, U, I, L) to start.`
     ;
     if ((grp_stop === 1)) {
-        instr_cr_new_text = `Great job.
-    
-Now, you will see the same eight symbols, the symbol-key association will change again.
+        instr_cr_new_text = `Great job. Now we proceed to next step.
         
-Your job is to figure out the new association between symbols and keys.
+Your job is to figure out a New association between the same eight symbols and (H, U, I, or L) keys.
     
 
-Again, some symbols corresponds to one of (H, U, I, L). 
+Some symbols that corresponded to (H, U, I, or L) may not require a response any more. 
 
-Some symbols do not correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+Some symbols that did not correspond with a key may become requiring a response.
+
+For symbols that do not require a response, DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
 
 ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
         
         
-Press (H, U, I, or L) to continue.`
+Press (H, U, I, or L) to start.`
     ;
     } else {
         if ((grp_swap === 1)) {
@@ -4018,7 +4018,7 @@ This task is designed to be difficult, so it is okay to make a guess.
             
             
             
-Press (H, U, I, or L) to start.`
+Press (H, U, I, or L) to proceed.`
     ;
         }
     }
@@ -7301,7 +7301,7 @@ function CountDownRoutineEachFrame(trials) {
       Number_CountDown.setAutoDraw(true);
     }
 
-    frameRemains = 3  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+    frameRemains = 2.5  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (Text_CountDown.status === PsychoJS.Status.STARTED && t >= frameRemains) {
       Text_CountDown.setAutoDraw(false);
     }
@@ -8681,7 +8681,7 @@ function Instr_RTRoutineBegin(trials) {
     TR_Coin.setVolume(0);
     // update component parameters for each repeat
     block_count = (block_count_cr_old - 1)*rt_block;
-    stop_tol = 1;
+    stop_tol = 2;
 
     if (block_count_cr_old == 1) {
       instr_text = instr_rt_old_text_1;
