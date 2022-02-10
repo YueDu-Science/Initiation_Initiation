@@ -6325,7 +6325,6 @@ function Instr_Block_NumRoutineBegin(trials) {
     Instr_Block_NumClock.reset(); // clock
     frameN = -1;
     TR_Coin.setVolume(0);
-    TR_Beep.setVolume(1);
     // update component parameters for each repeat
     Instr_Block_Num_Text.setText((('Block ' + block_count) + '\nPress (H, U, I, or L) to start'));
     Instr_Block_Num_Press.keys = undefined;
@@ -6336,7 +6335,6 @@ function Instr_Block_NumRoutineBegin(trials) {
     Instr_Block_NumComponents.push(Instr_Block_Num_Text);
     Instr_Block_NumComponents.push(Instr_Block_Num_Press);
     Instr_Block_NumComponents.push(TR_Coin);
-    Instr_Block_NumComponents.push(TR_Beep);
 
     for (const thisComponent of Instr_Block_NumComponents)
       if ('status' in thisComponent)
@@ -6355,18 +6353,7 @@ function Instr_Block_NumRoutineEachFrame(trials) {
     t = Instr_Block_NumClock.getTime();
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
-    
-
-    if (t >= 0 && TR_Beep.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      TR_Beep.tStart = t;  // (not accounting for frame time here)
-      TR_Beep.frameNStart = frameN;  // exact frame index
-      
-      psychoJS.window.callOnFlip(function(){ TR_Beep.play(); });  // screen flip
-      TR_Beep.status = PsychoJS.Status.STARTED;
-    }
-    
-    
+  
     // *Instr_Block_Num_Text* updates
     if (t >= 0.0 && Instr_Block_Num_Text.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -6396,8 +6383,6 @@ function Instr_Block_NumRoutineEachFrame(trials) {
         Instr_Block_Num_Press.keys = _Instr_Block_Num_Press_allKeys[0].name;  // just the first key pressed
         Instr_Block_Num_Press.rt = _Instr_Block_Num_Press_allKeys[0].rt;
         // a response ends the routine
-        TR_Beep.stop();  // stop the sound (if longer than duration)
-        TR_Beep.status = PsychoJS.Status.FINISHED;
         continueRoutine = false;
       }
     }
