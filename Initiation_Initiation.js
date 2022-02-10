@@ -6198,7 +6198,7 @@ function Instr_TR_HandRoutineBegin(trials) {
     t = 0;
     Instr_TR_HandClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(0);
+    
     // update component parameters for each repeat
     instr_HAND_TR_text.setText(instr_tr_text_hand);
     Instr_HAND_TR_press.keys = undefined;
@@ -6213,7 +6213,7 @@ function Instr_TR_HandRoutineBegin(trials) {
     Instr_TR_HandComponents = [];
     Instr_TR_HandComponents.push(instr_HAND_TR_text);
     Instr_TR_HandComponents.push(Instr_HAND_TR_press);
-    Instr_TR_HandComponents.push(TR_Coin);
+
 
     for (const thisComponent of Instr_TR_HandComponents)
       if ('status' in thisComponent)
@@ -6262,24 +6262,8 @@ function Instr_TR_HandRoutineEachFrame(trials) {
         Instr_HAND_TR_press.keys = _Instr_HAND_TR_press_allKeys[0].name;  // just the first key pressed
         Instr_HAND_TR_press.rt = _Instr_HAND_TR_press_allKeys[0].rt;
         // a response ends the routine
-       // continueRoutine = false;
+       continueRoutine = false;
       }
-    }
-    
-    if (t >= 0.0 && _Instr_HAND_TR_press_allKeys.length > 0 && TR_Coin.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      TR_Coin.tStart = t;  // (not accounting for frame time here)
-      TR_Coin.frameNStart = frameN;  // exact frame index
-      
-      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
-      TR_Coin.status = PsychoJS.Status.STARTED;
-    }
-    
-    frameRemains = 0.1 - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
-      TR_Coin.stop();  // stop the sound (if longer than duration)
-      TR_Coin.status = PsychoJS.Status.FINISHED;
-      continueRoutine = false;
     }
 
     // check for quit (typically the Esc key)
@@ -6324,7 +6308,6 @@ function Instr_TR_HandRoutineEnd(trials) {
         }
     
     Instr_HAND_TR_press.stop();
-    TR_Coin.stop();
     // the Routine "Instr_TR_Hand" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -6342,6 +6325,7 @@ function Instr_Block_NumRoutineBegin(trials) {
     Instr_Block_NumClock.reset(); // clock
     frameN = -1;
     TR_Coin.setVolume(0);
+    TR_Beep.setVolume(0);
     // update component parameters for each repeat
     Instr_Block_Num_Text.setText((('Block ' + block_count) + '\nPress (H, U, I, or L) to start'));
     Instr_Block_Num_Press.keys = undefined;
@@ -6352,6 +6336,7 @@ function Instr_Block_NumRoutineBegin(trials) {
     Instr_Block_NumComponents.push(Instr_Block_Num_Text);
     Instr_Block_NumComponents.push(Instr_Block_Num_Press);
     Instr_Block_NumComponents.push(TR_Coin);
+    Instr_Block_NumComponents.push(TR_Beep);
 
     for (const thisComponent of Instr_Block_NumComponents)
       if ('status' in thisComponent)
@@ -6417,7 +6402,21 @@ function Instr_Block_NumRoutineEachFrame(trials) {
     if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
       TR_Coin.stop();  // stop the sound (if longer than duration)
       TR_Coin.status = PsychoJS.Status.FINISHED;
-      continueRoutine = false;
+    }
+
+    if (t >= 0.0 && _Instr_Block_Num_Press_allKeys.length > 0 && TR_Beep.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      TR_Beep.tStart = t;  // (not accounting for frame time here)
+      TR_Beep.frameNStart = frameN;  // exact frame index
+      
+      psychoJS.window.callOnFlip(function(){ TR_Beep.play(); });  // screen flip
+      TR_Beep.status = PsychoJS.Status.STARTED;
+    }
+    
+    frameRemains = 0.1 - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+    if (t >= frameRemains + TR_Beep.tStart && TR_Beep.status === PsychoJS.Status.STARTED) {
+      TR_Beep.stop();  // stop the sound (if longer than duration)
+      TR_Beep.status = PsychoJS.Status.FINISHED;
     }
 
     // check for quit (typically the Esc key)
@@ -6463,6 +6462,7 @@ function Instr_Block_NumRoutineEnd(trials) {
     
     Instr_Block_Num_Press.stop();
     TR_Coin.stop()
+    TR_Beep.stop();
     // the Routine "Instr_Block_Num" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -8555,6 +8555,7 @@ function Instr_RTRoutineBegin(trials) {
     t = 0;
     Instr_RTClock.reset(); // clock
     frameN = -1;
+    TR_Coin.setVolume(0);
     // update component parameters for each repeat
     block_count = (block_count_cr_old - 1)*rt_block;
     stop_tol = 1;
@@ -8602,7 +8603,6 @@ function Instr_RTRoutineEachFrame(trials) {
     // get current time
     t = Instr_RTClock.getTime();
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
-    TR_Coin.setVolume(0);
     // update/draw components on each frame
     
     // *Instr_RT_Text* updates
@@ -9244,7 +9244,6 @@ function Instr_TR_NewRoutineBegin(trials) {
     t = 0;
     Instr_TR_NewClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(0);
     // update component parameters for each repeat
     Instr_TR_Old_Post_text_3.setText(instr_tr_new_text);
     Instr_TR_Old_Post_Press_3.keys = undefined;
@@ -9271,7 +9270,6 @@ function Instr_TR_NewRoutineBegin(trials) {
     Instr_TR_NewComponents = [];
     Instr_TR_NewComponents.push(Instr_TR_Old_Post_text_3);
     Instr_TR_NewComponents.push(Instr_TR_Old_Post_Press_3);
-    Instr_TR_NewComponents.push(TR_Coin);
     for (const thisComponent of Instr_TR_NewComponents)
       if ('status' in thisComponent)
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
@@ -9319,24 +9317,8 @@ function Instr_TR_NewRoutineEachFrame(trials) {
         Instr_TR_Old_Post_Press_3.keys = _Instr_TR_Old_Post_Press_3_allKeys[0].name;  // just the first key pressed
         Instr_TR_Old_Post_Press_3.rt = _Instr_TR_Old_Post_Press_3_allKeys[0].rt;
         // a response ends the routine
-       // continueRoutine = false;
+       continueRoutine = false;
       }
-    }
-    
-    if (t >= 0.0 && _Instr_TR_Old_Post_Press_3_allKeys.length > 0 && TR_Coin.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      TR_Coin.tStart = t;  // (not accounting for frame time here)
-      TR_Coin.frameNStart = frameN;  // exact frame index
-      
-      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
-      TR_Coin.status = PsychoJS.Status.STARTED;
-    }
-    
-    frameRemains = 0.1 - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
-      TR_Coin.stop();  // stop the sound (if longer than duration)
-      TR_Coin.status = PsychoJS.Status.FINISHED;
-      continueRoutine = false;
     }
 
     // check for quit (typically the Esc key)
@@ -9381,7 +9363,6 @@ function Instr_TR_NewRoutineEnd(trials) {
         }
     
     Instr_TR_Old_Post_Press_3.stop();
-    TR_Coin.stop();
     psychoJS.experiment.addData("symb_map_shuffle", symb_map_ind_shuffle);
     // the Routine "Instr_TR_New" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
