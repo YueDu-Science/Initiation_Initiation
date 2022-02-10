@@ -6330,7 +6330,7 @@ function Instr_Block_NumRoutineBegin(trials) {
     t = 0;
     Instr_Block_NumClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(0);
+    TR_Coin.setVolume(1);
     // update component parameters for each repeat
     Instr_Block_Num_Text.setText((('Block ' + block_count) + '\nPress (H, U, I, or L) to start'));
     Instr_Block_Num_Press.keys = undefined;
@@ -7445,7 +7445,7 @@ function Instr_CR_OldRoutineBegin(trials) {
     t = 0;
     Instr_CR_OldClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(0);
+    TR_Coin.setVolume(1);
     // update component parameters for each repeat
     block_count_cr_old  = block_count_cr_old  + 1;
 
@@ -8680,7 +8680,7 @@ function Instr_RTRoutineBegin(trials) {
     t = 0;
     Instr_RTClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(0);
+    TR_Coin.setVolume(1);
     // update component parameters for each repeat
     block_count = (block_count_cr_old - 1)*rt_block;
     stop_tol = 2;
@@ -8967,7 +8967,7 @@ function Instr_CR_NewRoutineBegin(trials) {
     t = 0;
     Instr_CR_NewClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(0);
+    TR_Coin.setVolume(1);
     // update component parameters for each repeat
     Instr_CR_New_Text.setText(instr_cr_new_text);
     Instr_CR_New_Press.keys = undefined;
