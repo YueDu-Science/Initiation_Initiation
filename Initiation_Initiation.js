@@ -6356,6 +6356,17 @@ function Instr_Block_NumRoutineEachFrame(trials) {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     
+
+    if (t >= 0 && TR_Beep.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      TR_Beep.tStart = t;  // (not accounting for frame time here)
+      TR_Beep.frameNStart = frameN;  // exact frame index
+      
+      psychoJS.window.callOnFlip(function(){ TR_Beep.play(); });  // screen flip
+      TR_Beep.status = PsychoJS.Status.STARTED;
+    }
+    
+    
     // *Instr_Block_Num_Text* updates
     if (t >= 0.0 && Instr_Block_Num_Text.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -6385,7 +6396,9 @@ function Instr_Block_NumRoutineEachFrame(trials) {
         Instr_Block_Num_Press.keys = _Instr_Block_Num_Press_allKeys[0].name;  // just the first key pressed
         Instr_Block_Num_Press.rt = _Instr_Block_Num_Press_allKeys[0].rt;
         // a response ends the routine
-       // continueRoutine = false;
+        TR_Beep.stop();  // stop the sound (if longer than duration)
+        TR_Beep.status = PsychoJS.Status.FINISHED;
+        continueRoutine = false;
       }
     }
     
@@ -6404,21 +6417,7 @@ function Instr_Block_NumRoutineEachFrame(trials) {
       TR_Coin.status = PsychoJS.Status.FINISHED;
     }
 
-    if (t >= Instr_Block_Num_Press.rt && _Instr_Block_Num_Press_allKeys.length > 0 && TR_Beep.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      TR_Beep.tStart = t;  // (not accounting for frame time here)
-      TR_Beep.frameNStart = frameN;  // exact frame index
-      
-      psychoJS.window.callOnFlip(function(){ TR_Beep.play(); });  // screen flip
-      TR_Beep.status = PsychoJS.Status.STARTED;
-    }
     
-    
-    if (t - Instr_Block_Num_Press.rt >= 0.2 && TR_Beep.status === PsychoJS.Status.STARTED) {
-      TR_Beep.stop();  // stop the sound (if longer than duration)
-      TR_Beep.status = PsychoJS.Status.FINISHED;
-      continueRoutine = false;
-    }
 
     // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
