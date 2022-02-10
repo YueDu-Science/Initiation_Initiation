@@ -5383,7 +5383,7 @@ function Instr_RT_HandRoutineBegin(trials) {
     Instr_RT_HandComponents = [];
     Instr_RT_HandComponents.push(Instr_RT_Hand_Rext);
     Instr_RT_HandComponents.push(Instr_RT_Hand_Key);
-    
+    Instr_RT_HandComponents.push(TR_Coin);
     for (const thisComponent of Instr_RT_HandComponents)
       if ('status' in thisComponent)
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
@@ -6213,7 +6213,8 @@ function Instr_TR_HandRoutineBegin(trials) {
     Instr_TR_HandComponents = [];
     Instr_TR_HandComponents.push(instr_HAND_TR_text);
     Instr_TR_HandComponents.push(Instr_HAND_TR_press);
-    
+    Instr_TR_HandComponents.push(TR_Coin);
+
     for (const thisComponent of Instr_TR_HandComponents)
       if ('status' in thisComponent)
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
@@ -8877,7 +8878,7 @@ function Instr_CR_NewRoutineBegin(trials) {
     Instr_CR_NewComponents = [];
     Instr_CR_NewComponents.push(Instr_CR_New_Text);
     Instr_CR_NewComponents.push(Instr_CR_New_Press);
-    
+    Instr_CR_NewComponents.push(TR_Coin);
     for (const thisComponent of Instr_CR_NewComponents)
       if ('status' in thisComponent)
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
@@ -9241,7 +9242,7 @@ function Instr_TR_NewRoutineBegin(trials) {
     Instr_TR_NewComponents = [];
     Instr_TR_NewComponents.push(Instr_TR_Old_Post_text_3);
     Instr_TR_NewComponents.push(Instr_TR_Old_Post_Press_3);
-    
+    Instr_TR_NewComponents.push(TR_Coin);
     for (const thisComponent of Instr_TR_NewComponents)
       if ('status' in thisComponent)
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
