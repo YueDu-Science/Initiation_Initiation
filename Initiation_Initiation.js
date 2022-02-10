@@ -3867,12 +3867,10 @@ ACCURACY is the priority, so go as slowly as you need to. The more mistakes you 
 Ready? Press (H, U, I, or L) to continue.`
     ;
 
-    instr_cr_old_text_2 = `In the upcoming block, you will see the same eight symbols, but this time the symbol-key association will change. 
-    
-Your job is to figure out the NEW association between symbols and keys.
+    instr_cr_old_text_2 = `In the upcoming block, your job is to figure out a NEW association between symbols and keys.
     
 
-The same four symbols corresponds to (H, U, I, or L). 
+The same four symbols still correspond to (H, U, I, or L) but the symbol-key association will change. 
 
 The other four symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
@@ -3884,12 +3882,10 @@ ACCURACY is the priority, so go as slowly as you need to. The more mistakes you 
 Ready? Press (H, U, I, or L) to continue.`
     ;
 
-    instr_cr_old_text_3 = `In the next block, the association between symbols and keys will change again. 
-    
-Take you time to figure out the NEW association.
+    instr_cr_old_text_3 = `In the next block, take you time to figure out a NEW association again.
   
 
-Again, the same four symbols that corresponded to (H, U, I, or L) . 
+Again, The same four symbols still correspond to (H, U, I, or L) but the symbol-key association will change. 
 
 The other four symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
@@ -7236,13 +7232,14 @@ function CountDownRoutineBegin(trials) {
     // update component parameters for each repeat
     routineTimer.reset(3);
     TR_Beep.setVolume(1);
+    TR_Coin.setVolume(1);
     countdown = 3;
     // keep track of which components have finished
     CountDownComponents = [];
     CountDownComponents.push(Text_CountDown);
     CountDownComponents.push(Number_CountDown);
     CountDownComponents.push(TR_Beep);
-    //CountDownComponents.push(TR_Beep);
+    CountDownComponents.push(TR_Coin);
 
     for (const thisComponent of CountDownComponents)
       if ('status' in thisComponent)
@@ -7284,6 +7281,23 @@ function CountDownRoutineEachFrame(trials) {
       TR_Beep.status = PsychoJS.Status.FINISHED;
     
     }
+
+
+    // play sound for warm up
+    if (t >= 0.0 && TR_Coin.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      TR_Coin.tStart = t;  // (not accounting for frame time here)
+      TR_Coin.frameNStart = frameN;  // exact frame index
+      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
+      TR_Coin.status = PsychoJS.Status.STARTED;
+      
+    }
+    frameRemains = 2  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+    if (t >= frameRemains && TR_Coin.status === PsychoJS.Status.STARTED) {
+      TR_Coin.stop();  // stop the sound (if longer than duration)
+      TR_Coin.status = PsychoJS.Status.FINISHED;
+    
+    }
     // *Text_SS_Prac_CountDown* updates
     if (t >= 0.0 && Text_CountDown.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -7301,7 +7315,7 @@ function CountDownRoutineEachFrame(trials) {
       Number_CountDown.setAutoDraw(true);
     }
 
-    frameRemains = 2.5  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+    frameRemains = 2  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (Text_CountDown.status === PsychoJS.Status.STARTED && t >= frameRemains) {
       Text_CountDown.setAutoDraw(false);
     }
@@ -7346,6 +7360,7 @@ function CountDownRoutineEnd(trials) {
       }
     }
     TR_Beep.stop(); 
+    TR_Coin.stop(); 
     return Scheduler.Event.NEXT;
   };
 }
