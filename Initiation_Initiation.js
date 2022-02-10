@@ -4087,6 +4087,33 @@ function Instr_ExpRoutineBegin(trials) {
     t = 0;
     Instr_ExpClock.reset(); // clock
     frameN = -1;
+
+    TR_Beep = new sound.Sound({
+      win: psychoJS.window,
+      value: beep,
+      secs: (- 1),
+      startTime: 0,
+    });
+    TR_Beep.setVolume(1);
+
+    TR_Coin_Hand = new sound.Sound({
+      win: psychoJS.window,
+      value: coin,
+      secs: -1,
+    });
+
+    TR_Coin = new sound.Sound({
+      win: psychoJS.window,
+      value: coin,
+      secs: -1,
+    });
+
+    TR_Feedback_Coin = new sound.Sound({
+      win: psychoJS.window,
+      value: coin,
+      secs: -1,
+      });
+      
     // update component parameters for each repeat
     Instr_Exp_Text.setText(instr_exp_text);
     Instr_Exp_Key.keys = undefined;
@@ -5615,33 +5642,6 @@ function Creat_StimSeqRoutineBegin(trials) {
         }
     }
     
-    TR_Beep = new sound.Sound({
-      win: psychoJS.window,
-      value: beep,
-      secs: (- 1),
-      startTime: 0,
-    });
-    TR_Beep.setVolume(1);
-
-    TR_Coin_Hand = new sound.Sound({
-      win: psychoJS.window,
-      value: coin,
-      secs: -1,
-    });
-
-    TR_Coin = new sound.Sound({
-      win: psychoJS.window,
-      value: coin,
-      secs: -1,
-    });
-
-    TR_Feedback_Coin = new sound.Sound({
-      win: psychoJS.window,
-      value: coin,
-      secs: -1,
-      });
-
-
     // keep track of which components have finished
     Creat_StimSeqComponents = [];
     
