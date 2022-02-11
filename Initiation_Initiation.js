@@ -226,7 +226,7 @@ var num_trials_cr = 2000;
 var num_criterion = 1;
 
 var tr_block_old = 2;
-var tr_block_new_swap = 2;
+var tr_block_new_swap = 0;
 var tr_block_new_stop = 2;
 
 var prac_old_block = 1;   // set of criterion + practice (rt_blocks)
