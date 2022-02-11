@@ -3851,12 +3851,12 @@ There will be at least 2 blocks, depending on how well you press ON the fourth b
     
 Press (H, U, I, or L) to proceed.`
     ;
-    instr_cr_old_text_1 = `In the upcoming block, you will see eight symbols on the screen, one at a time. You job is to figure out the association between symbols and keys.
+    instr_cr_old_text_1 = `In the upcoming block, you will see 8 symbols on the screen, one at a time. You job is to figure out the association between symbols and keys.
 
 
-Four symbols corresponds to (H, U, I, or L). 
+4 symbols corresponds to (H, U, I, or L). 
 
-Four symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+4 symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
 
 
@@ -3870,9 +3870,9 @@ Ready? Press (H, U, I, or L) to start.`
     instr_cr_old_text_2 = `In the upcoming block, your job is to figure out a NEW association between symbols and keys.
     
 
-The same four symbols still correspond to (H, U, I, or L) but the symbol-key association will change. 
+The same 4 symbols still correspond to (H, U, I, or L) but the symbol-key association will change. 
 
-The other four symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+The other 4 symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
 
 ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
@@ -3885,9 +3885,9 @@ Ready? Press (H, U, I, or L) to start.`
     instr_cr_old_text_3 = `In the next block, take you time to figure out a NEW association again.
   
 
-Again, The same four symbols still correspond to (H, U, I, or L) but the symbol-key association will change. 
+Again, The same 4 symbols still correspond to (H, U, I, or L) but the symbol-key association will change. 
 
-The other four symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+The other 4 symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
 
 ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
@@ -3962,7 +3962,7 @@ Symbols that corresponded to (H, U, I, or L) may not require a response any more
 Symbols that did not correspond with a key may become requiring a response.
 
 
-Your job is to figure out the New association between the same eight symbols and (H, U, I, or L) keys.
+Your job is to figure out the New association between the same 8 symbols and (H, U, I, or L) keys.
 
 For symbols that do not require a response, DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
@@ -5406,7 +5406,7 @@ function Instr_RT_HandRoutineBegin(trials) {
     t = 0;
     Instr_RT_HandClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(0);
+    TR_Coin.setVolume(1);
     // update component parameters for each repeat
     block_type = "RT";
     stim_type = "Hand";
@@ -6332,7 +6332,7 @@ function Instr_Block_NumRoutineBegin(trials) {
     t = 0;
     Instr_Block_NumClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(0);
+    TR_Coin.setVolume(1);
     // update component parameters for each repeat
     Instr_Block_Num_Text.setText((('Block ' + block_count) + '\nPress (H, U, I, or L) to start'));
     Instr_Block_Num_Press.keys = undefined;
@@ -7224,7 +7224,7 @@ function CountDownRoutineBegin(trials) {
     routineTimer.add(3.000000);
     // update component parameters for each repeat
     routineTimer.reset(3);
-    TR_Beep.setVolume(1);
+    TR_Beep.setVolume(0);
     TR_Coin.setVolume(0);
     countdown = 3;
     // keep track of which components have finished
@@ -7447,7 +7447,7 @@ function Instr_CR_OldRoutineBegin(trials) {
     t = 0;
     Instr_CR_OldClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(0);
+    TR_Coin.setVolume(1);
     // update component parameters for each repeat
     block_count_cr_old  = block_count_cr_old  + 1;
 
@@ -8286,7 +8286,6 @@ function TR_Enter_TrialsRoutineBegin(trials) {
     // update component parameters for each repeat
     
     TR_Beep.setVolume(1);
-    TR_Coin.setVolume(0);
     routineTimer.reset(time_limit);
     tr_press_early = 0;
     tr_press_late = 0;
@@ -8308,7 +8307,6 @@ function TR_Enter_TrialsRoutineBegin(trials) {
     TR_Enter_TrialsComponents.push(TR_Rec_Frame);
     TR_Enter_TrialsComponents.push(TR_Stim_Image);
     TR_Enter_TrialsComponents.push(TR_Press);
-    TR_Enter_TrialsComponents.push(TR_Coin);
     
     for (const thisComponent of TR_Enter_TrialsComponents)
       if ('status' in thisComponent)
@@ -8682,7 +8680,7 @@ function Instr_RTRoutineBegin(trials) {
     t = 0;
     Instr_RTClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(0);
+    TR_Coin.setVolume(1);
     // update component parameters for each repeat
     block_count = (block_count_cr_old - 1)*rt_block;
     stop_tol = 2;
@@ -8969,7 +8967,7 @@ function Instr_CR_NewRoutineBegin(trials) {
     t = 0;
     Instr_CR_NewClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(0);
+    TR_Coin.setVolume(1);
     // update component parameters for each repeat
     Instr_CR_New_Text.setText(instr_cr_new_text);
     Instr_CR_New_Press.keys = undefined;
