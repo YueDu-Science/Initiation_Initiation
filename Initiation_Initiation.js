@@ -229,7 +229,7 @@ var tr_block_old = 2;
 var tr_block_new_swap = 2;
 var tr_block_new_stop = 2;
 
-var prac_old_block = 2;   // set of criterion + practice (rt_blocks)
+var prac_old_block = 1;   // set of criterion + practice (rt_blocks)
 var rt_block = 1;
 var num_trials = 8;
 
@@ -3954,7 +3954,7 @@ In the following 2 blocks, you will hear four beeps again. Press the correspondi
 Press one of (H, U, I, L) to start.`
     ;
     if ((grp_stop === 1)) {
-        instr_cr_new_text = `Great job. Now we proceed to the next step. In the upcoming block,
+        instr_cr_new_text = `Great job. Now we proceed to the next step. In the upcoming block:
 
 
 Symbols that corresponded to (H, U, I, or L) may not require a response any more. 
@@ -3962,7 +3962,7 @@ Symbols that corresponded to (H, U, I, or L) may not require a response any more
 Symbols that did not correspond with a key may become requiring a response.
 
 
-Your job is to figure out a New association between the same eight symbols and (H, U, I, or L) keys.
+Your job is to figure out the New association between the same eight symbols and (H, U, I, or L) keys.
 
 For symbols that do not require a response, DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
@@ -4002,7 +4002,7 @@ Press (H, U, I, or L) to continue.`
         if ((grp_stop === 1)) {
             instr_tr_new_text = `Great job. We are almost there!
             
-In the last ${tr_block_new_stop} blocks, use the NEW symbol-key map you just learned:
+In the last ${tr_block_new_stop} blocks, you will hear 4 beeps. Use the NEW symbol-key map you just learned:
           
 If you see a symbol that requires a response, press the corresponding key ON the fourth beep.             
 If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING.
@@ -6109,7 +6109,7 @@ function RT_Feedback_HandRoutineEachFrame(trials) {
     
     frameRemains = 0.0 + feedback_dur - psychoJS.window.monitorFramePeriod * 0.75;
     if (t >= frameRemains && TR_Coin.status === PsychoJS.Status.STARTED) {
-      TR_Coin.stop();  // stop the sound (if longer than duration)
+     // TR_Coin.stop();  // stop the sound (if longer than duration)
       TR_Coin.status = PsychoJS.Status.FINISHED;
     }
     
@@ -9565,7 +9565,7 @@ function TR_Enter_Trials_StopRoutineEachFrame(trials) {
     
     frameRemains = time_limit  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (t >= frameRemains && TR_Beep.status === PsychoJS.Status.STARTED) {
-      TR_Beep_Stop.stop();  // stop the sound (if longer than duration)
+      //TR_Beep_Stop.stop();  // stop the sound (if longer than duration)
       TR_Beep.status = PsychoJS.Status.FINISHED;
     }
     
