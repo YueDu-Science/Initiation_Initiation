@@ -5478,13 +5478,13 @@ function Instr_RT_HandRoutineEachFrame(trials) {
       TR_Coin.tStart = t;  // (not accounting for frame time here)
       TR_Coin.frameNStart = frameN;  // exact frame index
       
-      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
+     // psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
       TR_Coin.status = PsychoJS.Status.STARTED;
     }
     
     frameRemains = TR_Coin.getDuration() - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
-      TR_Coin.stop();  // stop the sound (if longer than duration)
+    //  TR_Coin.stop();  // stop the sound (if longer than duration)
       TR_Coin.status = PsychoJS.Status.FINISHED;
       continueRoutine = false;
     }
