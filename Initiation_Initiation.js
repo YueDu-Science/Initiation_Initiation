@@ -5406,7 +5406,7 @@ function Instr_RT_HandRoutineBegin(trials) {
     t = 0;
     Instr_RT_HandClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(1);
+    TR_Coin.setVolume(0);
     // update component parameters for each repeat
     block_type = "RT";
     stim_type = "Hand";
@@ -6332,7 +6332,7 @@ function Instr_Block_NumRoutineBegin(trials) {
     t = 0;
     Instr_Block_NumClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(1);
+    TR_Coin.setVolume(0);
     // update component parameters for each repeat
     Instr_Block_Num_Text.setText((('Block ' + block_count) + '\nPress (H, U, I, or L) to start'));
     Instr_Block_Num_Press.keys = undefined;
@@ -6400,13 +6400,13 @@ function Instr_Block_NumRoutineEachFrame(trials) {
       TR_Coin.tStart = t;  // (not accounting for frame time here)
       TR_Coin.frameNStart = frameN;  // exact frame index
       
-      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
+     // psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
       TR_Coin.status = PsychoJS.Status.STARTED;
     }
     
     frameRemains = TR_Coin.getDuration() - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
-      TR_Coin.stop();  // stop the sound (if longer than duration)
+     // TR_Coin.stop();  // stop the sound (if longer than duration)
       TR_Coin.status = PsychoJS.Status.FINISHED;
       continueRoutine = false;
     }
@@ -7448,7 +7448,7 @@ function Instr_CR_OldRoutineBegin(trials) {
     t = 0;
     Instr_CR_OldClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(1);
+    TR_Coin.setVolume(0);
     // update component parameters for each repeat
     block_count_cr_old  = block_count_cr_old  + 1;
 
@@ -7566,13 +7566,13 @@ function Instr_CR_OldRoutineEachFrame(trials) {
       TR_Coin.tStart = t;  // (not accounting for frame time here)
       TR_Coin.frameNStart = frameN;  // exact frame index
       
-      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
+     // psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
       TR_Coin.status = PsychoJS.Status.STARTED;
     }
     
     frameRemains = TR_Coin.getDuration() - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
-      TR_Coin.stop();  // stop the sound (if longer than duration)
+     // TR_Coin.stop();  // stop the sound (if longer than duration)
       TR_Coin.status = PsychoJS.Status.FINISHED;
       continueRoutine = false;
     }
@@ -8769,13 +8769,13 @@ function Instr_RTRoutineEachFrame(trials) {
       TR_Coin.tStart = t;  // (not accounting for frame time here)
       TR_Coin.frameNStart = frameN;  // exact frame index
       
-      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
+     // psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
       TR_Coin.status = PsychoJS.Status.STARTED;
     }
     
     frameRemains = TR_Coin.getDuration() - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
-      TR_Coin.stop();  // stop the sound (if longer than duration)
+     // TR_Coin.stop();  // stop the sound (if longer than duration)
       TR_Coin.status = PsychoJS.Status.FINISHED;
       continueRoutine = false;
     }
@@ -8968,7 +8968,7 @@ function Instr_CR_NewRoutineBegin(trials) {
     t = 0;
     Instr_CR_NewClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(1);
+    TR_Coin.setVolume(0);
     // update component parameters for each repeat
     Instr_CR_New_Text.setText(instr_cr_new_text);
     Instr_CR_New_Press.keys = undefined;
@@ -9090,13 +9090,13 @@ function Instr_CR_NewRoutineEachFrame(trials) {
       TR_Coin.tStart = t;  // (not accounting for frame time here)
       TR_Coin.frameNStart = frameN;  // exact frame index
       
-      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
+    //  psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
       TR_Coin.status = PsychoJS.Status.STARTED;
     }
     
     frameRemains = TR_Coin.getDuration() - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
-      TR_Coin.stop();  // stop the sound (if longer than duration)
+     // TR_Coin.stop();  // stop the sound (if longer than duration)
       TR_Coin.status = PsychoJS.Status.FINISHED;
       continueRoutine = false;
     }
