@@ -3954,14 +3954,15 @@ In the following 2 blocks, you will hear four beeps again. Press the correspondi
 Press one of (H, U, I, L) to start.`
     ;
     if ((grp_stop === 1)) {
-        instr_cr_new_text = `Great job. Now we proceed to next step.
-        
+        instr_cr_new_text = `Great job. Now we proceed to the next step. In the upcoming block,
+
+
+Symbols that corresponded to (H, U, I, or L) may not require a response any more. 
+
+Symbols that did not correspond with a key may become requiring a response.
+
+
 Your job is to figure out a New association between the same eight symbols and (H, U, I, or L) keys.
-    
-
-Some symbols that corresponded to (H, U, I, or L) may not require a response any more. 
-
-Some symbols that did not correspond with a key may become requiring a response.
 
 For symbols that do not require a response, DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
@@ -5405,7 +5406,7 @@ function Instr_RT_HandRoutineBegin(trials) {
     t = 0;
     Instr_RT_HandClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(0);
+    TR_Coin.setVolume(1);
     // update component parameters for each repeat
     block_type = "RT";
     stim_type = "Hand";
@@ -5485,7 +5486,6 @@ function Instr_RT_HandRoutineEachFrame(trials) {
     if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
       TR_Coin.stop();  // stop the sound (if longer than duration)
       TR_Coin.status = PsychoJS.Status.FINISHED;
-      continueRoutine = false;
     }
 
 
