@@ -5406,7 +5406,7 @@ function Instr_RT_HandRoutineBegin(trials) {
     t = 0;
     Instr_RT_HandClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(1);
+    TR_Coin.setVolume(0);
     // update component parameters for each repeat
     block_type = "RT";
     stim_type = "Hand";
@@ -6189,7 +6189,7 @@ function RT_Feedback_HandRoutineEnd(trials) {
         thisComponent.setAutoDraw(false);
       }
     }
-    TR_Coin.stop();  // ensure sound has stopped at end of routine
+    //TR_Coin.stop();  // ensure sound has stopped at end of routine
     // the Routine "RT_Feedback_Hand" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -6332,7 +6332,7 @@ function Instr_Block_NumRoutineBegin(trials) {
     t = 0;
     Instr_Block_NumClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(1);
+    TR_Coin.setVolume(0);
     // update component parameters for each repeat
     Instr_Block_Num_Text.setText((('Block ' + block_count) + '\nPress (H, U, I, or L) to start'));
     Instr_Block_Num_Press.keys = undefined;
@@ -7018,7 +7018,7 @@ function TR_Feedback_HandRoutineEnd(trials) {
         thisComponent.setAutoDraw(false);
       }
     }
-    TR_Coin.stop();  // ensure sound has stopped at end of routine
+    //TR_Coin.stop();  // ensure sound has stopped at end of routine
     // the Routine "TR_Feedback_Hand" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -7225,7 +7225,7 @@ function CountDownRoutineBegin(trials) {
     // update component parameters for each repeat
     routineTimer.reset(3);
     TR_Beep.setVolume(1);
-    TR_Coin.setVolume(1);
+    TR_Coin.setVolume(0);
     countdown = 3;
     // keep track of which components have finished
     CountDownComponents = [];
@@ -7447,7 +7447,7 @@ function Instr_CR_OldRoutineBegin(trials) {
     t = 0;
     Instr_CR_OldClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(1);
+    TR_Coin.setVolume(0);
     // update component parameters for each repeat
     block_count_cr_old  = block_count_cr_old  + 1;
 
@@ -8042,7 +8042,7 @@ function RT_FeedbackRoutineEnd(trials) {
         thisComponent.setAutoDraw(false);
       }
     }
-    TR_Coin.stop();  // ensure sound has stopped at end of routine
+    //TR_Coin.stop();  // ensure sound has stopped at end of routine
     // the Routine "RT_Feedback" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -8665,7 +8665,7 @@ function TR_FeedbackRoutineEnd(trials) {
         thisComponent.setAutoDraw(false);
       }
     }
-    TR_Coin.stop();  // ensure sound has stopped at end of routine
+    //TR_Coin.stop();  // ensure sound has stopped at end of routine
     // the Routine "TR_Feedback" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -8682,7 +8682,7 @@ function Instr_RTRoutineBegin(trials) {
     t = 0;
     Instr_RTClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(1);
+    TR_Coin.setVolume(0);
     // update component parameters for each repeat
     block_count = (block_count_cr_old - 1)*rt_block;
     stop_tol = 2;
@@ -8969,7 +8969,7 @@ function Instr_CR_NewRoutineBegin(trials) {
     t = 0;
     Instr_CR_NewClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(1);
+    TR_Coin.setVolume(0);
     // update component parameters for each repeat
     Instr_CR_New_Text.setText(instr_cr_new_text);
     Instr_CR_New_Press.keys = undefined;
