@@ -221,17 +221,17 @@ var resp_ind = [];
 var symb_map_ind_shuffle;
 ////////////////////////////////////
 var tr_block_hand = 4;
-var num_trials_hand = 4;
+var num_trials_hand = 96;
 var num_trials_cr = 2000;
-var num_criterion = 1;
+var num_criterion = 5;
 
-var tr_block_old = 2;
+var tr_block_old = 0;
 var tr_block_new_swap = 0;
-var tr_block_new_stop = 2;
+var tr_block_new_stop = 6;
 
-var prac_old_block = 1;   // set of criterion + practice (rt_blocks)
+var prac_old_block = 12;   // set of criterion + practice (rt_blocks)
 var rt_block = 1;
-var num_trials = 8;
+var num_trials = 96;
 
 var tr_hand_yes = 1;
 var rt_hand_yes = 1;
@@ -6391,7 +6391,7 @@ function Instr_Block_NumRoutineEachFrame(trials) {
         Instr_Block_Num_Press.keys = _Instr_Block_Num_Press_allKeys[0].name;  // just the first key pressed
         Instr_Block_Num_Press.rt = _Instr_Block_Num_Press_allKeys[0].rt;
         // a response ends the routine
-        continueRoutine = false;
+        // continueRoutine = false;
       }
     }
     
@@ -6408,6 +6408,7 @@ function Instr_Block_NumRoutineEachFrame(trials) {
     if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
       TR_Coin.stop();  // stop the sound (if longer than duration)
       TR_Coin.status = PsychoJS.Status.FINISHED;
+      continueRoutine = false;
     }
 
     
