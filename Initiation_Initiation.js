@@ -2221,9 +2221,9 @@ function TR_Block_HandLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    //thisScheduler.add(CountDownRoutineBegin(snapshot));
-    //thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    //thisScheduler.add(CountDownRoutineEnd(snapshot));
+    thisScheduler.add(CountDownRoutineBegin(snapshot));
+    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
+    thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_HandLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_HandLoopBegin, TR_Iter_HandLoopScheduler);
     thisScheduler.add(TR_Iter_HandLoopScheduler);
@@ -2551,9 +2551,9 @@ function TR_Old_Block_PreLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    //thisScheduler.add(CountDownRoutineBegin(snapshot));
-    //thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    //thisScheduler.add(CountDownRoutineEnd(snapshot));
+    thisScheduler.add(CountDownRoutineBegin(snapshot));
+    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
+    thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_Old_PreLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_Old_PreLoopBegin, TR_Iter_Old_PreLoopScheduler);
     thisScheduler.add(TR_Iter_Old_PreLoopScheduler);
@@ -2865,9 +2865,9 @@ function TR_Old_Block_PostLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    //thisScheduler.add(CountDownRoutineBegin(snapshot));
-    //thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    //thisScheduler.add(CountDownRoutineEnd(snapshot));
+    thisScheduler.add(CountDownRoutineBegin(snapshot));
+    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
+    thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_Old_PostLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_Old_PostLoopBegin, TR_Iter_Old_PostLoopScheduler);
     thisScheduler.add(TR_Iter_Old_PostLoopScheduler);
@@ -3265,9 +3265,9 @@ function TR_New_Block_SwapLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    //thisScheduler.add(CountDownRoutineBegin(snapshot));
-    //thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    //thisScheduler.add(CountDownRoutineEnd(snapshot));
+    thisScheduler.add(CountDownRoutineBegin(snapshot));
+    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
+    thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_New_SwapLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_New_SwapLoopBegin, TR_Iter_New_SwapLoopScheduler);
     thisScheduler.add(TR_Iter_New_SwapLoopScheduler);
@@ -3422,9 +3422,9 @@ function TR_New_Block_StopLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    //thisScheduler.add(CountDownRoutineBegin(snapshot));
-    //thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    //thisScheduler.add(CountDownRoutineEnd(snapshot));
+    thisScheduler.add(CountDownRoutineBegin(snapshot));
+    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
+    thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_New_StopLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_New_StopLoopBegin, TR_Iter_New_StopLoopScheduler);
     thisScheduler.add(TR_Iter_New_StopLoopScheduler);
@@ -3820,7 +3820,7 @@ After the data are saved, click 'OK' to exit and close the webpage.`
 
     instr_exp_text = `Thank you for participating in our study!
     
-This study will take about 1 hour and 30 minutes. 
+This study will take about 1.5 to 2 hours. 
 
 Once you start, you can take a break between rounds, Please DO NOT turn off your web browser until you complete the task, unless you decide to withdraw from this study.
     
@@ -3957,9 +3957,9 @@ Press one of (H, U, I, L) to start.`
         instr_cr_new_text = `Great job. Now we proceed to the next step. In the upcoming block:
 
 
-Symbols that corresponded to (H, U, I, or L) may not require a response any more. 
+Symbols that previously corresponded to (H, U, I, or L) may NOT require a response any more. 
 
-Symbols that did not correspond with a key may become requiring a response.
+Symbols that previously did not correspond with a key may become requiring a response.
 
 
 Your job is to figure out the New association between the same 8 symbols and (H, U, I, or L) keys.
@@ -5469,7 +5469,7 @@ function Instr_RT_HandRoutineEachFrame(trials) {
         Instr_RT_Hand_Key.keys = _Instr_RT_Hand_Key_allKeys[0].name;  // just the first key pressed
         Instr_RT_Hand_Key.rt = _Instr_RT_Hand_Key_allKeys[0].rt;
         // a response ends the routine
-        // continueRoutine = false;
+        continueRoutine = false;
       }
     }
     
@@ -6391,7 +6391,7 @@ function Instr_Block_NumRoutineEachFrame(trials) {
         Instr_Block_Num_Press.keys = _Instr_Block_Num_Press_allKeys[0].name;  // just the first key pressed
         Instr_Block_Num_Press.rt = _Instr_Block_Num_Press_allKeys[0].rt;
         // a response ends the routine
-        // continueRoutine = false;
+         continueRoutine = false;
       }
     }
     
@@ -7557,7 +7557,7 @@ function Instr_CR_OldRoutineEachFrame(trials) {
         Instr_CR_Old_Press.keys = _Instr_CR_Old_Press_allKeys[0].name;  // just the first key pressed
         Instr_CR_Old_Press.rt = _Instr_CR_Old_Press_allKeys[0].rt;
         // a response ends the routine
-       // continueRoutine = false;
+       continueRoutine = false;
       }
     }
 
@@ -8760,7 +8760,7 @@ function Instr_RTRoutineEachFrame(trials) {
         Instr_RT_Press.keys = _Instr_RT_Press_allKeys[0].name;  // just the first key pressed
         Instr_RT_Press.rt = _Instr_RT_Press_allKeys[0].rt;
         // a response ends the routine
-       // continueRoutine = false;
+       continueRoutine = false;
       }
     }
     
@@ -9081,7 +9081,7 @@ function Instr_CR_NewRoutineEachFrame(trials) {
         Instr_CR_New_Press.keys = _Instr_CR_New_Press_allKeys[0].name;  // just the first key pressed
         Instr_CR_New_Press.rt = _Instr_CR_New_Press_allKeys[0].rt;
         // a response ends the routine
-        // continueRoutine = false;
+         continueRoutine = false;
       }
     }
     
