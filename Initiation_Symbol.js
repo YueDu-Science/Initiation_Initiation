@@ -24,12 +24,13 @@ psychoJS.openWindow({
 });
 
 // store info about the experiment session:
-let expName = 'Initiation_Initiation';  // from the Builder filename that created this script
+let expName = 'Initiation_Symbol';  // from the Builder filename that created this script
+// let expInfo = {'participant': '', 'session': ''};
 let expInfo = {'participant': ''};
 
 // schedule the experiment:
 psychoJS.schedule(psychoJS.gui.DlgFromDict({
-  text: "Welcome. Press 'Ok' to the instruction. Please read it carefully.",
+  text: "Welcome. Please click 'Ok' to continue.",
   dictionary: expInfo,
   title: expName
 }));
@@ -51,10 +52,6 @@ flowScheduler.add(Init_StimRoutineEnd());
 flowScheduler.add(Instr_ExpRoutineBegin());
 flowScheduler.add(Instr_ExpRoutineEachFrame());
 flowScheduler.add(Instr_ExpRoutineEnd());
-const Sound_Check_BoolLoopScheduler = new Scheduler(psychoJS);
-flowScheduler.add(Sound_Check_BoolLoopBegin, Sound_Check_BoolLoopScheduler);
-flowScheduler.add(Sound_Check_BoolLoopScheduler);
-flowScheduler.add(Sound_Check_BoolLoopEnd);
 const RT_Hand_BoolLoopScheduler = new Scheduler(psychoJS);
 flowScheduler.add(RT_Hand_BoolLoopBegin, RT_Hand_BoolLoopScheduler);
 flowScheduler.add(RT_Hand_BoolLoopScheduler);
@@ -63,22 +60,18 @@ const TR_Hand_BoolLoopScheduler = new Scheduler(psychoJS);
 flowScheduler.add(TR_Hand_BoolLoopBegin, TR_Hand_BoolLoopScheduler);
 flowScheduler.add(TR_Hand_BoolLoopScheduler);
 flowScheduler.add(TR_Hand_BoolLoopEnd);
-//const CR_Old_BoolLoopScheduler = new Scheduler(psychoJS);
-//flowScheduler.add(CR_Old_BoolLoopBegin, CR_Old_BoolLoopScheduler);
-//flowScheduler.add(CR_Old_BoolLoopScheduler);
-//flowScheduler.add(CR_Old_BoolLoopEnd);
+const CR_Old_BoolLoopScheduler = new Scheduler(psychoJS);
+flowScheduler.add(CR_Old_BoolLoopBegin, CR_Old_BoolLoopScheduler);
+flowScheduler.add(CR_Old_BoolLoopScheduler);
+flowScheduler.add(CR_Old_BoolLoopEnd);
 const TR_Old_Pre_BoolLoopScheduler = new Scheduler(psychoJS);
 flowScheduler.add(TR_Old_Pre_BoolLoopBegin, TR_Old_Pre_BoolLoopScheduler);
 flowScheduler.add(TR_Old_Pre_BoolLoopScheduler);
 flowScheduler.add(TR_Old_Pre_BoolLoopEnd);
-const Prac_Old_IterLoopScheduler = new Scheduler(psychoJS);
-flowScheduler.add(Prac_Old_IterLoopBegin, Prac_Old_IterLoopScheduler);
-flowScheduler.add(Prac_Old_IterLoopScheduler);
-flowScheduler.add(Prac_Old_IterLoopEnd);
-//const RT_BoolLoopScheduler = new Scheduler(psychoJS);
-//flowScheduler.add(RT_BoolLoopBegin, RT_BoolLoopScheduler);
-//flowScheduler.add(RT_BoolLoopScheduler);
-//flowScheduler.add(RT_BoolLoopEnd);
+const RT_BoolLoopScheduler = new Scheduler(psychoJS);
+flowScheduler.add(RT_BoolLoopBegin, RT_BoolLoopScheduler);
+flowScheduler.add(RT_BoolLoopScheduler);
+flowScheduler.add(RT_BoolLoopEnd);
 const TR_Old_Post_BoolLoopScheduler = new Scheduler(psychoJS);
 flowScheduler.add(TR_Old_Post_BoolLoopBegin, TR_Old_Post_BoolLoopScheduler);
 flowScheduler.add(TR_Old_Post_BoolLoopScheduler);
@@ -167,12 +160,8 @@ var Init_StimClock;
 var block_type;
 var participant;
 var session;
-var grp_stop = 1;
+var grp_stop = 0;
 var grp_swap = 0;
-var sound_quit_bool = 0;
-var sound_exit_bool = 0;
-
-
 var beep_lead_in = 0.1;
 var color_p = [(- 1), 1, (- 1)];
 var color_n = [1, (- 1), (- 1)];
@@ -187,8 +176,6 @@ var too_late_tol = 0.2;
 var stop_tol = 2;
 var key_list = ["h", "u", "i", "l"];
 var x_symb = [0, 1, 2, 3, 4, 5, 6, 7];
-var x_symb_stop = [0,1,2,3];
-var x_symb_resp = [4,5,6,7];
 var x_hand = [0,1,2,3,0,1,2,3];
 var x8_new = x_symb;
 var x16 = x8_new.concat(x8_new);
@@ -196,12 +183,7 @@ var remap_pairs = [[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]];
 var num_pos = 4;
 var num_symb = 8;
 var symb_perm = permute(x_symb);
-var symb_perm_resp;
 var n_map = symb_perm.length;
-
-var block_count_cr_old = 0;
-var block_count_rt_old = 0;
-var myrng;
 
 var symb_remap_ind;
 var symb_map_ind;
@@ -211,75 +193,29 @@ var symb_g_map = [];
 var symb_g_remap = [];
 var symb_r_map = [];
 var symb_r_remap = [];
-var symb_creat_seq = [];
-var symb_g_creat_seq = [];
-var symb_r_creat_seq = [];
-var stop_pair_1 = [];
-var stop_pair_2 = [];
-var stop_ind = [];
-var resp_ind = [];
-var symb_map_ind_shuffle;
 ////////////////////////////////////
 var tr_block_hand = 4;
-var num_trials_hand = 4;
+var num_trials_hand = 96;
 var num_trials_cr = 2000;
-var num_criterion = 1;
-
+var num_criterion = 5;
+var num_trials = 96;
+var rt_block = 12;
 var tr_block_old = 2;
-var tr_block_new_swap = 2;
-var tr_block_new_stop = 2;
-
-var prac_old_block = 2;   // set of criterion + practice (rt_blocks)
-var rt_block = 1;
-var num_trials = 8;
+var tr_block_new_swap = 0;
+var tr_block_new_stop = 0;
 
 var tr_hand_yes = 1;
 var rt_hand_yes = 1;
 var cr_old_yes = 1;
 var cr_new_yes = 1;
 var rt_yes = 1;
-var tr_old_pre_yes = 0;
-var tr_old_post_yes = 0;
+var tr_old_pre_yes = 1;
+var tr_old_post_yes = 1;
 var tr_new_yes = 1;
-
-var sound_check_yes = 1;
-var num_trials_sound_check = 20;
-
-
-var num_trials_sound_check;
-var Instr_Sound_CheckClock;
-var Instr_Sound_Check_Text;
-var Instr_Sound_Check_Press;
-var Coin_Tone_Text;
-var Buzz_Tone_Text;
-var sound_check_coin;
-var sound_check_buzz;
-var Instr_Sound_Check_Press_Space;
-var Instr_Trial_NumClock;
-var Instr_Trial_Num_Text;
-var Instr_Trial_Num_Press;
-var Sound_Check_Press;
-var Sound_Check_Sound_Play;
-var Sound_Check_Play_Text;
-var Sound_Check_Feedback_Text;
-var Sound_Quit_TextClock;
-var instr_Sound_Quit_Text;
-var Sound_Exit_TextClock;
-var inst_Sound_Exit_Text;
-var Sound_Check_Criterion_DetClock;
-var Sound_Check_FeedbackClock;
-var Sound_Check_Enter_TrialClock;
-var Sound_Check_Creat_StimSeqClock;
-var Sound_Check_Pre_TrialClock;
-var instr_sound_check_text2;
-var Sound_Score;
-var Sound_Score_Text;
-var Sound_Score_Hint;
-var Sound_check_Creat_StimSeq_Text;
-var Sound_check_Creat_StimSeq_Text_Press;
-var Sound_Exit_Text_Press;
-var countdown;
 //////////////////////////////////////
+
+var pre = 0;
+var post = 0;
 
 var timing_tol_early = 0.1;
 var timing_tol_late = 0.075;
@@ -332,9 +268,6 @@ var Instr_HAND_TR_press;
 var Instr_Block_NumClock;
 var Instr_Block_Num_Text;
 var Instr_Block_Num_Press;
-var Instr_Round_NumClock;
-var Instr_Round_Num_Text;
-var Instr_Round_Num_Press;
 var TR_Enter_Trials_HandClock;
 var TR_Beep_Hand;
 var TR_Rec_Frame_Hand;
@@ -343,7 +276,6 @@ var TR_Stim_Hand;
 var TR_Press_Hand;
 var TR_Feedback_HandClock;
 var TR_Feedback_Coin_Hand;
-var TR_Coin_Hand;
 var Tr_Rec_Frame_Feedback_Hand;
 var TR_Feedback_Text_Hand;
 var TR_Feedback_HandShape;
@@ -377,10 +309,8 @@ var TR_Stim_Image;
 var TR_Press;
 var TR_FeedbackClock;
 var TR_Feedback_Coin;
-var TR_Coin;
 var Tr_Rec_Frame_Feedback;
 var TR_Feedback_Text;
-var TR_Text;
 var TR_Feedback_Image;
 var Instr_RTClock;
 var Instr_RT_Text;
@@ -406,14 +336,8 @@ var TR_Press_Stop;
 var Instr_End_ExpClock;
 var Instr_End_Exp_Text;
 var Instr_End_Exp_Key;
-var Text_CountDown;
-var Number_CountDown;
-var penalty_countdown;
 var globalClock;
 var routineTimer;
-var CountDownClock;
-var penalty_countdown_text;
-var sample_num;
 
 
 function experimentInit() {
@@ -432,16 +356,16 @@ function experimentInit() {
   rng1 = myrng()
   rng2 = myrng()
   rng3 = myrng()
- 
+  
   //determine which group participants are in
-  /* if ((rng1 < 0.5)) {
+  if ((rng1 < 0.5)) {
       grp_stop = 1;
-      tr_block_new_stop = 1;
+      tr_block_new_stop = 6;
   } else {
       grp_swap = 1;
-      tr_block_new_swap = 1;
-  } */
-  
+      tr_block_new_swap = 6;
+  }
+
   // session # determines which blocks they do
   //if ((session === 1)) {
   //    rt_block = 1;
@@ -475,189 +399,7 @@ function experimentInit() {
   
   Instr_Exp_Key = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
   
-  // Initialize components for Routine "Instr_Sound_Check"
-  Instr_Sound_CheckClock = new util.Clock();
-  Instr_Sound_Check_Text = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'Instr_Sound_Check_Text',
-    text: 'default text',
-    font: 'Arial',
-    units: undefined, 
-    pos: [0, 0], height: 0.03,  wrapWidth: undefined, ori: 0,
-    color: new util.Color('white'),  opacity: 1,
-    depth: 0.0 
-  });
-  
-  Instr_Sound_Check_Press = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
-
-  Coin_Tone_Text = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'Coin_Tone_Text',
-    text: 'Press (f) to hear the coin sound',
-    font: 'Arial',
-    units: undefined, 
-    pos: [(- 0.17), 0.1], height: 0.03,  wrapWidth: undefined, ori: 0,
-    color: new util.Color('white'),  opacity: 1,
-    depth: -3.0 
-  });
-  
-  Buzz_Tone_Text = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'Buzz_Tone_Text',
-    text: 'Press (j) to hear the buzzer sound',
-    font: 'Arial',
-    units: undefined, 
-    pos: [(0.17), 0.1], height: 0.03,  wrapWidth: undefined, ori: 0,
-    color: new util.Color('white'),  opacity: 1,
-    depth: -3.0 
-  });
-
-  Sound_Score = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'Sound_Score',
-    text: 'default text',
-    font: 'Arial',
-    units: undefined, 
-    pos: [0, 0], height: 0.1,  wrapWidth: undefined, ori: 0,
-    color: new util.Color('white'),  opacity: 1,
-    depth: -3.0 
-  });
-
-  Sound_Score_Text = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'Sound_Score_Text',
-    text: 'default text',
-    font: 'Arial',
-    units: undefined, 
-    pos: [0, 0.15], height: 0.03,  wrapWidth: undefined, ori: 0,
-    color: new util.Color('white'),  opacity: 1,
-    depth: -3.0 
-  });
-
-  Sound_Score_Hint = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'Sound_Score_Hint',
-    alignHoriz: 'center',
-    text: 'default text',
-    font: 'Arial',
-    units: undefined, 
-    pos: [0, -0.3], height: 0.02,  wrapWidth: undefined, ori: 0,
-    color: new util.Color('white'),  opacity: 1,
-    depth: -3.0 
-  });
-  
-  sound_check_coin = new sound.Sound({
-    win: psychoJS.window,
-    value: 'A',
-    secs: (- 1),
-    });
-  sound_check_coin.setVolume(1);
-  sound_check_buzz = new sound.Sound({
-    win: psychoJS.window,
-    value: 'A',
-    secs: (- 1),
-    });
-  sound_check_buzz.setVolume(1);
-  Instr_Sound_Check_Press_Space = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
-  // Initialize components for Routine "Creat_StimSeq"
-  Sound_Check_Creat_StimSeqClock = new util.Clock();
-
-  Sound_check_Creat_StimSeq_Text = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'Sound_check_Creat_StimSeq_Text',
-    alignHoriz: 'center',
-    text: 'default text',
-    font: 'Arial',
-    units: undefined, 
-    pos: [0, 0], height: 0.03,  wrapWidth: undefined, ori: 0,
-    color: new util.Color('white'),  opacity: 1,
-    depth: 0.0 
-  });
-  Sound_check_Creat_StimSeq_Text_Press = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
-
-  // Initialize components for Routine "Instr_Trial_Num"
-  Instr_Trial_NumClock = new util.Clock();
-  Instr_Trial_Num_Text = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'Instr_Trial_Num_Text',
-    alignHoriz: 'center',
-    text: 'default text',
-    font: 'Arial',
-    units: undefined, 
-    pos: [0, 0], height: 0.03,  wrapWidth: undefined, ori: 0,
-    color: new util.Color('white'),  opacity: 1,
-    depth: 0.0 
-  });
-  
-  Instr_Trial_Num_Press = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
-  
-  // Initialize components for Routine "Pre_Trial"
-  Sound_Check_Pre_TrialClock = new util.Clock();
-  // Initialize components for Routine "RT_Enter_Trial"
-  Sound_Check_Enter_TrialClock = new util.Clock();
-  Sound_Check_Press = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
-  Sound_Exit_Text_Press = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
-  /* Sound_Check_Sound_Play = new sound.Sound({
-    win: psychoJS.window,
-    value: 'A',
-    secs: (- 1),
-    });
-  Sound_Check_Sound_Play.setVolume(1); */
-  Sound_Check_Play_Text = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'Sound_Check_Play_Text',
-    alignHoriz: 'center',
-    text: 'default text',
-    font: 'Arial',
-    units: undefined, 
-    pos: [0, 0], height: 0.03,  wrapWidth: undefined, ori: 0,
-    color: new util.Color('white'),  opacity: 1,
-    depth: 0.0 
-  });
-  
-  Sound_Check_FeedbackClock = new util.Clock();
-  Sound_Check_Feedback_Text = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'Sound_Check_Feedback_Text',
-    alignHoriz: 'center',
-    text: 'default text',
-    font: 'Arial',
-    units: undefined, 
-    pos: [0, 0], height: 0.03,  wrapWidth: undefined, ori: 0,
-    color: new util.Color('white'),  opacity: 1,
-    depth: 0.0 
-  });
-  
-  // Initialize components for Routine "Criterion_Det"
-  Sound_Check_Criterion_DetClock = new util.Clock();
-  // Initialize components for Routine "Sound_Quit_Text"
-  Sound_Quit_TextClock = new util.Clock();
-  instr_Sound_Quit_Text = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'instr_Sound_Quit_Text',
-    text: 'default text',
-    font: 'Arial',
-    units: undefined, 
-    pos: [0, 0], height: 0.03,  wrapWidth: undefined, ori: 0,
-    color: new util.Color('white'),  opacity: 1,
-    depth: 0.0 
-  });
-  
-  // Initialize components for Routine "Sound_Exit_Text"
-  Sound_Exit_TextClock = new util.Clock();
-  inst_Sound_Exit_Text = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'inst_Sound_Exit_Text',
-    text: 'default text',
-    font: 'Arial',
-    units: undefined, 
-    pos: [0, 0], height: 0.03,  wrapWidth: undefined, ori: 0,
-    color: new util.Color('white'),  opacity: 1,
-    depth: 0.0 
-  });
-
-
-    // Initialize components for Routine "Instr_RT_Hand"
+  // Initialize components for Routine "Instr_RT_Hand"
   Instr_RT_HandClock = new util.Clock();
   Instr_RT_Hand_Rext = new visual.TextStim({
     win: psychoJS.window,
@@ -673,6 +415,8 @@ function experimentInit() {
   
   Instr_RT_Hand_Key = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
   
+  // Initialize components for Routine "Creat_StimSeq"
+  Creat_StimSeqClock = new util.Clock();
   // Initialize components for Routine "Pre_Trial_Hand"
   Pre_Trial_HandClock = new util.Clock();
   Pre_Trial_Rec_Frame_Hand = new visual.Rect ({
@@ -815,12 +559,12 @@ function experimentInit() {
   });
   // Initialize components for Routine "TR_Enter_Trials_Hand"
   TR_Enter_Trials_HandClock = new util.Clock();
-  /* TR_Beep_Hand = new sound.Sound({
+  TR_Beep_Hand = new sound.Sound({
     win: psychoJS.window,
     value: 'A',
     secs: (- 1),
     });
-  TR_Beep_Hand.setVolume(1); */
+  TR_Beep_Hand.setVolume(1);
   TR_Rec_Frame_Hand = new visual.Rect ({
     win: psychoJS.window, name: 'TR_Rec_Frame_Hand', units : 'height', 
     width: [0.3, 0.3][0], height: [0.3, 0.3][1],
@@ -1050,25 +794,12 @@ function experimentInit() {
   
   // Initialize components for Routine "TR_Enter_Trials"
   TR_Enter_TrialsClock = new util.Clock();
-  /* TR_Beep = new sound.Sound({
+  TR_Beep = new sound.Sound({
     win: psychoJS.window,
     value: 'A',
     secs: (- 1),
     });
-  TR_Beep.setVolume(1); */
-
-  TR_Text = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'TR_Text',
-    alignText: 'center',
-    text: 'default text',
-    font: 'Arial',
-    units: undefined, 
-    pos: [0, 0.25], height: 0.08,  wrapWidth: undefined, ori: 0,
-    color: new util.Color('white'),  opacity: 1,
-    depth: -2.0 
-  });
-
+  TR_Beep.setVolume(1);
   TR_Rec_Frame = new visual.Rect ({
     win: psychoJS.window, name: 'TR_Rec_Frame', units : 'height', 
     width: [0.3, 0.3][0], height: [0.3, 0.3][1],
@@ -1151,43 +882,6 @@ function experimentInit() {
   });
   
   TR_Penalty_Press = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
-
-
-  // Initialize components for countdown
-  CountDownClock = new util.Clock();
-  Text_CountDown = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'Text_CountDown',
-    text: 'Beeps start in',
-    font: 'Arial',
-    units: undefined, 
-    pos: [0, 0.25], height: 0.05,  wrapWidth: undefined, ori: 0,
-    color: new util.Color('white'),  opacity: 1,
-    depth: -2.0 
-  });
-
-  Number_CountDown = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'Number_CountDown',
-    text: '',
-    font: 'Arial',
-    units: undefined, 
-    pos: [0, 0], height: 0.12,  wrapWidth: undefined, ori: 0,
-    color: new util.Color('white'),  opacity: 1,
-    depth: -2.0 
-  });
-
-  penalty_countdown = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'penalty_countdown',
-    text: '',
-    font: 'Arial',
-    units: undefined, 
-    pos: [0, -0.27], height: 0.1,  wrapWidth: undefined, ori: 0,
-    color: new util.Color('white'),  opacity: 1,
-    depth: -2.0 
-  });
-
   
   // Initialize components for Routine "Instr_RT"
   Instr_RTClock = new util.Clock();
@@ -1329,12 +1023,12 @@ function experimentInit() {
   
   // Initialize components for Routine "TR_Enter_Trials"
   TR_Enter_TrialsClock = new util.Clock();
-  /* TR_Beep = new sound.Sound({
+  TR_Beep = new sound.Sound({
     win: psychoJS.window,
     value: 'A',
     secs: (- 1),
     });
-  TR_Beep.setVolume(1); */
+  TR_Beep.setVolume(1);
   TR_Rec_Frame = new visual.Rect ({
     win: psychoJS.window, name: 'TR_Rec_Frame', units : 'height', 
     width: [0.3, 0.3][0], height: [0.3, 0.3][1],
@@ -1591,22 +1285,6 @@ function experimentInit() {
   });
   
   Instr_Block_Num_Press = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
-
-  // Initialize components for Routine "Instr_Round_Num"
-  Instr_Round_NumClock = new util.Clock();
-  Instr_Round_Num_Text = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'Instr_Round_Num_Text',
-    alignHoriz: 'center',
-    text: 'default text',
-    font: 'Arial',
-    units: undefined, 
-    pos: [0, 0], height: 0.03,  wrapWidth: undefined, ori: 0,
-    color: new util.Color('white'),  opacity: 1,
-    depth: 0.0 
-  });
-  
-  Instr_Round_Num_Press = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
   
   // Initialize components for Routine "Pre_Trial"
   Pre_TrialClock = new util.Clock();
@@ -1621,12 +1299,12 @@ function experimentInit() {
   
   // Initialize components for Routine "TR_Enter_Trials"
   TR_Enter_TrialsClock = new util.Clock();
-  /* TR_Beep = new sound.Sound({
+  TR_Beep = new sound.Sound({
     win: psychoJS.window,
     value: 'A',
     secs: (- 1),
     });
-  TR_Beep.setVolume(1); */
+  TR_Beep.setVolume(1);
   TR_Rec_Frame = new visual.Rect ({
     win: psychoJS.window, name: 'TR_Rec_Frame', units : 'height', 
     width: [0.3, 0.3][0], height: [0.3, 0.3][1],
@@ -1887,204 +1565,6 @@ function Import_StimLoopEnd() {
   return Scheduler.Event.NEXT;
 }
 
-var Sound_Check_Bool;
-function Sound_Check_BoolLoopBegin(thisScheduler) {
-  // set up handler to look after randomisation of conditions etc
-  Sound_Check_Bool = new TrialHandler({
-    psychoJS: psychoJS,
-    nReps: sound_check_yes, method: TrialHandler.Method.SEQUENTIAL,
-    extraInfo: expInfo, originPath: undefined,
-    trialList: undefined,
-    seed: undefined, name: 'Sound_Check_Bool'
-  });
-  psychoJS.experiment.addLoop(Sound_Check_Bool); // add the loop to the experiment
-  currentLoop = Sound_Check_Bool;  // we're now the current loop
-
-  // Schedule all the trials in the trialList:
-  for (const thisSound_Check_Bool of Sound_Check_Bool) {
-    const snapshot = Sound_Check_Bool.getSnapshot();
-    thisScheduler.add(importConditions(snapshot));
-    const Instr_Sound_Check_IterLoopScheduler = new Scheduler(psychoJS);
-    thisScheduler.add(Instr_Sound_Check_IterLoopBegin, Instr_Sound_Check_IterLoopScheduler);
-    thisScheduler.add(Instr_Sound_Check_IterLoopScheduler);
-    thisScheduler.add(Instr_Sound_Check_IterLoopEnd);
-    thisScheduler.add(Sound_Check_Creat_StimSeqRoutineBegin(snapshot));
-    thisScheduler.add(Sound_Check_Creat_StimSeqRoutineEachFrame(snapshot));
-    thisScheduler.add(Sound_Check_Creat_StimSeqRoutineEnd(snapshot));
-    const Sound_Check_IterLoopScheduler = new Scheduler(psychoJS);
-    thisScheduler.add(Sound_Check_IterLoopBegin, Sound_Check_IterLoopScheduler);
-    thisScheduler.add(Sound_Check_IterLoopScheduler);
-    thisScheduler.add(Sound_Check_IterLoopEnd);
-    const Sound_Quit_BoolLoopScheduler = new Scheduler(psychoJS);
-    thisScheduler.add(Sound_Quit_BoolLoopBegin, Sound_Quit_BoolLoopScheduler);
-    thisScheduler.add(Sound_Quit_BoolLoopScheduler);
-    thisScheduler.add(Sound_Quit_BoolLoopEnd);
-    const Sound_Exit_BoolLoopScheduler = new Scheduler(psychoJS);
-    thisScheduler.add(Sound_Exit_BoolLoopBegin, Sound_Exit_BoolLoopScheduler);
-    thisScheduler.add(Sound_Exit_BoolLoopScheduler);
-    thisScheduler.add(Sound_Exit_BoolLoopEnd);
-    thisScheduler.add(endLoopIteration(thisScheduler, snapshot));
-  }
-
-  return Scheduler.Event.NEXT;
-}
-
-var Instr_Sound_Check_Iter;
-function Instr_Sound_Check_IterLoopBegin(thisScheduler) {
-  // set up handler to look after randomisation of conditions etc
-  Instr_Sound_Check_Iter = new TrialHandler({
-    psychoJS: psychoJS,
-    nReps: 100, method: TrialHandler.Method.SEQUENTIAL,
-    extraInfo: expInfo, originPath: undefined,
-    trialList: undefined,
-    seed: undefined, name: 'Instr_Sound_Check_Iter'
-  });
-  psychoJS.experiment.addLoop(Instr_Sound_Check_Iter); // add the loop to the experiment
-  currentLoop = Instr_Sound_Check_Iter;  // we're now the current loop
-
-  // Schedule all the trials in the trialList:
-  for (const thisInstr_Sound_Check_Iter of Instr_Sound_Check_Iter) {
-    const snapshot = Instr_Sound_Check_Iter.getSnapshot();
-    thisScheduler.add(importConditions(snapshot));
-    thisScheduler.add(Instr_Sound_CheckRoutineBegin(snapshot));
-    thisScheduler.add(Instr_Sound_CheckRoutineEachFrame(snapshot));
-    thisScheduler.add(Instr_Sound_CheckRoutineEnd(snapshot));
-    thisScheduler.add(endLoopIteration(thisScheduler, snapshot));
-  }
-
-  return Scheduler.Event.NEXT;
-}
-
-
-function Instr_Sound_Check_IterLoopEnd() {
-  psychoJS.experiment.removeLoop(Instr_Sound_Check_Iter);
-
-  return Scheduler.Event.NEXT;
-}
-
-
-var Sound_Check_Iter;
-function Sound_Check_IterLoopBegin(thisScheduler) {
-  // set up handler to look after randomisation of conditions etc
-  Sound_Check_Iter = new TrialHandler({
-    psychoJS: psychoJS,
-    nReps: num_trials_sound_check, method: TrialHandler.Method.SEQUENTIAL,
-    extraInfo: expInfo, originPath: undefined,
-    trialList: undefined,
-    seed: undefined, name: 'Sound_Check_Iter'
-  });
-  psychoJS.experiment.addLoop(Sound_Check_Iter); // add the loop to the experiment
-  currentLoop = Sound_Check_Iter;  // we're now the current loop
-
-  // Schedule all the trials in the trialList:
-  for (const thisSound_Check_Iter of Sound_Check_Iter) {
-    const snapshot = Sound_Check_Iter.getSnapshot();
-    thisScheduler.add(importConditions(snapshot));
-   // thisScheduler.add(Instr_Trial_NumRoutineBegin(snapshot));
-   // thisScheduler.add(Instr_Trial_NumRoutineEachFrame(snapshot));
-   // thisScheduler.add(Instr_Trial_NumRoutineEnd(snapshot));
-    thisScheduler.add(Sound_Check_Pre_TrialRoutineBegin(snapshot));
-    thisScheduler.add(Sound_Check_Pre_TrialRoutineEachFrame(snapshot));
-    thisScheduler.add(Sound_Check_Pre_TrialRoutineEnd(snapshot));
-    thisScheduler.add(Sound_Check_Enter_TrialRoutineBegin(snapshot));
-    thisScheduler.add(Sound_Check_Enter_TrialRoutineEachFrame(snapshot));
-    thisScheduler.add(Sound_Check_Enter_TrialRoutineEnd(snapshot));
-    //thisScheduler.add(Sound_Check_FeedbackRoutineBegin(snapshot));
-    //thisScheduler.add(Sound_Check_FeedbackRoutineEachFrame(snapshot));
-    //thisScheduler.add(Sound_Check_FeedbackRoutineEnd(snapshot));
-    //thisScheduler.add(Sound_Check_Criterion_DetRoutineBegin(snapshot));
-    //thisScheduler.add(Sound_Check_Criterion_DetRoutineEachFrame(snapshot));
-    //thisScheduler.add(Sound_Check_Criterion_DetRoutineEnd(snapshot));
-    thisScheduler.add(endLoopIteration(thisScheduler, snapshot));
-  }
-
-  return Scheduler.Event.NEXT;
-}
-
-
-function Sound_Check_IterLoopEnd() {
-  psychoJS.experiment.removeLoop(Sound_Check_Iter);
-
-  return Scheduler.Event.NEXT;
-}
-
-
-var Sound_Quit_Bool;
-function Sound_Quit_BoolLoopBegin(thisScheduler) {
-  // set up handler to look after randomisation of conditions etc
-  Sound_Quit_Bool = new TrialHandler({
-    psychoJS: psychoJS,
-    nReps: sound_quit_bool, method: TrialHandler.Method.SEQUENTIAL,
-    extraInfo: expInfo, originPath: undefined,
-    trialList: undefined,
-    seed: undefined, name: 'Sound_Quit_Bool'
-  });
-  psychoJS.experiment.addLoop(Sound_Quit_Bool); // add the loop to the experiment
-  currentLoop = Sound_Quit_Bool;  // we're now the current loop
-
-  // Schedule all the trials in the trialList:
-  for (const thisSound_Quit_Bool of Sound_Quit_Bool) {
-    const snapshot = Sound_Quit_Bool.getSnapshot();
-    thisScheduler.add(importConditions(snapshot));
-    thisScheduler.add(Sound_Quit_TextRoutineBegin(snapshot));
-    thisScheduler.add(Sound_Quit_TextRoutineEachFrame(snapshot));
-    thisScheduler.add(Sound_Quit_TextRoutineEnd(snapshot));
-    thisScheduler.add(endLoopIteration(thisScheduler, snapshot));
-  }
-
-  return Scheduler.Event.NEXT;
-}
-
-
-function Sound_Quit_BoolLoopEnd() {
-  psychoJS.experiment.removeLoop(Sound_Quit_Bool);
-
-  return Scheduler.Event.NEXT;
-}
-
-
-var Sound_Exit_Bool;
-function Sound_Exit_BoolLoopBegin(thisScheduler) {
-  // set up handler to look after randomisation of conditions etc
-  Sound_Exit_Bool = new TrialHandler({
-    psychoJS: psychoJS,
-    nReps: sound_exit_bool, method: TrialHandler.Method.SEQUENTIAL,
-    extraInfo: expInfo, originPath: undefined,
-    trialList: undefined,
-    seed: undefined, name: 'Sound_Exit_Bool'
-  });
-  psychoJS.experiment.addLoop(Sound_Exit_Bool); // add the loop to the experiment
-  currentLoop = Sound_Exit_Bool;  // we're now the current loop
-
-  // Schedule all the trials in the trialList:
-  for (const thisSound_Exit_Bool of Sound_Exit_Bool) {
-    const snapshot = Sound_Exit_Bool.getSnapshot();
-    thisScheduler.add(importConditions(snapshot));
-    thisScheduler.add(Sound_Exit_TextRoutineBegin(snapshot));
-    thisScheduler.add(Sound_Exit_TextRoutineEachFrame(snapshot));
-    thisScheduler.add(Sound_Exit_TextRoutineEnd(snapshot));
-    thisScheduler.add(endLoopIteration(thisScheduler, snapshot));
-  }
-
-  return Scheduler.Event.NEXT;
-}
-
-
-function Sound_Exit_BoolLoopEnd() {
-  psychoJS.experiment.removeLoop(Sound_Exit_Bool);
-
-  return Scheduler.Event.NEXT;
-}
-
-
-function Sound_Check_BoolLoopEnd() {
-  psychoJS.experiment.removeLoop(Sound_Check_Bool);
-
-  return Scheduler.Event.NEXT;
-}
-
-
-
 
 var RT_Hand_Bool;
 function RT_Hand_BoolLoopBegin(thisScheduler) {
@@ -2221,9 +1701,6 @@ function TR_Block_HandLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    thisScheduler.add(CountDownRoutineBegin(snapshot));
-    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_HandLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_HandLoopBegin, TR_Iter_HandLoopScheduler);
     thisScheduler.add(TR_Iter_HandLoopScheduler);
@@ -2365,44 +1842,6 @@ function TR_Hand_BoolLoopEnd() {
 }
 
 
-var Prac_Old_Iter;
-function Prac_Old_IterLoopBegin(thisScheduler) {
-  // set up handler to look after randomisation of conditions etc
-  Prac_Old_Iter = new TrialHandler({
-    psychoJS: psychoJS,
-    nReps: prac_old_block, method: TrialHandler.Method.SEQUENTIAL,
-    extraInfo: expInfo, originPath: undefined,
-    trialList: undefined,
-    seed: undefined, name: 'Prac_Old_Iter'
-  });
-  psychoJS.experiment.addLoop(Prac_Old_Iter); // add the loop to the experiment
-  currentLoop = Prac_Old_Iter;  // we're now the current loop
-
-  // Schedule all the trials in the trialList:
-  for (const thisPrac_Old_Iter of Prac_Old_Iter) {
-    const snapshot = Prac_Old_Iter.getSnapshot();
-    thisScheduler.add(importConditions(snapshot));
-    const CR_Old_BoolLoopScheduler = new Scheduler(psychoJS);
-    thisScheduler.add(CR_Old_BoolLoopBegin, CR_Old_BoolLoopScheduler);
-    thisScheduler.add(CR_Old_BoolLoopScheduler);
-    thisScheduler.add(CR_Old_BoolLoopEnd);
-    const RT_BoolLoopScheduler = new Scheduler(psychoJS);
-    thisScheduler.add(RT_BoolLoopBegin, RT_BoolLoopScheduler);
-    thisScheduler.add(RT_BoolLoopScheduler);
-    thisScheduler.add(RT_BoolLoopEnd);
-    thisScheduler.add(endLoopIteration(thisScheduler, snapshot));
-    
-  }
-
-  return Scheduler.Event.NEXT;
-}
-
-function Prac_Old_IterLoopEnd() {
-  psychoJS.experiment.removeLoop(Prac_Old_Iter);
-
-  return Scheduler.Event.NEXT;
-}
-
 var CR_Old_Bool;
 function CR_Old_BoolLoopBegin(thisScheduler) {
   // set up handler to look after randomisation of conditions etc
@@ -2420,27 +1859,16 @@ function CR_Old_BoolLoopBegin(thisScheduler) {
   for (const thisCR_Old_Bool of CR_Old_Bool) {
     const snapshot = CR_Old_Bool.getSnapshot();
     thisScheduler.add(importConditions(snapshot));
-    thisScheduler.add(Instr_Round_NumRoutineBegin(snapshot));
-    thisScheduler.add(Instr_Round_NumRoutineEachFrame(snapshot));
-    thisScheduler.add(Instr_Round_NumRoutineEnd(snapshot));
     thisScheduler.add(Instr_CR_OldRoutineBegin(snapshot));
     thisScheduler.add(Instr_CR_OldRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_CR_OldRoutineEnd(snapshot));
     thisScheduler.add(Creat_StimSeqRoutineBegin(snapshot));
     thisScheduler.add(Creat_StimSeqRoutineEachFrame(snapshot));
     thisScheduler.add(Creat_StimSeqRoutineEnd(snapshot));
-    const CR_Grp_Stop_BoolLoopScheduler = new Scheduler(psychoJS);
-    thisScheduler.add(CR_Grp_Stop_BoolLoopBegin, CR_Grp_Stop_BoolLoopScheduler);
-    thisScheduler.add(CR_Grp_Stop_BoolLoopScheduler);
-    thisScheduler.add(CR_Grp_Stop_BoolLoopEnd);
-    const CR_Grp_Swap_BoolLoopScheduler = new Scheduler(psychoJS);
-    thisScheduler.add(CR_Grp_Swap_BoolLoopBegin, CR_Grp_Swap_BoolLoopScheduler);
-    thisScheduler.add(CR_Grp_Swap_BoolLoopScheduler);
-    thisScheduler.add(CR_Grp_Swap_BoolLoopEnd);
-    //const CR_Old_IterLoopScheduler = new Scheduler(psychoJS);
-    // thisScheduler.add(CR_Old_IterLoopBegin, CR_Old_IterLoopScheduler);
-    //thisScheduler.add(CR_Old_IterLoopScheduler);
-    //thisScheduler.add(CR_Old_IterLoopEnd);
+    const CR_Old_IterLoopScheduler = new Scheduler(psychoJS);
+    thisScheduler.add(CR_Old_IterLoopBegin, CR_Old_IterLoopScheduler);
+    thisScheduler.add(CR_Old_IterLoopScheduler);
+    thisScheduler.add(CR_Old_IterLoopEnd);
     thisScheduler.add(endLoopIteration(thisScheduler, snapshot));
   }
 
@@ -2551,9 +1979,6 @@ function TR_Old_Block_PreLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    thisScheduler.add(CountDownRoutineBegin(snapshot));
-    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_Old_PreLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_Old_PreLoopBegin, TR_Iter_Old_PreLoopScheduler);
     thisScheduler.add(TR_Iter_Old_PreLoopScheduler);
@@ -2743,9 +2168,9 @@ function RT_BlockLoopBegin(thisScheduler) {
     thisScheduler.add(Creat_StimSeqRoutineBegin(snapshot));
     thisScheduler.add(Creat_StimSeqRoutineEachFrame(snapshot));
     thisScheduler.add(Creat_StimSeqRoutineEnd(snapshot));
-    //thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
-    //thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
-    //thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
+    thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
+    thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
+    thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
     const RT_IterLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(RT_IterLoopBegin, RT_IterLoopScheduler);
     thisScheduler.add(RT_IterLoopScheduler);
@@ -2777,9 +2202,9 @@ function RT_IterLoopBegin(thisScheduler) {
     thisScheduler.add(Pre_TrialRoutineBegin(snapshot));
     thisScheduler.add(Pre_TrialRoutineEachFrame(snapshot));
     thisScheduler.add(Pre_TrialRoutineEnd(snapshot));
-    thisScheduler.add(RT_Enter_Trial_StopRoutineBegin(snapshot));
-    thisScheduler.add(RT_Enter_Trial_StopRoutineEachFrame(snapshot));
-    thisScheduler.add(RT_Enter_Trial_StopRoutineEnd(snapshot));
+    thisScheduler.add(RT_Enter_TrialRoutineBegin(snapshot));
+    thisScheduler.add(RT_Enter_TrialRoutineEachFrame(snapshot));
+    thisScheduler.add(RT_Enter_TrialRoutineEnd(snapshot));
     thisScheduler.add(RT_FeedbackRoutineBegin(snapshot));
     thisScheduler.add(RT_FeedbackRoutineEachFrame(snapshot));
     thisScheduler.add(RT_FeedbackRoutineEnd(snapshot));
@@ -2865,9 +2290,6 @@ function TR_Old_Block_PostLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    thisScheduler.add(CountDownRoutineBegin(snapshot));
-    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_Old_PostLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_Old_PostLoopBegin, TR_Iter_Old_PostLoopScheduler);
     thisScheduler.add(TR_Iter_Old_PostLoopScheduler);
@@ -3265,9 +2687,6 @@ function TR_New_Block_SwapLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    thisScheduler.add(CountDownRoutineBegin(snapshot));
-    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_New_SwapLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_New_SwapLoopBegin, TR_Iter_New_SwapLoopScheduler);
     thisScheduler.add(TR_Iter_New_SwapLoopScheduler);
@@ -3422,9 +2841,6 @@ function TR_New_Block_StopLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    thisScheduler.add(CountDownRoutineBegin(snapshot));
-    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_New_StopLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_New_StopLoopBegin, TR_Iter_New_StopLoopScheduler);
     thisScheduler.add(TR_Iter_New_StopLoopScheduler);
@@ -3639,15 +3055,10 @@ function Import_Stim_FileRoutineEnd(trials) {
 
 var coin;
 var beep;
-var buzz;
 var symb_map_rnd;
-var symb_map_rnd_stop;
-var resp_ind_rnd;
 var remap_pair_rnd;
 var remap_pair_1 = [];
 var remap_pair_2 = [];
-var probe_pair_1 = []
-var resp_map_ind = [];
 var Init_StimComponents;
 function Init_StimRoutineBegin(trials) {
   return function () {
@@ -3661,7 +3072,6 @@ function Init_StimRoutineBegin(trials) {
     hand_shape = StimList[0]["Hand"];
     coin = StimList[0]["Sound_P"];
     beep = StimList[0]["Beep"];
-    buzz = StimList[0]["Sound_N"];
     for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
         stimnum.push(StimList[i]["StimNum"]);
         symb.push(StimList[i]["Symb"]);
@@ -3673,63 +3083,35 @@ function Init_StimRoutineBegin(trials) {
         y.push(StimList[i]["Y_pos"]);
     }
 
+    symb_map_rnd = Math.floor(rng2 * symb_perm.length) // random interger between 0 and num_symb - 1
+    symb_map_ind = symb_perm[symb_map_rnd];
 
-    // randomize prep-time so that prep-time for each symbol spread over a good range
-    
-      
-    symb_map_rnd = Math.floor(rng1 * symb_perm.length) // random interger between 0 and num_symb - 1
-    symb_map_ind = symb_perm[symb_map_rnd]; // randomize which symbols corresponds to which index 0 to 7
-
-
-    symb_perm_resp = permute(x_symb_resp)  // permute those four resp id so can use them later
-    for (var i = 0, _pj_a = symb_perm_resp.length; (i < _pj_a); i += 1) {
-      resp_map_ind.push(i);
-    }
-    util.shuffle(resp_map_ind)
-
-    // the below two steps generate two pairs which do not require respones during practice
-    // they are basically 0 to 4; but dividing to two pairs for later convenience (feedback section)
-    remap_pair_rnd = Math.floor(rng2 * remap_pairs.length)
-    remap_pair_1 = remap_pairs[remap_pair_rnd];      // do not require responses during practice
-
-    for (i = 0, _pj_a = 4; (i < _pj_a); i += 1) { // do not require responses during practice
+    remap_pair_rnd = Math.floor(rng3 * remap_pairs.length)
+    remap_pair_1 = remap_pairs[remap_pair_rnd];
+    for (i = 0, _pj_a = 4; (i < _pj_a); i += 1) {
         if  (!(remap_pair_1.includes(i))) {
-            remap_pair_2.push((i));
+            remap_pair_2.push((i + 4));
         }
     }
-
-    // remap_pair_1 is two random symbol 0 to 4
-    // generate a pair correponding to the same respones and it does not require responses during probe session
-    for (i = 0, _pj_a = 4; (i < _pj_a); i += 1) { // probe_pair_1 require responses during practice but not during prob
-      if  (!(remap_pair_1.includes(i))) {
-          probe_pair_1.push((i + 4));
-      }
-  }
-
-    //symb_remap_ind = Object.assign({}, symb_map_ind);
+    symb_remap_ind = Object.assign({}, symb_map_ind);
     
-    //symb_remap_ind[remap_pair_1[0]] = symb_map_ind[remap_pair_1[1]];
-    //symb_remap_ind[remap_pair_1[1]] = symb_map_ind[remap_pair_1[0]];
-    //symb_remap_ind[remap_pair_2[0]] = symb_map_ind[remap_pair_2[1]];
-    //symb_remap_ind[remap_pair_2[1]] = symb_map_ind[remap_pair_2[0]];
+    symb_remap_ind[remap_pair_1[0]] = symb_map_ind[remap_pair_1[1]];
+    symb_remap_ind[remap_pair_1[1]] = symb_map_ind[remap_pair_1[0]];
+    symb_remap_ind[remap_pair_2[0]] = symb_map_ind[remap_pair_2[1]];
+    symb_remap_ind[remap_pair_2[1]] = symb_map_ind[remap_pair_2[0]];
 
-    //symb_remap_ind = Object.values(symb_remap_ind)
-
-    // for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
-    //     symb_map.push(symb[symb_map_ind[i]]);
-    //     symb_remap.push(symb[symb_remap_ind[i]]);
-    //     symb_g_map.push(symb_g[symb_map_ind[i]]);
-    //     symb_g_remap.push(symb_g[symb_remap_ind[i]]);
-    //     symb_r_map.push(symb_r[symb_map_ind[i]]);
-    //     symb_r_remap.push(symb_r[symb_remap_ind[i]]);
-    // }
+    for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
+        symb_map.push(symb[symb_map_ind[i]]);
+        symb_remap.push(symb[symb_remap_ind[i]]);
+        symb_g_map.push(symb_g[symb_map_ind[i]]);
+        symb_g_remap.push(symb_g[symb_remap_ind[i]]);
+        symb_r_map.push(symb_r[symb_map_ind[i]]);
+        symb_r_remap.push(symb_r[symb_remap_ind[i]]);
+    }
     psychoJS.experiment.addData("symb_map", symb_map_ind);
-   // psychoJS.experiment.addData("symb_remap", symb_remap_ind);
-    psychoJS.experiment.addData("stop_ind", x_symb_stop);
-    psychoJS.experiment.addData("resp_ind", x_symb_resp);
+    psychoJS.experiment.addData("symb_remap", symb_remap_ind);
     psychoJS.experiment.addData("Remap_Pair_1", remap_pair_1);
     psychoJS.experiment.addData("Remap_Pair_2", remap_pair_2);
-    psychoJS.experiment.addData("Probe_Pair_1", probe_pair_1);
     
     // keep track of which components have finished
     Init_StimComponents = [];
@@ -3780,12 +3162,8 @@ var instr_end_exp_text;
 var instr_exp_text;
 var instr_rt_text_hand;
 var instr_tr_text_hand;
-var instr_cr_old_text_1;
-var instr_cr_old_text_2;
-var instr_cr_old_text_3;
-var instr_rt_old_text_1;
-var instr_rt_old_text_2;
-var instr_rt_old_text_3;
+var instr_cr_old_text;
+var instr_rt_text;
 var instr_tr_old_pre_text;
 var instr_tr_old_post_text;
 var instr_cr_new_text;
@@ -3795,13 +3173,6 @@ var penalty_tooearly_text;
 var feedback_early_text;
 var feedback_late_text;
 var feedback_good_text;
-var instr_sound_quit_text;
-var instr_sound_exit_text;
-var instr_sound_select_text;
-var instr_sound_check_text;
-var instr_sound_check_feedback_P_text;
-var instr_sound_check_feedback_N_text;
-var instr_sound_check_feedback_NO_text;
 function Init_StimRoutineEnd(trials) {
   return function () {
     //------Ending Routine 'Init_Stim'-------
@@ -3813,7 +3184,7 @@ function Init_StimRoutineEnd(trials) {
 
     instr_end_exp_text = `Great job! You have completed the task.
     
-Press (space bar) to proceed so that your data can be saved. The saving process may take up to 1 minute.
+Press (space) to proceed so that your data can be saved. The saving process may take up to 1 minute.
 
 After the data are saved, click 'OK' to exit and close the webpage.`
     ;
@@ -3826,7 +3197,7 @@ Once you start, you can take a break between rounds, Please DO NOT turn off your
     
 
 
-Press (space bar) to continue.`
+Press (space) to continue.`
     ;
     instr_rt_text_hand = `The upcoming 3 blocks are used to help you get familiar with the task.
     
@@ -3836,7 +3207,7 @@ You will see a hand appear on the screen. One of the fingers on the screen will 
     
 
 
-Press (H, U, I, or L) to start.`
+Press (H, U, I, or L) to continue.`
     ;
     instr_tr_text_hand = `Great Job!
     
@@ -3844,94 +3215,39 @@ In the following blocks, you will hear 4 beeps. You need to press the correspond
 
 
 Sometimes, the finger will light up at the very last second. You will not have enough time to know which finger to press. In this case, MAKE A GUESS. Always press one of your fingers ON the fourth beep.
-    
-    
+
+
 There will be at least 2 blocks, depending on how well you press ON the fourth beep.
-    
-    
-Press (H, U, I, or L) to proceed.`
+
+
+Press (H, U, I, or L) to continue.`
     ;
-    instr_cr_old_text_1 = `In the upcoming block, you will see eight symbols on the screen, one at a time. You job is to figure out the association between symbols and keys.
+    instr_cr_old_text = `Good Job! You are now ready for the tasks!
+    
+In the upcoming block, you will see eight symbols on the screen, one at a time. Each symbol corresponds to one of (H, U, I, L). 
 
-
-Four symbols corresponds to (H, U, I, or L). 
-
-Four symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
-
+Your job is to figure out which symbol corresponds with which key.
 
 
 ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
     
 
 
-Ready? Press (H, U, I, or L) to start.`
+Ready? Press (H, U, I, or L) to continue.`
     ;
-
-    instr_cr_old_text_2 = `In the upcoming block, your job is to figure out a NEW association between symbols and keys.
-    
-
-The same four symbols still correspond to (H, U, I, or L) but the symbol-key association will change. 
-
-The other four symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
-
-
-ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
-    
-
-
-Ready? Press (H, U, I, or L) to start.`
-    ;
-
-    instr_cr_old_text_3 = `In the next block, take you time to figure out a NEW association again.
-  
-
-Again, The same four symbols still correspond to (H, U, I, or L) but the symbol-key association will change. 
-
-The other four symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
-
-
-ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
-    
-
-
-Ready? Press (H, U, I, or L) to start.`
-    ;
-
-    instr_rt_old_text_1 = `Now, use the symbol-key map you just learned:
-
-If you see a symbol that requires a response, press the corresponding key as quickly and as accurately as possible.            
-
-If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING, and simply wait for 2 second.
-    
-
-    
-
-Whenever you are ready, press (H, U, I, or L) to start.`
-    ;
-
-    instr_rt_old_text_2 = `In the upcoming task, use the NEW symbol-key map you just learned:
-
-If you see a symbol that requires a response, press the corresponding key as quickly and as accurately as possible.            
-
-If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING, and simply wait for 2 second.
-    
-    
-
-
-Whenever you are ready, press (H, U, I, or L) to start.`
-    ;
-
-    if ((session > 1)) {
-        instr_rt_old_text_1 = `Now you are going to practice the symbol-key map you learned. Your job is to press the corresponding key as quickly and as accurately as possible.
+    if ((session === 1)) {
+        instr_rt_text = `Now you are going to practice the symbol-key map you learned. 
+        
+Your job is to press the corresponding key as quickly and as accurately as possible.
     
 There will be ${rt_block} blocks with short breaks in between.
     
 
-Whenever you are ready, press one of (H, U, I, L) to start.`
+Whenever you are ready, press (H, U, I, or L) to start.`
     ;
     } else {
-        if ((2 < session)) {
-            instr_rt_old_text_1 = `Today, we first continue to practice the symbol-key maps for ${rt_block} blocks.
+        if ((1 < session)) {
+            instr_rt_text = `Today, we first continue to practice the symbol-key maps for ${rt_block} blocks.
     
 Remember, your job is to press the corresponding key as quickly and accurately as you can.
     
@@ -3941,146 +3257,95 @@ Whenever you are ready, press (H, U, I, or L) to start.`
     }
     instr_tr_old_pre_text = `Good job so far.
     
-In the following 2 blocks, press the corresponding key ON the fourth beep. Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
+In the following ${tr_block_old} blocks, use the symbol-key map you learned. Press the corresponding key ON the fourth beep. 
+
+Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
     
 
 Press (H, U, I, or L) to start.`
     ;
     instr_tr_old_post_text = `Great job.
     
-In the following 2 blocks, you will hear four beeps again. Press the corresponding key ON the fourth beep. Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
+In the following ${tr_block_old} blocks, use the symbol-key map you practices. Press the corresponding key ON the fourth beep. 
+
+Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
     
 
-Press one of (H, U, I, L) to start.`
+Press (H, U, I, or L) to start.`
     ;
     if ((grp_stop === 1)) {
-        instr_cr_new_text = `Great job. Now we proceed to the next step. In the upcoming block,
-
-
-Symbols that corresponded to (H, U, I, or L) may not require a response any more. 
-
-Symbols that did not correspond with a key may become requiring a response.
-
-
-Your job is to figure out a New association between the same eight symbols and (H, U, I, or L) keys.
-
-For symbols that do not require a response, DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
-
-
-ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
+        instr_cr_new_text = `Great job.
+    
+In next block, you will see the same eight symbols, but this time some of them may no longer correspond with a key (H, U, I, L).
+        
+Your job is to figure out which are those symbols and DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+        
+        
+ACCURACY is the priority, so go as slowly as you need to. The more mistaks you make, the longer this block will take.
         
         
 Press (H, U, I, or L) to start.`
     ;
     } else {
         if ((grp_swap === 1)) {
-            instr_cr_new_text = `Congratulations!
+            instr_cr_new_text = `Great job.
     
-Now, you will see the same eight symbols, but this time they may correspond with different key (H, U, I, L).
+In the next block, you will see the same eight symbols, but this time they may correspond with a different key (H, U, I, L).
 
 Your job is to figure out the new association between the symbols and the keys.
 
 
-ACCURACY is the priority, so go as slowly as you need to. The more mistaks you make, the longer this block will take.
+ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
 
 
-Press one of (H, U, I, or L) to start.`
+Press (H, U, I, or L) to start.`
     ;
         }
     }
     if ((grp_swap === 1)) {
-        instr_tr_new_text = `In the following set of blocks, use the NEW symbol-key map you just learned, press the corresponding key on the fourth beep. 
+        instr_tr_new_text = `Great job. We are almost there!
+
+In the last ${tr_block_new_swap} blocks, use the NEW symbol-key map you just learned: 
+Press the corresponding key ON the fourth beep. 
             
 Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
-              
-These are the last 6 blocks for this experiment.
+
             
         
-Press (H, U, I, or L) to continue.`
+Press (H, U, I, or L) to start.`
     ;
     } else {
         if ((grp_stop === 1)) {
             instr_tr_new_text = `Great job. We are almost there!
             
 In the last ${tr_block_new_stop} blocks, use the NEW symbol-key map you just learned:
-          
 If you see a symbol that requires a response, press the corresponding key ON the fourth beep.             
 If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING.
-            
-            
+
+
 Remember, the symbol may show up very late. In this case, MAKE A GUESS. If you decide to press, remember to respond ON the fourth beep.
-            
+
 This task is designed to be difficult, so it is okay to make a guess.
-            
-            
-            
-            
-Press (H, U, I, or L) to proceed.`
+
+
+
+
+
+Press (H, U, I, or L) to start.`
     ;
         }
     }
     penalty_toolate_text = `Response was too late.
-2 seconds penalty.
-
-Press (H, U, I, or L) to proceed.`
+2 second penalty.
+After 2 second, press (H, U, I, or L) to continue.`
     ;
     penalty_tooearly_text = `Response was too early.
-2 seconds penalty.
-
-Press (H, U, I, or L) to proceed.`
+2 second penalty.
+After 2 second, press (H, U, I, or L) to continue.`
     ;
-    penalty_countdown_text = `Ready`
-    ;
-
-
     feedback_early_text = `little early`;
     feedback_late_text = `little late`;
     feedback_good_text = `good timing`;
-
-
-    instr_sound_quit_text = `It seems that your computer does not play the sound well. 
-    
-Please press (Esc) to exit and check your spearker or headphone. 
-
-Disconnect any Bluetooth headphone as it is NOT allowed.
-
-You may restart the task later.`
-    ;
-    instr_sound_exit_text = `It seems that those sounds were not well identified. 
-    
-If you did not hear any sound, please press (Esc) to exit, check you audio, and restart the task later.
-
-If you did hear sound but just pressed wrong buttons, press (spce bar) to proceed.`;
-
-    instr_sound_select_text = ` Press ( f ) if you heared a coin sound; 
-
-Press ( j ) if you heared a buzzer sound; `
-    ;
-
-    instr_sound_check_text = `We will first test your audio. Press the corresponding keys to hear different tones.
-
-Press ( f ) to hear the coin sound.
-
-Press ( j ) to hear the buzzer sound.
-
-If you do not hear sound, press (Esc) to exist and check if you audio works fine on your computer.
-
-If you are able to hear the sound, press (space bar) to proceed.`
-  ;
-
-  instr_sound_check_text2 = `On next screen, you will hear either the coin sound or the buzzer sound. 
-  
-Press ( f ) after hearing the coin sound. 
-
-Press ( j ) after hearing the buzzer sound. 
-
-You must get at least 4 of these correct in a row to proceed.
-
-Whenever you are ready, press (space bar) to start.`
-  ;
-    instr_sound_check_feedback_P_text = `Your choice is correct`;
-    instr_sound_check_feedback_N_text = `Your choice is not correct`;
-    instr_sound_check_feedback_NO_text = `Let's hear it again`;
     
     // the Routine "Init_Stim" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
@@ -4088,7 +3353,6 @@ Whenever you are ready, press (space bar) to start.`
     return Scheduler.Event.NEXT;
   };
 }
-
 
 var _Instr_Exp_Key_allKeys;
 var Instr_ExpComponents;
@@ -4098,33 +3362,6 @@ function Instr_ExpRoutineBegin(trials) {
     t = 0;
     Instr_ExpClock.reset(); // clock
     frameN = -1;
-
-    TR_Beep = new sound.Sound({
-      win: psychoJS.window,
-      value: beep,
-      secs: (- 1),
-      startTime: 0,
-    });
-    TR_Beep.setVolume(1);
-
-    TR_Coin_Hand = new sound.Sound({
-      win: psychoJS.window,
-      value: coin,
-      secs: -1,
-    });
-
-    TR_Coin = new sound.Sound({
-      win: psychoJS.window,
-      value: coin,
-      secs: -1,
-    });
-
-    TR_Feedback_Coin = new sound.Sound({
-      win: psychoJS.window,
-      value: coin,
-      secs: -1,
-      });
-
     // update component parameters for each repeat
     Instr_Exp_Text.setText(instr_exp_text);
     Instr_Exp_Key.keys = undefined;
@@ -4235,1165 +3472,6 @@ function Instr_ExpRoutineEnd(trials) {
   };
 }
 
-var _Instr_Sound_Check_Press_allKeys;
-var trial_count;
-var sound_criterion;
-var sound_corr;
-var sound_miss;
-var x_sound;
-var doplay;
-var playdelay;
-var sound_score;
-var coin_yes;
-var buzz_yes;
-var key_num;
-var _Instr_Sound_Check_Press_Space_allKeys;
-var Instr_Sound_CheckComponents;
-var temp_t;
-function Instr_Sound_CheckRoutineBegin(trials) {
-  return function () {
-    //------Prepare to start Routine 'Instr_Sound_Check'-------
-    t = 0;
-    Instr_Sound_CheckClock.reset(); // clock
-    frameN = -1;
-    // update component parameters for each repeat
-    Instr_Sound_Check_Text.setText(instr_sound_check_text);
-    Instr_Sound_Check_Press.keys = undefined;
-    Instr_Sound_Check_Press.rt = undefined;
-    _Instr_Sound_Check_Press_allKeys = [];
-    trial_count = 0;
-    sound_criterion = 4;
-    sound_corr = 0;
-    sound_miss = 0;
-    x_sound = [1, 2, 1, 2, 1, 2, 1, 1, 2, 1];
-    doplay = 0;
-    playdelay = 0.5;
-    sound_score = 0;
-    coin_yes = 0;
-    buzz_yes = 0;
-    key_num = 0;
-    
-
-    sound_check_coin = new sound.Sound({
-      win: psychoJS.window,
-      value: coin,
-      secs: -1,
-      });
-      
-    sound_check_buzz = new sound.Sound({
-    win: psychoJS.window,
-    value: buzz,
-    secs: -1,
-    });
-        
-    sound_check_coin.setVolume(1);
-    sound_check_buzz.setVolume(1);
-
-    Instr_Sound_Check_Press_Space.keys = undefined;
-    Instr_Sound_Check_Press_Space.rt = undefined;
-    _Instr_Sound_Check_Press_Space_allKeys = [];
-    // keep track of which components have finished
-    Instr_Sound_CheckComponents = [];
-    Instr_Sound_CheckComponents.push(Instr_Sound_Check_Text);
-    Instr_Sound_CheckComponents.push(Instr_Sound_Check_Press);
-    //Instr_Sound_CheckComponents.push(Coin_Tone_Text);
-    //Instr_Sound_CheckComponents.push(Buzz_Tone_Text);
-    Instr_Sound_CheckComponents.push(sound_check_coin);
-    Instr_Sound_CheckComponents.push(sound_check_buzz);
-    Instr_Sound_CheckComponents.push(Instr_Sound_Check_Press_Space);
-    
-    for (const thisComponent of Instr_Sound_CheckComponents)
-      if ('status' in thisComponent)
-        thisComponent.status = PsychoJS.Status.NOT_STARTED;
-    
-    return Scheduler.Event.NEXT;
-  };
-}
-
-
-var playtime;
-function Instr_Sound_CheckRoutineEachFrame(trials) {
-  return function () {
-    //------Loop for each frame of Routine 'Instr_Sound_Check'-------
-    let continueRoutine = true; // until we're told otherwise
-    // get current time
-    t = Instr_Sound_CheckClock.getTime();
-    frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
-    // update/draw components on each frame
-    
-    // *Instr_Sound_Check_Text* updates
-    if (t >= 0.0 && Instr_Sound_Check_Text.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      Instr_Sound_Check_Text.tStart = t;  // (not accounting for frame time here)
-      Instr_Sound_Check_Text.frameNStart = frameN;  // exact frame index
-      
-      Instr_Sound_Check_Text.setAutoDraw(true);
-    }
-
-    // *Instr_Sound_Check_Press* updates
-    if (t >= 0.0 && Instr_Sound_Check_Press.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      Instr_Sound_Check_Press.tStart = t;  // (not accounting for frame time here)
-      Instr_Sound_Check_Press.frameNStart = frameN;  // exact frame index
-      
-      // keyboard checking is just starting
-      psychoJS.window.callOnFlip(function() { Instr_Sound_Check_Press.clock.reset(); });  // t=0 on next screen flip
-      psychoJS.window.callOnFlip(function() { Instr_Sound_Check_Press.start(); }); // start on screen flip
-      psychoJS.window.callOnFlip(function() { Instr_Sound_Check_Press.clearEvents(); });
-    }
-
-    if (Instr_Sound_Check_Press.status === PsychoJS.Status.STARTED) {
-      let theseKeys = Instr_Sound_Check_Press.getKeys({keyList: ['f', 'j'], waitRelease: false});
-      _Instr_Sound_Check_Press_allKeys = _Instr_Sound_Check_Press_allKeys.concat(theseKeys);
-      if (_Instr_Sound_Check_Press_allKeys.length > 0) {
-        Instr_Sound_Check_Press.keys = _Instr_Sound_Check_Press_allKeys[0].name;  // just the last key pressed
-        Instr_Sound_Check_Press.rt = _Instr_Sound_Check_Press_allKeys[0].rt;
-      }
-    }
-    
-    // *Coin_Tone_Text* updates
-    /* if (t >= 0.0 && Coin_Tone_Text.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      Coin_Tone_Text.tStart = t;  // (not accounting for frame time here)
-      Coin_Tone_Text.frameNStart = frameN;  // exact frame index
-      
-      Coin_Tone_Text.setAutoDraw(true);
-    } */
-
-    
-    // *Buzz_Tone_Text* updates
-    /* if (t >= 0.0 && Buzz_Tone_Text.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      Buzz_Tone_Text.tStart = t;  // (not accounting for frame time here)
-      Buzz_Tone_Text.frameNStart = frameN;  // exact frame index
-      
-      Buzz_Tone_Text.setAutoDraw(true);
-    } */
-
-    
-    // start/stop sound_check_coin
-    if (Instr_Sound_Check_Press.keys === "f" && sound_check_coin.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      sound_check_coin.tStart = t;  // (not accounting for frame time here)
-      sound_check_coin.frameNStart = frameN;  // exact frame index
-      temp_t = sound_check_coin.tStart
-
-
-      psychoJS.window.callOnFlip(function(){ sound_check_coin.play(); });  // screen flip
-      sound_check_coin.status = PsychoJS.Status.STARTED;
-    }
-    if (t >= (sound_check_coin.getDuration() + sound_check_coin.tStart)     && sound_check_coin.status === PsychoJS.Status.STARTED) {
-      sound_check_coin.stop();  // stop the sound (if longer than duration)
-      sound_check_coin.status = PsychoJS.Status.FINISHED;
-    }
-    // start/stop sound_check_buzz
-    if (Instr_Sound_Check_Press.keys === "j" && sound_check_buzz.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      sound_check_buzz.tStart = t;  // (not accounting for frame time here)
-      sound_check_buzz.frameNStart = frameN;  // exact frame index
-      temp_t = sound_check_buzz.tStart
-
-
-      psychoJS.window.callOnFlip(function(){ sound_check_buzz.play(); });  // screen flip
-      sound_check_buzz.status = PsychoJS.Status.STARTED;
-    }
-    if (t >= (sound_check_buzz.getDuration() + sound_check_buzz.tStart) && sound_check_buzz.status === PsychoJS.Status.STARTED) {
-      sound_check_buzz.stop();  // stop the sound (if longer than duration)
-      sound_check_buzz.status = PsychoJS.Status.FINISHED;
-    }
-    
-    // *Instr_Sound_Check_Press_Space* updates
-    if (t >= 0.0 && Instr_Sound_Check_Press_Space.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      Instr_Sound_Check_Press_Space.tStart = t;  // (not accounting for frame time here)
-      Instr_Sound_Check_Press_Space.frameNStart = frameN;  // exact frame index
-      
-      // keyboard checking is just starting
-      psychoJS.window.callOnFlip(function() { Instr_Sound_Check_Press_Space.clock.reset(); });  // t=0 on next screen flip
-      psychoJS.window.callOnFlip(function() { Instr_Sound_Check_Press_Space.start(); }); // start on screen flip
-      psychoJS.window.callOnFlip(function() { Instr_Sound_Check_Press_Space.clearEvents(); });
-    }
-
-    if (Instr_Sound_Check_Press_Space.status === PsychoJS.Status.STARTED) {
-      let theseKeys = Instr_Sound_Check_Press_Space.getKeys({keyList: ['space'], waitRelease: false});
-      _Instr_Sound_Check_Press_Space_allKeys = _Instr_Sound_Check_Press_Space_allKeys.concat(theseKeys);
-      if (_Instr_Sound_Check_Press_Space_allKeys.length > 0) {
-        Instr_Sound_Check_Press_Space.keys = _Instr_Sound_Check_Press_Space_allKeys[0].name;  // just the first key pressed
-        Instr_Sound_Check_Press_Space.rt = _Instr_Sound_Check_Press_Space_allKeys[0].rt;
-        // a response ends the routine
-        continueRoutine = false;
-      }
-    }
-    
-    if (sound_check_coin.status === PsychoJS.Status.FINISHED || sound_check_buzz.status === PsychoJS.Status.FINISHED) {
-      // keep track of start time/frame for later
-      //Coin_Tone_Text.setAutoDraw(false);
-      //Buzz_Tone_Text.setAutoDraw(false);
-      continueRoutine = false;
-    }
-
-
-    // check for quit (typically the Esc key)
-    if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
-      return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
-    }
-    
-    // check if the Routine should terminate
-    if (!continueRoutine) {  // a component has requested a forced-end of Routine
-      return Scheduler.Event.NEXT;
-    }
-    
-    continueRoutine = false;  // reverts to True if at least one component still running
-    for (const thisComponent of Instr_Sound_CheckComponents)
-      if ('status' in thisComponent && thisComponent.status !== PsychoJS.Status.FINISHED) {
-        continueRoutine = true;
-        break;
-      }
-    
-    // refresh the screen if continuing
-    if (continueRoutine) {
-      return Scheduler.Event.FLIP_REPEAT;
-    } else {
-      return Scheduler.Event.NEXT;
-    }
-  };
-}
-
-
-function Instr_Sound_CheckRoutineEnd(trials) {
-  return function () {
-    //------Ending Routine 'Instr_Sound_Check'-------
-    for (const thisComponent of Instr_Sound_CheckComponents) {
-      if (typeof thisComponent.setAutoDraw === 'function') {
-        thisComponent.setAutoDraw(false);
-      }
-    }
-
-    psychoJS.experiment.addData('Instr_Sound_Check_Press.keys', Instr_Sound_Check_Press.keys);
-    if (typeof Instr_Sound_Check_Press.keys !== 'undefined') {  // we had a response
-        psychoJS.experiment.addData('Instr_Sound_Check_Press.rt', Instr_Sound_Check_Press.rt);
-        }
-    
-    Instr_Sound_Check_Press.stop();
-    if ((Instr_Sound_Check_Press_Space.keys === "space")) {
-        trials.finished = true;
-    }
-    
-    //sound_check_coin.stop();  // ensure sound has stopped at end of routine
-    //sound_check_buzz.stop();  // ensure sound has stopped at end of routine
-    psychoJS.experiment.addData('Instr_Sound_Check_Press_Space.keys', Instr_Sound_Check_Press_Space.keys);
-    if (typeof Instr_Sound_Check_Press_Space.keys !== 'undefined') {  // we had a response
-        psychoJS.experiment.addData('Instr_Sound_Check_Press_Space.rt', Instr_Sound_Check_Press_Space.rt);
-        routineTimer.reset();
-        }
-    
-    Instr_Sound_Check_Press_Space.stop();
-    // the Routine "Instr_Sound_Check" was not non-slip safe, so reset the non-slip timer
-    routineTimer.reset();
-    
-    return Scheduler.Event.NEXT;
-  };
-}
-
-var sound_check_trial_count;
-var sound_criterion;
-var sound_corr;
-var sound_miss;
-var Sound_Check_Creat_StimSeqComponents;
-var _Sound_check_Creat_StimSeq_Text_Press_allKeys;
-function Sound_Check_Creat_StimSeqRoutineBegin(trials) {
-  return function () {
-    //------Prepare to start Routine 'Creat_StimSeq'-------
-    t = 0;
-    Sound_Check_Creat_StimSeqClock.reset(); // clock
-    frameN = -1;
-    // update component parameters for each repeat
-    sound_check_trial_count = 1;
-    sound_criterion = 4;
-    sound_corr = 0;
-    sound_miss = 0;
-
-
-    Sound_check_Creat_StimSeq_Text.setText(instr_sound_check_text2);
-    Sound_check_Creat_StimSeq_Text_Press.keys = undefined;
-    Sound_check_Creat_StimSeq_Text_Press.rt = undefined;
-    _Sound_check_Creat_StimSeq_Text_Press_allKeys = [];
-    
-    // keep track of which components have finished
-    Sound_Check_Creat_StimSeqComponents = [];
-    Sound_Check_Creat_StimSeqComponents.push(Sound_check_Creat_StimSeq_Text);
-    Sound_Check_Creat_StimSeqComponents.push(Sound_check_Creat_StimSeq_Text_Press);
-    
-    
-    for (const thisComponent of Sound_Check_Creat_StimSeqComponents)
-      if ('status' in thisComponent)
-        thisComponent.status = PsychoJS.Status.NOT_STARTED;
-    
-    return Scheduler.Event.NEXT;
-  };
-}
-
-
-function Sound_Check_Creat_StimSeqRoutineEachFrame(trials) {
-  return function () {
-    //------Loop for each frame of Routine 'Creat_StimSeq'-------
-    let continueRoutine = true; // until we're told otherwise
-    // get current time
-    t = Sound_Check_Creat_StimSeqClock.getTime();
-    frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
-
-
-    // *Instr_Trial_Num_Text* updates
-    if (t >= 0.0 && Sound_check_Creat_StimSeq_Text.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      Sound_check_Creat_StimSeq_Text.tStart = t;  // (not accounting for frame time here)
-      Sound_check_Creat_StimSeq_Text.frameNStart = frameN;  // exact frame index
-      
-      Sound_check_Creat_StimSeq_Text.setAutoDraw(true);
-    }
-
-    // *Instr_Trial_Num_Press* updates
-    if (t >= 0.0 && Sound_check_Creat_StimSeq_Text_Press.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      Sound_check_Creat_StimSeq_Text_Press.tStart = t;  // (not accounting for frame time here)
-      Sound_check_Creat_StimSeq_Text_Press.frameNStart = frameN;  // exact frame index
-      
-      // keyboard checking is just starting
-      psychoJS.window.callOnFlip(function() { Sound_check_Creat_StimSeq_Text_Press.clock.reset(); });  // t=0 on next screen flip
-      psychoJS.window.callOnFlip(function() { Sound_check_Creat_StimSeq_Text_Press.start(); }); // start on screen flip
-      psychoJS.window.callOnFlip(function() { Sound_check_Creat_StimSeq_Text_Press.clearEvents(); });
-    }
-
-    if (Sound_check_Creat_StimSeq_Text_Press.status === PsychoJS.Status.STARTED) {
-      let theseKeys = Sound_check_Creat_StimSeq_Text_Press.getKeys({keyList: ['space'], waitRelease: false});
-      _Sound_check_Creat_StimSeq_Text_Press_allKeys = _Sound_check_Creat_StimSeq_Text_Press_allKeys.concat(theseKeys);
-      if (_Sound_check_Creat_StimSeq_Text_Press_allKeys.length > 0) {
-        Sound_check_Creat_StimSeq_Text_Press.keys = _Sound_check_Creat_StimSeq_Text_Press_allKeys[0].name;  // just the first key pressed
-        Sound_check_Creat_StimSeq_Text_Press.rt = _Sound_check_Creat_StimSeq_Text_Press_allKeys[0].rt;
-        // a response ends the routine
-        continueRoutine = false;
-      }
-    }
-
-    // update/draw components on each frame
-    // check for quit (typically the Esc key)
-    if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
-      return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
-    }
-    
-    // check if the Routine should terminate
-    if (!continueRoutine) {  // a component has requested a forced-end of Routine
-      return Scheduler.Event.NEXT;
-    }
-    
-    continueRoutine = false;  // reverts to True if at least one component still running
-    for (const thisComponent of Sound_Check_Creat_StimSeqComponents)
-      if ('status' in thisComponent && thisComponent.status !== PsychoJS.Status.FINISHED) {
-        continueRoutine = true;
-        break;
-      }
-    
-    // refresh the screen if continuing
-    if (continueRoutine) {
-      return Scheduler.Event.FLIP_REPEAT;
-    } else {
-      return Scheduler.Event.NEXT;
-    }
-  };
-}
-
-
-function Sound_Check_Creat_StimSeqRoutineEnd(trials) {
-  return function () {
-    //------Ending Routine 'Creat_StimSeq'-------
-    for (const thisComponent of Sound_Check_Creat_StimSeqComponents) {
-      if (typeof thisComponent.setAutoDraw === 'function') {
-        thisComponent.setAutoDraw(false);
-      }
-    }
-    
-    psychoJS.experiment.addData('Sound_check_Creat_StimSeq_Text_Press.keys', Sound_check_Creat_StimSeq_Text_Press.keys);
-    if (typeof Instr_Trial_Num_Press.keys !== 'undefined') {  // we had a response
-        psychoJS.experiment.addData('Sound_check_Creat_StimSeq_Text_Press.rt', Sound_check_Creat_StimSeq_Text_Press.rt);
-        routineTimer.reset();
-        }
-    
-    Instr_Trial_Num_Press.stop();
-    // the Routine "Creat_StimSeq" was not non-slip safe, so reset the non-slip timer
-    routineTimer.reset();
-    
-    return Scheduler.Event.NEXT;
-  };
-}
-
-var beep_sound_check;
-var sound_name;
-var no_sound;
-var sound_check_corr;
-var Sound_Check_Pre_TrialComponents;
-var score;
-function Sound_Check_Pre_TrialRoutineBegin(trials) {
-  return function () {
-    //------Prepare to start Routine 'Pre_Trial'-------
-    t = 0;
-    Sound_Check_Pre_TrialClock.reset(); // clock
-    frameN = -1;
-    // update component parameters for each repeat
-    
-    if ((Math.random() < 0.5)) {
-        beep_sound_check = coin;
-        sound_name = "coin";
-    } else {
-        beep_sound_check = buzz;
-        sound_name = "buzz";
-    }
-    no_sound = 0;
-    corr = (- 1);
-    
-    Sound_Check_Sound_Play = new sound.Sound({
-    win: psychoJS.window,
-    value: beep_sound_check,
-    secs: -1,
-    });
-
-    Sound_Check_Sound_Play.setVolume(1);
-
-
-    pre_trial_dur = 0.2;
-    
-    Sound_Score.setText(sound_score);
-    Sound_Score_Text.setText('Score')
-    Sound_Score_Hint.setText(instr_sound_select_text)
-    
-    // keep track of which components have finished
-    Sound_Check_Pre_TrialComponents = [];
-    Sound_Check_Pre_TrialComponents.push(Sound_Score);
-    Sound_Check_Pre_TrialComponents.push(Sound_Score_Text);
-    Sound_Check_Pre_TrialComponents.push(Sound_Score_Hint);
-
-    for (const thisComponent of Sound_Check_Pre_TrialComponents)
-      if ('status' in thisComponent)
-        thisComponent.status = PsychoJS.Status.NOT_STARTED;
-    
-    return Scheduler.Event.NEXT;
-  };
-}
-
-
-function Sound_Check_Pre_TrialRoutineEachFrame(trials) {
-  return function () {
-    //------Loop for each frame of Routine 'Pre_Trial'-------
-    let continueRoutine = true; // until we're told otherwise
-    // get current time
-    t = Sound_Check_Pre_TrialClock.getTime();
-    frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
-    // update/draw components on each frame
-
-
-    // *Pre_Trial_Rec_Frame* updates
-    if (t >= 0.0 && Sound_Score.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      Sound_Score.tStart = t;  // (not accounting for frame time here)
-      Sound_Score.frameNStart = frameN;  // exact frame index
-      
-      Sound_Score.setAutoDraw(true);
-    }
-
-    // *Pre_Trial_Rec_Frame* updates
-    if (t >= 0.0 && Sound_Score_Text.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      Sound_Score_Text.tStart = t;  // (not accounting for frame time here)
-      Sound_Score_Text.frameNStart = frameN;  // exact frame index
-      
-      Sound_Score_Text.setAutoDraw(true);
-    }
-
-    // *Pre_Trial_Rec_Frame* updates
-    if (t >= 0.0 && Sound_Score_Hint.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      Sound_Score_Hint.tStart = t;  // (not accounting for frame time here)
-      Sound_Score_Hint.frameNStart = frameN;  // exact frame index
-      
-      Sound_Score_Hint.setAutoDraw(true);
-    }
-
-    frameRemains = 0.0 + pre_trial_dur - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (Sound_Score_Text.status === PsychoJS.Status.STARTED && t >= frameRemains) {
-      Sound_Score.setAutoDraw(false);
-      Sound_Score_Text.setAutoDraw(false);
-      Sound_Score_Hint.setAutoDraw(false);
-    }
-
-
-    // check for quit (typically the Esc key)
-    if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
-      return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
-    }
-    
-    // check if the Routine should terminate
-    if (!continueRoutine) {  // a component has requested a forced-end of Routine
-      return Scheduler.Event.NEXT;
-    }
-    
-    continueRoutine = false;  // reverts to True if at least one component still running
-    for (const thisComponent of Sound_Check_Pre_TrialComponents)
-      if ('status' in thisComponent && thisComponent.status !== PsychoJS.Status.FINISHED) {
-        continueRoutine = true;
-        break;
-      }
-    
-    // refresh the screen if continuing
-    if (continueRoutine) {
-      return Scheduler.Event.FLIP_REPEAT;
-    } else {
-      return Scheduler.Event.NEXT;
-    }
-  };
-}
-
-
-function Sound_Check_Pre_TrialRoutineEnd(trials) {
-  return function () {
-    //------Ending Routine 'Pre_Trial'-------
-    for (const thisComponent of Sound_Check_Pre_TrialComponents) {
-      if (typeof thisComponent.setAutoDraw === 'function') {
-        thisComponent.setAutoDraw(false);
-      }
-    }
-    psychoJS.experiment.addData("sound_check", sound_name);
-    
-    // the Routine "Pre_Trial" was not non-slip safe, so reset the non-slip timer
-    routineTimer.reset();
-    
-    return Scheduler.Event.NEXT;
-  };
-}
-
-
-var _Sound_Check_Press_allKeys;
-var Sound_Check_Enter_TrialComponents;
-function Sound_Check_Enter_TrialRoutineBegin(trials) {
-  return function () {
-    //------Prepare to start Routine 'RT_Enter_Trial'-------
-    t = 0;
-    Sound_Check_Enter_TrialClock.reset(); // clock
-    frameN = -1;
-    // update component parameters for each repeat
-    Sound_Check_Press.keys = undefined;
-    Sound_Check_Press.rt = undefined;
-    _Sound_Check_Press_allKeys = [];
-    
-    
-    Sound_Score.setText(sound_score);
-    Sound_Score_Text.setText('Score')
-    Sound_Score_Hint.setText(instr_sound_select_text)
-
-    Sound_Check_Play_Text.setText(instr_sound_select_text);
-    // keep track of which components have finished
-    Sound_Check_Enter_TrialComponents = [];
-    Sound_Check_Enter_TrialComponents.push(Sound_Check_Press);
-    Sound_Check_Enter_TrialComponents.push(Sound_Check_Sound_Play);
-    Sound_Check_Enter_TrialComponents.push(Sound_Check_Play_Text);
-    
-    for (const thisComponent of Sound_Check_Enter_TrialComponents)
-      if ('status' in thisComponent)
-        thisComponent.status = PsychoJS.Status.NOT_STARTED;
-    
-    return Scheduler.Event.NEXT;
-  };
-}
-
-
-function Sound_Check_Enter_TrialRoutineEachFrame(trials) {
-  return function () {
-    //------Loop for each frame of Routine 'RT_Enter_Trial'-------
-    let continueRoutine = true; // until we're told otherwise
-    // get current time
-    t = Sound_Check_Enter_TrialClock.getTime();
-    frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
-    // update/draw components on each frame
-    
-
-    if (t >= 0.0) {
-      Sound_Score.setText(sound_score);
-      Sound_Score.setAutoDraw(true);
-      Sound_Score_Text.setAutoDraw(true);
-      Sound_Score_Hint.setAutoDraw(true);
-    }
-
-    // *Sound_Check_Press* updates
-    if (t >= (Sound_Check_Sound_Play.getDuration() + Sound_Check_Sound_Play.tStart) && Sound_Check_Press.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      Sound_Check_Press.tStart = t;  // (not accounting for frame time here)
-      Sound_Check_Press.frameNStart = frameN;  // exact frame index
-      
-      // keyboard checking is just starting
-      psychoJS.window.callOnFlip(function() { Sound_Check_Press.clock.reset(); });  // t=0 on next screen flip
-      psychoJS.window.callOnFlip(function() { Sound_Check_Press.start(); }); // start on screen flip
-      psychoJS.window.callOnFlip(function() { Sound_Check_Press.clearEvents(); });
-    }
-
-    if (Sound_Check_Press.status === PsychoJS.Status.STARTED) {
-      let theseKeys = Sound_Check_Press.getKeys({keyList: ['f', 'j'], waitRelease: false});
-      _Sound_Check_Press_allKeys = _Sound_Check_Press_allKeys.concat(theseKeys);
-      if (_Sound_Check_Press_allKeys.length > 0) {
-        Sound_Check_Press.keys = _Sound_Check_Press_allKeys[0].name;  // just the first key pressed
-        Sound_Check_Press.rt = _Sound_Check_Press_allKeys[0].rt;
-        // a response ends the routine
-        continueRoutine = false;
-      }
-    }
-    
-    // start/stop Sound_Check_Sound_Play
-    if (t >= 1 && Sound_Check_Sound_Play.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      Sound_Check_Sound_Play.tStart = t;  // (not accounting for frame time here)
-      Sound_Check_Sound_Play.frameNStart = frameN;  // exact frame index
-      
-      psychoJS.window.callOnFlip(function(){ Sound_Check_Sound_Play.play(); });  // screen flip
-      Sound_Check_Sound_Play.status = PsychoJS.Status.STARTED;
-    }
-    if (t >= (Sound_Check_Sound_Play.getDuration() + Sound_Check_Sound_Play.tStart)     && Sound_Check_Sound_Play.status === PsychoJS.Status.STARTED) {
-      Sound_Check_Sound_Play.stop();  // stop the sound (if longer than duration)
-      Sound_Check_Sound_Play.status = PsychoJS.Status.FINISHED;
-    }
-    
-    /* // *Sound_Check_Play_Text* updates
-    if (t >= 2 && Sound_Check_Play_Text.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      Sound_Check_Play_Text.tStart = t;  // (not accounting for frame time here)
-      Sound_Check_Play_Text.frameNStart = frameN;  // exact frame index
-      
-      Sound_Check_Play_Text.setAutoDraw(true);
-    } */
-
-    // check for quit (typically the Esc key)
-    if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
-      return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
-    }
-    
-    // check if the Routine should terminate
-    if (!continueRoutine) {  // a component has requested a forced-end of Routine
-      return Scheduler.Event.NEXT;
-    }
-    
-    continueRoutine = false;  // reverts to True if at least one component still running
-    for (const thisComponent of Sound_Check_Enter_TrialComponents)
-      if ('status' in thisComponent && thisComponent.status !== PsychoJS.Status.FINISHED) {
-        continueRoutine = true;
-        break;
-      }
-    
-    // refresh the screen if continuing
-    if (continueRoutine) {
-      return Scheduler.Event.FLIP_REPEAT;
-    } else {
-      return Scheduler.Event.NEXT;
-    }
-  };
-}
-
-
-var sound_check_feedback_text;
-var Sound_key_press;
-var sound_check_rt;
-function Sound_Check_Enter_TrialRoutineEnd(trials) {
-  return function () {
-    //------Ending Routine 'RT_Enter_Trial'-------
-    for (const thisComponent of Sound_Check_Enter_TrialComponents) {
-      if (typeof thisComponent.setAutoDraw === 'function') {
-        thisComponent.setAutoDraw(false);
-      }
-    }
-
-    Sound_Score.setAutoDraw(false);
-    Sound_Score_Hint.setAutoDraw(false);
-    Sound_Score_Text.setAutoDraw(false);
-
-    if ((beep_sound_check === coin)) {
-        if ((Sound_Check_Press.keys === "f")) {
-            
-            sound_check_corr = 1;
-            no_sound = 0;
-        } else {
-            if ((Sound_Check_Press.keys === "j")) {
-                sound_check_corr = 0;
-                no_sound = 0;
-            } else {
-                if ((Sound_Check_Press.keys === "n")) {
-                    no_sound = 1;
-                    sound_check_corr = 0;
-                }
-            }
-        }
-    } else {
-        if ((Sound_Check_Press.keys === "f")) {
-            sound_check_corr = 0;
-            no_sound = 0;
-        } else {
-            if ((Sound_Check_Press.keys === "j")) {
-                sound_check_corr = 1;
-                no_sound = 0;
-            } else {
-                if ((Sound_Check_Press.keys === "n")) {
-                    no_sound = 1;
-                    sound_check_corr = 0;
-                }
-            }
-        }
-    }
-    if ((sound_check_corr === 1)) {
-        sound_check_feedback_text = instr_sound_check_feedback_P_text;
-    } else {
-        if (((sound_check_corr === 0) && (no_sound === 0))) {
-            sound_check_feedback_text = instr_sound_check_feedback_N_text;
-        } else {
-            if ((no_sound === 1)) {
-                sound_check_feedback_text = instr_sound_check_feedback_NO_text;
-            }
-        }
-    }
-
-
-    // update component parameters for each repeat
-    if ((sound_check_corr === 1)) {
-      sound_corr = (sound_corr + 1);
-      sound_score = sound_score + 1;
-    } else {
-        if (((sound_check_corr === 0) && (sound_corr < sound_criterion))) {
-            sound_corr = 0;
-            sound_score = 0;
-        }
-    }
-    if ((no_sound === 1)) {
-        sound_miss = (sound_miss + 1);
-    } else {
-        if (((no_sound === 0) && (sound_miss < sound_criterion))) {
-            sound_miss = 0;
-        }
-    }
-    sound_check_trial_count = (sound_check_trial_count + 1);
-    if ((sound_check_trial_count > num_trials_sound_check)) {
-        sound_exit_bool = 1;
-    }
-    if ((sound_miss === sound_criterion)) {
-        sound_quit_bool = 0;
-    }
-    
-    if (((sound_corr === sound_criterion) || (sound_miss === sound_criterion))) {
-      trials.finished = true;
-      sound_exit_bool = 0;
-    }
-
-    Sound_key_press = Sound_Check_Press.keys;
-    sound_check_rt = Sound_Check_Press.rt - 1; // sound play 1s after trial onset
-    psychoJS.experiment.addData("sound_check_press", Sound_key_press);
-    psychoJS.experiment.addData("sound_check_rt", sound_check_rt);
-    psychoJS.experiment.addData("sound_check_correct", corr);
-    psychoJS.experiment.addData("sound_check_trial_count", sound_check_trial_count)
-
-    psychoJS.experiment.addData('Sound_Check_Press.keys', Sound_Check_Press.keys);
-    if (typeof Sound_Check_Press.keys !== 'undefined') {  // we had a response
-        psychoJS.experiment.addData('Sound_Check_Press.rt', Sound_Check_Press.rt);
-        routineTimer.reset();
-        }
-    
-    Sound_Check_Press.stop();
-    Sound_Check_Sound_Play.stop();  // ensure sound has stopped at end of routine
-    // the Routine "RT_Enter_Trial" was not non-slip safe, so reset the non-slip timer
-    routineTimer.reset();
-    
-    return Scheduler.Event.NEXT;
-  };
-}
-
-
-var Sound_Check_FeedbackComponents;
-function Sound_Check_FeedbackRoutineBegin(trials) {
-  return function () {
-    //------Prepare to start Routine 'RT_Feedback'-------
-    t = 0;
-    Sound_Check_FeedbackClock.reset(); // clock
-    frameN = -1;
-    routineTimer.add(1.000000);
-    // update component parameters for each repeat
-    Sound_Check_Feedback_Text.setText(sound_check_feedback_text);
-    // keep track of which components have finished
-    Sound_Check_FeedbackComponents = [];
-    Sound_Check_FeedbackComponents.push(Sound_Check_Feedback_Text);
-    
-    for (const thisComponent of Sound_Check_FeedbackComponents)
-      if ('status' in thisComponent)
-        thisComponent.status = PsychoJS.Status.NOT_STARTED;
-    
-    return Scheduler.Event.NEXT;
-  };
-}
-
-
-var frameRemains;
-function Sound_Check_FeedbackRoutineEachFrame(trials) {
-  return function () {
-    //------Loop for each frame of Routine 'RT_Feedback'-------
-    let continueRoutine = true; // until we're told otherwise
-    // get current time
-    t = Sound_Check_FeedbackClock.getTime();
-    frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
-    // update/draw components on each frame
-    
-    // *Sound_Check_Feedback_Text* updates
-    if (t >= 0.0 && Sound_Check_Feedback_Text.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      Sound_Check_Feedback_Text.tStart = t;  // (not accounting for frame time here)
-      Sound_Check_Feedback_Text.frameNStart = frameN;  // exact frame index
-      
-      Sound_Check_Feedback_Text.setAutoDraw(true);
-    }
-
-    frameRemains = 0.0 + 1 - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (Sound_Check_Feedback_Text.status === PsychoJS.Status.STARTED && t >= frameRemains) {
-      Sound_Check_Feedback_Text.setAutoDraw(false);
-    }
-    // check for quit (typically the Esc key)
-    if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
-      return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
-    }
-    
-    // check if the Routine should terminate
-    if (!continueRoutine) {  // a component has requested a forced-end of Routine
-      return Scheduler.Event.NEXT;
-    }
-    
-    continueRoutine = false;  // reverts to True if at least one component still running
-    for (const thisComponent of Sound_Check_FeedbackComponents)
-      if ('status' in thisComponent && thisComponent.status !== PsychoJS.Status.FINISHED) {
-        continueRoutine = true;
-        break;
-      }
-    
-    // refresh the screen if continuing
-    if (continueRoutine && routineTimer.getTime() > 0) {
-      return Scheduler.Event.FLIP_REPEAT;
-    } else {
-      return Scheduler.Event.NEXT;
-    }
-  };
-}
-
-
-function Sound_Check_FeedbackRoutineEnd(trials) {
-  return function () {
-    //------Ending Routine 'RT_Feedback'-------
-    for (const thisComponent of Sound_Check_FeedbackComponents) {
-      if (typeof thisComponent.setAutoDraw === 'function') {
-        thisComponent.setAutoDraw(false);
-      }
-    }
-    return Scheduler.Event.NEXT;
-  };
-}
-
-
-var Sound_Check_Criterion_DetComponents;
-function Sound_Check_Criterion_DetRoutineBegin(trials) {
-  return function () {
-    //------Prepare to start Routine 'Criterion_Det'-------
-    t = 0;
-    Sound_Check_Criterion_DetClock.reset(); // clock
-    frameN = -1;
-    // update component parameters for each repeat
-    if ((sound_check_corr === 1)) {
-        sound_corr = (sound_corr + 1);
-    } else {
-        if (((sound_check_corr === 0) && (sound_corr < sound_criterion))) {
-            sound_corr = 0;
-        }
-    }
-    if ((no_sound === 1)) {
-        sound_miss = (sound_miss + 1);
-    } else {
-        if (((no_sound === 0) && (sound_miss < sound_criterion))) {
-            sound_miss = 0;
-        }
-    }
-    sound_check_trial_count = (sound_check_trial_count + 1);
-    if ((sound_check_trial_count > num_trials_sound_check)) {
-        sound_exit_bool = 1;
-    }
-    if ((sound_miss === sound_criterion)) {
-        sound_quit_bool = 1;
-    }
-    
-    if (((sound_corr === sound_criterion) || (sound_miss === sound_criterion))) {
-      trials.finished = true;
-    }
-    
-    // keep track of which components have finished
-    Sound_Check_Criterion_DetComponents = [];
-    
-    for (const thisComponent of Sound_Check_Criterion_DetComponents)
-      if ('status' in thisComponent)
-        thisComponent.status = PsychoJS.Status.NOT_STARTED;
-    
-    return Scheduler.Event.NEXT;
-  };
-}
-
-
-function Sound_Check_Criterion_DetRoutineEachFrame(trials) {
-  return function () {
-    //------Loop for each frame of Routine 'Criterion_Det'-------
-    let continueRoutine = true; // until we're told otherwise
-    // get current time
-    t = Sound_Check_Criterion_DetClock.getTime();
-    frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
-    // update/draw components on each frame
-    // check for quit (typically the Esc key)
-    if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
-      return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
-    }
-    
-    // check if the Routine should terminate
-    if (!continueRoutine) {  // a component has requested a forced-end of Routine
-      return Scheduler.Event.NEXT;
-    }
-    
-    continueRoutine = false;  // reverts to True if at least one component still running
-    for (const thisComponent of Sound_Check_Criterion_DetComponents)
-      if ('status' in thisComponent && thisComponent.status !== PsychoJS.Status.FINISHED) {
-        continueRoutine = true;
-        break;
-      }
-    
-    // refresh the screen if continuing
-    if (continueRoutine) {
-      return Scheduler.Event.FLIP_REPEAT;
-    } else {
-      return Scheduler.Event.NEXT;
-    }
-  };
-}
-
-
-function Sound_Check_Criterion_DetRoutineEnd(trials) {
-  return function () {
-    //------Ending Routine 'Criterion_Det'-------
-    for (const thisComponent of Sound_Check_Criterion_DetComponents) {
-      if (typeof thisComponent.setAutoDraw === 'function') {
-        thisComponent.setAutoDraw(false);
-      }
-    }
-    // the Routine "Criterion_Det" was not non-slip safe, so reset the non-slip timer
-    routineTimer.reset();
-    
-    return Scheduler.Event.NEXT;
-  };
-}
-
-
-var Sound_Quit_TextComponents;
-function Sound_Quit_TextRoutineBegin(trials) {
-  return function () {
-    //------Prepare to start Routine 'Sound_Quit_Text'-------
-    t = 0;
-    Sound_Quit_TextClock.reset(); // clock
-    frameN = -1;
-    // update component parameters for each repeat
-    instr_Sound_Quit_Text.setText(instr_sound_quit_text);
-    // keep track of which components have finished
-    Sound_Quit_TextComponents = [];
-    Sound_Quit_TextComponents.push(instr_Sound_Quit_Text);
-    
-    for (const thisComponent of Sound_Quit_TextComponents)
-      if ('status' in thisComponent)
-        thisComponent.status = PsychoJS.Status.NOT_STARTED;
-    
-    return Scheduler.Event.NEXT;
-  };
-}
-
-
-function Sound_Quit_TextRoutineEachFrame(trials) {
-  return function () {
-    //------Loop for each frame of Routine 'Sound_Quit_Text'-------
-    let continueRoutine = true; // until we're told otherwise
-    // get current time
-    t = Sound_Quit_TextClock.getTime();
-    frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
-    // update/draw components on each frame
-    
-    // *instr_Sound_Quit_Text* updates
-    if (t >= 0.0 && instr_Sound_Quit_Text.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      instr_Sound_Quit_Text.tStart = t;  // (not accounting for frame time here)
-      instr_Sound_Quit_Text.frameNStart = frameN;  // exact frame index
-      
-      instr_Sound_Quit_Text.setAutoDraw(true);
-    }
-
-    // check for quit (typically the Esc key)
-    if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
-      return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
-    }
-    
-    // check if the Routine should terminate
-    if (!continueRoutine) {  // a component has requested a forced-end of Routine
-      return Scheduler.Event.NEXT;
-    }
-    
-    continueRoutine = false;  // reverts to True if at least one component still running
-    for (const thisComponent of Sound_Quit_TextComponents)
-      if ('status' in thisComponent && thisComponent.status !== PsychoJS.Status.FINISHED) {
-        continueRoutine = true;
-        break;
-      }
-    
-    // refresh the screen if continuing
-    if (continueRoutine) {
-      return Scheduler.Event.FLIP_REPEAT;
-    } else {
-      return Scheduler.Event.NEXT;
-    }
-  };
-}
-
-
-function Sound_Quit_TextRoutineEnd(trials) {
-  return function () {
-    //------Ending Routine 'Sound_Quit_Text'-------
-    for (const thisComponent of Sound_Quit_TextComponents) {
-      if (typeof thisComponent.setAutoDraw === 'function') {
-        thisComponent.setAutoDraw(false);
-      }
-    }
-    // the Routine "Sound_Quit_Text" was not non-slip safe, so reset the non-slip timer
-    routineTimer.reset();
-    
-    return Scheduler.Event.NEXT;
-  };
-}
-
-
-var Sound_Exit_TextComponents;
-var _Sound_Exit_Text_Press_allKeys;
-function Sound_Exit_TextRoutineBegin(trials) {
-  return function () {
-    //------Prepare to start Routine 'Sound_Exit_Text'-------
-    t = 0;
-    Sound_Exit_TextClock.reset(); // clock
-    frameN = -1;
-    // update component parameters for each repeat
-    inst_Sound_Exit_Text.setText(instr_sound_exit_text);
-
-    Sound_Exit_Text_Press.keys = undefined;
-    Sound_Exit_Text_Press.rt = undefined;
-    _Sound_Exit_Text_Press_allKeys = [];
-    // keep track of which components have finished
-    Sound_Exit_TextComponents = [];
-    Sound_Exit_TextComponents.push(inst_Sound_Exit_Text);
-    Sound_Exit_TextComponents.push(Sound_Exit_Text_Press);
-
-
-    for (const thisComponent of Sound_Exit_TextComponents)
-      if ('status' in thisComponent)
-        thisComponent.status = PsychoJS.Status.NOT_STARTED;
-    
-    return Scheduler.Event.NEXT;
-  };
-}
-
-
-function Sound_Exit_TextRoutineEachFrame(trials) {
-  return function () {
-    //------Loop for each frame of Routine 'Sound_Exit_Text'-------
-    let continueRoutine = true; // until we're told otherwise
-    // get current time
-    t = Sound_Exit_TextClock.getTime();
-    frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
-    // update/draw components on each frame
-    
-    // *inst_Sound_Exit_Text* updates
-    if (t >= 0.0 && inst_Sound_Exit_Text.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      inst_Sound_Exit_Text.tStart = t;  // (not accounting for frame time here)
-      inst_Sound_Exit_Text.frameNStart = frameN;  // exact frame index
-      
-      inst_Sound_Exit_Text.setAutoDraw(true);
-    }
-
-
-    // *Instr_Sound_Check_Press_Space* updates
-    if (t >= 0.0 && Sound_Exit_Text_Press.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      Sound_Exit_Text_Press.tStart = t;  // (not accounting for frame time here)
-      Sound_Exit_Text_Press.frameNStart = frameN;  // exact frame index
-      
-      // keyboard checking is just starting
-      psychoJS.window.callOnFlip(function() { Sound_Exit_Text_Press.clock.reset(); });  // t=0 on next screen flip
-      psychoJS.window.callOnFlip(function() { Sound_Exit_Text_Press.start(); }); // start on screen flip
-      psychoJS.window.callOnFlip(function() { Sound_Exit_Text_Press.clearEvents(); });
-    }
-
-    if (Sound_Exit_Text_Press.status === PsychoJS.Status.STARTED) {
-      let theseKeys = Sound_Exit_Text_Press.getKeys({keyList: ['space'], waitRelease: false});
-      _Sound_Exit_Text_Press_allKeys = _Sound_Exit_Text_Press_allKeys.concat(theseKeys);
-      if (_Sound_Exit_Text_Press_allKeys.length > 0) {
-        Sound_Exit_Text_Press.keys = _Sound_Exit_Text_Press_allKeys[0].name;  // just the first key pressed
-        Sound_Exit_Text_Press.rt = _Sound_Exit_Text_Press_allKeys[0].rt;
-        // a response ends the routine
-        continueRoutine = false;
-      }
-    }
-
-    // check for quit (typically the Esc key)
-    if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
-      return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
-    }
-    
-    // check if the Routine should terminate
-    if (!continueRoutine) {  // a component has requested a forced-end of Routine
-      return Scheduler.Event.NEXT;
-    }
-    
-    continueRoutine = false;  // reverts to True if at least one component still running
-    for (const thisComponent of Sound_Exit_TextComponents)
-      if ('status' in thisComponent && thisComponent.status !== PsychoJS.Status.FINISHED) {
-        continueRoutine = true;
-        break;
-      }
-    
-    // refresh the screen if continuing
-    if (continueRoutine) {
-      return Scheduler.Event.FLIP_REPEAT;
-    } else {
-      return Scheduler.Event.NEXT;
-    }
-  };
-}
-
-
-function Sound_Exit_TextRoutineEnd(trials) {
-  return function () {
-    //------Ending Routine 'Sound_Exit_Text'-------
-    for (const thisComponent of Sound_Exit_TextComponents) {
-      if (typeof thisComponent.setAutoDraw === 'function') {
-        thisComponent.setAutoDraw(false);
-      }
-    }
-
-    psychoJS.experiment.addData('Sound_Exit_Text_Press.keys', Sound_Exit_Text_Press.keys);
-    if (typeof Sound_Exit_Text_Press.keys !== 'undefined') {  // we had a response
-        psychoJS.experiment.addData('Sound_Exit_Text_Press.rt', Sound_Exit_Text_Press.rt);
-        }
-    
-    Sound_Exit_Text_Press.stop();
-    // the Routine "Sound_Exit_Text" was not non-slip safe, so reset the non-slip timer
-    routineTimer.reset();
-    
-    return Scheduler.Event.NEXT;
-  };
-}
-
 
 var stim_type;
 var remap;
@@ -5406,7 +3484,6 @@ function Instr_RT_HandRoutineBegin(trials) {
     t = 0;
     Instr_RT_HandClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(1);
     // update component parameters for each repeat
     block_type = "RT";
     stim_type = "Hand";
@@ -5421,7 +3498,7 @@ function Instr_RT_HandRoutineBegin(trials) {
     Instr_RT_HandComponents = [];
     Instr_RT_HandComponents.push(Instr_RT_Hand_Rext);
     Instr_RT_HandComponents.push(Instr_RT_Hand_Key);
-    Instr_RT_HandComponents.push(TR_Coin);
+    
     for (const thisComponent of Instr_RT_HandComponents)
       if ('status' in thisComponent)
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
@@ -5469,31 +3546,10 @@ function Instr_RT_HandRoutineEachFrame(trials) {
         Instr_RT_Hand_Key.keys = _Instr_RT_Hand_Key_allKeys[0].name;  // just the first key pressed
         Instr_RT_Hand_Key.rt = _Instr_RT_Hand_Key_allKeys[0].rt;
         // a response ends the routine
-        // continueRoutine = false;
+        continueRoutine = false;
       }
     }
     
-    if (t >= 0.0 && _Instr_RT_Hand_Key_allKeys.length > 0 && TR_Coin.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      TR_Coin.tStart = t;  // (not accounting for frame time here)
-      TR_Coin.frameNStart = frameN;  // exact frame index
-      
-      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
-      TR_Coin.status = PsychoJS.Status.STARTED;
-    }
-    
-    frameRemains = TR_Coin.getDuration - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
-      TR_Coin.stop();  // stop the sound (if longer than duration)
-      TR_Coin.status = PsychoJS.Status.FINISHED;
-      Instr_RT_Hand_Key.stop();
-    }
-
-    if (TR_Coin.status = PsychoJS.Status.FINISHED && Instr_RT_Hand_Rext.status === PsychoJS.Status.STARTED) {
-      Instr_RT_Hand_Rext.setAutoDraw(false);
-    }
-
-
     // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
@@ -5536,7 +3592,6 @@ function Instr_RT_HandRoutineEnd(trials) {
         }
     
     Instr_RT_Hand_Key.stop();
-    TR_Coin.stop();
     // the Routine "Instr_RT_Hand" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -5547,8 +3602,8 @@ function Instr_RT_HandRoutineEnd(trials) {
 
 var trial_count;
 var repeat_count;
-var tr_timing_good;
 var trial_count_item;
+var tr_timing_good;
 var sum_corr;
 var seq_stimnum_hand;
 var seq_stimnum;
@@ -5611,9 +3666,9 @@ function Creat_StimSeqRoutineBegin(trials) {
                 i = _pj_a[_pj_c];
                 seq_stimnum.push(stimnum[i]);
                 seq_key.push(key[i]);
-                seq_symb.push(symb_creat_seq[i]);
-                seq_symb_g.push(symb_g_creat_seq[i]);
-                seq_symb_r.push(symb_r_creat_seq[i]);
+                seq_symb.push(symb[i]);
+                seq_symb_g.push(symb_g[i]);
+                seq_symb_r.push(symb_r[i]);
                 seq_keynum.push(keynum[i]);
             }
             util.shuffle(x16);
@@ -5621,9 +3676,9 @@ function Creat_StimSeqRoutineBegin(trials) {
                 i = _pj_a[_pj_c];
                 seq_stimnum.push(stimnum[i]);
                 seq_key.push(key[i]);
-                seq_symb.push(symb_creat_seq[i]);
-                seq_symb_g.push(symb_g_creat_seq[i]);
-                seq_symb_r.push(symb_r_creat_seq[i]);
+                seq_symb.push(symb[i]);
+                seq_symb_g.push(symb_g[i]);
+                seq_symb_r.push(symb_r[i]);
                 seq_keynum.push(keynum[i]);
             }
             util.shuffle(x8_new);
@@ -5631,9 +3686,9 @@ function Creat_StimSeqRoutineBegin(trials) {
                 i = _pj_a[_pj_c];
                 seq_stimnum.push(stimnum[i]);
                 seq_key.push(key[i]);
-                seq_symb.push(symb_creat_seq[i]);
-                seq_symb_g.push(symb_g_creat_seq[i]);
-                seq_symb_r.push(symb_r_creat_seq[i]);
+                seq_symb.push(symb[i]);
+                seq_symb_g.push(symb_g[i]);
+                seq_symb_r.push(symb_r[i]);
                 seq_keynum.push(keynum[i]);
             }
             count = (count + 1);
@@ -5648,9 +3703,9 @@ function Creat_StimSeqRoutineBegin(trials) {
                 i = _pj_a[_pj_c];
                 seq_stimnum.push(stimnum[i]);
                 seq_key.push(key[i]);
-                seq_symb.push(symb_creat_seq[i]);
-                seq_symb_g.push(symb_g_creat_seq[i]);
-                seq_symb_r.push(symb_r_creat_seq[i]);
+                seq_symb.push(symb[i]);
+                seq_symb_g.push(symb_g[i]);
+                seq_symb_r.push(symb_r[i]);
                 seq_keynum.push(keynum[i]);
             }
             count = (count + 1);
@@ -5737,6 +3792,7 @@ function Pre_Trial_HandRoutineBegin(trials) {
     t = 0;
     Pre_Trial_HandClock.reset(); // clock
     frameN = -1;
+
     // update component parameters for each repeat
     Pre_Trial_Rec_Frame_Hand.setOpacity(rec_frame_opacity);
     Pre_Trial_Rec_Frame_Hand.setLineColor(new util.Color(rec_frame_color));
@@ -5852,6 +3908,8 @@ function Pre_Trial_HandRoutineEnd(trials) {
     psychoJS.experiment.addData("stim_type", stim_type);
     psychoJS.experiment.addData("key", key_item);
     psychoJS.experiment.addData("block_type", block_type);
+    psychoJS.experiment.addData("tr_old_pre", pre);
+    psychoJS.experiment.addData("tr_old_post", post);
     psychoJS.experiment.addData("remap", remap);
     psychoJS.experiment.addData("repeat_count", repeat_count);
     psychoJS.experiment.addData("trial_Count", trial_count);
@@ -6067,8 +4125,12 @@ function RT_Feedback_HandRoutineBegin(trials) {
     RT_Feedback_HandClock.reset(); // clock
     frameN = -1;
     // update component parameters for each repeat
-    
-    TR_Coin.setVolume(sound_vol);
+    RT_Feedback_Coin_Hand = new sound.Sound({
+    win: psychoJS.window,
+    value: coin,
+    secs: -1,
+    });
+    RT_Feedback_Coin_Hand.setVolume(sound_vol);
     RT_Rec_Frame_Feedback_Hand.setOpacity(rec_frame_opacity);
     RT_Rec_Frame_Feedback_Hand.setLineColor(new util.Color(rec_frame_color));
     RT_Rec_Frame_Feedback_Hand.setLineWidth(rec_wd);
@@ -6078,7 +4140,7 @@ function RT_Feedback_HandRoutineBegin(trials) {
     RT_Stim_Feedback_Hand.setLineColor(new util.Color(feedback_col));
     // keep track of which components have finished
     RT_Feedback_HandComponents = [];
-    RT_Feedback_HandComponents.push(TR_Coin);
+    RT_Feedback_HandComponents.push(RT_Feedback_Coin_Hand);
     RT_Feedback_HandComponents.push(RT_Rec_Frame_Feedback_Hand);
     RT_Feedback_HandComponents.push(RT_Feedback_HandShape);
     RT_Feedback_HandComponents.push(RT_Stim_Feedback_Hand);
@@ -6101,19 +4163,19 @@ function RT_Feedback_HandRoutineEachFrame(trials) {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     // start/stop RT_Feedback_Coin_Hand
-    if (t >= 0.0 && TR_Coin.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 0.0 && RT_Feedback_Coin_Hand.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
-      TR_Coin.tStart = t;  // (not accounting for frame time here)
-      TR_Coin.frameNStart = frameN;  // exact frame index
+      RT_Feedback_Coin_Hand.tStart = t;  // (not accounting for frame time here)
+      RT_Feedback_Coin_Hand.frameNStart = frameN;  // exact frame index
       
-      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
-      TR_Coin.status = PsychoJS.Status.STARTED;
+      psychoJS.window.callOnFlip(function(){ RT_Feedback_Coin_Hand.play(); });  // screen flip
+      RT_Feedback_Coin_Hand.status = PsychoJS.Status.STARTED;
     }
     
     frameRemains = 0.0 + feedback_dur - psychoJS.window.monitorFramePeriod * 0.75;
-    if (t >= frameRemains && TR_Coin.status === PsychoJS.Status.STARTED) {
-      TR_Coin.stop();  // stop the sound (if longer than duration)
-      TR_Coin.status = PsychoJS.Status.FINISHED;
+    if (t >= frameRemains && RT_Feedback_Coin_Hand.status === PsychoJS.Status.STARTED) {
+    //  RT_Feedback_Coin_Hand.stop();  // stop the sound (if longer than duration)
+      RT_Feedback_Coin_Hand.status = PsychoJS.Status.FINISHED;
     }
     
     // *RT_Rec_Frame_Feedback_Hand* updates
@@ -6192,7 +4254,7 @@ function RT_Feedback_HandRoutineEnd(trials) {
         thisComponent.setAutoDraw(false);
       }
     }
-    TR_Coin.stop();  // ensure sound has stopped at end of routine
+   // RT_Feedback_Coin_Hand.stop();  // ensure sound has stopped at end of routine
     // the Routine "RT_Feedback_Hand" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -6209,7 +4271,6 @@ function Instr_TR_HandRoutineBegin(trials) {
     t = 0;
     Instr_TR_HandClock.reset(); // clock
     frameN = -1;
-    
     // update component parameters for each repeat
     instr_HAND_TR_text.setText(instr_tr_text_hand);
     Instr_HAND_TR_press.keys = undefined;
@@ -6224,8 +4285,7 @@ function Instr_TR_HandRoutineBegin(trials) {
     Instr_TR_HandComponents = [];
     Instr_TR_HandComponents.push(instr_HAND_TR_text);
     Instr_TR_HandComponents.push(Instr_HAND_TR_press);
-
-
+    
     for (const thisComponent of Instr_TR_HandComponents)
       if ('status' in thisComponent)
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
@@ -6273,10 +4333,10 @@ function Instr_TR_HandRoutineEachFrame(trials) {
         Instr_HAND_TR_press.keys = _Instr_HAND_TR_press_allKeys[0].name;  // just the first key pressed
         Instr_HAND_TR_press.rt = _Instr_HAND_TR_press_allKeys[0].rt;
         // a response ends the routine
-       continueRoutine = false;
+        continueRoutine = false;
       }
     }
-
+    
     // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
@@ -6335,7 +4395,6 @@ function Instr_Block_NumRoutineBegin(trials) {
     t = 0;
     Instr_Block_NumClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(1);
     // update component parameters for each repeat
     Instr_Block_Num_Text.setText((('Block ' + block_count) + '\nPress (H, U, I, or L) to start'));
     Instr_Block_Num_Press.keys = undefined;
@@ -6345,8 +4404,7 @@ function Instr_Block_NumRoutineBegin(trials) {
     Instr_Block_NumComponents = [];
     Instr_Block_NumComponents.push(Instr_Block_Num_Text);
     Instr_Block_NumComponents.push(Instr_Block_Num_Press);
-    Instr_Block_NumComponents.push(TR_Coin);
-
+    
     for (const thisComponent of Instr_Block_NumComponents)
       if ('status' in thisComponent)
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
@@ -6364,7 +4422,7 @@ function Instr_Block_NumRoutineEachFrame(trials) {
     t = Instr_Block_NumClock.getTime();
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
-  
+    
     // *Instr_Block_Num_Text* updates
     if (t >= 0.0 && Instr_Block_Num_Text.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -6376,7 +4434,7 @@ function Instr_Block_NumRoutineEachFrame(trials) {
 
     
     // *Instr_Block_Num_Press* updates
-    if (t >= 0.0 && Instr_Block_Num_Press.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 1 && Instr_Block_Num_Press.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       Instr_Block_Num_Press.tStart = t;  // (not accounting for frame time here)
       Instr_Block_Num_Press.frameNStart = frameN;  // exact frame index
@@ -6398,23 +4456,6 @@ function Instr_Block_NumRoutineEachFrame(trials) {
       }
     }
     
-    if (t >= 0.0 && _Instr_Block_Num_Press_allKeys.length > 0 && TR_Coin.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      TR_Coin.tStart = t;  // (not accounting for frame time here)
-      TR_Coin.frameNStart = frameN;  // exact frame index
-      
-      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
-      TR_Coin.status = PsychoJS.Status.STARTED;
-    }
-    
-    frameRemains = TR_Coin.getDuration - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
-      TR_Coin.stop();  // stop the sound (if longer than duration)
-      TR_Coin.status = PsychoJS.Status.FINISHED;
-    }
-
-    
-
     // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
@@ -6457,134 +4498,7 @@ function Instr_Block_NumRoutineEnd(trials) {
         }
     
     Instr_Block_Num_Press.stop();
-    TR_Coin.stop();
     // the Routine "Instr_Block_Num" was not non-slip safe, so reset the non-slip timer
-    routineTimer.reset();
-    
-    return Scheduler.Event.NEXT;
-  };
-}
-
-var round_count = 0
-var _Instr_Round_Num_Press_allKeys;
-var Instr_Round_NumComponents;
-function Instr_Round_NumRoutineBegin(trials) {
-  return function () {
-    //------Prepare to start Routine 'Instr_Round_Num'-------
-    t = 0;
-    Instr_Round_NumClock.reset(); // clock
-    frameN = -1;
-
-    round_count = round_count + 1
-    // update component parameters for each repeat
-    if (round_count == 1){
-      Instr_Round_Num_Text.setText(('Good Job! You are now ready for the tasks! \n\nPress (H, U, I, or L) to start Round ' + round_count + '/' + prac_old_block));
-    } else {
-      Instr_Round_Num_Text.setText((('Round ' + round_count + '/' + prac_old_block) + '\nPress (H, U, I, or L) to start'));
-    }
-    
-    Instr_Round_Num_Press.keys = undefined;
-    Instr_Round_Num_Press.rt = undefined;
-    _Instr_Round_Num_Press_allKeys = [];
-    // keep track of which components have finished
-    Instr_Round_NumComponents = [];
-    Instr_Round_NumComponents.push(Instr_Round_Num_Text);
-    Instr_Round_NumComponents.push(Instr_Round_Num_Press);
-    
-    for (const thisComponent of Instr_Round_NumComponents)
-      if ('status' in thisComponent)
-        thisComponent.status = PsychoJS.Status.NOT_STARTED;
-    
-    return Scheduler.Event.NEXT;
-  };
-}
-
-
-function Instr_Round_NumRoutineEachFrame(trials) {
-  return function () {
-    //------Loop for each frame of Routine 'Instr_Block_Num'-------
-    let continueRoutine = true; // until we're told otherwise
-    // get current time
-    t = Instr_Round_NumClock.getTime();
-    frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
-    // update/draw components on each frame
-    
-    // *Instr_Round_Num_Text* updates
-    if (t >= 0.0 && Instr_Round_Num_Text.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      Instr_Round_Num_Text.tStart = t;  // (not accounting for frame time here)
-      Instr_Round_Num_Text.frameNStart = frameN;  // exact frame index
-      
-      Instr_Round_Num_Text.setAutoDraw(true);
-    }
-
-    
-    // *Instr_Round_Num_Press* updates
-    if (t >= 1 && Instr_Round_Num_Press.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      Instr_Round_Num_Press.tStart = t;  // (not accounting for frame time here)
-      Instr_Round_Num_Press.frameNStart = frameN;  // exact frame index
-      
-      // keyboard checking is just starting
-      psychoJS.window.callOnFlip(function() { Instr_Round_Num_Press.clock.reset(); });  // t=0 on next screen flip
-      psychoJS.window.callOnFlip(function() { Instr_Round_Num_Press.start(); }); // start on screen flip
-      psychoJS.window.callOnFlip(function() { Instr_Round_Num_Press.clearEvents(); });
-    }
-
-    if (Instr_Round_Num_Press.status === PsychoJS.Status.STARTED) {
-      let theseKeys = Instr_Round_Num_Press.getKeys({keyList: ['h', 'u', 'i', 'l'], waitRelease: false});
-      _Instr_Round_Num_Press_allKeys = _Instr_Round_Num_Press_allKeys.concat(theseKeys);
-      if (_Instr_Round_Num_Press_allKeys.length > 0) {
-        Instr_Round_Num_Press.keys = _Instr_Round_Num_Press_allKeys[0].name;  // just the first key pressed
-        Instr_Round_Num_Press.rt = _Instr_Round_Num_Press_allKeys[0].rt;
-        // a response ends the routine
-        continueRoutine = false;
-      }
-    }
-    
-    // check for quit (typically the Esc key)
-    if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
-      return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
-    }
-    
-    // check if the Routine should terminate
-    if (!continueRoutine) {  // a component has requested a forced-end of Routine
-      return Scheduler.Event.NEXT;
-    }
-    
-    continueRoutine = false;  // reverts to True if at least one component still running
-    for (const thisComponent of Instr_Round_NumComponents)
-      if ('status' in thisComponent && thisComponent.status !== PsychoJS.Status.FINISHED) {
-        continueRoutine = true;
-        break;
-      }
-    
-    // refresh the screen if continuing
-    if (continueRoutine) {
-      return Scheduler.Event.FLIP_REPEAT;
-    } else {
-      return Scheduler.Event.NEXT;
-    }
-  };
-}
-
-
-function Instr_Round_NumRoutineEnd(trials) {
-  return function () {
-    //------Ending Routine 'Instr_Round_Num'-------
-    for (const thisComponent of Instr_Round_NumComponents) {
-      if (typeof thisComponent.setAutoDraw === 'function') {
-        thisComponent.setAutoDraw(false);
-      }
-    }
-    psychoJS.experiment.addData('Instr_Round_Num_Press.keys', Instr_Round_Num_Press.keys);
-    if (typeof Instr_Round_Num_Press.keys !== 'undefined') {  // we had a response
-        psychoJS.experiment.addData('Instr_Round_Num_Press.rt', Instr_Round_Num_Press.rt);
-        routineTimer.reset();
-        }
-    
-    Instr_Round_Num_Press.stop();
-    // the Routine "Instr_Round_Num" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
     return Scheduler.Event.NEXT;
@@ -6607,9 +4521,12 @@ function TR_Enter_Trials_HandRoutineBegin(trials) {
     TR_Enter_Trials_HandClock.reset(); // clock
     frameN = -1;
     // update component parameters for each repeat
-    
-    TR_Beep.setVolume(1);
-    TR_Coin_Hand.setVolume(0);
+    TR_Beep_Hand = new sound.Sound({
+    win: psychoJS.window,
+    value: beep,
+    secs: -1,
+    });
+    TR_Beep_Hand.setVolume(1);
     routineTimer.reset(time_limit);
     tr_press_early = 0;
     tr_press_late = 0;
@@ -6628,7 +4545,7 @@ function TR_Enter_Trials_HandRoutineBegin(trials) {
     _TR_Press_Hand_allKeys = [];
     // keep track of which components have finished
     TR_Enter_Trials_HandComponents = [];
-    TR_Enter_Trials_HandComponents.push(TR_Beep);
+    TR_Enter_Trials_HandComponents.push(TR_Beep_Hand);
     TR_Enter_Trials_HandComponents.push(TR_Rec_Frame_Hand);
     TR_Enter_Trials_HandComponents.push(TR_HandShape);
     TR_Enter_Trials_HandComponents.push(TR_Stim_Hand);
@@ -6652,18 +4569,18 @@ function TR_Enter_Trials_HandRoutineEachFrame(trials) {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     // start/stop TR_Beep_Hand
-    if (t >= 0.0 && TR_Beep.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 0.0 && TR_Beep_Hand.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
-      TR_Beep.tStart = t;  // (not accounting for frame time here)
-      TR_Beep.frameNStart = frameN;  // exact frame index
-      psychoJS.window.callOnFlip(function(){ TR_Beep.play(); });  // screen flip
-      TR_Beep.status = PsychoJS.Status.STARTED;
+      TR_Beep_Hand.tStart = t;  // (not accounting for frame time here)
+      TR_Beep_Hand.frameNStart = frameN;  // exact frame index
+      psychoJS.window.callOnFlip(function(){ TR_Beep_Hand.play(); });  // screen flip
+      TR_Beep_Hand.status = PsychoJS.Status.STARTED;
       
     }
     frameRemains = time_limit  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (t >= frameRemains && TR_Beep.status === PsychoJS.Status.STARTED) {
-      TR_Beep.stop();  // stop the sound (if longer than duration)
-      TR_Beep.status = PsychoJS.Status.FINISHED;
+    if (t >= frameRemains && TR_Beep_Hand.status === PsychoJS.Status.STARTED) {
+      TR_Beep_Hand.stop();  // stop the sound (if longer than duration)
+      TR_Beep_Hand.status = PsychoJS.Status.FINISHED;
     }
     
     // *TR_Rec_Frame_Hand* updates
@@ -6879,8 +4796,13 @@ function TR_Feedback_HandRoutineBegin(trials) {
     t = 0;
     TR_Feedback_HandClock.reset(); // clock
     frameN = -1;
-    
-    TR_Coin.setVolume(sound_vol);
+    // update component parameters for each repeat
+    TR_Feedback_Coin_Hand = new sound.Sound({
+    win: psychoJS.window,
+    value: coin,
+    secs: -1,
+    });
+    TR_Feedback_Coin_Hand.setVolume(sound_vol);
     Tr_Rec_Frame_Feedback_Hand.setOpacity(rec_frame_opacity);
     Tr_Rec_Frame_Feedback_Hand.setLineColor(new util.Color(rec_frame_color));
     Tr_Rec_Frame_Feedback_Hand.setLineWidth(rec_wd);
@@ -6892,7 +4814,7 @@ function TR_Feedback_HandRoutineBegin(trials) {
     TR_Stim_Feedback_Hand.setLineColor(new util.Color(feedback_col));
     // keep track of which components have finished
     TR_Feedback_HandComponents = [];
-    TR_Feedback_HandComponents.push(TR_Coin);
+    TR_Feedback_HandComponents.push(TR_Feedback_Coin_Hand);
     TR_Feedback_HandComponents.push(Tr_Rec_Frame_Feedback_Hand);
     TR_Feedback_HandComponents.push(TR_Feedback_Text_Hand);
     TR_Feedback_HandComponents.push(TR_Feedback_HandShape);
@@ -6916,19 +4838,19 @@ function TR_Feedback_HandRoutineEachFrame(trials) {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     // start/stop TR_Feedback_Coin_Hand
-    if (t >= 0 && TR_Coin.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 0 && TR_Feedback_Coin_Hand.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
-      TR_Coin.tStart = t;  // (not accounting for frame time here)
-      TR_Coin.frameNStart = frameN;  // exact frame index
+      TR_Feedback_Coin_Hand.tStart = t;  // (not accounting for frame time here)
+      TR_Feedback_Coin_Hand.frameNStart = frameN;  // exact frame index
       
-      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
-      TR_Coin.status = PsychoJS.Status.STARTED;
+      psychoJS.window.callOnFlip(function(){ TR_Feedback_Coin_Hand.play(); });  // screen flip
+      TR_Feedback_Coin_Hand.status = PsychoJS.Status.STARTED;
     }
     
     frameRemains = 0.0 + feedback_dur - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (t >= frameRemains && TR_Coin.status === PsychoJS.Status.STARTED) {
-      //TR_Coin.stop();  // stop the sound (if longer than duration)
-      TR_Coin.status = PsychoJS.Status.FINISHED;
+    if (t >= frameRemains && TR_Feedback_Coin_Hand.status === PsychoJS.Status.STARTED) {
+      //TR_Feedback_Coin_Hand.stop();  // stop the sound (if longer than duration)
+      TR_Feedback_Coin_Hand.status = PsychoJS.Status.FINISHED;
     }
     
     // *Tr_Rec_Frame_Feedback_Hand* updates
@@ -7021,7 +4943,7 @@ function TR_Feedback_HandRoutineEnd(trials) {
         thisComponent.setAutoDraw(false);
       }
     }
-    TR_Coin.stop();  // ensure sound has stopped at end of routine
+   // TR_Feedback_Coin_Hand.stop();  // ensure sound has stopped at end of routine
     // the Routine "TR_Feedback_Hand" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -7038,17 +4960,10 @@ function TR_PenaltyRoutineBegin(trials) {
     t = 0;
     TR_PenaltyClock.reset(); // clock
     frameN = -1;
-    routineTimer.add(2.000000);
-    // update component parameters for each repeat
-    routineTimer.reset(2);
-    countdown = 2;
-    TR_Beep.setVolume(0);
     // update component parameters for each repeat
     TR_Rec_Frame_Penalty.setLineColor(new util.Color(rec_frame_color));
     TR_Rec_Frame_Penalty.setLineWidth(rec_wd);
     TR_Penalty_Text.setText(tr_penalty_text);
-    penalty_countdown.setText(countdown);
-    penalty_countdown.setHeight(0.1);
     TR_Penalty_Press.keys = undefined;
     TR_Penalty_Press.rt = undefined;
     _TR_Penalty_Press_allKeys = [];
@@ -7057,8 +4972,6 @@ function TR_PenaltyRoutineBegin(trials) {
     TR_PenaltyComponents.push(TR_Rec_Frame_Penalty);
     TR_PenaltyComponents.push(TR_Penalty_Text);
     TR_PenaltyComponents.push(TR_Penalty_Press);
-    TR_PenaltyComponents.push(penalty_countdown);
-    TR_PenaltyComponents.push(TR_Beep);
     
     for (const thisComponent of TR_PenaltyComponents)
       if ('status' in thisComponent)
@@ -7078,16 +4991,6 @@ function TR_PenaltyRoutineEachFrame(trials) {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     
-
-    if (t >= 0.0 && penalty_countdown.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      penalty_countdown.tStart = t;  // (not accounting for frame time here)
-      penalty_countdown.frameNStart = frameN;  // exact frame index
-      
-      penalty_countdown.setAutoDraw(true);
-    }
-
-
     // *TR_Rec_Frame_Penalty* updates
     if (t >= 0.0 && TR_Rec_Frame_Penalty.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -7109,7 +5012,7 @@ function TR_PenaltyRoutineEachFrame(trials) {
 
     
     // *TR_Penalty_Press* updates
-    if (t >= 0.0 && TR_Penalty_Press.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 2 && TR_Penalty_Press.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       TR_Penalty_Press.tStart = t;  // (not accounting for frame time here)
       TR_Penalty_Press.frameNStart = frameN;  // exact frame index
@@ -7127,45 +5030,10 @@ function TR_PenaltyRoutineEachFrame(trials) {
         TR_Penalty_Press.keys = _TR_Penalty_Press_allKeys[0].name;  // just the first key pressed
         TR_Penalty_Press.rt = _TR_Penalty_Press_allKeys[0].rt;
         // a response ends the routine
-       //continueRoutine = false;
+        continueRoutine = false;
       }
     }
     
-    if (_TR_Penalty_Press_allKeys.length > 0 && penalty_countdown.status === PsychoJS.Status.STARTED){ // only update if being drawn
-      
-      if (((0 <= t - TR_Penalty_Press.rt) && (t - TR_Penalty_Press.rt < 1))) {
-        countdown = 1;
-      } else {
-          if ((1 <= t - TR_Penalty_Press.rt) && (t - TR_Penalty_Press.rt < 2)) {
-              countdown = 0;
-          } 
-      }
-      penalty_countdown.setText(countdown);
-    }
-
-    if (t - TR_Penalty_Press.rt >= 2 && penalty_countdown.status === PsychoJS.Status.STARTED && _TR_Penalty_Press_allKeys.length > 0) {
-      penalty_countdown.setAutoDraw(false);
-      TR_Penalty_Text.setAutoDraw(false);
-      TR_Rec_Frame_Penalty.setAutoDraw(false);
-      TR_Penalty_Press.status = PsychoJS.Status.FINISHED;
-    }
-
-    // play sound for warm up
-    if (t - TR_Penalty_Press.rt >= 0.0 && TR_Beep.status === PsychoJS.Status.NOT_STARTED && _TR_Penalty_Press_allKeys.length > 0) {
-      // keep track of start time/frame for later
-      TR_Beep.tStart = t;  // (not accounting for frame time here)
-      TR_Beep.frameNStart = frameN;  // exact frame index
-      psychoJS.window.callOnFlip(function(){ TR_Beep.play(); });  // screen flip
-      TR_Beep.status = PsychoJS.Status.STARTED;
-      
-    }
-
-    if (t - TR_Penalty_Press.rt >= 2 && TR_Beep.status === PsychoJS.Status.STARTED) {
-      TR_Beep.stop();  // stop the sound (if longer than duration)
-      TR_Beep.status = PsychoJS.Status.FINISHED;
-    } 
-
-
     // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
@@ -7208,7 +5076,6 @@ function TR_PenaltyRoutineEnd(trials) {
         }
     
     TR_Penalty_Press.stop();
-    penalty_countdown.setAutoDraw(false);
     // the Routine "TR_Penalty" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -7216,150 +5083,6 @@ function TR_PenaltyRoutineEnd(trials) {
   };
 }
 
-var countdown = 3;
-var CountDownComponents;
-function CountDownRoutineBegin(trials) {
-  return function () {
-    //------Prepare to start Routine 'SS_Prac_CountDown'-------
-    t = 0;
-    CountDownClock.reset(); // clock
-    frameN = -1;
-    routineTimer.add(3.000000);
-    // update component parameters for each repeat
-    routineTimer.reset(3);
-    TR_Beep.setVolume(1);
-    TR_Coin.setVolume(1);
-    countdown = 3;
-    // keep track of which components have finished
-    CountDownComponents = [];
-    CountDownComponents.push(Text_CountDown);
-    CountDownComponents.push(Number_CountDown);
-    CountDownComponents.push(TR_Beep);
-    CountDownComponents.push(TR_Coin);
-
-    for (const thisComponent of CountDownComponents)
-      if ('status' in thisComponent)
-        thisComponent.status = PsychoJS.Status.NOT_STARTED;
-    
-    return Scheduler.Event.NEXT;
-  };
-}
-
-
-function CountDownRoutineEachFrame(trials) {
-  return function () {
-    //------Loop for each frame of Routine 'SS_Prac_CountDown'-------
-    let continueRoutine = true; // until we're told otherwise
-    // get current time
-    t = CountDownClock.getTime();
-    frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
-    // update/draw components on each frame
-    if (((1 <= routineTimer.getTime()) && (routineTimer.getTime() < 2))) {
-        countdown = 2;
-    } else {
-        if ((routineTimer.getTime() < 1)) {
-            countdown = 1;
-        }
-    }
-    
-    // play sound for warm up
-    if (t >= 0.0 && TR_Beep.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      TR_Beep.tStart = t;  // (not accounting for frame time here)
-      TR_Beep.frameNStart = frameN;  // exact frame index
-      psychoJS.window.callOnFlip(function(){ TR_Beep.play(); });  // screen flip
-      TR_Beep.status = PsychoJS.Status.STARTED;
-      
-    }
-    frameRemains = 2.5  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (t >= frameRemains && TR_Beep.status === PsychoJS.Status.STARTED) {
-      TR_Beep.stop();  // stop the sound (if longer than duration)
-      TR_Beep.status = PsychoJS.Status.FINISHED;
-    
-    }
-
-
-    // play sound for warm up
-    if (t >= 0.0 && TR_Coin.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      TR_Coin.tStart = t;  // (not accounting for frame time here)
-      TR_Coin.frameNStart = frameN;  // exact frame index
-      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
-      TR_Coin.status = PsychoJS.Status.STARTED;
-      
-    }
-    frameRemains = 2.5  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (t >= frameRemains && TR_Coin.status === PsychoJS.Status.STARTED) {
-      TR_Coin.stop();  // stop the sound (if longer than duration)
-      TR_Coin.status = PsychoJS.Status.FINISHED;
-    
-    }
-    // *Text_SS_Prac_CountDown* updates
-    if (t >= 0.0 && Text_CountDown.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      Text_CountDown.tStart = t;  // (not accounting for frame time here)
-      Text_CountDown.frameNStart = frameN;  // exact frame index
-      
-      Text_CountDown.setAutoDraw(true);
-    }
-
-    if (t >= 0.0 && Number_CountDown.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      Number_CountDown.tStart = t;  // (not accounting for frame time here)
-      Number_CountDown.frameNStart = frameN;  // exact frame index
-      
-      Number_CountDown.setAutoDraw(true);
-    }
-
-    frameRemains = 3  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (Text_CountDown.status === PsychoJS.Status.STARTED && t >= frameRemains) {
-      Text_CountDown.setAutoDraw(false);
-    }
-
-    if (Number_CountDown.status === PsychoJS.Status.STARTED && t >= frameRemains) {
-      Number_CountDown.setAutoDraw(false);
-    }
-    
-    if (Number_CountDown.status === PsychoJS.Status.STARTED){ // only update if being drawn
-      Number_CountDown.setText(countdown);
-    }
-    
-    
-    // check if the Routine should terminate
-    if (!continueRoutine) {  // a component has requested a forced-end of Routine
-      return Scheduler.Event.NEXT;
-    }
-    
-    continueRoutine = false;  // reverts to True if at least one component still running
-    for (const thisComponent of CountDownComponents)
-      if ('status' in thisComponent && thisComponent.status !== PsychoJS.Status.FINISHED) {
-        continueRoutine = true;
-        break;
-      }
-    
-    // refresh the screen if continuing
-    if (continueRoutine && routineTimer.getTime() > 0) {
-      return Scheduler.Event.FLIP_REPEAT;
-    } else {
-      return Scheduler.Event.NEXT;
-    }
-  };
-}
-
-
-function CountDownRoutineEnd(trials) {
-  return function () {
-    //------Ending Routine 'SS_Prac_CountDown'-------
-    for (const thisComponent of CountDownComponents) {
-      if (typeof thisComponent.setAutoDraw === 'function') {
-        thisComponent.setAutoDraw(false);
-      }
-    }
-    TR_Beep.stop(); 
-    TR_Coin.stop(); 
-    return Scheduler.Event.NEXT;
-  };
-}
 
 var tr_timing_perc;
 var TR_Hand_Accuracy_BoolComponents;
@@ -7440,78 +5163,33 @@ function TR_Hand_Accuracy_BoolRoutineEnd(trials) {
   };
 }
 
-var instr_text;
+
 var _Instr_CR_Old_Press_allKeys;
 var Instr_CR_OldComponents;
-var ind_rnd;
 function Instr_CR_OldRoutineBegin(trials) {
   return function () {
     //------Prepare to start Routine 'Instr_CR_Old'-------
     t = 0;
     Instr_CR_OldClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(1);
     // update component parameters for each repeat
-    block_count_cr_old  = block_count_cr_old  + 1;
-
-    stop_tol = 2;
-
-    if (block_count_cr_old == 1) {
-      instr_text = instr_cr_old_text_1;
-    } else {
-        if (block_count_cr_old == 2) {
-          instr_text = instr_cr_old_text_2;
-        } else {
-          if (block_count_cr_old >= 3) {
-            instr_text = instr_cr_old_text_3;
-          }
-        }
-    }
-
-    block_count = block_count_cr_old - 1;
-    Instr_CR_Old_Text.setText(instr_text);
+    Instr_CR_Old_Text.setText(instr_cr_old_text);
     Instr_CR_Old_Press.keys = undefined;
     Instr_CR_Old_Press.rt = undefined;
     _Instr_CR_Old_Press_allKeys = [];
     block_type = "CR";
     stim_type = "Symb";
+    block_count = 0;
     remap = 0;
+    symb = symb_map;
+    symb_g = symb_g_map;
+    symb_r = symb_r_map;
     
-    //symb_map_rnd_stop = Math.floor(myrng() * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
-    ind_rnd = resp_map_ind[block_count];
-    resp_ind_rnd = symb_perm_resp[ind_rnd] // shuffle index of resp symbols
-    
-    symb_map_ind_shuffle = [];
-    symb_map_ind_shuffle = Object.assign({}, symb_map_ind);
-    
-    symb_map_ind_shuffle[resp_ind_rnd[0]] = symb_map_ind[x_symb_resp[0]];
-    symb_map_ind_shuffle[resp_ind_rnd[1]] = symb_map_ind[x_symb_resp[1]];
-    symb_map_ind_shuffle[resp_ind_rnd[2]] = symb_map_ind[x_symb_resp[2]];
-    symb_map_ind_shuffle[resp_ind_rnd[3]] = symb_map_ind[x_symb_resp[3]];
-
-    symb_map_ind_shuffle = Object.values(symb_map_ind_shuffle);
-
-    symb_map = [];
-    symb_g_map = [];
-    symb_r_map = [];
-    for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
-      symb_map.push(symb[symb_map_ind_shuffle[i]]);
-      symb_g_map.push(symb_g[symb_map_ind_shuffle[i]]);
-      symb_r_map.push(symb_r[symb_map_ind_shuffle[i]]);
-    }
-    
-    symb_creat_seq = symb_map;
-    symb_g_creat_seq = symb_g_map;
-    symb_r_creat_seq = symb_r_map;
-
-    stop_pair_1 = remap_pair_1;
-    stop_pair_2 = remap_pair_2;
-
     // keep track of which components have finished
     Instr_CR_OldComponents = [];
     Instr_CR_OldComponents.push(Instr_CR_Old_Text);
     Instr_CR_OldComponents.push(Instr_CR_Old_Press);
-    Instr_CR_OldComponents.push(TR_Coin);
+    
     for (const thisComponent of Instr_CR_OldComponents)
       if ('status' in thisComponent)
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
@@ -7559,26 +5237,10 @@ function Instr_CR_OldRoutineEachFrame(trials) {
         Instr_CR_Old_Press.keys = _Instr_CR_Old_Press_allKeys[0].name;  // just the first key pressed
         Instr_CR_Old_Press.rt = _Instr_CR_Old_Press_allKeys[0].rt;
         // a response ends the routine
-       // continueRoutine = false;
+        continueRoutine = false;
       }
     }
-
-    if (t >= 0.0 && _Instr_CR_Old_Press_allKeys.length > 0 && TR_Coin.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      TR_Coin.tStart = t;  // (not accounting for frame time here)
-      TR_Coin.frameNStart = frameN;  // exact frame index
-      
-      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
-      TR_Coin.status = PsychoJS.Status.STARTED;
-    }
     
-    frameRemains = TR_Coin.getDuration - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
-      TR_Coin.stop();  // stop the sound (if longer than duration)
-      TR_Coin.status = PsychoJS.Status.FINISHED;
-      continueRoutine = false;
-    }
-
     // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
@@ -7621,9 +5283,6 @@ function Instr_CR_OldRoutineEnd(trials) {
         }
     
     Instr_CR_Old_Press.stop();
-    TR_Coin.stop();
-    psychoJS.experiment.addData("symb_map_shuffle", symb_map_ind_shuffle);
-
     // the Routine "Instr_CR_Old" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -7742,6 +5401,8 @@ function Pre_TrialRoutineEnd(trials) {
     psychoJS.experiment.addData("stim_type", stim_type);
     psychoJS.experiment.addData("key", key_item);
     psychoJS.experiment.addData("block_type", block_type);
+    psychoJS.experiment.addData("tr_old_pre", pre);
+    psychoJS.experiment.addData("tr_old_post", post);
     psychoJS.experiment.addData("remap", remap);
     psychoJS.experiment.addData("repeat_count", repeat_count);
     psychoJS.experiment.addData("trial_Count", trial_count);
@@ -7939,15 +5600,19 @@ function RT_FeedbackRoutineBegin(trials) {
     RT_FeedbackClock.reset(); // clock
     frameN = -1;
     // update component parameters for each repeat
-    
-    TR_Coin.setVolume(sound_vol);
+    CR_Feedback_Coin_Old = new sound.Sound({
+    win: psychoJS.window,
+    value: coin,
+    secs: -1,
+    });
+    CR_Feedback_Coin_Old.setVolume(sound_vol);
     RT_Rec_Frame_Feedback.setOpacity(rec_frame_opacity);
     RT_Rec_Frame_Feedback.setLineColor(new util.Color(rec_frame_color));
     RT_Rec_Frame_Feedback.setLineWidth(rec_wd);
     RT_Feedback_Image.setImage(feedback_image);
     // keep track of which components have finished
     RT_FeedbackComponents = [];
-    RT_FeedbackComponents.push(TR_Coin);
+    RT_FeedbackComponents.push(CR_Feedback_Coin_Old);
     RT_FeedbackComponents.push(RT_Rec_Frame_Feedback);
     RT_FeedbackComponents.push(RT_Feedback_Image);
     
@@ -7969,18 +5634,18 @@ function RT_FeedbackRoutineEachFrame(trials) {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     // start/stop CR_Feedback_Coin_Old
-    if (t >= 0.0 && TR_Coin.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 0.0 && CR_Feedback_Coin_Old.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
-      TR_Coin.tStart = t;  // (not accounting for frame time here)
-      TR_Coin.frameNStart = frameN;  // exact frame index
+      CR_Feedback_Coin_Old.tStart = t;  // (not accounting for frame time here)
+      CR_Feedback_Coin_Old.frameNStart = frameN;  // exact frame index
       
-      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
-      TR_Coin.status = PsychoJS.Status.STARTED;
+      psychoJS.window.callOnFlip(function(){ CR_Feedback_Coin_Old.play(); });  // screen flip
+      CR_Feedback_Coin_Old.status = PsychoJS.Status.STARTED;
     }
     frameRemains = 0.0 + feedback_dur - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (t >= frameRemains && TR_Coin.status === PsychoJS.Status.STARTED) {
-      //TR_Coin.stop();  // stop the sound (if longer than duration)
-      TR_Coin.status = PsychoJS.Status.FINISHED;
+    if (t >= frameRemains && CR_Feedback_Coin_Old.status === PsychoJS.Status.STARTED) {
+      //CR_Feedback_Coin_Old.stop();  // stop the sound (if longer than duration)
+      CR_Feedback_Coin_Old.status = PsychoJS.Status.FINISHED;
     }
     
     // *RT_Rec_Frame_Feedback* updates
@@ -8045,7 +5710,7 @@ function RT_FeedbackRoutineEnd(trials) {
         thisComponent.setAutoDraw(false);
       }
     }
-    TR_Coin.stop();  // ensure sound has stopped at end of routine
+    //CR_Feedback_Coin_Old.stop();  // ensure sound has stopped at end of routine
     // the Routine "RT_Feedback" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -8168,9 +5833,10 @@ function Instr_TR_Old_PreRoutineBegin(trials) {
     stim_type = "Symb";
     remap = 0;
     block_count = 0;
-    symb_creat_seq = symb_map;
-    symb_g_creat_seq = symb_g_map;
-    symb_r_creat_seq = symb_r_map;
+    pre = 1;
+    symb = symb_map;
+    symb_g = symb_g_map;
+    symb_r = symb_r_map;
     
     // keep track of which components have finished
     Instr_TR_Old_PreComponents = [];
@@ -8287,9 +5953,12 @@ function TR_Enter_TrialsRoutineBegin(trials) {
     TR_Enter_TrialsClock.reset(); // clock
     frameN = -1;
     // update component parameters for each repeat
-    
-    TR_Beep.setVolume(1);
-    TR_Coin.setVolume(0);
+    TR_Beep_Hand = new sound.Sound({
+    win: psychoJS.window,
+    value: beep,
+    secs: -1,
+    });
+    TR_Beep_Hand.setVolume(1);
     routineTimer.reset(time_limit);
     tr_press_early = 0;
     tr_press_late = 0;
@@ -8307,11 +5976,10 @@ function TR_Enter_TrialsRoutineBegin(trials) {
     _TR_Press_allKeys = [];
     // keep track of which components have finished
     TR_Enter_TrialsComponents = [];
-    TR_Enter_TrialsComponents.push(TR_Beep);
+    TR_Enter_TrialsComponents.push(TR_Beep_Hand);
     TR_Enter_TrialsComponents.push(TR_Rec_Frame);
     TR_Enter_TrialsComponents.push(TR_Stim_Image);
     TR_Enter_TrialsComponents.push(TR_Press);
-    TR_Enter_TrialsComponents.push(TR_Coin);
     
     for (const thisComponent of TR_Enter_TrialsComponents)
       if ('status' in thisComponent)
@@ -8331,18 +5999,18 @@ function TR_Enter_TrialsRoutineEachFrame(trials) {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     // start/stop TR_Beep
-    if (t >= 0.0 && TR_Beep.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 0.0 && TR_Beep_Hand.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
-      TR_Beep.tStart = t;  // (not accounting for frame time here)
-      TR_Beep.frameNStart = frameN;  // exact frame index
+      TR_Beep_Hand.tStart = t;  // (not accounting for frame time here)
+      TR_Beep_Hand.frameNStart = frameN;  // exact frame index
       
-      psychoJS.window.callOnFlip(function(){ TR_Beep.play(); });  // screen flip
-      TR_Beep.status = PsychoJS.Status.STARTED;
+      psychoJS.window.callOnFlip(function(){ TR_Beep_Hand.play(); });  // screen flip
+      TR_Beep_Hand.status = PsychoJS.Status.STARTED;
     }
     frameRemains = time_limit  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (t >= frameRemains && TR_Beep.status === PsychoJS.Status.STARTED) {
-      TR_Beep.stop();  // stop the sound (if longer than duration)
-      TR_Beep.status = PsychoJS.Status.FINISHED;
+    if (t >= frameRemains && TR_Beep_Hand.status === PsychoJS.Status.STARTED) {
+      //TR_Beep.stop();  // stop the sound (if longer than duration)
+      TR_Beep_Hand.status = PsychoJS.Status.FINISHED;
     }
     
     // *TR_Rec_Frame* updates
@@ -8543,10 +6211,13 @@ function TR_FeedbackRoutineBegin(trials) {
     t = 0;
     TR_FeedbackClock.reset(); // clock
     frameN = -1;
-    
     // update component parameters for each repeat
-
-    TR_Coin.setVolume(sound_vol);
+    TR_Feedback_Coin = new sound.Sound({
+    win: psychoJS.window,
+    value: coin,
+    secs: -1,
+    });
+    TR_Feedback_Coin.setVolume(sound_vol);
     Tr_Rec_Frame_Feedback.setOpacity(rec_frame_opacity);
     Tr_Rec_Frame_Feedback.setLineColor(new util.Color(rec_frame_color));
     Tr_Rec_Frame_Feedback.setLineWidth(rec_wd);
@@ -8555,7 +6226,7 @@ function TR_FeedbackRoutineBegin(trials) {
     TR_Feedback_Image.setImage(feedback_image);
     // keep track of which components have finished
     TR_FeedbackComponents = [];
-    TR_FeedbackComponents.push(TR_Coin);
+    TR_FeedbackComponents.push(TR_Feedback_Coin);
     TR_FeedbackComponents.push(Tr_Rec_Frame_Feedback);
     TR_FeedbackComponents.push(TR_Feedback_Text);
     TR_FeedbackComponents.push(TR_Feedback_Image);
@@ -8578,18 +6249,18 @@ function TR_FeedbackRoutineEachFrame(trials) {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     // start/stop TR_Feedback_Coin
-    if (t >= 0.0 && TR_Coin.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 0.0 && TR_Feedback_Coin.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
-      TR_Coin.tStart = t;  // (not accounting for frame time here)
-      TR_Coin.frameNStart = frameN;  // exact frame index
+      TR_Feedback_Coin.tStart = t;  // (not accounting for frame time here)
+      TR_Feedback_Coin.frameNStart = frameN;  // exact frame index
       
-      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
-      TR_Coin.status = PsychoJS.Status.STARTED;
+      psychoJS.window.callOnFlip(function(){ TR_Feedback_Coin.play(); });  // screen flip
+      TR_Feedback_Coin.status = PsychoJS.Status.STARTED;
     }
     frameRemains = 0.0 + feedback_dur - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (t >= frameRemains && TR_Coin.status === PsychoJS.Status.STARTED) {
-      //TR_Coin.stop();  // stop the sound (if longer than duration)
-      TR_Coin.status = PsychoJS.Status.FINISHED;
+    if (t >= frameRemains && TR_Feedback_Coin.status === PsychoJS.Status.STARTED) {
+      //TR_Feedback_Coin.stop();  // stop the sound (if longer than duration)
+      TR_Feedback_Coin.status = PsychoJS.Status.FINISHED;
     }
     
     // *Tr_Rec_Frame_Feedback* updates
@@ -8668,7 +6339,7 @@ function TR_FeedbackRoutineEnd(trials) {
         thisComponent.setAutoDraw(false);
       }
     }
-    TR_Coin.stop();  // ensure sound has stopped at end of routine
+    //TR_Feedback_Coin.stop();  // ensure sound has stopped at end of routine
     // the Routine "TR_Feedback" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -8685,38 +6356,30 @@ function Instr_RTRoutineBegin(trials) {
     t = 0;
     Instr_RTClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(1);
     // update component parameters for each repeat
-    block_count = (block_count_cr_old - 1)*rt_block;
-    stop_tol = 2;
-
-    if (block_count_cr_old == 1) {
-      instr_text = instr_rt_old_text_1;
-    } else {
-        if (block_count_cr_old == 2) {
-          instr_text = instr_rt_old_text_2;
-        } else {
-          if (block_count_cr_old >= 3) {
-            instr_text = instr_rt_old_text_2;
-          }
-        }
-    }
-
-
-    Instr_RT_Text.setText(instr_text);
+    Instr_RT_Text.setText(instr_rt_text);
     Instr_RT_Press.keys = undefined;
     Instr_RT_Press.rt = undefined;
     _Instr_RT_Press_allKeys = [];
     block_type = "RT";
     stim_type = "Symb";
     remap = 0;
+    if ((session === 1)) {
+        block_count = 0;
+    } else {
+        if ((session === 2)) {
+            block_count = 5;
+        }
+    }
+    symb = symb_map;
+    symb_g = symb_g_map;
+    symb_r = symb_r_map;
     
     // keep track of which components have finished
     Instr_RTComponents = [];
     Instr_RTComponents.push(Instr_RT_Text);
     Instr_RTComponents.push(Instr_RT_Press);
-    Instr_RTComponents.push(TR_Coin)
-
+    
     for (const thisComponent of Instr_RTComponents)
       if ('status' in thisComponent)
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
@@ -8764,26 +6427,10 @@ function Instr_RTRoutineEachFrame(trials) {
         Instr_RT_Press.keys = _Instr_RT_Press_allKeys[0].name;  // just the first key pressed
         Instr_RT_Press.rt = _Instr_RT_Press_allKeys[0].rt;
         // a response ends the routine
-       // continueRoutine = false;
+        continueRoutine = false;
       }
     }
     
-    if (t >= 0.0 && _Instr_RT_Press_allKeys.length > 0 && TR_Coin.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      TR_Coin.tStart = t;  // (not accounting for frame time here)
-      TR_Coin.frameNStart = frameN;  // exact frame index
-      
-      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
-      TR_Coin.status = PsychoJS.Status.STARTED;
-    }
-    
-    frameRemains = TR_Coin.getDuration - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
-      TR_Coin.stop();  // stop the sound (if longer than duration)
-      TR_Coin.status = PsychoJS.Status.FINISHED;
-      continueRoutine = false;
-    }
-
     // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
@@ -8826,8 +6473,6 @@ function Instr_RTRoutineEnd(trials) {
         }
     
     Instr_RT_Press.stop();
-    TR_Coin.stop();
-    psychoJS.experiment.addData("symb_map_shuffle", symb_map_ind_shuffle);
     // the Routine "Instr_RT" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -8853,7 +6498,7 @@ function Instr_TR_Old_PostRoutineBegin(trials) {
     stim_type = "Symb";
     remap = 0;
     block_count = 0;
-    
+    post = 1;
     symb = symb_map;
     symb_g = symb_g_map;
     symb_r = symb_r_map;
@@ -8972,7 +6617,6 @@ function Instr_CR_NewRoutineBegin(trials) {
     t = 0;
     Instr_CR_NewClock.reset(); // clock
     frameN = -1;
-    TR_Coin.setVolume(1);
     // update component parameters for each repeat
     Instr_CR_New_Text.setText(instr_cr_new_text);
     Instr_CR_New_Press.keys = undefined;
@@ -8982,54 +6626,16 @@ function Instr_CR_NewRoutineBegin(trials) {
     stim_type = "Symb";
     block_count = 0;
     remap = 1;
-    stop_tol = 2;
-
-    stop_pair_1 = probe_pair_1;
-    stop_pair_2 = remap_pair_1;
-
     
-    //symb_map_rnd_stop = Math.floor(myrng() * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
-    ind_rnd = resp_map_ind[symb_perm_resp.length-1];
-    resp_ind_rnd = symb_perm_resp[ind_rnd] // shuffle index of resp symbols
-    
-    symb_map_ind_shuffle = [];
-    symb_map_ind_shuffle = Object.assign({}, symb_map_ind);
-    
-    symb_map_ind_shuffle[resp_ind_rnd[0]] = symb_map_ind[x_symb_resp[0]];
-    symb_map_ind_shuffle[resp_ind_rnd[1]] = symb_map_ind[x_symb_resp[1]];
-    symb_map_ind_shuffle[resp_ind_rnd[2]] = symb_map_ind[x_symb_resp[2]];
-    symb_map_ind_shuffle[resp_ind_rnd[3]] = symb_map_ind[x_symb_resp[3]];
-
-    symb_map_ind_shuffle = Object.values(symb_map_ind_shuffle);
-
-    symb_map = [];
-    symb_g_map = [];
-    symb_r_map = [];
-    for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
-      symb_map.push(symb[symb_map_ind_shuffle[i]]);
-      symb_g_map.push(symb_g[symb_map_ind_shuffle[i]]);
-      symb_r_map.push(symb_r[symb_map_ind_shuffle[i]]);
-    }
-
-
-    symb_map = [];
-    symb_g_map = [];
-    symb_r_map = [];
-    for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
-      symb_map.push(symb[symb_map_ind_shuffle[i]]);
-      symb_g_map.push(symb_g[symb_map_ind_shuffle[i]]);
-      symb_r_map.push(symb_r[symb_map_ind_shuffle[i]]);
-    }
-
     if (grp_stop === 1) {
-        symb_creat_seq = symb_map;
-        symb_g_creat_seq = symb_g_map;
-        symb_r_creat_seq = symb_r_map;
+        symb = symb_map;
+        symb_g = symb_g_map;
+        symb_r = symb_r_map;
     } else {
         if (grp_swap === 1) {
-            symb_creat_seq = symb_remap;
-            symb_g_creat_seq = symb_g_remap;
-            symb_r_creat_seq = symb_r_remap;
+            symb = symb_remap;
+            symb_g = symb_g_remap;
+            symb_r = symb_r_remap;
         }
     }
     
@@ -9037,7 +6643,7 @@ function Instr_CR_NewRoutineBegin(trials) {
     Instr_CR_NewComponents = [];
     Instr_CR_NewComponents.push(Instr_CR_New_Text);
     Instr_CR_NewComponents.push(Instr_CR_New_Press);
-    Instr_CR_NewComponents.push(TR_Coin);
+    
     for (const thisComponent of Instr_CR_NewComponents)
       if ('status' in thisComponent)
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
@@ -9085,26 +6691,10 @@ function Instr_CR_NewRoutineEachFrame(trials) {
         Instr_CR_New_Press.keys = _Instr_CR_New_Press_allKeys[0].name;  // just the first key pressed
         Instr_CR_New_Press.rt = _Instr_CR_New_Press_allKeys[0].rt;
         // a response ends the routine
-        // continueRoutine = false;
+        continueRoutine = false;
       }
     }
     
-    if (t >= 0.0 && _Instr_CR_New_Press_allKeys.length > 0 && TR_Coin.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      TR_Coin.tStart = t;  // (not accounting for frame time here)
-      TR_Coin.frameNStart = frameN;  // exact frame index
-      
-      psychoJS.window.callOnFlip(function(){ TR_Coin.play(); });  // screen flip
-      TR_Coin.status = PsychoJS.Status.STARTED;
-    }
-    
-    frameRemains = TR_Coin.getDuration - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (t >= frameRemains + TR_Coin.tStart && TR_Coin.status === PsychoJS.Status.STARTED) {
-      TR_Coin.stop();  // stop the sound (if longer than duration)
-      TR_Coin.status = PsychoJS.Status.FINISHED;
-      continueRoutine = false;
-    }
-
     // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
@@ -9147,8 +6737,6 @@ function Instr_CR_NewRoutineEnd(trials) {
         }
     
     Instr_CR_New_Press.stop();
-    TR_Coin.stop();
-    psychoJS.experiment.addData("symb_map_shuffle", symb_map_ind_shuffle);
     // the Routine "Instr_CR_New" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -9295,7 +6883,7 @@ function RT_Enter_Trial_StopRoutineEnd(trials) {
       }
     }
     sound_vol = 0;
-    if ((stop_pair_1.includes(stimnum_item)) || (stop_pair_2.includes(stimnum_item))) {
+    if ((remap_pair_1.includes(stimnum_item)) || (remap_pair_2.includes(stimnum_item))) {
         if ((RT_Press_Stop.keys === undefined)) {
             corr = 1;
             feedback_image = symb_g_item;
@@ -9306,7 +6894,7 @@ function RT_Enter_Trial_StopRoutineEnd(trials) {
             feedback_image = symb_r_item;
             feedback_dur = 1;
         }
-    } else {
+      } else {
         if ((RT_Press_Stop.keys !== undefined)) {
           if (RT_Press_Stop.corr) {
               corr = 1;
@@ -9383,16 +6971,15 @@ function Instr_TR_NewRoutineBegin(trials) {
     stim_type = "Symb";
     remap = 1;
     block_count = 0;
-    
     if (grp_stop === 1) {
-        symb_creat_seq = symb_map;
-        symb_g_creat_seq = symb_g_map;
-        symb_r_creat_seq = symb_r_map;
+        symb = symb_map;
+        symb_g = symb_g_map;
+        symb_r = symb_r_map;
     } else {
         if (grp_swap === 1) {
-            symb_creat_seq = symb_remap;
-            symb_g_creat_seq = symb_g_remap;
-            symb_r_creat_seq = symb_r_remap;
+            symb = symb_remap;
+            symb_g = symb_g_remap;
+            symb_r = symb_r_remap;
         }
     }
     
@@ -9400,6 +6987,7 @@ function Instr_TR_NewRoutineBegin(trials) {
     Instr_TR_NewComponents = [];
     Instr_TR_NewComponents.push(Instr_TR_Old_Post_text_3);
     Instr_TR_NewComponents.push(Instr_TR_Old_Post_Press_3);
+    
     for (const thisComponent of Instr_TR_NewComponents)
       if ('status' in thisComponent)
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
@@ -9447,10 +7035,10 @@ function Instr_TR_NewRoutineEachFrame(trials) {
         Instr_TR_Old_Post_Press_3.keys = _Instr_TR_Old_Post_Press_3_allKeys[0].name;  // just the first key pressed
         Instr_TR_Old_Post_Press_3.rt = _Instr_TR_Old_Post_Press_3_allKeys[0].rt;
         // a response ends the routine
-       continueRoutine = false;
+        continueRoutine = false;
       }
     }
-
+    
     // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
@@ -9493,7 +7081,6 @@ function Instr_TR_NewRoutineEnd(trials) {
         }
     
     Instr_TR_Old_Post_Press_3.stop();
-    psychoJS.experiment.addData("symb_map_shuffle", symb_map_ind_shuffle);
     // the Routine "Instr_TR_New" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -9513,7 +7100,13 @@ function TR_Enter_Trials_StopRoutineBegin(trials) {
     t = 0;
     TR_Enter_Trials_StopClock.reset(); // clock
     frameN = -1;
-    TR_Beep.setVolume(1);
+    // update component parameters for each repeat
+    TR_Beep_Hand = new sound.Sound({
+    win: psychoJS.window,
+    value: beep,
+    secs: -1,
+    });
+    TR_Beep_Hand.setVolume(1);
     routineTimer.reset(time_limit);
     tr_text = 0;
     tr_sound = 0;
@@ -9534,7 +7127,7 @@ function TR_Enter_Trials_StopRoutineBegin(trials) {
     _TR_Press_Stop_allKeys = [];
     // keep track of which components have finished
     TR_Enter_Trials_StopComponents = [];
-    TR_Enter_Trials_StopComponents.push(TR_Beep);
+    TR_Enter_Trials_StopComponents.push(TR_Beep_Hand);
     TR_Enter_Trials_StopComponents.push(TR_Rec_Frame_Stop);
     TR_Enter_Trials_StopComponents.push(TR_Stim_Image_Stop);
     TR_Enter_Trials_StopComponents.push(TR_Press_Stop);
@@ -9557,19 +7150,19 @@ function TR_Enter_Trials_StopRoutineEachFrame(trials) {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     // start/stop TR_Beep_Stop
-    if (t >= 0.0 && TR_Beep.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 0.0 && TR_Beep_Hand.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
-      TR_Beep.tStart = t;  // (not accounting for frame time here)
-      TR_Beep.frameNStart = frameN;  // exact frame index
+      TR_Beep_Hand.tStart = t;  // (not accounting for frame time here)
+      TR_Beep_Hand.frameNStart = frameN;  // exact frame index
       
-      psychoJS.window.callOnFlip(function(){ TR_Beep.play(); });  // screen flip
-      TR_Beep.status = PsychoJS.Status.STARTED;
+      psychoJS.window.callOnFlip(function(){ TR_Beep_Hand.play(); });  // screen flip
+      TR_Beep_Hand.status = PsychoJS.Status.STARTED;
     }
     
     frameRemains = time_limit  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (t >= frameRemains && TR_Beep.status === PsychoJS.Status.STARTED) {
-      TR_Beep_Stop.stop();  // stop the sound (if longer than duration)
-      TR_Beep.status = PsychoJS.Status.FINISHED;
+    if (t >= frameRemains && TR_Beep_Hand.status === PsychoJS.Status.STARTED) {
+      //TR_Beep_Stop.stop();  // stop the sound (if longer than duration)
+      TR_Beep_Hand.status = PsychoJS.Status.FINISHED;
     }
     
     // *TR_Rec_Frame_Stop* updates
@@ -9668,7 +7261,7 @@ function TR_Enter_Trials_StopRoutineEnd(trials) {
     }
     //TR_Beep_Stop.stop();  // ensure sound has stopped at end of routine
     sound_vol = 0;
-    if ((stop_pair_1.includes(stimnum_item)) || (stop_pair_2.includes(stimnum_item))) {
+    if ((remap_pair_1.includes(stimnum_item)) || (remap_pair_2.includes(stimnum_item))) {
         if ((TR_Press_Stop.keys === undefined)) {
             corr = 1;
             feedback_image = symb_g_item;
@@ -9794,7 +7387,6 @@ function TR_Enter_Trials_StopRoutineEnd(trials) {
         }
     
     TR_Press_Stop.stop();
-    TR_Beep.stop();
     // the Routine "TR_Enter_Trials_Stop" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
