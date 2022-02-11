@@ -6607,7 +6607,6 @@ function TR_Enter_Trials_HandRoutineBegin(trials) {
     // update component parameters for each repeat
     
     TR_Beep.setVolume(1);
-    TR_Coin_Hand.setVolume(0);
     routineTimer.reset(time_limit);
     tr_press_early = 0;
     tr_press_late = 0;
@@ -6862,6 +6861,7 @@ function TR_Enter_Trials_HandRoutineEnd(trials) {
         }
     
     TR_Press_Hand.stop();
+    TR_Beep.stop();
     // the Routine "TR_Enter_Trials_Hand" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
