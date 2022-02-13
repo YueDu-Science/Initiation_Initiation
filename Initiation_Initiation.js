@@ -221,17 +221,17 @@ var resp_ind = [];
 var symb_map_ind_shuffle;
 ////////////////////////////////////
 var tr_block_hand = 4;
-var num_trials_hand = 96;
+var num_trials_hand = 1;
 var num_trials_cr = 2000;
-var num_criterion = 5;
+var num_criterion = 1;
 
 var tr_block_old = 0;
 var tr_block_new_swap = 0;
-var tr_block_new_stop = 6;
+var tr_block_new_stop = 2;
 
-var prac_old_block = 12;   // set of criterion + practice (rt_blocks)
+var prac_old_block = 2;   // set of criterion + practice (rt_blocks)
 var rt_block = 1;
-var num_trials = 96;
+var num_trials = 2;
 
 var tr_hand_yes = 1;
 var rt_hand_yes = 1;
@@ -5451,7 +5451,7 @@ function Instr_RT_HandRoutineEachFrame(trials) {
 
     
     // *Instr_RT_Hand_Key* updates
-    if (t >= 0.0 && Instr_RT_Hand_Key.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 2.0 && Instr_RT_Hand_Key.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       Instr_RT_Hand_Key.tStart = t;  // (not accounting for frame time here)
       Instr_RT_Hand_Key.frameNStart = frameN;  // exact frame index
@@ -6252,7 +6252,7 @@ function Instr_TR_HandRoutineEachFrame(trials) {
 
     
     // *Instr_HAND_TR_press* updates
-    if (t >= 0.0 && Instr_HAND_TR_press.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 2.0 && Instr_HAND_TR_press.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       Instr_HAND_TR_press.tStart = t;  // (not accounting for frame time here)
       Instr_HAND_TR_press.frameNStart = frameN;  // exact frame index
@@ -7539,7 +7539,7 @@ function Instr_CR_OldRoutineEachFrame(trials) {
 
     
     // *Instr_CR_Old_Press* updates
-    if (t >= 0.0 && Instr_CR_Old_Press.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 2.0 && Instr_CR_Old_Press.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       Instr_CR_Old_Press.tStart = t;  // (not accounting for frame time here)
       Instr_CR_Old_Press.frameNStart = frameN;  // exact frame index
@@ -8742,7 +8742,7 @@ function Instr_RTRoutineEachFrame(trials) {
 
     
     // *Instr_RT_Press* updates
-    if (t >= 0.0 && Instr_RT_Press.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 2.0 && Instr_RT_Press.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       Instr_RT_Press.tStart = t;  // (not accounting for frame time here)
       Instr_RT_Press.frameNStart = frameN;  // exact frame index
@@ -9063,7 +9063,7 @@ function Instr_CR_NewRoutineEachFrame(trials) {
 
     
     // *Instr_CR_New_Press* updates
-    if (t >= 0.0 && Instr_CR_New_Press.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 2.0 && Instr_CR_New_Press.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       Instr_CR_New_Press.tStart = t;  // (not accounting for frame time here)
       Instr_CR_New_Press.frameNStart = frameN;  // exact frame index
@@ -9425,7 +9425,7 @@ function Instr_TR_NewRoutineEachFrame(trials) {
 
     
     // *Instr_TR_Old_Post_Press_3* updates
-    if (t >= 0.0 && Instr_TR_Old_Post_Press_3.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 2.0 && Instr_TR_Old_Post_Press_3.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       Instr_TR_Old_Post_Press_3.tStart = t;  // (not accounting for frame time here)
       Instr_TR_Old_Post_Press_3.frameNStart = frameN;  // exact frame index
