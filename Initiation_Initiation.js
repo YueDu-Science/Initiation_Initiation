@@ -4164,7 +4164,7 @@ function Instr_ExpRoutineEachFrame(trials) {
 
     
     // *Instr_Exp_Key* updates
-    if (t >= 0.0 && Instr_Exp_Key.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 2.0 && Instr_Exp_Key.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       Instr_Exp_Key.tStart = t;  // (not accounting for frame time here)
       Instr_Exp_Key.frameNStart = frameN;  // exact frame index
