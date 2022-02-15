@@ -3854,9 +3854,9 @@ Press (H, U, I, or L) to proceed.`
     instr_cr_old_text_1 = `In the upcoming block, you will see 8 symbols on the screen, one at a time. You job is to figure out the association between symbols and keys.
 
 
-4 symbols corresponds to (H, U, I, or L). 
+Some symbols correspond to (H, U, I, or L). 
 
-4 symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+Some symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
 
 
@@ -3870,9 +3870,9 @@ Ready? Press (H, U, I, or L) to start.`
     instr_cr_old_text_2 = `In the upcoming block, your job is to figure out a NEW association between symbols and keys.
     
 
-The same 4 symbols still correspond to (H, U, I, or L) but the symbol-key association will change. 
+Again, some symbols correspond to (H, U, I, or L). 
 
-The other 4 symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+Some symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
 
 ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
@@ -3885,9 +3885,9 @@ Ready? Press (H, U, I, or L) to start.`
     instr_cr_old_text_3 = `In the next block, take you time to figure out a NEW association again.
   
 
-Again, The same 4 symbols still correspond to (H, U, I, or L) but the symbol-key association will change. 
+Again, some symbols correspond to (H, U, I, or L). 
 
-The other 4 symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+Some symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
 
 ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
