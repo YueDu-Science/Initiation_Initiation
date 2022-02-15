@@ -4020,14 +4020,12 @@ Press (H, U, I, or L) to proceed.`
         }
     }
     penalty_toolate_text = `Response was too late.
-2 seconds penalty.
 
-Press (H, U, I, or L) to proceed.`
+Press (H, U, I, or L) to accept a 2 second penalty.`
     ;
     penalty_tooearly_text = `Response was too early.
-2 seconds penalty.
 
-Press (H, U, I, or L) to proceed.`
+Press (H, U, I, or L) to accept a 2 second penalty.`
     ;
     penalty_countdown_text = `Ready`
     ;
