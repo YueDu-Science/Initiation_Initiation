@@ -233,16 +233,16 @@ var prac_old_block = 12;   // set of criterion + practice (rt_blocks)
 var rt_block = 1;
 var num_trials = 96;
 
-var tr_hand_yes = 0;
-var rt_hand_yes = 0;
-var cr_old_yes = 0;
+var tr_hand_yes = 1;
+var rt_hand_yes = 1;
+var cr_old_yes = 1;
 var cr_new_yes = 1;
-var rt_yes = 0;
+var rt_yes = 1;
 var tr_old_pre_yes = 0;
 var tr_old_post_yes = 0;
 var tr_new_yes = 1;
 
-var sound_check_yes = 0;
+var sound_check_yes = 1;
 var num_trials_sound_check = 20;
 
 
