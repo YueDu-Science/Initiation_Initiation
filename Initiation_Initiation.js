@@ -233,16 +233,16 @@ var prac_old_block = 12;   // set of criterion + practice (rt_blocks)
 var rt_block = 1;
 var num_trials = 96;
 
-var tr_hand_yes = 1;
-var rt_hand_yes = 1;
-var cr_old_yes = 1;
+var tr_hand_yes = 0;
+var rt_hand_yes = 0;
+var cr_old_yes = 0;
 var cr_new_yes = 1;
-var rt_yes = 1;
+var rt_yes = 0;
 var tr_old_pre_yes = 0;
 var tr_old_post_yes = 0;
 var tr_new_yes = 1;
 
-var sound_check_yes = 1;
+var sound_check_yes = 0;
 var num_trials_sound_check = 20;
 
 
@@ -9726,6 +9726,7 @@ function TR_Enter_Trials_StopRoutineEnd(trials) {
             tr_press_late = 1;
             tr_feedback = 1;
             feedback_image = symb_r_item;
+            tr_text = 0;
         }
     }
     feedback_dur = 0.3;
