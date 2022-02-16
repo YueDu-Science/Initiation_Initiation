@@ -3962,7 +3962,7 @@ Symbols that previously corresponded to (H, U, I, or L) may NOT require a respon
 Symbols that previously did not correspond with a key may become requiring a response.
 
 
-Your job is to figure out the New association between the same 8 symbols and (H, U, I, or L) keys.
+Your job is to figure out the NEW association between the same 8 symbols and (H, U, I, or L) keys.
 
 For symbols that do not require a response, DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
 
