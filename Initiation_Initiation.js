@@ -191,6 +191,7 @@ var x16 = x8_new.concat(x8_new);
 var remap_pairs = [[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]];
 var num_pos = 4;
 var num_symb = 8;
+var num_letter = 4;
 var symb_perm = permute(x_symb);
 
 var symb_remap_ind;
@@ -3603,7 +3604,7 @@ function Init_StimRoutineBegin(trials) {
     coin = StimList[0]["Sound_P"];
     beep = StimList[0]["Beep"];
     buzz = StimList[0]["Sound_N"];
-    for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
+    for (var i = 0, _pj_a = num_symb + num_letter; (i < _pj_a); i += 1) {
         stimnum.push(StimList[i]["StimNum"]);
         symb.push(StimList[i]["Symb"]);
         symb_r.push(StimList[i]["Symb_R"]);
