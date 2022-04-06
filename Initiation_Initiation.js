@@ -1858,7 +1858,7 @@ function Import_StimLoopBegin(thisScheduler) {
     psychoJS: psychoJS,
     nReps: 1, method: TrialHandler.Method.SEQUENTIAL,
     extraInfo: expInfo, originPath: undefined,
-    trialList: TrialHandler.importConditions(psychoJS.serverManager, 'conditions.xlsx', '0:8'),
+    trialList: TrialHandler.importConditions(psychoJS.serverManager, 'conditions.xlsx', '0:12'),
     seed: undefined, name: 'Import_Stim'
   });
   psychoJS.experiment.addLoop(Import_Stim); // add the loop to the experiment
@@ -3606,7 +3606,7 @@ function Init_StimRoutineBegin(trials) {
     coin = StimList[0]["Sound_P"];
     beep = StimList[0]["Beep"];
     buzz = StimList[0]["Sound_N"];
-    for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
+    for (var i = 0, _pj_a = num_symb + num_letter; (i < _pj_a); i += 1) {
         stimnum.push(StimList[i]["StimNum"]);
         symb.push(StimList[i]["Symb"]);
         symb_r.push(StimList[i]["Symb_R"]);
