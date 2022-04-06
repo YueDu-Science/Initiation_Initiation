@@ -25,6 +25,7 @@ psychoJS.openWindow({
 
 // store info about the experiment session:
 let expName = 'Initiation_Initiation';  // from the Builder filename that created this script
+// let expInfo = {'participant': '', 'session': ''};
 let expInfo = {'participant': ''};
 
 // schedule the experiment:
@@ -345,6 +346,7 @@ var Pre_Trial_Rec_Frame;
 var RT_Enter_TrialClock;
 var RT_Rec_Frame;
 var RT_Stim_Image;
+var Letter;
 var RT_Press;
 var RT_FeedbackClock;
 var CR_Feedback_Coin_Old;
