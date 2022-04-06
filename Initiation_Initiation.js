@@ -7503,6 +7503,8 @@ function RT_Enter_TrialRoutineBegin(trials) {
     RT_Rec_Frame.setOpacity(rec_frame_opacity);
     RT_Rec_Frame.setLineColor(new util.Color(rec_frame_color));
     RT_Rec_Frame.setLineWidth(rec_wd);
+
+    RT_Enter_TrialComponents = [];
     if (symb_type === "symbol"){
       RT_Stim_Image.setImage(symb_item);
       RT_Enter_TrialComponents.push(RT_Stim_Image);
@@ -7516,7 +7518,7 @@ function RT_Enter_TrialRoutineBegin(trials) {
     RT_Press.rt = undefined;
     _RT_Press_allKeys = [];
     // keep track of which components have finished
-    RT_Enter_TrialComponents = [];
+    
     RT_Enter_TrialComponents.push(RT_Rec_Frame);
     //RT_Enter_TrialComponents.push(RT_Stim_Image);
     RT_Enter_TrialComponents.push(RT_Press);
@@ -7696,6 +7698,8 @@ function RT_FeedbackRoutineBegin(trials) {
     RT_Rec_Frame_Feedback.setOpacity(rec_frame_opacity);
     RT_Rec_Frame_Feedback.setLineColor(new util.Color(rec_frame_color));
     RT_Rec_Frame_Feedback.setLineWidth(rec_wd);
+
+    RT_FeedbackComponents = [];
     if (symb_type === "symbol"){
       RT_Feedback_Image.setImage(feedback_image);
       RT_FeedbackComponents.push(RT_Feedback_Image);
@@ -7706,7 +7710,7 @@ function RT_FeedbackRoutineBegin(trials) {
       RT_FeedbackComponents.push(Letter);
     }
     // keep track of which components have finished
-    RT_FeedbackComponents = [];
+    
     RT_FeedbackComponents.push(TR_Coin);
     RT_FeedbackComponents.push(RT_Rec_Frame_Feedback);
     
@@ -8083,6 +8087,8 @@ function TR_Enter_TrialsRoutineBegin(trials) {
     TR_Rec_Frame.setLineWidth(rec_wd);
     console.log(symb_type)
     console.log(symb_item)
+
+    TR_Enter_TrialsComponents = [];
     if (symb_type === "symbol"){
       TR_Stim_Image.setImage(symb_item);
       TR_Enter_TrialsComponents.push(TR_Stim_Image);
@@ -8096,7 +8102,7 @@ function TR_Enter_TrialsRoutineBegin(trials) {
     TR_Press.rt = undefined;
     _TR_Press_allKeys = [];
     // keep track of which components have finished
-    TR_Enter_TrialsComponents = [];
+    
     TR_Enter_TrialsComponents.push(TR_Beep);
     TR_Enter_TrialsComponents.push(TR_Rec_Frame);
     
@@ -8358,6 +8364,8 @@ function TR_FeedbackRoutineBegin(trials) {
     Tr_Rec_Frame_Feedback.setLineWidth(rec_wd);
     TR_Feedback_Text.setColor(new util.Color(tr_feedback_text_color));
     TR_Feedback_Text.setText(tr_feedback_text);
+
+    TR_FeedbackComponents = [];
     if (symb_type === "symbol"){
       TR_Feedback_Image.setImage(feedback_image);
       TR_FeedbackComponents.push(TR_Feedback_Image);
@@ -8367,7 +8375,7 @@ function TR_FeedbackRoutineBegin(trials) {
       TR_FeedbackComponents.push(Letter);
     }
     // keep track of which components have finished
-    TR_FeedbackComponents = [];
+    
     TR_FeedbackComponents.push(TR_Coin);
     TR_FeedbackComponents.push(Tr_Rec_Frame_Feedback);
     TR_FeedbackComponents.push(TR_Feedback_Text);
@@ -8964,6 +8972,8 @@ function RT_Enter_Trial_StopRoutineBegin(trials) {
     RT_Rec_Frame_Stop.setOpacity(rec_frame_opacity);
     RT_Rec_Frame_Stop.setLineColor(new util.Color(rec_frame_color));
     RT_Rec_Frame_Stop.setLineWidth(rec_wd);
+
+    RT_Enter_Trial_StopComponents = [];
     if (symb_type === "symbol"){
       RT_Stim_Image_Stop.setImage(symb_item);
       RT_Enter_Trial_StopComponents.push(RT_Stim_Image_Stop);
@@ -8977,7 +8987,7 @@ function RT_Enter_Trial_StopRoutineBegin(trials) {
     RT_Press_Stop.rt = undefined;
     _RT_Press_Stop_allKeys = [];
     // keep track of which components have finished
-    RT_Enter_Trial_StopComponents = [];
+    
     RT_Enter_Trial_StopComponents.push(RT_Rec_Frame_Stop);
     
     RT_Enter_Trial_StopComponents.push(RT_Press_Stop);
@@ -9353,6 +9363,8 @@ function TR_Enter_Trials_StopRoutineBegin(trials) {
     TR_Rec_Frame_Stop.setOpacity(rec_frame_opacity);
     TR_Rec_Frame_Stop.setLineColor(new util.Color(rec_frame_color));
     TR_Rec_Frame_Stop.setLineWidth(rec_wd);
+
+    TR_Enter_Trials_StopComponents = [];
     if (symb_type === "symbol"){
       TR_Stim_Image_Stop.setImage(symb_item);
       TR_Enter_Trials_StopComponents.push(TR_Stim_Image_Stop);
@@ -9366,7 +9378,7 @@ function TR_Enter_Trials_StopRoutineBegin(trials) {
     TR_Press_Stop.rt = undefined;
     _TR_Press_Stop_allKeys = [];
     // keep track of which components have finished
-    TR_Enter_Trials_StopComponents = [];
+    
     TR_Enter_Trials_StopComponents.push(TR_Beep);
     TR_Enter_Trials_StopComponents.push(TR_Rec_Frame_Stop);
     
