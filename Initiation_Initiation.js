@@ -5500,7 +5500,7 @@ function Creat_StimSeqRoutineBegin(trials) {
         while ((count < (num_trials / 18))) {
             // add letter catch trials
             // for each count/iteration, need only 2 letters
-            x16_new = x16.concat(x_letter_3.slice(0*(count-1),2))
+            x16_new = x16.concat(x_letter_3.slice(0*(count-1),2+0*(count-1)))
             console.log(x16_new)
             util.shuffle(x16_new);
             for (var i, _pj_c = 0, _pj_a = x16_new, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
