@@ -5497,12 +5497,13 @@ function Creat_StimSeqRoutineBegin(trials) {
     
     if (((block_type !== "CR") && (stim_type === "Symb") && (remap === 0))) {
         count = 0;
-        while ((count < (num_trials / 16))) {
+        while ((count < (num_trials / 18))) {
             // add letter catch trials
             // for each count/iteration, need only 2 letters
             x16_new = x16.concat(x_letter_3.slice(0*(count-1),2))
+            console.log(x16_new)
             util.shuffle(x16_new);
-            for (var i, _pj_c = 0, _pj_a = x16, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+            for (var i, _pj_c = 0, _pj_a = x16_new, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                 i = _pj_a[_pj_c];
                 seq_stimnum.push(stimnum[i]);
                 seq_key.push(key[i]);
