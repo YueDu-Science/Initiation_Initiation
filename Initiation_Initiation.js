@@ -7380,7 +7380,7 @@ function Pre_TrialRoutineBegin(trials) {
         stim_start_time = ((prep_time_range[1] - prep_time) + beep_lead_in);
         trial_count_item[stimnum_item] = (trial_count_item[stimnum_item] + 1);
     } else if ((block_type === "TR") && (remap === 0)) {
-          if (symbol_type === "symbol") {
+          if (symb_type === "symbol") {
             interval_ind = prep_time_ind[stimnum_item][trial_count_item[stimnum_item]];
             prep_time = ((Math.random() * (prep_time_interval[interval_ind][1] - prep_time_interval[interval_ind][0])) + prep_time_interval[interval_ind][0]);
             stim_start_time = ((prep_time_range[1] - prep_time) + beep_lead_in);
