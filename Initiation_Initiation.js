@@ -8081,8 +8081,9 @@ function TR_Enter_TrialsRoutineBegin(trials) {
     TR_Rec_Frame.setOpacity(rec_frame_opacity);
     TR_Rec_Frame.setLineColor(new util.Color(rec_frame_color));
     TR_Rec_Frame.setLineWidth(rec_wd);
-
-    if (symb_type === "symb"){
+    console.log(symb_type)
+    console.log(symb_item)
+    if (symb_type === "symbol"){
       TR_Stim_Image.setImage(symb_item);
       TR_Enter_TrialsComponents.push(TR_Stim_Image);
     } else if (symb_type === "number") {
@@ -8147,7 +8148,7 @@ function TR_Enter_TrialsRoutineEachFrame(trials) {
       TR_Rec_Frame.setAutoDraw(false);
     }
     
-    if (symb_type === "symb"){
+    if (symb_type === "symbol"){
       // *TR_Stim_Image* updates
       if (t >= stim_start_time && TR_Stim_Image.status === PsychoJS.Status.NOT_STARTED) {
         // keep track of start time/frame for later
@@ -8357,7 +8358,7 @@ function TR_FeedbackRoutineBegin(trials) {
     Tr_Rec_Frame_Feedback.setLineWidth(rec_wd);
     TR_Feedback_Text.setColor(new util.Color(tr_feedback_text_color));
     TR_Feedback_Text.setText(tr_feedback_text);
-    if (symb_type === "symb"){
+    if (symb_type === "symbol"){
       TR_Feedback_Image.setImage(feedback_image);
       TR_FeedbackComponents.push(TR_Feedback_Image);
     } else if (symb_type === "number") {
@@ -8432,7 +8433,7 @@ function TR_FeedbackRoutineEachFrame(trials) {
       TR_Feedback_Text.setAutoDraw(false);
     }
     
-    if (symb_type === "symb"){
+    if (symb_type === "symbol"){
       // *TR_Feedback_Image* updates
       if (t >= 0.0 && TR_Feedback_Image.status === PsychoJS.Status.NOT_STARTED) {
         // keep track of start time/frame for later
@@ -8963,7 +8964,7 @@ function RT_Enter_Trial_StopRoutineBegin(trials) {
     RT_Rec_Frame_Stop.setOpacity(rec_frame_opacity);
     RT_Rec_Frame_Stop.setLineColor(new util.Color(rec_frame_color));
     RT_Rec_Frame_Stop.setLineWidth(rec_wd);
-    if (symb_type === "symb"){
+    if (symb_type === "symbol"){
       RT_Stim_Image_Stop.setImage(symb_item);
       RT_Enter_Trial_StopComponents.push(RT_Stim_Image_Stop);
     } else if (symb_type === "number") {
@@ -9013,7 +9014,7 @@ function RT_Enter_Trial_StopRoutineEachFrame(trials) {
       RT_Rec_Frame_Stop.setAutoDraw(false);
     }
     
-    if (symb_type === "symb"){
+    if (symb_type === "symbol"){
       // *RT_Stim_Image_Stop* updates
       if (t >= 0.0 && RT_Stim_Image_Stop.status === PsychoJS.Status.NOT_STARTED) {
         // keep track of start time/frame for later
@@ -9352,7 +9353,7 @@ function TR_Enter_Trials_StopRoutineBegin(trials) {
     TR_Rec_Frame_Stop.setOpacity(rec_frame_opacity);
     TR_Rec_Frame_Stop.setLineColor(new util.Color(rec_frame_color));
     TR_Rec_Frame_Stop.setLineWidth(rec_wd);
-    if (symb_type === "symb"){
+    if (symb_type === "symbol"){
       TR_Stim_Image_Stop.setImage(symb_item);
       TR_Enter_Trials_StopComponents.push(TR_Stim_Image_Stop);
     } else if (symb_type === "number") {
@@ -9418,7 +9419,7 @@ function TR_Enter_Trials_StopRoutineEachFrame(trials) {
       TR_Rec_Frame_Stop.setAutoDraw(false);
     }
     
-    if (symb_type === "symb"){
+    if (symb_type === "symbol"){
       // *TR_Stim_Image_Stop* updates
       if (t >= stim_start_time && TR_Stim_Image_Stop.status === PsychoJS.Status.NOT_STARTED) {
         // keep track of start time/frame for later
