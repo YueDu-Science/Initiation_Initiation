@@ -7467,7 +7467,7 @@ function Pre_TrialRoutineBegin(trials) {
             stim_start_time = ((prep_time_range[1] - prep_time) + beep_lead_in);
             trial_count_item[stimnum_item] = (trial_count_item[stimnum_item] + 1);
           } else if (symb_type === "number"){
-            prep_time = Math.random() * (0.45 - 0.25) + 0.25;
+            prep_time = Math.random() * (0.6 - 0.25) + 0.25;
             stim_start_time = ((prep_time_range[1] - prep_time) + beep_lead_in);
             }
       } else {
@@ -7575,12 +7575,16 @@ function Pre_TrialRoutineEnd(trials) {
 
 var _RT_Press_allKeys;
 var RT_Enter_TrialComponents;
+var jitter;
 function RT_Enter_TrialRoutineBegin(trials) {
   return function () {
     //------Prepare to start Routine 'RT_Enter_Trial'-------
     t = 0;
     RT_Enter_TrialClock.reset(); // clock
     frameN = -1;
+
+    jitter = Math.random()*0.3;
+
     // update component parameters for each repeat
     RT_Rec_Frame.setOpacity(rec_frame_opacity);
     RT_Rec_Frame.setLineColor(new util.Color(rec_frame_color));
@@ -7634,7 +7638,7 @@ function RT_Enter_TrialRoutineEachFrame(trials) {
 
     if (symb_type === "symbol"){
     // *RT_Stim_Image* updates
-      if (t >= 0.0 && RT_Stim_Image.status === PsychoJS.Status.NOT_STARTED) {
+      if (t >= jitter && RT_Stim_Image.status === PsychoJS.Status.NOT_STARTED) {
         // keep track of start time/frame for later
         RT_Stim_Image.tStart = t;  // (not accounting for frame time here)
         RT_Stim_Image.frameNStart = frameN;  // exact frame index
@@ -7642,7 +7646,7 @@ function RT_Enter_TrialRoutineEachFrame(trials) {
         RT_Stim_Image.setAutoDraw(true);
       }
     } else if (symb_type === "number") {
-      if (t >= 0.0 && Letter.status === PsychoJS.Status.NOT_STARTED) {
+      if (t >= jitter && Letter.status === PsychoJS.Status.NOT_STARTED) {
         // keep track of start time/frame for later
         Letter.tStart = t;  // (not accounting for frame time here)
         Letter.frameNStart = frameN;  // exact frame index
@@ -9046,6 +9050,8 @@ function RT_Enter_Trial_StopRoutineBegin(trials) {
     t = 0;
     RT_Enter_Trial_StopClock.reset(); // clock
     frameN = -1;
+
+    jitter = Math.random()*0.3;
     // update component parameters for each repeat
     RT_Rec_Frame_Stop.setOpacity(rec_frame_opacity);
     RT_Rec_Frame_Stop.setLineColor(new util.Color(rec_frame_color));
@@ -9104,7 +9110,7 @@ function RT_Enter_Trial_StopRoutineEachFrame(trials) {
     
     if (symb_type === "symbol"){
       // *RT_Stim_Image_Stop* updates
-      if (t >= 0.0 && RT_Stim_Image_Stop.status === PsychoJS.Status.NOT_STARTED) {
+      if (t >= jitter && RT_Stim_Image_Stop.status === PsychoJS.Status.NOT_STARTED) {
         // keep track of start time/frame for later
         RT_Stim_Image_Stop.tStart = t;  // (not accounting for frame time here)
         RT_Stim_Image_Stop.frameNStart = frameN;  // exact frame index
@@ -9112,12 +9118,12 @@ function RT_Enter_Trial_StopRoutineEachFrame(trials) {
         RT_Stim_Image_Stop.setAutoDraw(true);
       }
 
-      frameRemains = 0.0 + stop_tol - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+      frameRemains = jitter + stop_tol - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
       if (RT_Stim_Image_Stop.status === PsychoJS.Status.STARTED && t >= frameRemains) {
         RT_Stim_Image_Stop.setAutoDraw(false);
       }
     } else if (symb_type === "number") {
-      if (t >= 0.0 && Letter.status === PsychoJS.Status.NOT_STARTED) {
+      if (t >= jitter && Letter.status === PsychoJS.Status.NOT_STARTED) {
         // keep track of start time/frame for later
         Letter.tStart = t;  // (not accounting for frame time here)
         Letter.frameNStart = frameN;  // exact frame index
@@ -9125,7 +9131,7 @@ function RT_Enter_Trial_StopRoutineEachFrame(trials) {
         Letter.setAutoDraw(true);
       }
   
-      frameRemains = 0.0 + stop_tol - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+      frameRemains = jitter + stop_tol - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
       if (Letter.status === PsychoJS.Status.STARTED && t >= frameRemains) {
         Letter.setAutoDraw(false);
       }
