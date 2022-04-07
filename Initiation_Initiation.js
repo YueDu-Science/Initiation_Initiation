@@ -182,7 +182,8 @@ var pre_trial_dur = 0.2;
 var time_limit = 1.5;
 var too_late_tol = 0.2;
 var stop_tol = 2;
-var key_list = ["H", "U", "I", "L"];
+var key_list = ["h", "u", "i", "l"];
+var key_list_C = ["H", "U", "I", "L"];
 var finger_list = ["INDEX", "MIDDLE", "RING", "LITTLER"];
 var x_symb = [0, 1, 2, 3, 4, 5, 6, 7];
 var x_letter = [8,9,10,11];
@@ -2230,9 +2231,9 @@ function TR_Block_HandLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    thisScheduler.add(CountDownRoutineBegin(snapshot));
-    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    thisScheduler.add(CountDownRoutineEnd(snapshot));
+    //thisScheduler.add(CountDownRoutineBegin(snapshot));
+    //thisScheduler.add(CountDownRoutineEachFrame(snapshot));
+    //thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_HandLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_HandLoopBegin, TR_Iter_HandLoopScheduler);
     thisScheduler.add(TR_Iter_HandLoopScheduler);
@@ -2511,9 +2512,9 @@ function TR_Old_Block_PreLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    thisScheduler.add(CountDownRoutineBegin(snapshot));
-    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    thisScheduler.add(CountDownRoutineEnd(snapshot));
+    //thisScheduler.add(CountDownRoutineBegin(snapshot));
+    //thisScheduler.add(CountDownRoutineEachFrame(snapshot));
+    //thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_Old_PreLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_Old_PreLoopBegin, TR_Iter_Old_PreLoopScheduler);
     thisScheduler.add(TR_Iter_Old_PreLoopScheduler);
@@ -2825,9 +2826,9 @@ function TR_Old_Block_PostLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    thisScheduler.add(CountDownRoutineBegin(snapshot));
-    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    thisScheduler.add(CountDownRoutineEnd(snapshot));
+    //thisScheduler.add(CountDownRoutineBegin(snapshot));
+    //thisScheduler.add(CountDownRoutineEachFrame(snapshot));
+    //thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_Old_PostLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_Old_PostLoopBegin, TR_Iter_Old_PostLoopScheduler);
     thisScheduler.add(TR_Iter_Old_PostLoopScheduler);
@@ -3225,9 +3226,9 @@ function TR_New_Block_SwapLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    thisScheduler.add(CountDownRoutineBegin(snapshot));
-    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    thisScheduler.add(CountDownRoutineEnd(snapshot));
+    //thisScheduler.add(CountDownRoutineBegin(snapshot));
+    //thisScheduler.add(CountDownRoutineEachFrame(snapshot));
+    //thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_New_SwapLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_New_SwapLoopBegin, TR_Iter_New_SwapLoopScheduler);
     thisScheduler.add(TR_Iter_New_SwapLoopScheduler);
@@ -3382,9 +3383,9 @@ function TR_New_Block_StopLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    thisScheduler.add(CountDownRoutineBegin(snapshot));
-    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    thisScheduler.add(CountDownRoutineEnd(snapshot));
+    //thisScheduler.add(CountDownRoutineBegin(snapshot));
+    //thisScheduler.add(CountDownRoutineEachFrame(snapshot));
+    //thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_New_StopLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_New_StopLoopBegin, TR_Iter_New_StopLoopScheduler);
     thisScheduler.add(TR_Iter_New_StopLoopScheduler);
@@ -3792,16 +3793,16 @@ Press (H, U, I, or L) to proceed.`
     ;
     instr_cr_old_text = `Good Job! You are now ready for the tasks!
     
-    In the upcoming block, you will see eight symbols on the screen, one at a time. Each symbol corresponds to one of (H, U, I, L). 
+In the upcoming block, you will see eight symbols on the screen, one at a time. Each symbol corresponds to one of (H, U, I, L). 
     
-    Your job is to figure out which symbol corresponds with which key.
+Your job is to figure out which symbol corresponds with which key.
     
     
-    ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
+ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
         
     
     
-    Ready? Press (H, U, I, or L) to continue.`
+Ready? Press (H, U, I, or L) to continue.`
     ;
     if ((session === 1)) {
       instr_rt_text = `Now you are going to practice the symbol-key map you learned. 
@@ -3825,21 +3826,21 @@ Whenever you are ready, press (H, U, I, or L) to start.`
   }
   instr_tr_old_pre_text = `Good job so far.
     
-  In the following ${tr_block_old} blocks, use the symbol-key map you learned. Press the corresponding key ON the fourth beep. 
+In the following ${tr_block_old} blocks, use the symbol-key map you learned. Press the corresponding key ON the fourth beep. 
   
-  Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
+Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
       
   
-  Press (H, U, I, or L) to start.`
+Press (H, U, I, or L) to start.`
       ;
       instr_tr_old_post_text = `Great job.
       
-  In the following ${tr_block_old} blocks, use the symbol-key map you practices. Press the corresponding key ON the fourth beep. 
+In the following ${tr_block_old} blocks, use the symbol-key map you practices. Press the corresponding key ON the fourth beep. 
   
-  Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
+Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
       
   
-  Press (H, U, I, or L) to start.`
+Press (H, U, I, or L) to start.`
       ;
       if ((grp_stop === 1)) {
         instr_cr_new_text = `Great job.
@@ -3904,14 +3905,12 @@ Press (H, U, I, or L) to start.`
         }
     }
     penalty_toolate_text = `Response was too late.
-
-Press (H, U, I, or L) to accept a 2 second penalty.`
+2 second penalty.
+After 2 second, press (H, U, I, or L) to continue.`
     ;
     penalty_tooearly_text = `Response was too early.
-
-Press (H, U, I, or L) to accept a 2 second penalty.`
-    ;
-    penalty_countdown_text = `Ready`
+2 second penalty.
+After 2 second, press (H, U, I, or L) to continue.`
     ;
 
 
@@ -6261,6 +6260,7 @@ function Instr_TR_HandRoutineEnd(trials) {
 
 var _Instr_Block_Num_Press_allKeys;
 var Instr_Block_NumComponents;
+var key_item_c;
 function Instr_Block_NumRoutineBegin(trials) {
   return function () {
     //------Prepare to start Routine 'Instr_Block_Num'-------
@@ -6292,9 +6292,10 @@ function Instr_Block_NumRoutineBegin(trials) {
     } 
 
     key_item = key_list[key_rnd];
+    key_item_c = key_list_C[key_rnd];
     finger_item = finger_list[key_rnd];
 
-    Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress ' + key_item + 'using the ' +  finger_item + 'finger') + '\n\n\n\nPress (H, U, I, or L) to start'));
+    Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress (' + key_item_c + ')using the (' +  finger_item + ')finger') + '\n\n\n\nPress (H, U, I, or L) to start'));
     Instr_Block_Num_Press.keys = undefined;
     Instr_Block_Num_Press.rt = undefined;
     _Instr_Block_Num_Press_allKeys = [];
@@ -6870,17 +6871,17 @@ function TR_PenaltyRoutineBegin(trials) {
     t = 0;
     TR_PenaltyClock.reset(); // clock
     frameN = -1;
-    routineTimer.add(2.000000);
-    // update component parameters for each repeat
-    routineTimer.reset(2);
-    countdown = 2;
-    TR_Beep.setVolume(0);
+    // routineTimer.add(2.000000);
+    // // update component parameters for each repeat
+    // routineTimer.reset(2);
+    // countdown = 2;
+    //TR_Beep.setVolume(0);
     // update component parameters for each repeat
     TR_Rec_Frame_Penalty.setLineColor(new util.Color(rec_frame_color));
     TR_Rec_Frame_Penalty.setLineWidth(rec_wd);
     TR_Penalty_Text.setText(tr_penalty_text);
-    penalty_countdown.setText(countdown);
-    penalty_countdown.setHeight(0.1);
+    // penalty_countdown.setText(countdown);
+    // penalty_countdown.setHeight(0.1);
     TR_Penalty_Press.keys = undefined;
     TR_Penalty_Press.rt = undefined;
     _TR_Penalty_Press_allKeys = [];
@@ -6889,8 +6890,8 @@ function TR_PenaltyRoutineBegin(trials) {
     TR_PenaltyComponents.push(TR_Rec_Frame_Penalty);
     TR_PenaltyComponents.push(TR_Penalty_Text);
     TR_PenaltyComponents.push(TR_Penalty_Press);
-    TR_PenaltyComponents.push(penalty_countdown);
-    TR_PenaltyComponents.push(TR_Beep);
+    // TR_PenaltyComponents.push(penalty_countdown);
+    //TR_PenaltyComponents.push(TR_Beep);
     
     for (const thisComponent of TR_PenaltyComponents)
       if ('status' in thisComponent)
@@ -6911,13 +6912,13 @@ function TR_PenaltyRoutineEachFrame(trials) {
     // update/draw components on each frame
     
 
-    if (t >= 0.0 && penalty_countdown.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      penalty_countdown.tStart = t;  // (not accounting for frame time here)
-      penalty_countdown.frameNStart = frameN;  // exact frame index
+    // if (t >= 0.0 && penalty_countdown.status === PsychoJS.Status.NOT_STARTED) {
+    //   // keep track of start time/frame for later
+    //   penalty_countdown.tStart = t;  // (not accounting for frame time here)
+    //   penalty_countdown.frameNStart = frameN;  // exact frame index
       
-      penalty_countdown.setAutoDraw(true);
-    }
+    //   penalty_countdown.setAutoDraw(true);
+    // }
 
 
     // *TR_Rec_Frame_Penalty* updates
@@ -6941,7 +6942,7 @@ function TR_PenaltyRoutineEachFrame(trials) {
 
     
     // *TR_Penalty_Press* updates
-    if (t >= 0.0 && TR_Penalty_Press.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 2 && TR_Penalty_Press.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       TR_Penalty_Press.tStart = t;  // (not accounting for frame time here)
       TR_Penalty_Press.frameNStart = frameN;  // exact frame index
@@ -6959,43 +6960,43 @@ function TR_PenaltyRoutineEachFrame(trials) {
         TR_Penalty_Press.keys = _TR_Penalty_Press_allKeys[0].name;  // just the first key pressed
         TR_Penalty_Press.rt = _TR_Penalty_Press_allKeys[0].rt;
         // a response ends the routine
-       //continueRoutine = false;
+       continueRoutine = false;
       }
     }
     
-    if (_TR_Penalty_Press_allKeys.length > 0 && penalty_countdown.status === PsychoJS.Status.STARTED){ // only update if being drawn
+    // if (_TR_Penalty_Press_allKeys.length > 0 && penalty_countdown.status === PsychoJS.Status.STARTED){ // only update if being drawn
       
-      if (((0 <= t - TR_Penalty_Press.rt) && (t - TR_Penalty_Press.rt < 1))) {
-        countdown = 1;
-      } else {
-          if ((1 <= t - TR_Penalty_Press.rt) && (t - TR_Penalty_Press.rt < 2)) {
-              countdown = 0;
-          } 
-      }
-      penalty_countdown.setText(countdown);
-    }
+    //   if (((0 <= t - TR_Penalty_Press.rt) && (t - TR_Penalty_Press.rt < 1))) {
+    //     countdown = 1;
+    //   } else {
+    //       if ((1 <= t - TR_Penalty_Press.rt) && (t - TR_Penalty_Press.rt < 2)) {
+    //           countdown = 0;
+    //       } 
+    //   }
+    //   penalty_countdown.setText(countdown);
+    // }
 
-    if (t - TR_Penalty_Press.rt >= 2 && penalty_countdown.status === PsychoJS.Status.STARTED && _TR_Penalty_Press_allKeys.length > 0) {
-      penalty_countdown.setAutoDraw(false);
-      TR_Penalty_Text.setAutoDraw(false);
-      TR_Rec_Frame_Penalty.setAutoDraw(false);
-      TR_Penalty_Press.status = PsychoJS.Status.FINISHED;
-    }
+    // if (t - TR_Penalty_Press.rt >= 2 && penalty_countdown.status === PsychoJS.Status.STARTED && _TR_Penalty_Press_allKeys.length > 0) {
+    //   penalty_countdown.setAutoDraw(false);
+    //   TR_Penalty_Text.setAutoDraw(false);
+    //   TR_Rec_Frame_Penalty.setAutoDraw(false);
+    //   TR_Penalty_Press.status = PsychoJS.Status.FINISHED;
+    // }
 
-    // play sound for warm up
-    if (t - TR_Penalty_Press.rt >= 0.0 && TR_Beep.status === PsychoJS.Status.NOT_STARTED && _TR_Penalty_Press_allKeys.length > 0) {
-      // keep track of start time/frame for later
-      TR_Beep.tStart = t;  // (not accounting for frame time here)
-      TR_Beep.frameNStart = frameN;  // exact frame index
-      psychoJS.window.callOnFlip(function(){ TR_Beep.play(); });  // screen flip
-      TR_Beep.status = PsychoJS.Status.STARTED;
+    // // play sound for warm up
+    // if (t - TR_Penalty_Press.rt >= 0.0 && TR_Beep.status === PsychoJS.Status.NOT_STARTED && _TR_Penalty_Press_allKeys.length > 0) {
+    //   // keep track of start time/frame for later
+    //   TR_Beep.tStart = t;  // (not accounting for frame time here)
+    //   TR_Beep.frameNStart = frameN;  // exact frame index
+    //   psychoJS.window.callOnFlip(function(){ TR_Beep.play(); });  // screen flip
+    //   TR_Beep.status = PsychoJS.Status.STARTED;
       
-    }
+    // }
 
-    if (t - TR_Penalty_Press.rt >= 2 && TR_Beep.status === PsychoJS.Status.STARTED) {
-      TR_Beep.stop();  // stop the sound (if longer than duration)
-      TR_Beep.status = PsychoJS.Status.FINISHED;
-    } 
+    // if (t - TR_Penalty_Press.rt >= 2 && TR_Beep.status === PsychoJS.Status.STARTED) {
+    //   TR_Beep.stop();  // stop the sound (if longer than duration)
+    //   TR_Beep.status = PsychoJS.Status.FINISHED;
+    // } 
 
 
     // check for quit (typically the Esc key)
@@ -7040,7 +7041,7 @@ function TR_PenaltyRoutineEnd(trials) {
         }
     
     TR_Penalty_Press.stop();
-    penalty_countdown.setAutoDraw(false);
+    //penalty_countdown.setAutoDraw(false);
     // the Routine "TR_Penalty" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
