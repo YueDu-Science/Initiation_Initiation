@@ -6261,6 +6261,7 @@ function Instr_TR_HandRoutineEnd(trials) {
 var _Instr_Block_Num_Press_allKeys;
 var Instr_Block_NumComponents;
 var key_item_c;
+var finger_item;
 function Instr_Block_NumRoutineBegin(trials) {
   return function () {
     //------Prepare to start Routine 'Instr_Block_Num'-------
