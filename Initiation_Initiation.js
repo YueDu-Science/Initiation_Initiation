@@ -184,7 +184,7 @@ var too_late_tol = 0.2;
 var stop_tol = 2;
 var key_list = ["h", "u", "i", "l"];
 var key_list_C = ["H", "U", "I", "L"];
-var finger_list = ["INDEX", "MIDDLE", "RING", "LITTLER"];
+var finger_list = ["INDEX", "MIDDLE", "RING", "LITTLE"];
 var x_symb = [0, 1, 2, 3, 4, 5, 6, 7];
 var x_letter = [8,9,10,11];
 var x_letter_3 = x_letter.concat(x_letter.concat(x_letter))
@@ -6296,7 +6296,7 @@ function Instr_Block_NumRoutineBegin(trials) {
     key_item_c = key_list_C[key_rnd];
     finger_item = finger_list[key_rnd];
 
-    Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress (' + key_item_c + ')using the (' +  finger_item + ')finger') + '\n\n\n\nPress (H, U, I, or L) to start'));
+    Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger when you see a symbol') + '\n\n\n Press (H, U, I, or L) for letters (1, 2, 3, or 4)' + '\n\n\n\nPress' +  key_item_c + 'to start'));
     Instr_Block_Num_Press.keys = undefined;
     Instr_Block_Num_Press.rt = undefined;
     _Instr_Block_Num_Press_allKeys = [];
