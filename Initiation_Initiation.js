@@ -424,7 +424,7 @@ function experimentInit() {
   
   iter = 0;
   while (iter < 2000) {
-    rng4 = Math.floor(math.random() * key_list.length) 
+    rng4 = Math.floor(Math.random() * key_list.length) 
     if (rng4 !== Math.floor( rng3* key_list.length) ) {
       break;
     }
@@ -6271,11 +6271,11 @@ function Instr_Block_NumRoutineBegin(trials) {
     // update component parameters for each repeat
     if (block_type === "RT") {
       // randomly select a key a response key
-      key_rnd = Math.floor(math.random() * key_list.length) 
+      key_rnd = Math.floor(Math.random() * key_list.length) 
       // use this to set the key in pre_trial routine
     } else if (block_type === "TR" && remap === 0 && pre === 1 && post === 0) {
       // randomly select a key a response key
-      key_rnd = Math.floor(math.random() * key_list.length) 
+      key_rnd = Math.floor(Math.random() * key_list.length) 
       // use this to set the key in pre_trial routine
     } else if (block_type === "TR" && remap === 0 && pre === 0 && post === 1 && block_count === 1) {
       // randomly select a key a response key
@@ -7297,7 +7297,7 @@ function Instr_CR_OldRoutineBegin(trials) {
     symb_g = symb_g_map;
     symb_r = symb_r_map;
  // randomly select a key a response key
-    key_rnd = Math.floor(math.random() * key_list.length) 
+    key_rnd = Math.floor(Math.random() * key_list.length) 
     // use this to set the key in pre_trial routine
 
     // keep track of which components have finished
