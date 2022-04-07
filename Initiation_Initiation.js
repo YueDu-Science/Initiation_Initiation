@@ -3593,7 +3593,6 @@ var remap_pair_rnd;
 var remap_pair_1 = [];
 var remap_pair_2 = [];
 var Init_StimComponents;
-var num_stim;
 function Init_StimRoutineBegin(trials) {
   return function () {
     //------Prepare to start Routine 'Init_Stim'-------
@@ -3607,9 +3606,7 @@ function Init_StimRoutineBegin(trials) {
     coin = StimList[0]["Sound_P"];
     beep = StimList[0]["Beep"];
     buzz = StimList[0]["Sound_N"];
-    num_stim = num_symb + num_letter;
-    console.log(num_stim)
-    for (var i = 0, _pj_a = num_stim; (i < _pj_a); i += 1) {
+    for (var i = 0, _pj_a = num_symb + num_letter; (i < _pj_a); i += 1) {
         stimnum.push(StimList[i]["StimNum"]);
         symb.push(StimList[i]["Symb"]);
         symb_r.push(StimList[i]["Symb_R"]);
@@ -3621,7 +3618,6 @@ function Init_StimRoutineBegin(trials) {
     }
 
     console.log(symb)
-    console.log(symb[9])
 
     symb_map_rnd = Math.floor(rng1 * symb_perm.length) // random interger between 0 and num_symb - 1
     symb_map_ind = symb_perm[symb_map_rnd]; // randomize which symbols corresponds to which index 0 to 7
@@ -3640,7 +3636,7 @@ function Init_StimRoutineBegin(trials) {
     symb_remap_ind[remap_pair_2[0]] = symb_map_ind[remap_pair_2[1]];
     symb_remap_ind[remap_pair_2[1]] = symb_map_ind[remap_pair_2[0]];
 
-     for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
+     for (var i = 0, _pj_a = num_symb + num_letter; (i < _pj_a); i += 1) {
          symb_map.push(symb[symb_map_ind[i]]);
          symb_remap.push(symb[symb_remap_ind[i]]);
          symb_g_map.push(symb_g[symb_map_ind[i]]);
@@ -3652,6 +3648,7 @@ function Init_StimRoutineBegin(trials) {
     psychoJS.experiment.addData("symb_remap", symb_remap_ind);
     psychoJS.experiment.addData("Remap_Pair_1", remap_pair_1);
     psychoJS.experiment.addData("Remap_Pair_2", remap_pair_2);
+    
     
     // keep track of which components have finished
     Init_StimComponents = [];
@@ -5507,7 +5504,7 @@ function Creat_StimSeqRoutineBegin(trials) {
             // add letter catch trials
             // for each count/iteration, need only 2 letters
             x16_new = x16.concat(x_letter_3.slice(2*count,2+2*count))
-            console.log(x16_new)
+            
             console.log(symb)
             console.log(stimnum)
             util.shuffle(x16_new);
