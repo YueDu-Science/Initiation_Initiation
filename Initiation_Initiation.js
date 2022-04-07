@@ -3636,7 +3636,7 @@ function Init_StimRoutineBegin(trials) {
     symb_remap_ind[remap_pair_2[0]] = symb_map_ind[remap_pair_2[1]];
     symb_remap_ind[remap_pair_2[1]] = symb_map_ind[remap_pair_2[0]];
 
-     for (var i = 0, _pj_a = num_symb + num_letter; (i < _pj_a); i += 1) {
+     for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
          symb_map.push(symb[symb_map_ind[i]]);
          symb_remap.push(symb[symb_remap_ind[i]]);
          symb_g_map.push(symb_g[symb_map_ind[i]]);
@@ -3644,6 +3644,18 @@ function Init_StimRoutineBegin(trials) {
          symb_r_map.push(symb_r[symb_map_ind[i]]);
          symb_r_remap.push(symb_r[symb_remap_ind[i]]);
      }
+
+     for (var i = 0, _pj_a = num_letter; (i < _pj_a); i += 1) {
+      symb_map.push(symb[i+num_symb]);
+      symb_remap.push(symb[i+num_symb]);
+      symb_g_map.push(symb_g[i+num_symb]);
+      symb_g_remap.push(symb_g[i+num_symb]);
+      symb_r_map.push(symb_r[i+num_symb]);
+      symb_r_remap.push(symb_r[i+num_symb]);
+  }
+
+
+
     psychoJS.experiment.addData("symb_map", symb_map_ind);
     psychoJS.experiment.addData("symb_remap", symb_remap_ind);
     psychoJS.experiment.addData("Remap_Pair_1", remap_pair_1);
