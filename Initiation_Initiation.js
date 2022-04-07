@@ -3621,6 +3621,7 @@ function Init_StimRoutineBegin(trials) {
     }
 
     console.log(symb)
+    console.log(symb[9])
 
     symb_map_rnd = Math.floor(rng1 * symb_perm.length) // random interger between 0 and num_symb - 1
     symb_map_ind = symb_perm[symb_map_rnd]; // randomize which symbols corresponds to which index 0 to 7
@@ -5508,6 +5509,7 @@ function Creat_StimSeqRoutineBegin(trials) {
             x16_new = x16.concat(x_letter_3.slice(2*count,2+2*count))
             console.log(x16_new)
             console.log(symb)
+            console.log(stimnum)
             util.shuffle(x16_new);
             for (var i, _pj_c = 0, _pj_a = x16_new, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                 i = _pj_a[_pj_c];
@@ -7377,9 +7379,6 @@ function Pre_TrialRoutineBegin(trials) {
       key_item = key_list[key_rnd];
       symb_type = "symbol";
     }
-    console.log(seq_symb)
-    console.log(symb_type)
-    console.log(symb_item)
 
     symb_g_item = seq_symb_g[trial_count];
     symb_r_item = seq_symb_r[trial_count];
