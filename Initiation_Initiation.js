@@ -182,7 +182,8 @@ var pre_trial_dur = 0.2;
 var time_limit = 1.5;
 var too_late_tol = 0.2;
 var stop_tol = 2;
-var key_list = ["h", "u", "i", "l"];
+var key_list = ["H", "U", "I", "L"];
+var finger_list = ["INDEX", "MIDDLE", "RING", "LITTLER"];
 var x_symb = [0, 1, 2, 3, 4, 5, 6, 7];
 var x_letter = [8,9,10,11];
 var x_letter_3 = x_letter.concat(x_letter.concat(x_letter))
@@ -286,6 +287,7 @@ var key = [];
 var rng1
 var rng2
 var rng3
+var rng4
 
 var prep_time_range = [0, 1.2];
 var prep_time_ind_tmp = [];
@@ -401,7 +403,7 @@ var routineTimer;
 var CountDownClock;
 var penalty_countdown_text;
 var sample_num;
-
+var iter;
 
 function experimentInit() {
   document.body.style.cursor='none';
@@ -420,6 +422,15 @@ function experimentInit() {
   rng2 = myrng()
   rng3 = myrng()
   
+  iter = 0;
+  while (iter < 2000) {
+    rng4 = Math.floor(math.random() * key_list.length) 
+    if (rng4 !== Math.floor( rng3* key_list.length) ) {
+      break;
+    }
+    iter = iter + 1;
+  }
+
   //determine which group participants are in
   /* if ((rng1 < 0.5)) {
       grp_stop = 1;
@@ -6258,7 +6269,32 @@ function Instr_Block_NumRoutineBegin(trials) {
     frameN = -1;
     TR_Coin.setVolume(0);
     // update component parameters for each repeat
-    Instr_Block_Num_Text.setText((('Block ' + block_count) + '\nPress (H, U, I, or L) to start'));
+    if (block_type === "RT") {
+      // randomly select a key a response key
+      key_rnd = Math.floor(math.random() * key_list.length) 
+      // use this to set the key in pre_trial routine
+    } else if (block_type === "TR" && remap === 0 && pre === 1 && post === 0) {
+      // randomly select a key a response key
+      key_rnd = Math.floor(math.random() * key_list.length) 
+      // use this to set the key in pre_trial routine
+    } else if (block_type === "TR" && remap === 0 && pre === 0 && post === 1 && block_count === 1) {
+      // randomly select a key a response key
+      key_rnd = Math.floor(rng3 * key_list.length) 
+      // use this to set the key in pre_trial routine
+    } else if (block_type === "TR" && remap === 0 && pre === 0 && post === 1 && block_count === 2) {
+      // randomly select a key a response key
+      key_rnd = Math.floor(rng4 * key_list.length) 
+      // use this to set the key in pre_trial routine
+    } else if (block_type === "TR" && remap === 1) {
+      // randomly select a key a response key
+      key_rnd = Math.floor(rng4 * key_list.length) 
+      // use this to set the key in pre_trial routine
+    } 
+
+    key_item = key_list[key_rnd];
+    finger_item = finger_list[key_rnd];
+
+    Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress ' + key_item + 'using the ' +  finger_item + 'finger') + '\n\n\n\nPress (H, U, I, or L) to start'));
     Instr_Block_Num_Press.keys = undefined;
     Instr_Block_Num_Press.rt = undefined;
     _Instr_Block_Num_Press_allKeys = [];
@@ -7261,7 +7297,7 @@ function Instr_CR_OldRoutineBegin(trials) {
     symb_g = symb_g_map;
     symb_r = symb_r_map;
  // randomly select a key a response key
-    key_rnd = Math.floor(rng3 * key_list.length) 
+    key_rnd = Math.floor(math.random() * key_list.length) 
     // use this to set the key in pre_trial routine
 
     // keep track of which components have finished
@@ -7703,6 +7739,10 @@ function RT_Enter_TrialRoutineEnd(trials) {
     if ((block_type === "RT")) {
         trial_count = (trial_count + 1);
     }
+
+    if ((block_type === "CR") && (remap === 0)) {
+      trial_count = (trial_count + 1);
+  }
     
     // was no response the correct answer?!
     if (RT_Press.keys === undefined) {
@@ -7996,9 +8036,7 @@ function Instr_TR_Old_PreRoutineBegin(trials) {
     symb = symb_map;
     symb_g = symb_g_map;
     symb_r = symb_r_map;
-    // randomly select a key a response key
-    key_rnd = Math.floor(rng3 * key_list.length) 
-    // use this to set the key in pre_trial routine
+    
 
     // keep track of which components have finished
     // keep track of which components have finished
@@ -8585,10 +8623,7 @@ function Instr_RTRoutineBegin(trials) {
   symb_g = symb_g_map;
   symb_r = symb_r_map;
   
-  // randomly select a key a response key
-  key_rnd = Math.floor(rng3 * key_list.length) 
-  // use this to set the key in pre_trial routine
-
+  
     // keep track of which components have finished
     Instr_RTComponents = [];
     Instr_RTComponents.push(Instr_RT_Text);
@@ -8734,9 +8769,7 @@ function Instr_TR_Old_PostRoutineBegin(trials) {
     symb = symb_map;
     symb_g = symb_g_map;
     symb_r = symb_r_map;
-    // randomly select a key a response key
-    key_rnd = Math.floor(rng3 * key_list.length) 
-    // use this to set the key in pre_trial routine
+    
 
 
     // keep track of which components have finished
@@ -8877,7 +8910,7 @@ function Instr_CR_NewRoutineBegin(trials) {
     }
     
     // randomly select a key a response key
-    key_rnd = Math.floor(rng3 * key_list.length) 
+    key_rnd = Math.floor(rng4 * key_list.length) 
     // use this to set the key in pre_trial routine
 
     // keep track of which components have finished
@@ -9271,9 +9304,6 @@ function Instr_TR_NewRoutineBegin(trials) {
       }
   }
     
-  // randomly select a key a response key
-  key_rnd = Math.floor(rng3 * key_list.length) 
-  // use this to set the key in pre_trial routine
     // keep track of which components have finished
     Instr_TR_NewComponents = [];
     Instr_TR_NewComponents.push(Instr_TR_Old_Post_text_3);
