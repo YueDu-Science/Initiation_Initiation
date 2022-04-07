@@ -7371,6 +7371,10 @@ function Pre_TrialRoutineBegin(trials) {
       key_item = key_list[key_rnd];
       symb_type = "symbol";
     }
+    console.log(seq_symb)
+    console.log(symb_type)
+    console.log(symb_item)
+
     symb_g_item = seq_symb_g[trial_count];
     symb_r_item = seq_symb_r[trial_count];
     keynum_item = seq_keynum[trial_count];
@@ -8086,8 +8090,7 @@ function TR_Enter_TrialsRoutineBegin(trials) {
     TR_Rec_Frame.setOpacity(rec_frame_opacity);
     TR_Rec_Frame.setLineColor(new util.Color(rec_frame_color));
     TR_Rec_Frame.setLineWidth(rec_wd);
-    console.log(symb_type)
-    console.log(symb_item)
+    
 
     TR_Enter_TrialsComponents = [];
     if (symb_type === "symbol"){
