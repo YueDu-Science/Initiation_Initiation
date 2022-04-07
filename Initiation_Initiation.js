@@ -207,6 +207,7 @@ var symb_r_remap = [];
 var tr_block_hand = 4;
 var num_trials_hand = 4;
 var num_trials_cr = 2000;
+var num_trials_cr_old = 20;
 var num_criterion = 5;
 var num_trials = 108;
 var rt_block = 1;
@@ -216,7 +217,7 @@ var tr_block_new_stop = 1;
 
 var tr_hand_yes = 0;
 var rt_hand_yes = 0;
-var cr_old_yes = 0;
+var cr_old_yes = 1;
 var cr_new_yes = 1;
 var rt_yes = 1;
 var tr_old_pre_yes = 1;
@@ -2400,7 +2401,7 @@ function CR_Old_IterLoopBegin(thisScheduler) {
   // set up handler to look after randomisation of conditions etc
   CR_Old_Iter = new TrialHandler({
     psychoJS: psychoJS,
-    nReps: num_trials_cr, method: TrialHandler.Method.SEQUENTIAL,
+    nReps: num_trials_cr_old, method: TrialHandler.Method.SEQUENTIAL,
     extraInfo: expInfo, originPath: undefined,
     trialList: undefined,
     seed: undefined, name: 'CR_Old_Iter'
@@ -2421,9 +2422,9 @@ function CR_Old_IterLoopBegin(thisScheduler) {
     thisScheduler.add(RT_FeedbackRoutineBegin(snapshot));
     thisScheduler.add(RT_FeedbackRoutineEachFrame(snapshot));
     thisScheduler.add(RT_FeedbackRoutineEnd(snapshot));
-    thisScheduler.add(Criterion_DetRoutineBegin(snapshot));
-    thisScheduler.add(Criterion_DetRoutineEachFrame(snapshot));
-    thisScheduler.add(Criterion_DetRoutineEnd(snapshot));
+   // thisScheduler.add(Criterion_DetRoutineBegin(snapshot));
+   // thisScheduler.add(Criterion_DetRoutineEachFrame(snapshot));
+   // thisScheduler.add(Criterion_DetRoutineEnd(snapshot));
     thisScheduler.add(endLoopIteration(thisScheduler, snapshot));
   }
 
@@ -5473,7 +5474,7 @@ function Creat_StimSeqRoutineBegin(trials) {
             count = (count + 1);
         }
     }
-    if ((block_type === "CR")) {
+    if ((block_type === "CR") && (remap === 1)) {
       count = 0;
       while ((count < (num_trials_cr / 40))) {
           util.shuffle(x16);
@@ -5533,6 +5534,30 @@ function Creat_StimSeqRoutineBegin(trials) {
             count = (count + 1);
         }
     }
+
+    if (((block_type === "CR") && (remap === 0))) {
+      count = 0;
+      while ((count < (num_trials / 18))) {
+          // add letter catch trials
+          // for each count/iteration, need only 2 letters
+          x16_new = x16.concat(x_letter_3.slice(2*count,2+2*count))
+          
+          console.log(symb)
+          console.log(stimnum)
+          util.shuffle(x16_new);
+          for (var i, _pj_c = 0, _pj_a = x16_new, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+              i = _pj_a[_pj_c];
+              seq_stimnum.push(stimnum[i]);
+              seq_key.push(key[i]);
+              seq_symb.push(symb[i]);
+              seq_symb_g.push(symb_g[i]);
+              seq_symb_r.push(symb_r[i]);
+              seq_keynum.push(keynum[i]);
+          }
+          
+          count = (count + 1);
+      }
+  }
 
     if (((block_type === "TR") && (stim_type === "Symb") && (remap === 1))) {
       count = 0;
