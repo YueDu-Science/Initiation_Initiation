@@ -2231,9 +2231,9 @@ function TR_Block_HandLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    //thisScheduler.add(CountDownRoutineBegin(snapshot));
-    //thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    //thisScheduler.add(CountDownRoutineEnd(snapshot));
+    thisScheduler.add(CountDownRoutineBegin(snapshot));
+    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
+    thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_HandLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_HandLoopBegin, TR_Iter_HandLoopScheduler);
     thisScheduler.add(TR_Iter_HandLoopScheduler);
@@ -2512,9 +2512,9 @@ function TR_Old_Block_PreLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    //thisScheduler.add(CountDownRoutineBegin(snapshot));
-    //thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    //thisScheduler.add(CountDownRoutineEnd(snapshot));
+    thisScheduler.add(CountDownRoutineBegin(snapshot));
+    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
+    thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_Old_PreLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_Old_PreLoopBegin, TR_Iter_Old_PreLoopScheduler);
     thisScheduler.add(TR_Iter_Old_PreLoopScheduler);
@@ -2826,9 +2826,9 @@ function TR_Old_Block_PostLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    //thisScheduler.add(CountDownRoutineBegin(snapshot));
-    //thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    //thisScheduler.add(CountDownRoutineEnd(snapshot));
+    thisScheduler.add(CountDownRoutineBegin(snapshot));
+    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
+    thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_Old_PostLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_Old_PostLoopBegin, TR_Iter_Old_PostLoopScheduler);
     thisScheduler.add(TR_Iter_Old_PostLoopScheduler);
@@ -3226,9 +3226,9 @@ function TR_New_Block_SwapLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    //thisScheduler.add(CountDownRoutineBegin(snapshot));
-    //thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    //thisScheduler.add(CountDownRoutineEnd(snapshot));
+    thisScheduler.add(CountDownRoutineBegin(snapshot));
+    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
+    thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_New_SwapLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_New_SwapLoopBegin, TR_Iter_New_SwapLoopScheduler);
     thisScheduler.add(TR_Iter_New_SwapLoopScheduler);
@@ -3383,9 +3383,9 @@ function TR_New_Block_StopLoopBegin(thisScheduler) {
     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
-    //thisScheduler.add(CountDownRoutineBegin(snapshot));
-    //thisScheduler.add(CountDownRoutineEachFrame(snapshot));
-    //thisScheduler.add(CountDownRoutineEnd(snapshot));
+    thisScheduler.add(CountDownRoutineBegin(snapshot));
+    thisScheduler.add(CountDownRoutineEachFrame(snapshot));
+    thisScheduler.add(CountDownRoutineEnd(snapshot));
     const TR_Iter_New_StopLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Iter_New_StopLoopBegin, TR_Iter_New_StopLoopScheduler);
     thisScheduler.add(TR_Iter_New_StopLoopScheduler);
@@ -6317,7 +6317,7 @@ function Instr_Block_NumRoutineBegin(trials) {
     key_item_c = key_list_C[key_rnd];
     finger_item = finger_list[key_rnd];
 
-    Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger when you see a symbol') + '\n\n\n Press (H, U, I, or L) for letters (1, 2, 3, or 4)' + '\n\n\n\nPress' +  key_item_c + 'to start'));
+    Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger when you see a symbol') + '\n\n\n Press (H, U, I, or L) for letters (1, 2, 3, or 4)' + '\n\n\n\nPress ( ' +  key_item_c + ' ) to start'));
     Instr_Block_Num_Press.keys = undefined;
     Instr_Block_Num_Press.rt = undefined;
     _Instr_Block_Num_Press_allKeys = [];
@@ -7317,7 +7317,7 @@ function Instr_CR_OldRoutineBegin(trials) {
     
 In the upcoming block, rest your INDEX, MIDDLE, RING, LITTLE fingers on keys (H, U, I, L).
 
-You will see eight novel symbols on the screen, one at a time. All symbols correspond to (${key_item_c}).
+You will see eight novel symbols on the screen, one at a time. All symbols correspond to key (${key_item_c}).
     
 Occasionally, you will also see four letters (1, 2, 3, 4) on the screen, one at a time. Each corresponds to one of (H, U, I, L). 
 
@@ -7625,7 +7625,7 @@ function RT_Enter_TrialRoutineBegin(trials) {
     RT_Enter_TrialClock.reset(); // clock
     frameN = -1;
 
-    jitter = Math.random()*0.3;
+    jitter = Math.random()*0.4;
 
     // update component parameters for each repeat
     RT_Rec_Frame.setOpacity(rec_frame_opacity);
