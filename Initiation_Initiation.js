@@ -3760,7 +3760,7 @@ After the data are saved, click 'OK' to exit and close the webpage.`
 
     instr_exp_text = `Thank you for participating in our study!
     
-This study will take about 1.5 to 2 hours. 
+This study will take about 1 hour. 
 
 Once you start, you can take a break between rounds, Please DO NOT turn off your web browser until you complete the task, unless you decide to withdraw from this study.
     
@@ -3793,20 +3793,24 @@ Press (H, U, I, or L) to proceed.`
     ;
     instr_cr_old_text = `Good Job! You are now ready for the tasks!
     
-In the upcoming block, you will see eight symbols on the screen, one at a time. Each symbol corresponds to one of (H, U, I, L). 
+In the upcoming block, you will see eight novel symbols on the screen, one at a time. All symbols correspond to one of (H, U, I, L). You will be informed which key to press on next page.
     
-Your job is to figure out which symbol corresponds with which key.
+Occasionally, you will also see four letters (1, 2, 3, 4) on the screen, one at a time. Each corresponds to one of (H, U, I, L). 
+
+For example, press key (H) to letter (1), press key (U) to letter (2), and so on.
+
+Use this block to learn how to do the task. You can go as slowly as you need to.
     
-    
-ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
-        
-    
-    
+
 Ready? Press (H, U, I, or L) to continue.`
     ;
     if ((session === 1)) {
       instr_rt_text = `Now you are going to practice the symbol-key map you learned. 
       
+Remember that all symbols are associated with only one key, which will be shown on next page.
+
+Letters (1, 2, 3, 4) are assocaited with (H, U, I, L) respectively.
+
 Your job is to press the corresponding key as quickly and as accurately as possible.
   
 There will be ${rt_block} blocks with short breaks in between.
@@ -3826,8 +3830,13 @@ Whenever you are ready, press (H, U, I, or L) to start.`
   }
   instr_tr_old_pre_text = `Good job so far.
     
-In the following ${tr_block_old} blocks, use the symbol-key map you learned. Press the corresponding key ON the fourth beep. 
-  
+In the following ${tr_block_old} blocks, you will hear four beeps. For each symbol or letter, press the corresponding key ON the fourth beep. 
+
+All symbols are associated with only one key, which will be shown on next page.
+
+Letters (1, 2, 3, 4) are assocaited with (H, U, I, L) respectively.
+
+
 Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
       
   
@@ -3835,7 +3844,11 @@ Press (H, U, I, or L) to start.`
       ;
       instr_tr_old_post_text = `Great job.
       
-In the following ${tr_block_old} blocks, use the symbol-key map you practices. Press the corresponding key ON the fourth beep. 
+In the following ${tr_block_old} blocks, you will hear four beeps. For each symbol or letter, press the corresponding key ON the fourth beep. 
+
+All symbols are associated with only one key, which will be shown on next page.
+
+Letters (1, 2, 3, 4) are assocaited with (H, U, I, L) respectively.
   
 Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
       
@@ -7657,7 +7670,7 @@ function RT_Enter_TrialRoutineEachFrame(trials) {
 
     
     // *RT_Press* updates
-    if (t >= 0.0 && RT_Press.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= jitter && RT_Press.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       RT_Press.tStart = t;  // (not accounting for frame time here)
       RT_Press.frameNStart = frameN;  // exact frame index
@@ -8894,6 +8907,25 @@ function Instr_CR_NewRoutineBegin(trials) {
     frameN = -1;
     TR_Coin.setVolume(0);
     // update component parameters for each repeat
+    // randomly select a key a response key
+    key_rnd = Math.floor(rng4 * key_list.length) 
+    key_item_c = key_list_C[key_rnd];
+    // use this to set the key in pre_trial routine
+
+
+    instr_cr_new_text = `Great job.
+    
+In next block, you will see the same eight symbols, but this time some of them are associated with ${key_item_c}, while some of them may NO longer require a response.
+        
+Your job is to figure out which are those symbols and DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+        
+        
+ACCURACY is the priority, so go as slowly as you need to. The more mistaks you make, the longer this block will take.
+        
+        
+Press (H, U, I, or L) to start.`
+    ;
+
     Instr_CR_New_Text.setText(instr_cr_new_text);
     Instr_CR_New_Press.keys = undefined;
     Instr_CR_New_Press.rt = undefined;
@@ -8915,10 +8947,6 @@ function Instr_CR_NewRoutineBegin(trials) {
         }
     }
     
-    // randomly select a key a response key
-    key_rnd = Math.floor(rng4 * key_list.length) 
-    // use this to set the key in pre_trial routine
-
     // keep track of which components have finished
     Instr_CR_NewComponents = [];
     Instr_CR_NewComponents.push(Instr_CR_New_Text);
