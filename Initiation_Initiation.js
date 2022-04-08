@@ -3807,7 +3807,9 @@ Ready? Press (H, U, I, or L) to continue.`
     if ((session === 1)) {
       instr_rt_text = `Now you are going to practice the symbol-key map you learned. 
       
-Remember that all symbols are associated with only one key, which will be shown on next page.
+Keep resting your INDEX, MIDDLE, RING, LITTLE fingers on keys (H, U, I, L).
+
+All symbols are associated with only one key, which will be shown on next page.
 
 Letters (1, 2, 3, 4) are assocaited with (H, U, I, L) respectively.
 
@@ -3830,7 +3832,9 @@ Whenever you are ready, press (H, U, I, or L) to start.`
   }
   instr_tr_old_pre_text = `Good job so far.
     
-In the following ${tr_block_old} blocks, you will hear four beeps. For each symbol or letter, press the corresponding key ON the fourth beep. 
+In the following ${tr_block_old} blocks, Keep resting your INDEX, MIDDLE, RING, LITTLE fingers on keys (H, U, I, L).
+
+You will hear four beeps. For each symbol or letter, press the corresponding key ON the fourth beep. 
 
 All symbols are associated with only one key, which will be shown on next page.
 
@@ -3844,7 +3848,9 @@ Press (H, U, I, or L) to start.`
       ;
       instr_tr_old_post_text = `Great job.
       
-In the following ${tr_block_old} blocks, you will hear four beeps. For each symbol or letter, press the corresponding key ON the fourth beep. 
+In the following ${tr_block_old} blocks, Keep resting your INDEX, MIDDLE, RING, LITTLE fingers on keys (H, U, I, L).
+
+You will hear four beeps. For each symbol or letter, press the corresponding key ON the fourth beep. 
 
 All symbols are associated with only one key, which will be shown on next page.
 
@@ -3899,9 +3905,11 @@ Press (H, U, I, or L) to start.`
     } else {
         if ((grp_stop === 1)) {
             instr_tr_new_text = `Great job. We are almost there!
+
+Remember to keep resting your INDEX, MIDDLE, RING, LITTLE fingers on keys (H, U, I, L).
             
 In the last ${tr_block_new_stop} blocks, use the NEW symbol-key map you just learned:
-If you see a symbol that requires a response, press the corresponding key ON the fourth beep.             
+If you see a symbol that requires a response, press the corresponding key (shown on next page) ON the fourth beep.             
 If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING.
 
 
@@ -7300,6 +7308,29 @@ function Instr_CR_OldRoutineBegin(trials) {
     frameN = -1;
     TR_Coin.setVolume(0);
     // update component parameters for each repeat
+    // randomly select a key a response key
+    key_rnd = Math.floor(Math.random() * key_list.length) 
+    key_item_c = key_list_C[key_rnd];
+    // use this to set the key in pre_trial routine
+
+    instr_cr_old_text = `Good Job! You are now ready for the tasks!
+    
+In the upcoming block, rest your INDEX, MIDDLE, RING, LITTLE fingers on keys (H, U, I, L).
+
+You will see eight novel symbols on the screen, one at a time. All symbols correspond to (${key_item_c}).
+    
+Occasionally, you will also see four letters (1, 2, 3, 4) on the screen, one at a time. Each corresponds to one of (H, U, I, L). 
+
+For example, press key (H) to letter (1), press key (U) to letter (2), and so on.
+
+
+
+Use this block to learn how to do the task. You can go as slowly as you need to.
+    
+
+Ready? Press (H, U, I, or L) to continue.`
+    ;
+
     Instr_CR_Old_Text.setText(instr_cr_old_text);
     Instr_CR_Old_Press.keys = undefined;
     Instr_CR_Old_Press.rt = undefined;
@@ -7311,9 +7342,7 @@ function Instr_CR_OldRoutineBegin(trials) {
     symb = symb_map;
     symb_g = symb_g_map;
     symb_r = symb_r_map;
- // randomly select a key a response key
-    key_rnd = Math.floor(Math.random() * key_list.length) 
-    // use this to set the key in pre_trial routine
+ 
 
     // keep track of which components have finished
     Instr_CR_OldComponents = [];
