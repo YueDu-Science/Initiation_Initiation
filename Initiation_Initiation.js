@@ -425,8 +425,8 @@ function experimentInit() {
   
   iter = 0;
   while (iter < 2000) {
-    rng4 = Math.floor(Math.random() * key_list.length) 
-    if (rng4 !== Math.floor( rng3* key_list.length) ) {
+    rng4 = myrng()
+    if (Math.floor( rng4* key_list.length) !== Math.floor( rng3* key_list.length) ) {
       break;
     }
     iter = iter + 1;
