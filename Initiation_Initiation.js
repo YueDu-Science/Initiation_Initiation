@@ -6317,7 +6317,15 @@ function Instr_Block_NumRoutineBegin(trials) {
     key_item_c = key_list_C[key_rnd];
     finger_item = finger_list[key_rnd];
 
-    Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger when you see a symbol') + '\n\n\n Press (H, U, I, or L) for letters (1, 2, 3, or 4)' + '\n\n\n\nPress ( ' +  key_item_c + ' ) to start'));
+    if (block_type === "TR" && remap === 1) {
+      Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') + '\n\n\n\nPress ( ' +  key_item_c + ' ) to start'));
+    } else{
+      Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger when you see a symbol') + '\n\n\n Press (H, U, I, or L) for letters (1, 2, 3, or 4)' + '\n\n\n\nPress ( ' +  key_item_c + ' ) to start'));
+    }
+    
+    
+    
+    
     Instr_Block_Num_Press.keys = undefined;
     Instr_Block_Num_Press.rt = undefined;
     _Instr_Block_Num_Press_allKeys = [];
@@ -8946,7 +8954,9 @@ function Instr_CR_NewRoutineBegin(trials) {
 
     instr_cr_new_text = `Great job.
     
-In next block, you will see the same eight symbols, but this time some of them are associated with ${key_item_c}, while some of them may NO longer require a response.
+In next block, keep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).
+
+You will see the same eight symbols, but this time some of them require you to press ${key_item_c} using the ${finger_item} finger, while some of them may NO longer require a response.
         
 Your job is to figure out which are those symbols and DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
         
