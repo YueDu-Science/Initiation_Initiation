@@ -6309,7 +6309,7 @@ function Instr_Block_NumRoutineBegin(trials) {
       // use this to set the key in pre_trial routine
     } else if (block_type === "TR" && remap === 1) {
       // randomly select a key a response key
-      key_rnd = Math.floor(rng4 * key_list.length) 
+      key_rnd = Math.floor(rng3 * key_list.length) 
       // use this to set the key in pre_trial routine
     } 
 
@@ -8939,7 +8939,7 @@ function Instr_CR_NewRoutineBegin(trials) {
     TR_Coin.setVolume(0);
     // update component parameters for each repeat
     // randomly select a key a response key
-    key_rnd = Math.floor(rng4 * key_list.length) 
+    key_rnd = Math.floor(rng3 * key_list.length) 
     key_item_c = key_list_C[key_rnd];
     // use this to set the key in pre_trial routine
 
