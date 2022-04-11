@@ -3770,7 +3770,7 @@ Press (space bar) to continue.`
     ;
     instr_rt_text_hand = `The upcoming 3 blocks are used to help you get familiar with the task.
     
-With your Right hand, place your Index, Middle, Ring, and Pinky fingers on (H, U, I, L) respectively. Your fingers will rest on these keys for the entirety of the experiment.
+With your Right hand, place your Index, Middle, Ring, and Little fingers on (H, U, I, L) respectively. Your fingers will rest on these keys for the entirety of the experiment.
     
 You will see a hand appear on the screen. One of the fingers on the screen will light up and your job is to press the corresponding finger as quickly and as accurately as possible.
     
@@ -3832,7 +3832,7 @@ Whenever you are ready, press (H, U, I, or L) to start.`
   }
   instr_tr_old_pre_text = `Good job so far.
     
-In the following ${tr_block_old} blocks, Keep resting your INDEX, MIDDLE, RING, LITTLE fingers on keys (H, U, I, L).
+In the following ${tr_block_old} blocks, Keep resting your Index, Middle, Ring, and Little fingers on keys (H, U, I, L).
 
 You will hear four beeps. For each symbol or letter, press the corresponding key ON the fourth beep. 
 
@@ -3848,7 +3848,7 @@ Press (H, U, I, or L) to start.`
       ;
       instr_tr_old_post_text = `Great job.
       
-In the following ${tr_block_old} blocks, Keep resting your INDEX, MIDDLE, RING, LITTLE fingers on keys (H, U, I, L).
+In the following ${tr_block_old} blocks, Keep resting your Index, Middle, Ring, and Little fingers on keys (H, U, I, L).
 
 You will hear four beeps. For each symbol or letter, press the corresponding key ON the fourth beep. 
 
@@ -3906,7 +3906,7 @@ Press (H, U, I, or L) to start.`
         if ((grp_stop === 1)) {
             instr_tr_new_text = `Great job. We are almost there!
 
-Remember to keep resting your INDEX, MIDDLE, RING, LITTLE fingers on keys (H, U, I, L).
+Remember to keep resting your Index, Middle, Ring, and Little fingers on keys (H, U, I, L).
             
 In the last ${tr_block_new_stop} blocks, use the NEW symbol-key map you just learned:
 If you see a symbol that requires a response, press the corresponding key (shown on next page) ON the fourth beep.             
@@ -7315,7 +7315,7 @@ function Instr_CR_OldRoutineBegin(trials) {
 
     instr_cr_old_text = `Good Job! You are now ready for the tasks!
     
-In the upcoming block, rest your INDEX, MIDDLE, RING, LITTLE fingers on keys (H, U, I, L).
+In the upcoming block, rest your Index, Middle, Ring, and Little fingers on keys (H, U, I, L).
 
 You will see eight novel symbols on the screen, one at a time. All symbols correspond to key (${key_item_c}).
     
@@ -8081,6 +8081,7 @@ function Instr_TR_Old_PreRoutineBegin(trials) {
     remap = 0;
     block_count = 0;
     pre = 1;
+    post = 0;
     symb = symb_map;
     symb_g = symb_g_map;
     symb_r = symb_r_map;
@@ -8813,6 +8814,7 @@ function Instr_TR_Old_PostRoutineBegin(trials) {
     stim_type = "Symb";
     remap = 0;
     block_count = 0;
+    pre = 0;
     post = 1;
     symb = symb_map;
     symb_g = symb_g_map;
