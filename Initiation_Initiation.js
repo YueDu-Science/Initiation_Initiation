@@ -210,7 +210,7 @@ var tr_block_hand = 4;
 var num_trials_hand = 4;
 var num_trials_cr = 2000;
 var num_trials_cr_old = 10;
-var num_criterion = 5;
+var num_criterion = 2;
 var num_trials = 10;
 var rt_block = 1;
 var tr_block_old = 2;
@@ -8956,7 +8956,7 @@ function Instr_CR_NewRoutineBegin(trials) {
     
 In next block, keep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).
 
-You will see the same eight symbols, but this time some of them require you to press ${key_item_c} using the ${finger_item} finger, while some of them may NO longer require a response.
+You will see the same eight symbols, but this time some of them require you to press key (${key_item_c}) using the (${finger_item}) finger, while some of them may NO longer require a response.
         
 Your job is to figure out which are those symbols and DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
         
