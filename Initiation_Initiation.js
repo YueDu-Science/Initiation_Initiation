@@ -209,9 +209,9 @@ var symb_r_remap = [];
 var tr_block_hand = 4;
 var num_trials_hand = 4;
 var num_trials_cr = 2000;
-var num_trials_cr_old = 20;
+var num_trials_cr_old = 10;
 var num_criterion = 5;
-var num_trials = 108;
+var num_trials = 10;
 var rt_block = 1;
 var tr_block_old = 2;
 var tr_block_new_swap = 0;
@@ -3807,7 +3807,7 @@ Ready? Press (H, U, I, or L) to continue.`
     if ((session === 1)) {
       instr_rt_text = `Now you are going to practice the symbol-key map you learned. 
       
-Keep resting your INDEX, MIDDLE, RING, LITTLE fingers on keys (H, U, I, L).
+Keep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).
 
 All symbols are associated with only one key, which will be shown on next page.
 
@@ -7509,7 +7509,7 @@ function Pre_TrialRoutineBegin(trials) {
             stim_start_time = ((prep_time_range[1] - prep_time) + beep_lead_in);
             trial_count_item[stimnum_item] = (trial_count_item[stimnum_item] + 1);
           } else if (symb_type === "number"){
-            prep_time = Math.random() * (0.6 - 0.25) + 0.25;
+            prep_time = Math.random() * (1.2 - 0.4) + 0.4;
             stim_start_time = ((prep_time_range[1] - prep_time) + beep_lead_in);
             }
       } else {
