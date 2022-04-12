@@ -3822,6 +3822,8 @@
  var instr_rt_old_text_1;
  var instr_rt_old_text_2;
  var instr_rt_old_text_3;
+ var instr_tr_old_post_text_1;
+ var instr_tr_old_post_text_2;
  var instr_tr_old_pre_text;
  var instr_tr_old_post_text;
  var instr_cr_new_text;
@@ -3849,187 +3851,176 @@
  
      instr_end_exp_text = `Great job! You have completed the task.
      
- Press (space bar) to proceed so that your data can be saved. The saving process may take up to 1 minute.
+Press (space bar) to proceed so that your data can be saved. The saving process may take up to 1 minute.
  
- After the data are saved, click 'OK' to exit and close the webpage.`
+After the data are saved, click 'OK' to exit and close the webpage.`
      ;
  
      instr_exp_text = `Thank you for participating in our study!
      
- This study will take about 1.5 to 2 hours. 
+This study will take about 1.5 to 2 hours. 
  
- Once you start, you can take a break between rounds, Please DO NOT turn off your web browser until you complete the task, unless you decide to withdraw from this study.
+Once you start, you can take a break between rounds, Please DO NOT turn off your web browser until you complete the task, unless you decide to withdraw from this study.
      
  
  
- Press (space bar) to continue.`
+Press (space bar) to continue.`
      ;
      instr_rt_text_hand = `The upcoming 3 blocks are used to help you get familiar with the task.
      
- With your Right hand, place your Index, Middle, Ring, and Pinky fingers on (H, U, I, L) respectively. Your fingers will rest on these keys for the entirety of the experiment.
+With your Right hand, place your Index, Middle, Ring, and Pinky fingers on (H, U, I, L) respectively. Your fingers will rest on these keys for the entirety of the experiment.
      
- You will see a hand appear on the screen. One of the fingers on the screen will light up and your job is to press the corresponding finger as quickly and as accurately as possible.
+You will see a hand appear on the screen. One of the fingers on the screen will light up and your job is to press the corresponding finger as quickly and as accurately as possible.
      
  
  
- Press (H, U, I, or L) to start.`
+Press (H, U, I, or L) to start.`
      ;
      instr_tr_text_hand = `Great Job!
      
- In the following blocks, you will hear 4 beeps. You need to press the corresponding finger ON the fourth beep. 
+In the following blocks, you will hear 4 beeps. You need to press the corresponding finger ON the fourth beep. 
  
  
- Sometimes, the finger will light up at the very last second. You will not have enough time to know which finger to press. In this case, MAKE A GUESS. Always press one of your fingers ON the fourth beep.
+Sometimes, the finger will light up at the very last second. You will not have enough time to know which finger to press. In this case, MAKE A GUESS. Always press one of your fingers ON the fourth beep.
      
      
- There will be at least 2 blocks, depending on how well you press ON the fourth beep.
+There will be at least 2 blocks, depending on how well you press ON the fourth beep.
      
      
- Press (H, U, I, or L) to proceed.`
+Press (H, U, I, or L) to proceed.`
      ;
-     instr_cr_old_text_1 = `In the upcoming block, you will see 8 symbols on the screen, one at a time. You job is to figure out the association between symbols and keys.
- 
- 
- Some symbols correspond to (H, U, I, or L). 
- 
- Some symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
- 
- 
- 
- ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
+     instr_cr_old_text_1 = `Good Job! You are now ready for the tasks!
+
+There will be ${prac_old_block} rounds. Each round has 2 blocks with short breaks in between. 
      
+In the upcoming block, you will see eight symbols on the screen, one at a time. Each symbol corresponds to one of (H, U, I, L). Some of these four keys may not be used.
+
+Your job is to figure out which symbol corresponds with which key.
+     
+     
+ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
  
  
- Ready? Press (H, U, I, or L) to start.`
+Ready? Press (H, U, I, or L) to start.`
      ;
  
      instr_cr_old_text_2 = `In the upcoming block, your job is to figure out a NEW association between symbols and keys.
      
  
- Again, some symbols correspond to (H, U, I, or L). 
- 
- Some symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+Again, each symbol corresponds to one of (H, U, I, L). Some of these four keys may not be used.
  
  
- ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
+ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
      
  
  
- Ready? Press (H, U, I, or L) to start.`
+Ready? Press (H, U, I, or L) to start.`
      ;
  
      instr_cr_old_text_3 = `In the next block, take you time to figure out a NEW association again.
    
  
- Again, some symbols correspond to (H, U, I, or L). 
- 
- Some symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+Similarly, each symbol corresponds to one of (H, U, I, L). Some of these four keys may not be used.
  
  
- ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
+ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
      
  
  
- Ready? Press (H, U, I, or L) to start.`
+Ready? Press (H, U, I, or L) to start.`
      ;
  
-     instr_rt_old_text_1 = `Now, use the symbol-key map you just learned:
+     instr_rt_old_text_1 = `Now, use the symbol-key map you just learned.
  
- If you see a symbol that requires a response, press the corresponding key as quickly and as accurately as possible.            
- 
- If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING, and simply wait for 2 second.
+Your job is to press the corresponding key as quickly and as accurately as possible.
      
  
-     
- 
- Whenever you are ready, press (H, U, I, or L) to start.`
+Whenever you are ready, press (H, U, I, or L) to start.`
      ;
  
-     instr_rt_old_text_2 = `In the upcoming task, use the NEW symbol-key map you just learned:
+     instr_rt_old_text_2 = `In the upcoming task, use the NEW symbol-key map you just learned.
  
- If you see a symbol that requires a response, press the corresponding key as quickly and as accurately as possible.            
- 
- If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING, and simply wait for 2 second.
-     
-     
+Your job is to press the corresponding key as quickly and as accurately as possible.     
  
  
- Whenever you are ready, press (H, U, I, or L) to start.`
+Whenever you are ready, press (H, U, I, or L) to start.`
      ;
  
      if ((session > 1)) {
          instr_rt_old_text_1 = `Now you are going to practice the symbol-key map you learned. Your job is to press the corresponding key as quickly and as accurately as possible.
      
- There will be ${rt_block} blocks with short breaks in between.
+There will be ${rt_block} blocks with short breaks in between.
      
  
- Whenever you are ready, press one of (H, U, I, L) to start.`
+Whenever you are ready, press one of (H, U, I, L) to start.`
      ;
      } else {
          if ((2 < session)) {
              instr_rt_old_text_1 = `Today, we first continue to practice the symbol-key maps for ${rt_block} blocks.
      
- Remember, your job is to press the corresponding key as quickly and accurately as you can.
+Remember, your job is to press the corresponding key as quickly and accurately as you can.
      
- Whenever you are ready, press (H, U, I, or L) to start.`
+Whenever you are ready, press (H, U, I, or L) to start.`
      ;
          }
      }
      instr_tr_old_pre_text = `Good job so far.
      
- In the following 2 blocks, press the corresponding key ON the fourth beep. Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
+In the following 2 blocks, press the corresponding key ON the fourth beep. Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
      
  
- Press (H, U, I, or L) to start.`
+Press (H, U, I, or L) to start.`
      ;
-     instr_tr_old_post_text = `Great job.
-     
- In the following 2 blocks, you will hear four beeps again. Press the corresponding key ON the fourth beep. Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
+     instr_tr_old_post_text_1 = `In the upcoming block, the task is different.
+
+You will hear four beeps again. Use the NEW symbol-key map you just learned and press the corresponding key ON the fourth beep. Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
      
  
- Press one of (H, U, I, L) to start.`
+Press one of (H, U, I, L) to start.`
+     ;
+
+     instr_tr_old_post_text_2 = `In the upcoming block, Use the NEW symbol-key map you just learned.
+
+You will hear four beeps again. Press the corresponding key ON the fourth beep. Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
+     
+ 
+Press one of (H, U, I, L) to start.`
      ;
      if ((grp_stop === 1)) {
-         instr_cr_new_text = `Great job. Now we proceed to the next step. In the upcoming block:
- 
- 
- Symbols that previously corresponded to (H, U, I, or L) may NOT require a response any more. 
- 
- Symbols that previously did not correspond with a key may become requiring a response.
- 
- 
- Your job is to figure out the NEW association between the same 8 symbols and (H, U, I, or L) keys.
- 
- For symbols that do not require a response, DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
- 
- 
- ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
-         
-         
- Press (H, U, I, or L) to start.`
-     ;
+         instr_cr_new_text = `Great job.
+    
+In next block, you will see the same eight symbols, but this time some of them may no longer correspond with a key (H, U, I, L).
+                 
+Your job is to figure out which are those symbols and DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+                 
+                 
+ACCURACY is the priority, so go as slowly as you need to. The more mistaks you make, the longer this block will take.
+                 
+                 
+Press (H, U, I, or L) to start.`
+    ;
      } else {
          if ((grp_swap === 1)) {
              instr_cr_new_text = `Congratulations!
      
- Now, you will see the same eight symbols, but this time they may correspond with different key (H, U, I, L).
+Now, you will see the same eight symbols, but this time they may correspond with different key (H, U, I, L).
  
- Your job is to figure out the new association between the symbols and the keys.
- 
- 
- ACCURACY is the priority, so go as slowly as you need to. The more mistaks you make, the longer this block will take.
+Your job is to figure out the new association between the symbols and the keys.
  
  
- Press one of (H, U, I, or L) to start.`
+ACCURACY is the priority, so go as slowly as you need to. The more mistaks you make, the longer this block will take.
+ 
+ 
+Press one of (H, U, I, or L) to start.`
      ;
          }
      }
      if ((grp_swap === 1)) {
          instr_tr_new_text = `In the following set of blocks, use the NEW symbol-key map you just learned, press the corresponding key on the fourth beep. 
              
- Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
+Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
                
- These are the last 6 blocks for this experiment.
+These are the last 6 blocks for this experiment.
              
          
  Press (H, U, I, or L) to continue.`
@@ -4038,30 +4029,30 @@
          if ((grp_stop === 1)) {
              instr_tr_new_text = `Great job. We are almost there!
              
- In the last ${tr_block_new_stop} blocks, you will hear 4 beeps. Use the NEW symbol-key map you just learned:
+In the last ${tr_block_new_stop} blocks, you will hear 4 beeps. Use the NEW symbol-key map you just learned:
            
- If you see a symbol that requires a response, press the corresponding key ON the fourth beep.             
- If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING.
+If you see a symbol that requires a response, press the corresponding key ON the fourth beep.             
+If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING.
              
              
- Remember, the symbol may show up very late. In this case, MAKE A GUESS. If you decide to press, remember to respond ON the fourth beep.
+Remember, the symbol may show up very late. In this case, MAKE A GUESS. If you decide to press, remember to respond ON the fourth beep.
              
- This task is designed to be difficult, so it is okay to make a guess.
-             
-             
+This task is designed to be difficult, so it is okay to make a guess.
              
              
- Press (H, U, I, or L) to proceed.`
+             
+             
+Press (H, U, I, or L) to proceed.`
      ;
          }
      }
      penalty_toolate_text = `Response was too late.
  
- Press (H, U, I, or L) to accept a 2 second penalty.`
+Press (H, U, I, or L) to accept a 2 second penalty.`
      ;
      penalty_tooearly_text = `Response was too early.
  
- Press (H, U, I, or L) to accept a 2 second penalty.`
+Press (H, U, I, or L) to accept a 2 second penalty.`
      ;
      penalty_countdown_text = `Ready`
      ;
@@ -4074,43 +4065,43 @@
  
      instr_sound_quit_text = `It seems that your computer does not play the sound well. 
      
- Please press (Esc) to exit and check your spearker or headphone. 
+Please press (Esc) to exit and check your spearker or headphone. 
+
+Disconnect any Bluetooth headphone as it is NOT allowed.
  
- Disconnect any Bluetooth headphone as it is NOT allowed.
- 
- You may restart the task later.`
+You may restart the task later.`
      ;
      instr_sound_exit_text = `It seems that those sounds were not well identified. 
      
- If you did not hear any sound, please press (Esc) to exit, check you audio, and restart the task later.
+If you did not hear any sound, please press (Esc) to exit, check you audio, and restart the task later.
  
- If you did hear sound but just pressed wrong buttons, press (spce bar) to proceed.`;
+If you did hear sound but just pressed wrong buttons, press (spce bar) to proceed.`;
  
      instr_sound_select_text = ` Press ( f ) if you heared a coin sound; 
  
- Press ( j ) if you heared a buzzer sound; `
+Press ( j ) if you heared a buzzer sound; `
      ;
  
      instr_sound_check_text = `We will first test your audio. Press the corresponding keys to hear different tones.
  
- Press ( f ) to hear the coin sound.
+Press ( f ) to hear the coin sound.
  
- Press ( j ) to hear the buzzer sound.
+Press ( j ) to hear the buzzer sound.
  
- If you do not hear sound, press (Esc) to exist and check if you audio works fine on your computer.
+If you do not hear sound, press (Esc) to exist and check if you audio works fine on your computer.
  
- If you are able to hear the sound, press (space bar) to proceed.`
+If you are able to hear the sound, press (space bar) to proceed.`
    ;
  
    instr_sound_check_text2 = `On next screen, you will hear either the coin sound or the buzzer sound. 
    
- Press ( f ) after hearing the coin sound. 
+Press ( f ) after hearing the coin sound. 
  
- Press ( j ) after hearing the buzzer sound. 
+Press ( j ) after hearing the buzzer sound. 
  
- You must get at least 4 of these correct in a row to proceed.
+You must get at least 4 of these correct in a row to proceed.
  
- Whenever you are ready, press (space bar) to start.`
+Whenever you are ready, press (space bar) to start.`
    ;
      instr_sound_check_feedback_P_text = `Your choice is correct`;
      instr_sound_check_feedback_N_text = `Your choice is not correct`;
@@ -8914,7 +8905,17 @@
      Instr_TR_Old_PostClock.reset(); // clock
      frameN = -1;
      // update component parameters for each repeat
-     Instr_TR_Old_Post_text.setText(instr_tr_old_post_text);
+
+     if (block_count_cr_old == prac_old_block + 1) {
+      instr_text = instr_tr_old_post_text_1;
+    } else {
+        if (block_count_cr_old > prac_old_block + 1) {
+          instr_text = instr_tr_old_post_text_2;
+        } 
+    }
+
+
+     Instr_TR_Old_Post_text.setText(instr_text);
      Instr_TR_Old_Post_Press.keys = undefined;
      Instr_TR_Old_Post_Press.rt = undefined;
      _Instr_TR_Old_Post_Press_allKeys = [];
