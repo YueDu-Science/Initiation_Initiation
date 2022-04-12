@@ -5645,7 +5645,7 @@
                  seq_symb.push(symb_creat_seq[i]);
                  seq_symb_g.push(symb_g_creat_seq[i]);
                  seq_symb_r.push(symb_r_creat_seq[i]);
-                if ([0,1,2,3].includes(symb_creat_seq[i])) {
+                if ([0,1,2,3].includes(seq_stimnum[i])) {
                   seq_key.push(key_request[0]);
                   seq_keynum.push(key_list.indexOf(key_request[0]));
                 } else {
@@ -5661,7 +5661,7 @@
                  seq_symb.push(symb_creat_seq[i]);
                  seq_symb_g.push(symb_g_creat_seq[i]);
                  seq_symb_r.push(symb_r_creat_seq[i]);
-                 if ([0,1,2,3].includes(symb_creat_seq[i])) {
+                 if ([0,1,2,3].includes(seq_stimnum[i])) {
                   seq_key.push(key_request[0]);
                   seq_keynum.push(key_list.indexOf(key_request[0]));
                 } else {
@@ -5676,7 +5676,7 @@
                  seq_symb.push(symb_creat_seq[i]);
                  seq_symb_g.push(symb_g_creat_seq[i]);
                  seq_symb_r.push(symb_r_creat_seq[i]);
-                 if ([0,1,2,3].includes(symb_creat_seq[i])) {
+                 if ([0,1,2,3].includes(seq_stimnum[i])) {
                   seq_key.push(key_request[0]);
                   seq_keynum.push(key_list.indexOf(key_request[0]));
                 } else {
