@@ -7520,7 +7520,7 @@
  var _Instr_CR_Old_Press_allKeys;
  var Instr_CR_OldComponents;
  var ind_rnd;
- var key_request;
+ var key_request = [];
  function Instr_CR_OldRoutineBegin(trials) {
    return function () {
      //------Prepare to start Routine 'Instr_CR_Old'-------
