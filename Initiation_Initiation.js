@@ -3889,9 +3889,9 @@ There will be at least 2 blocks, depending on how well you press ON the fourth b
      
 Press (H, U, I, or L) to proceed.`
      ;
-     instr_cr_old_text_1 = `Good Job! You are now ready for the tasks!
+     instr_cr_old_text_1 = `Here wer are about to start the first round.
 
-There will be ${prac_old_block} rounds. Each round has 2 blocks with short breaks in between. 
+There will be 2 blocks with short breaks in between. 
      
 In the upcoming block, you will see eight symbols on the screen, one at a time. Each symbol corresponds to one of (H, U, I, L). Some of these four keys may not be used.
 
@@ -6541,7 +6541,7 @@ Whenever you are ready, press (space bar) to start.`
      round_count = round_count + 1
      // update component parameters for each repeat
      if (round_count == 1){
-       Instr_Round_Num_Text.setText(('Good Job! You are now ready for the tasks! \n\nPress (H, U, I, or L) to start Round ' + round_count + '/' + total_old_block));
+       Instr_Round_Num_Text.setText(('Good Job! You are now ready for the tasks! \n\n There are' + total_old_block + ' rounds. Each round has 2 blocks. \n\nPress (H, U, I, or L) to start Round ' + round_count + '/' + total_old_block));
      } else if (round_count > 1 && round_count <= prac_old_block) {
        Instr_Round_Num_Text.setText((('Round ' + round_count + '/' + total_old_block) + '\nPress (H, U, I, or L) to start'));
      } else if (round_count == prac_old_block + 1) {
