@@ -215,7 +215,7 @@ var num_trials = 10;
 var rt_block = 1;
 var tr_block_old = 2;
 var tr_block_new_swap = 0;
-var tr_block_new_stop = 1;
+var tr_block_new_stop = 6;
 
 var tr_hand_yes = 0;
 var rt_hand_yes = 0;
