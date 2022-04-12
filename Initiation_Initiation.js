@@ -228,16 +228,16 @@
  var tr_block_hand = 4;
  var num_trials_hand = 96;
  var num_trials_cr = 2000;
- var num_criterion = 2;
+ var num_criterion = 1;
  
  var tr_block_new_swap = 0;
  var tr_block_new_stop = 6;
  
- var prac_old_block = 1;   // set of criterion + practice (rt_blocks)
+ var prac_old_block = 2;   // set of criterion + practice (rt_blocks)
  var rt_block = 2;
  var num_trials = 10;
  
- var test_old_block = 1;
+ var test_old_block = 2;
  var tr_block_old = 1;
 
  var total_old_block = prac_old_block + test_old_block;
@@ -3930,7 +3930,7 @@ ACCURACY is the priority, so go as slowly as you need to. The more mistakes you 
 Ready? Press (H, U, I, or L) to start.`
      ;
  
-     instr_rt_old_text_1 = `Now, use the symbol-key map you just learned.
+     instr_rt_old_text_1 = `In the upcoming ${rt_block} blocks, use the symbol-key map you just learned.
  
 Your job is to press the corresponding key as quickly and as accurately as possible.
      
@@ -3938,7 +3938,7 @@ Your job is to press the corresponding key as quickly and as accurately as possi
 Whenever you are ready, press (H, U, I, or L) to start.`
      ;
  
-     instr_rt_old_text_2 = `In the upcoming task, use the NEW symbol-key map you just learned.
+     instr_rt_old_text_2 = `In the upcoming ${rt_block} blocks, use the NEW symbol-key map you just learned.
  
 Your job is to press the corresponding key as quickly and as accurately as possible.     
  
