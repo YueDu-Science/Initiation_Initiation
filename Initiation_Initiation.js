@@ -213,7 +213,7 @@ var num_trials_cr_old = 10;
 var num_criterion = 2;
 var num_trials = 10;
 var rt_block = 1;
-var tr_block_old = 2;
+var tr_block_old = 1;
 var tr_block_new_swap = 0;
 var tr_block_new_stop = 6;
 
@@ -221,7 +221,7 @@ var tr_hand_yes = 0;
 var rt_hand_yes = 0;
 var cr_old_yes = 0;
 var cr_new_yes = 1;
-var rt_yes = 0;
+var rt_yes = 1;
 var tr_old_pre_yes = 0;
 var tr_old_post_yes = 1;
 var tr_new_yes = 1;
@@ -9172,7 +9172,7 @@ function RT_Enter_Trial_StopRoutineEachFrame(trials) {
       RT_Rec_Frame_Stop.setAutoDraw(true);
     }
 
-    frameRemains = stop_tol  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+    frameRemains = stop_tol + jitter  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (RT_Rec_Frame_Stop.status === PsychoJS.Status.STARTED && t >= frameRemains) {
       RT_Rec_Frame_Stop.setAutoDraw(false);
     }
@@ -9218,7 +9218,7 @@ function RT_Enter_Trial_StopRoutineEachFrame(trials) {
       psychoJS.window.callOnFlip(function() { RT_Press_Stop.clearEvents(); });
     }
 
-    frameRemains = 0.0 + stop_tol - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+    frameRemains = 0.0 + stop_tol + jitter - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if (RT_Press_Stop.status === PsychoJS.Status.STARTED && t >= frameRemains) {
       RT_Press_Stop.status = PsychoJS.Status.FINISHED;
   }
