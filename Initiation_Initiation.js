@@ -227,26 +227,25 @@
  var tr_block_hand = 4;
  var num_trials_hand = 96;
  var num_trials_cr = 2000;
- var num_criterion = 5;
+ var num_criterion = 2;
  
- var tr_block_old = 0;
  var tr_block_new_swap = 0;
  var tr_block_new_stop = 6;
  
- var prac_old_block = 12;   // set of criterion + practice (rt_blocks)
+ var prac_old_block = 1;   // set of criterion + practice (rt_blocks)
  var rt_block = 1;
- var num_trials = 96;
+ var num_trials = 10;
  
- var test_old_block = 4;
+ var test_old_block = 1;
  var tr_block_old = 1;
 
- var tr_hand_yes = 1;
- var rt_hand_yes = 1;
- var cr_old_yes = 1;
+ var tr_hand_yes = 0;
+ var rt_hand_yes = 0;
+ var cr_old_yes = 0;
  var cr_new_yes = 1;
  var rt_yes = 1;
  var tr_old_pre_yes = 0;
- var tr_old_post_yes = 0;
+ var tr_old_post_yes = 1;
  var tr_new_yes = 1;
  
  var sound_check_yes = 1;
