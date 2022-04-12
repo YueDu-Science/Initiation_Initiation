@@ -67,10 +67,10 @@
  //flowScheduler.add(CR_Old_BoolLoopBegin, CR_Old_BoolLoopScheduler);
  //flowScheduler.add(CR_Old_BoolLoopScheduler);
  //flowScheduler.add(CR_Old_BoolLoopEnd);
- const TR_Old_Pre_BoolLoopScheduler = new Scheduler(psychoJS);
- flowScheduler.add(TR_Old_Pre_BoolLoopBegin, TR_Old_Pre_BoolLoopScheduler);
- flowScheduler.add(TR_Old_Pre_BoolLoopScheduler);
- flowScheduler.add(TR_Old_Pre_BoolLoopEnd);
+ //const TR_Old_Pre_BoolLoopScheduler = new Scheduler(psychoJS);
+ //flowScheduler.add(TR_Old_Pre_BoolLoopBegin, TR_Old_Pre_BoolLoopScheduler);
+ //flowScheduler.add(TR_Old_Pre_BoolLoopScheduler);
+ //flowScheduler.add(TR_Old_Pre_BoolLoopEnd);
  const Prac_Old_IterLoopScheduler = new Scheduler(psychoJS);
  flowScheduler.add(Prac_Old_IterLoopBegin, Prac_Old_IterLoopScheduler);
  flowScheduler.add(Prac_Old_IterLoopScheduler);
@@ -241,7 +241,7 @@
 
  var tr_hand_yes = 0;
  var rt_hand_yes = 0;
- var cr_old_yes = 0;
+ var cr_old_yes = 1;
  var cr_new_yes = 1;
  var rt_yes = 1;
  var tr_old_pre_yes = 0;
