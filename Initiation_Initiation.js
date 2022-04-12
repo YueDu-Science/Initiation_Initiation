@@ -202,6 +202,7 @@
  var symb_perm = permute(x_symb);
  var symb_perm_resp;
  var n_map = symb_perm.length;
+ var key_ind;
  
  var block_count_cr_old = 0;
  var block_count_rt_old = 0;
@@ -239,6 +240,7 @@
  var test_old_block = 1;
  var tr_block_old = 1;
 
+ var total_old_block = prac_old_block + test_old_block;
  var tr_hand_yes = 0;
  var rt_hand_yes = 0;
  var cr_old_yes = 1;
@@ -6548,10 +6550,14 @@
      round_count = round_count + 1
      // update component parameters for each repeat
      if (round_count == 1){
-       Instr_Round_Num_Text.setText(('Good Job! You are now ready for the tasks! \n\nPress (H, U, I, or L) to start Round ' + round_count + '/' + prac_old_block));
-     } else {
-       Instr_Round_Num_Text.setText((('Round ' + round_count + '/' + prac_old_block) + '\nPress (H, U, I, or L) to start'));
-     }
+       Instr_Round_Num_Text.setText(('Good Job! You are now ready for the tasks! \n\nPress (H, U, I, or L) to start Round ' + round_count + '/' + total_old_block));
+     } else if (round_count > 1 && round_count <= prac_old_block) {
+       Instr_Round_Num_Text.setText((('Round ' + round_count + '/' + total_old_block) + '\nPress (H, U, I, or L) to start'));
+     } else if (round_count == prac_old_block + 1) {
+      Instr_Round_Num_Text.setText(('There are' + test_old_block + ' rounds left. \n\n Pay attention to the instruction, some tasks will be different! \n\nPress (H, U, I, or L) to start Round ' + round_count + '/' + total_old_block));
+    }  else if (round_count > prac_old_block + 1) {
+      Instr_Round_Num_Text.setText((('Round ' + round_count + '/' + total_old_block) + '\nPress (H, U, I, or L) to start'));
+    }  
      
      Instr_Round_Num_Press.keys = undefined;
      Instr_Round_Num_Press.rt = undefined;
