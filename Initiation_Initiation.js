@@ -7570,8 +7570,8 @@
      symb_r_creat_seq = symb_r_map;
  
      key_ind = Math.floor(Math.random() * remap_pairs.length)
-     key_request[0] = key_list[remap_pairs[key_ind][0]];
-     key_request[1] = key_list[remap_pairs[key_ind][1]];
+     key_request.push(key_list[remap_pairs[key_ind][0]]);
+     key_request.push(key_list[remap_pairs[key_ind][1]]);
      console.log(key_request);
      // keep track of which components have finished
      Instr_CR_OldComponents = [];
