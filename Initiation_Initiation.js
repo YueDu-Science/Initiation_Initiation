@@ -250,7 +250,7 @@
  var tr_old_post_yes = 1;
  var tr_new_yes = 1;
  
- var sound_check_yes = 1;
+ var sound_check_yes = 0;
  var num_trials_sound_check = 20;
  
  
@@ -5647,10 +5647,10 @@
                  seq_symb_r.push(symb_r_creat_seq[i]);
                 if ([0,1,2,3].includes(symb_creat_seq[i])) {
                   seq_key.push(key_request[0]);
-                  seq_key.push(key_list.indexOf(key_request[0]));
+                  seq_keynum.push(key_list.indexOf(key_request[0]));
                 } else {
                   seq_key.push(key_request[1]);
-                  seq_key.push(key_list.indexOf(key_request[1]));
+                  seq_keynum.push(key_list.indexOf(key_request[1]));
                 }
 
              }
@@ -5663,10 +5663,10 @@
                  seq_symb_r.push(symb_r_creat_seq[i]);
                  if ([0,1,2,3].includes(symb_creat_seq[i])) {
                   seq_key.push(key_request[0]);
-                  seq_key.push(key_list.indexOf(key_request[0]));
+                  seq_keynum.push(key_list.indexOf(key_request[0]));
                 } else {
                   seq_key.push(key_request[1]);
-                  seq_key.push(key_list.indexOf(key_request[1]));
+                  seq_keynum.push(key_list.indexOf(key_request[1]));
                 }
              }
              util.shuffle(x8_new);
@@ -5678,10 +5678,10 @@
                  seq_symb_r.push(symb_r_creat_seq[i]);
                  if ([0,1,2,3].includes(symb_creat_seq[i])) {
                   seq_key.push(key_request[0]);
-                  seq_key.push(key_list.indexOf(key_request[0]));
+                  seq_keynum.push(key_list.indexOf(key_request[0]));
                 } else {
                   seq_key.push(key_request[1]);
-                  seq_key.push(key_list.indexOf(key_request[1]));
+                  seq_keynum.push(key_list.indexOf(key_request[1]));
                 }
              }
              count = (count + 1);
@@ -5700,10 +5700,10 @@
                  seq_symb_r.push(symb_r_creat_seq[i]);
                  if ([0,1,2,3].includes(symb_creat_seq[i])) {
                   seq_key.push(key_request[0]);
-                  seq_key.push(key_list.indexOf(key_request[0]));
+                  seq_keynum.push(key_list.indexOf(key_request[0]));
                 } else {
                   seq_key.push(key_request[1]);
-                  seq_key.push(key_list.indexOf(key_request[1]));
+                  seq_keynum.push(key_list.indexOf(key_request[1]));
                 }
              }
              count = (count + 1);
@@ -7570,7 +7570,9 @@
      symb_r_creat_seq = symb_r_map;
  
      key_ind = Math.floor(Math.random() * remap_pairs.length)
-     key_request = key_list[remap_pairs[key_ind]];
+     key_request[0] = key_list[remap_pairs[key_ind][0]];
+     key_request[1] = key_list[remap_pairs[key_ind][1]];
+     console.log(key_request);
      // keep track of which components have finished
      Instr_CR_OldComponents = [];
      Instr_CR_OldComponents.push(Instr_CR_Old_Text);
