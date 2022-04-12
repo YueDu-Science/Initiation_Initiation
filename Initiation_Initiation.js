@@ -212,6 +212,7 @@ var num_trials_cr = 2000;
 var num_trials_cr_old = 10;
 var num_criterion = 2;
 var num_trials = 108;
+var num_trials_probe = 96;
 var rt_block = 1;
 var tr_block_old = 1;
 var tr_block_new_swap = 0;
@@ -220,10 +221,10 @@ var tr_block_new_stop = 6;
 var tr_hand_yes = 0;
 var rt_hand_yes = 0;
 var cr_old_yes = 0;
-var cr_new_yes = 1;
-var rt_yes = 1;
+var cr_new_yes = 0;
+var rt_yes = 0;
 var tr_old_pre_yes = 0;
-var tr_old_post_yes = 1;
+var tr_old_post_yes = 0;
 var tr_new_yes = 1;
 
 var sound_check_yes = 0;
@@ -3245,7 +3246,7 @@ function TR_Iter_New_SwapLoopBegin(thisScheduler) {
   // set up handler to look after randomisation of conditions etc
   TR_Iter_New_Swap = new TrialHandler({
     psychoJS: psychoJS,
-    nReps: num_trials, method: TrialHandler.Method.SEQUENTIAL,
+    nReps: num_trials_probe, method: TrialHandler.Method.SEQUENTIAL,
     extraInfo: expInfo, originPath: undefined,
     trialList: undefined,
     seed: undefined, name: 'TR_Iter_New_Swap'
@@ -3402,7 +3403,7 @@ function TR_Iter_New_StopLoopBegin(thisScheduler) {
   // set up handler to look after randomisation of conditions etc
   TR_Iter_New_Stop = new TrialHandler({
     psychoJS: psychoJS,
-    nReps: num_trials, method: TrialHandler.Method.SEQUENTIAL,
+    nReps: num_trials_probe, method: TrialHandler.Method.SEQUENTIAL,
     extraInfo: expInfo, originPath: undefined,
     trialList: undefined,
     seed: undefined, name: 'TR_Iter_New_Stop'
@@ -5592,7 +5593,7 @@ function Creat_StimSeqRoutineBegin(trials) {
 
     if (((block_type === "TR") && (stim_type === "Symb") && (remap === 1))) {
       count = 0;
-      while ((count < (num_trials / 16))) {
+      while ((count < (num_trials_probe / 16))) {
           util.shuffle(x16);
           for (var i, _pj_c = 0, _pj_a = x16, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
               i = _pj_a[_pj_c];
