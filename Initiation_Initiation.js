@@ -234,7 +234,7 @@
  var tr_block_new_stop = 6;
  
  var prac_old_block = 1;   // set of criterion + practice (rt_blocks)
- var rt_block = 1;
+ var rt_block = 2;
  var num_trials = 10;
  
  var test_old_block = 1;
@@ -2433,7 +2433,7 @@
      thisScheduler.add(CR_Old_BoolLoopScheduler);
      thisScheduler.add(CR_Old_BoolLoopEnd);
      const TR_Old_Post_BoolLoopScheduler = new Scheduler(psychoJS);
-     thisScheduler.add(TR_Old_Post_BoolLoopBegin, RT_BoolLoopScheduler);
+     thisScheduler.add(TR_Old_Post_BoolLoopBegin, TR_Old_Post_BoolLoopScheduler);
      thisScheduler.add(TR_Old_Post_BoolLoopScheduler);
      thisScheduler.add(TR_Old_Post_BoolLoopEnd);
      thisScheduler.add(endLoopIteration(thisScheduler, snapshot));
@@ -2789,9 +2789,9 @@
      thisScheduler.add(Creat_StimSeqRoutineBegin(snapshot));
      thisScheduler.add(Creat_StimSeqRoutineEachFrame(snapshot));
      thisScheduler.add(Creat_StimSeqRoutineEnd(snapshot));
-     //thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
-     //thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
-     //thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
+     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
+     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
+     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
      const RT_IterLoopScheduler = new Scheduler(psychoJS);
      thisScheduler.add(RT_IterLoopBegin, RT_IterLoopScheduler);
      thisScheduler.add(RT_IterLoopScheduler);
@@ -3891,7 +3891,7 @@ Press (H, U, I, or L) to proceed.`
      ;
      instr_cr_old_text_1 = `Here wer are about to start the first round.
 
-There will be 2 blocks with short breaks in between. 
+There will be 3 blocks with short breaks in between. 
      
 In the upcoming block, you will see eight symbols on the screen, one at a time. Each symbol corresponds to one of (H, U, I, L). Some of these four keys may not be used.
 
@@ -6541,7 +6541,7 @@ Whenever you are ready, press (space bar) to start.`
      round_count = round_count + 1
      // update component parameters for each repeat
      if (round_count == 1){
-       Instr_Round_Num_Text.setText(('Good Job! You are now ready for the tasks! \n\n There are' + total_old_block + ' rounds. Each round has 2 blocks. \n\nPress (H, U, I, or L) to start Round ' + round_count + '/' + total_old_block));
+       Instr_Round_Num_Text.setText(('Good Job! You are now ready for the tasks! \n\n There are ' + total_old_block + ' rounds. Each round has 3 blocks. \n\nPress (H, U, I, or L) to start Round ' + round_count + '/' + total_old_block));
      } else if (round_count > 1 && round_count <= prac_old_block) {
        Instr_Round_Num_Text.setText((('Round ' + round_count + '/' + total_old_block) + '\nPress (H, U, I, or L) to start'));
      } else if (round_count == prac_old_block + 1) {
@@ -7810,6 +7810,7 @@ Whenever you are ready, press (space bar) to start.`
      psychoJS.experiment.addData("grp_stop", grp_stop);
      psychoJS.experiment.addData("grp_swap", grp_swap);
      psychoJS.experiment.addData("block_num", block_count);
+     psychoJS.experiment.addData("round_num", block_count_cr_old);
      psychoJS.experiment.addData("prep_time", prep_time);
      psychoJS.experiment.addData("session", session);
      
@@ -8747,7 +8748,7 @@ Whenever you are ready, press (space bar) to start.`
      frameN = -1;
      TR_Coin.setVolume(1);
      // update component parameters for each repeat
-     block_count = (block_count_cr_old - 1)*rt_block;
+     block_count = 0;
      stop_tol = 2;
  
      if (block_count_cr_old == 1) {
@@ -9051,6 +9052,7 @@ Whenever you are ready, press (space bar) to start.`
      block_type = "CR";
      stim_type = "Symb";
      block_count = 0;
+     block_count_cr_old = [];
      remap = 1;
      stop_tol = 2;
  
@@ -9416,6 +9418,7 @@ Whenever you are ready, press (space bar) to start.`
      stim_type = "Symb";
      remap = 1;
      block_count = 0;
+     block_count_cr_old = [];
      
      if (grp_stop === 1) {
          symb_creat_seq = symb_map;
