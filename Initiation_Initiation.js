@@ -2475,18 +2475,18 @@
      thisScheduler.add(Creat_StimSeqRoutineBegin(snapshot));
      thisScheduler.add(Creat_StimSeqRoutineEachFrame(snapshot));
      thisScheduler.add(Creat_StimSeqRoutineEnd(snapshot));
-     const CR_Grp_Stop_BoolLoopScheduler = new Scheduler(psychoJS);
-     thisScheduler.add(CR_Grp_Stop_BoolLoopBegin, CR_Grp_Stop_BoolLoopScheduler);
-     thisScheduler.add(CR_Grp_Stop_BoolLoopScheduler);
-     thisScheduler.add(CR_Grp_Stop_BoolLoopEnd);
-     const CR_Grp_Swap_BoolLoopScheduler = new Scheduler(psychoJS);
-     thisScheduler.add(CR_Grp_Swap_BoolLoopBegin, CR_Grp_Swap_BoolLoopScheduler);
-     thisScheduler.add(CR_Grp_Swap_BoolLoopScheduler);
-     thisScheduler.add(CR_Grp_Swap_BoolLoopEnd);
-     //const CR_Old_IterLoopScheduler = new Scheduler(psychoJS);
-     // thisScheduler.add(CR_Old_IterLoopBegin, CR_Old_IterLoopScheduler);
-     //thisScheduler.add(CR_Old_IterLoopScheduler);
-     //thisScheduler.add(CR_Old_IterLoopEnd);
+    //  const CR_Grp_Stop_BoolLoopScheduler = new Scheduler(psychoJS);
+    //  thisScheduler.add(CR_Grp_Stop_BoolLoopBegin, CR_Grp_Stop_BoolLoopScheduler);
+    //  thisScheduler.add(CR_Grp_Stop_BoolLoopScheduler);
+    //  thisScheduler.add(CR_Grp_Stop_BoolLoopEnd);
+    //  const CR_Grp_Swap_BoolLoopScheduler = new Scheduler(psychoJS);
+    //  thisScheduler.add(CR_Grp_Swap_BoolLoopBegin, CR_Grp_Swap_BoolLoopScheduler);
+    //  thisScheduler.add(CR_Grp_Swap_BoolLoopScheduler);
+    //  thisScheduler.add(CR_Grp_Swap_BoolLoopEnd);
+     const CR_Old_IterLoopScheduler = new Scheduler(psychoJS);
+     thisScheduler.add(CR_Old_IterLoopBegin, CR_Old_IterLoopScheduler);
+     thisScheduler.add(CR_Old_IterLoopScheduler);
+     thisScheduler.add(CR_Old_IterLoopEnd);
      thisScheduler.add(endLoopIteration(thisScheduler, snapshot));
    }
  
