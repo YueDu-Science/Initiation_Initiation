@@ -3731,7 +3731,7 @@
  
      for (i = 0, _pj_a = 4; (i < _pj_a); i += 1) { // do not require responses during practice
          if  (!(remap_pair_1.includes(i))) {
-             remap_pair_2.push((i));
+             remap_pair_2.push((i + 4));
          }
      }
 
@@ -6581,7 +6581,7 @@ Whenever you are ready, press (space bar) to start.`
      } else if (round_count > 1 && round_count <= prac_old_block) {
        Instr_Round_Num_Text.setText((('Round ' + round_count + '/' + total_old_block) + '\nPress (H, U, I, or L) to start'));
      } else if (round_count == prac_old_block + 1) {
-      Instr_Round_Num_Text.setText(('There are ' + test_old_block + ' rounds left. \n\n Pay attention to the instruction, some tasks will be different! \n\nPress (H, U, I, or L) to start Round ' + round_count + '/' + total_old_block));
+      Instr_Round_Num_Text.setText(('There are ' + test_old_block + ' rounds left. \n\n Pay attention to the instruction, some blocks will have different tasks! \n\nPress (H, U, I, or L) to start Round ' + round_count + '/' + total_old_block));
     }  else if (round_count > prac_old_block + 1) {
       Instr_Round_Num_Text.setText((('Round ' + round_count + '/' + total_old_block) + '\nPress (H, U, I, or L) to start'));
     }  
