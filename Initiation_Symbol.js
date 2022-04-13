@@ -3706,7 +3706,7 @@ function Creat_StimSeqRoutineBegin(trials) {
                 seq_symb.push(symb[i]);
                 seq_symb_g.push(symb_g[i]);
                 seq_symb_r.push(symb_r[i]);
-                seq_keynum.push(keynum[i]);
+                Prac_Old_IterL
             }
             count = (count + 1);
         }

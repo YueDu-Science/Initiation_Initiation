@@ -83,10 +83,10 @@
  //flowScheduler.add(RT_BoolLoopBegin, RT_BoolLoopScheduler);
  //flowScheduler.add(RT_BoolLoopScheduler);
  //flowScheduler.add(RT_BoolLoopEnd);
- const TR_Old_Post_BoolLoopScheduler = new Scheduler(psychoJS);
- flowScheduler.add(TR_Old_Post_BoolLoopBegin, TR_Old_Post_BoolLoopScheduler);
- flowScheduler.add(TR_Old_Post_BoolLoopScheduler);
- flowScheduler.add(TR_Old_Post_BoolLoopEnd);
+ //const TR_Old_Post_BoolLoopScheduler = new Scheduler(psychoJS);
+ //flowScheduler.add(TR_Old_Post_BoolLoopBegin, TR_Old_Post_BoolLoopScheduler);
+ //flowScheduler.add(TR_Old_Post_BoolLoopScheduler);
+ //flowScheduler.add(TR_Old_Post_BoolLoopEnd);
  const CR_New_BoolLoopScheduler = new Scheduler(psychoJS);
  flowScheduler.add(CR_New_BoolLoopBegin, CR_New_BoolLoopScheduler);
  flowScheduler.add(CR_New_BoolLoopScheduler);
@@ -233,11 +233,11 @@
  var tr_block_new_swap = 0;
  var tr_block_new_stop = 6;
  
- var prac_old_block = 0;   // set of criterion + practice (rt_blocks)
+ var prac_old_block = 1;   // set of criterion + practice (rt_blocks)
  var rt_block = 2;
  var num_trials = 4;
  
- var test_old_block = 2;
+ var test_old_block = 1;
  var tr_block_old = 2;
 
  var total_old_block = prac_old_block + test_old_block;
@@ -250,7 +250,7 @@
  var tr_old_post_yes = 1;
  var tr_new_yes = 1;
  
- var sound_check_yes = 0;
+ var sound_check_yes = 1;
  var num_trials_sound_check = 20;
  
  
