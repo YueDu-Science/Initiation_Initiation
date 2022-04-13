@@ -3721,17 +3721,8 @@
  
  
      // randomize prep-time so that prep-time for each symbol spread over a good range
-     
-       
      symb_map_rnd = Math.floor(rng1 * symb_perm.length) // random interger between 0 and num_symb - 1
      symb_map_ind = symb_perm[symb_map_rnd]; // randomize which symbols corresponds to which index 0 to 7
- 
- 
-     symb_perm = permute(x_symb)  // permute those four resp id so can use them later
-     for (var i = 0, _pj_a = symb_perm.length; (i < _pj_a); i += 1) {
-       resp_map_ind.push(i);
-     }
-     util.shuffle(resp_map_ind)
  
      // the below two steps generate two pairs which do not require respones during practice
      // they are basically 0 to 4; but dividing to two pairs for later convenience (feedback section)
@@ -3966,14 +3957,18 @@ Whenever you are ready, press (H, U, I, or L) to start.`
      }
      instr_tr_old_pre_text = `Good job so far.
      
-In the following 2 blocks, press the corresponding key ON the fourth beep. Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
+In the following 2 blocks, press the corresponding key ON the fourth beep. 
+
+Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
      
  
 Press (H, U, I, or L) to start.`
      ;
      instr_tr_old_post_text_1 = `In the upcoming block, the task is different.
 
-You will hear four beeps again. Use the NEW symbol-key map you just learned and press the corresponding key ON the fourth beep. Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
+You will hear four beeps again. Use the NEW symbol-key map you just learned and press the corresponding key ON the fourth beep. 
+
+Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
      
  
 Press one of (H, U, I, L) to start.`
@@ -3981,9 +3976,11 @@ Press one of (H, U, I, L) to start.`
 
      instr_tr_old_post_text_2 = `In the upcoming block, Use the NEW symbol-key map you just learned.
 
-You will hear four beeps again. Press the corresponding key ON the fourth beep. Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
+You will hear four beeps again. Press the corresponding key ON the fourth beep. 
+
+Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
      
- 
+
 Press one of (H, U, I, L) to start.`
      ;
      if ((grp_stop === 1)) {
@@ -4047,13 +4044,13 @@ Press (H, U, I, or L) to proceed.`
          }
      }
      penalty_toolate_text = `Response was too late.
- 
-Press (H, U, I, or L) to accept a 2 second penalty.`
-     ;
-     penalty_tooearly_text = `Response was too early.
- 
-Press (H, U, I, or L) to accept a 2 second penalty.`
-     ;
+2 second penalty.
+After 2 second, press (H, U, I, or L) to continue.`
+    ;
+    penalty_tooearly_text = `Response was too early.
+2 second penalty.
+After 2 second, press (H, U, I, or L) to continue.`
+    ;
      penalty_countdown_text = `Ready`
      ;
  
@@ -6545,7 +6542,7 @@ Whenever you are ready, press (space bar) to start.`
      } else if (round_count > 1 && round_count <= prac_old_block) {
        Instr_Round_Num_Text.setText((('Round ' + round_count + '/' + total_old_block) + '\nPress (H, U, I, or L) to start'));
      } else if (round_count == prac_old_block + 1) {
-      Instr_Round_Num_Text.setText(('There are' + test_old_block + ' rounds left. \n\n Pay attention to the instruction, some tasks will be different! \n\nPress (H, U, I, or L) to start Round ' + round_count + '/' + total_old_block));
+      Instr_Round_Num_Text.setText(('There are ' + test_old_block + ' rounds left. \n\n Pay attention to the instruction, some tasks will be different! \n\nPress (H, U, I, or L) to start Round ' + round_count + '/' + total_old_block));
     }  else if (round_count > prac_old_block + 1) {
       Instr_Round_Num_Text.setText((('Round ' + round_count + '/' + total_old_block) + '\nPress (H, U, I, or L) to start'));
     }  
@@ -7105,17 +7102,10 @@ Whenever you are ready, press (space bar) to start.`
      t = 0;
      TR_PenaltyClock.reset(); // clock
      frameN = -1;
-     routineTimer.add(2.000000);
-     // update component parameters for each repeat
-     routineTimer.reset(2);
-     countdown = 2;
-     TR_Beep.setVolume(0);
      // update component parameters for each repeat
      TR_Rec_Frame_Penalty.setLineColor(new util.Color(rec_frame_color));
      TR_Rec_Frame_Penalty.setLineWidth(rec_wd);
      TR_Penalty_Text.setText(tr_penalty_text);
-     penalty_countdown.setText(countdown);
-     penalty_countdown.setHeight(0.1);
      TR_Penalty_Press.keys = undefined;
      TR_Penalty_Press.rt = undefined;
      _TR_Penalty_Press_allKeys = [];
@@ -7124,8 +7114,6 @@ Whenever you are ready, press (space bar) to start.`
      TR_PenaltyComponents.push(TR_Rec_Frame_Penalty);
      TR_PenaltyComponents.push(TR_Penalty_Text);
      TR_PenaltyComponents.push(TR_Penalty_Press);
-     TR_PenaltyComponents.push(penalty_countdown);
-     TR_PenaltyComponents.push(TR_Beep);
      
      for (const thisComponent of TR_PenaltyComponents)
        if ('status' in thisComponent)
@@ -7145,16 +7133,6 @@ Whenever you are ready, press (space bar) to start.`
      frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
      // update/draw components on each frame
      
- 
-     if (t >= 0.0 && penalty_countdown.status === PsychoJS.Status.NOT_STARTED) {
-       // keep track of start time/frame for later
-       penalty_countdown.tStart = t;  // (not accounting for frame time here)
-       penalty_countdown.frameNStart = frameN;  // exact frame index
-       
-       penalty_countdown.setAutoDraw(true);
-     }
- 
- 
      // *TR_Rec_Frame_Penalty* updates
      if (t >= 0.0 && TR_Rec_Frame_Penalty.status === PsychoJS.Status.NOT_STARTED) {
        // keep track of start time/frame for later
@@ -7176,7 +7154,7 @@ Whenever you are ready, press (space bar) to start.`
  
      
      // *TR_Penalty_Press* updates
-     if (t >= 0.0 && TR_Penalty_Press.status === PsychoJS.Status.NOT_STARTED) {
+     if (t >= 2 && TR_Penalty_Press.status === PsychoJS.Status.NOT_STARTED) {
        // keep track of start time/frame for later
        TR_Penalty_Press.tStart = t;  // (not accounting for frame time here)
        TR_Penalty_Press.frameNStart = frameN;  // exact frame index
@@ -7194,44 +7172,9 @@ Whenever you are ready, press (space bar) to start.`
          TR_Penalty_Press.keys = _TR_Penalty_Press_allKeys[0].name;  // just the first key pressed
          TR_Penalty_Press.rt = _TR_Penalty_Press_allKeys[0].rt;
          // a response ends the routine
-        //continueRoutine = false;
+         continueRoutine = false;
        }
      }
-     
-     if (_TR_Penalty_Press_allKeys.length > 0 && penalty_countdown.status === PsychoJS.Status.STARTED){ // only update if being drawn
-       
-       if (((0 <= t - TR_Penalty_Press.rt) && (t - TR_Penalty_Press.rt < 1))) {
-         countdown = 1;
-       } else {
-           if ((1 <= t - TR_Penalty_Press.rt) && (t - TR_Penalty_Press.rt < 2)) {
-               countdown = 0;
-           } 
-       }
-       penalty_countdown.setText(countdown);
-     }
- 
-     if (t - TR_Penalty_Press.rt >= 2 && penalty_countdown.status === PsychoJS.Status.STARTED && _TR_Penalty_Press_allKeys.length > 0) {
-       penalty_countdown.setAutoDraw(false);
-       TR_Penalty_Text.setAutoDraw(false);
-       TR_Rec_Frame_Penalty.setAutoDraw(false);
-       TR_Penalty_Press.status = PsychoJS.Status.FINISHED;
-     }
- 
-     // play sound for warm up
-     if (t - TR_Penalty_Press.rt >= 0.0 && TR_Beep.status === PsychoJS.Status.NOT_STARTED && _TR_Penalty_Press_allKeys.length > 0) {
-       // keep track of start time/frame for later
-       TR_Beep.tStart = t;  // (not accounting for frame time here)
-       TR_Beep.frameNStart = frameN;  // exact frame index
-       psychoJS.window.callOnFlip(function(){ TR_Beep.play(); });  // screen flip
-       TR_Beep.status = PsychoJS.Status.STARTED;
-       
-     }
- 
-     if (t - TR_Penalty_Press.rt >= 2 && TR_Beep.status === PsychoJS.Status.STARTED) {
-       TR_Beep.stop();  // stop the sound (if longer than duration)
-       TR_Beep.status = PsychoJS.Status.FINISHED;
-     } 
- 
  
      // check for quit (typically the Esc key)
      if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
@@ -7275,7 +7218,6 @@ Whenever you are ready, press (space bar) to start.`
          }
      
      TR_Penalty_Press.stop();
-     penalty_countdown.setAutoDraw(false);
      // the Routine "TR_Penalty" was not non-slip safe, so reset the non-slip timer
      routineTimer.reset();
      
@@ -9055,7 +8997,28 @@ Whenever you are ready, press (space bar) to start.`
      block_count_cr_old = [];
      remap = 1;
      stop_tol = 2;
+    
+
+     symb_map_rnd = Math.floor(rng1 * symb_perm.length) // random interger between 0 and num_symb - 1
+     symb_map_ind = symb_perm[symb_map_rnd]; // randomize which symbols corresponds to which index 0 to 7
  
+     symb_remap_ind = Object.assign({}, symb_map_ind);
+     
+     symb_remap_ind[remap_pair_1[0]] = symb_map_ind[remap_pair_1[1]];
+     symb_remap_ind[remap_pair_1[1]] = symb_map_ind[remap_pair_1[0]];
+     symb_remap_ind[remap_pair_2[0]] = symb_map_ind[remap_pair_2[1]];
+     symb_remap_ind[remap_pair_2[1]] = symb_map_ind[remap_pair_2[0]];
+ 
+     symb_remap_ind = Object.values(symb_remap_ind)
+ 
+      for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
+          symb_map.push(symb[symb_map_ind[i]]);
+          symb_remap.push(symb[symb_remap_ind[i]]);
+          symb_g_map.push(symb_g[symb_map_ind[i]]);
+          symb_g_remap.push(symb_g[symb_remap_ind[i]]);
+          symb_r_map.push(symb_r[symb_map_ind[i]]);
+          symb_r_remap.push(symb_r[symb_remap_ind[i]]);
+      }
   
      if (grp_stop === 1) {
          symb_creat_seq = symb_map;
