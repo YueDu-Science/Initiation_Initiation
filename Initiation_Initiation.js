@@ -3986,7 +3986,9 @@ Press one of (H, U, I, L) to start.`
      if ((grp_stop === 1)) {
          instr_cr_new_text = `Great job.
     
-In next block, you will see the same eight symbols, but this time some of them may no longer correspond with a key (H, U, I, L).
+In next block, you will see the same eight symbols, but the symbol-key association will change again.
+
+Importantly, some of symbols may no longer correspond with a key (H, U, I, L).
                  
 Your job is to figure out which are those symbols and DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
                  
