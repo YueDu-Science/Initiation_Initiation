@@ -3859,7 +3859,7 @@ Press (space bar) to continue.`
      ;
      instr_rt_text_hand = `The upcoming 3 blocks are used to help you get familiar with the task.
      
-With your Right hand, place your Index, Middle, Ring, and Pinky fingers on (H, U, I, L) respectively. Your fingers will rest on these keys for the entirety of the experiment.
+With your Right hand, place your Index, Middle, Ring, and Little fingers on (H, U, I, L) respectively. Your fingers will rest on these keys for the entirety of the experiment.
      
 You will see a hand appear on the screen. One of the fingers on the screen will light up and your job is to press the corresponding finger as quickly and as accurately as possible.
      
