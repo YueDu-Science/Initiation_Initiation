@@ -233,7 +233,7 @@
  var tr_block_new_swap = 0;
  var tr_block_new_stop = 6;
  
- var prac_old_block = 2;   // set of criterion + practice (rt_blocks)
+ var prac_old_block = 0;   // set of criterion + practice (rt_blocks)
  var rt_block = 2;
  var num_trials = 10;
  
@@ -3138,9 +3138,9 @@
      thisScheduler.add(Pre_TrialRoutineBegin(snapshot));
      thisScheduler.add(Pre_TrialRoutineEachFrame(snapshot));
      thisScheduler.add(Pre_TrialRoutineEnd(snapshot));
-     thisScheduler.add(RT_Enter_TrialRoutineBegin(snapshot));
-     thisScheduler.add(RT_Enter_TrialRoutineEachFrame(snapshot));
-     thisScheduler.add(RT_Enter_TrialRoutineEnd(snapshot));
+     thisScheduler.add(RT_Enter_Trial_StopRoutineBegin(snapshot));
+     thisScheduler.add(RT_Enter_Trial_StopRoutineEachFrame(snapshot));
+     thisScheduler.add(RT_Enter_Trial_StopRoutineEnd(snapshot));
      thisScheduler.add(RT_FeedbackRoutineBegin(snapshot));
      thisScheduler.add(RT_FeedbackRoutineEachFrame(snapshot));
      thisScheduler.add(RT_FeedbackRoutineEnd(snapshot));
