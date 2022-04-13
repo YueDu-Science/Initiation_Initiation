@@ -238,7 +238,7 @@
  var num_trials = 10;
  
  var test_old_block = 2;
- var tr_block_old = 1;
+ var tr_block_old = 2;
 
  var total_old_block = prac_old_block + test_old_block;
  var tr_hand_yes = 0;
