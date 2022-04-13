@@ -7506,8 +7506,9 @@ Whenever you are ready, press (space bar) to start.`
      console.log(symb_creat_seq);
 
      key_ind = Math.floor(Math.random() * remap_pairs.length)
-     key_request.push(key_list[remap_pairs[key_ind][0]]);
-     key_request.push(key_list[remap_pairs[key_ind][1]]);
+
+     key_request[0] = key_list[remap_pairs[key_ind][0]];
+     key_request[1] = key_list[remap_pairs[key_ind][1]];
      console.log(key_request);
      console.log(key_request[0]);
      console.log(key_request[1]);
