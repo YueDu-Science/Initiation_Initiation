@@ -231,7 +231,7 @@
  var num_criterion = 1;
  
  var tr_block_new_swap = 0;
- var tr_block_new_stop = 6;
+ var tr_block_new_stop = 1;
  
  var prac_old_block = 1;   // set of criterion + practice (rt_blocks)
  var rt_block = 2;
