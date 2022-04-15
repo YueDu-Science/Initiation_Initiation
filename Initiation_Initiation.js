@@ -75,10 +75,10 @@
  flowScheduler.add(Prac_Old_IterLoopBegin, Prac_Old_IterLoopScheduler);
  flowScheduler.add(Prac_Old_IterLoopScheduler);
  flowScheduler.add(Prac_Old_IterLoopEnd);
- const Test_Old_IterLoopScheduler = new Scheduler(psychoJS);
- flowScheduler.add(Test_Old_IterLoopBegin, Test_Old_IterLoopScheduler);
- flowScheduler.add(Test_Old_IterLoopScheduler);
- flowScheduler.add(Test_Old_IterLoopEnd);
+ //const Test_Old_IterLoopScheduler = new Scheduler(psychoJS);
+ //flowScheduler.add(Test_Old_IterLoopBegin, Test_Old_IterLoopScheduler);
+ //flowScheduler.add(Test_Old_IterLoopScheduler);
+ //flowScheduler.add(Test_Old_IterLoopEnd);
  //const RT_BoolLoopScheduler = new Scheduler(psychoJS);
  //flowScheduler.add(RT_BoolLoopBegin, RT_BoolLoopScheduler);
  //flowScheduler.add(RT_BoolLoopScheduler);
@@ -87,6 +87,10 @@
  //flowScheduler.add(TR_Old_Post_BoolLoopBegin, TR_Old_Post_BoolLoopScheduler);
  //flowScheduler.add(TR_Old_Post_BoolLoopScheduler);
  //flowScheduler.add(TR_Old_Post_BoolLoopEnd);
+ const CR_Old_BoolLoopScheduler = new Scheduler(psychoJS);
+ flowScheduler.add(CR_Old_BoolLoopBegin, CR_Old_BoolLoopScheduler);
+ flowScheduler.add(CR_Old_BoolLoopScheduler);
+ flowScheduler.add(CR_Old_BoolLoopEnd);
  const CR_New_BoolLoopScheduler = new Scheduler(psychoJS);
  flowScheduler.add(CR_New_BoolLoopBegin, CR_New_BoolLoopScheduler);
  flowScheduler.add(CR_New_BoolLoopScheduler);
@@ -228,21 +232,21 @@
  var tr_block_hand = 4;
  var num_trials_hand = 96;
  var num_trials_cr = 2000;
- var num_criterion = 5;
+ var num_criterion = 1;
  
  var tr_block_new_swap = 0;
  var tr_block_new_stop = 6;
  
- var prac_old_block = 6;   // set of criterion + practice (rt_blocks)
+ var prac_old_block = 1;   // set of criterion + practice (rt_blocks)
  var rt_block = 2;
- var num_trials = 96;
+ var num_trials = 4;
  
- var test_old_block = 2;
+ var test_old_block = 0;
  var tr_block_old = 2;
 
  var total_old_block = prac_old_block + test_old_block;
- var tr_hand_yes = 1;
- var rt_hand_yes = 1;
+ var tr_hand_yes = 0;
+ var rt_hand_yes = 0;
  var cr_old_yes = 1;
  var cr_new_yes = 1;
  var rt_yes = 1;
@@ -3810,6 +3814,7 @@
  var instr_cr_old_text_1;
  var instr_cr_old_text_2;
  var instr_cr_old_text_3;
+ var instr_cr_old_text_4;
  var instr_rt_old_text_1;
  var instr_rt_old_text_2;
  var instr_rt_old_text_3;
@@ -3920,6 +3925,21 @@ ACCURACY is the priority, so go as slowly as you need to. The more mistakes you 
  
 Ready? Press (H, U, I, or L) to start.`
      ;
+
+     instr_cr_old_text_4 = `Good job. We are getting close!
+
+In the next block, you will need to figure out a NEW association again.
+
+   
+Each symbol corresponds to one of (H, U, I, L). This time, all 4 keys will be used.
+      
+      
+ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
+          
+      
+      
+Ready? Press (H, U, I, or L) to start.`
+     ;
  
      instr_rt_old_text_1 = `In the upcoming ${rt_block} blocks, use the symbol-key map you just learned.
  
@@ -3936,6 +3956,8 @@ Your job is to press the corresponding key as quickly and as accurately as possi
  
 Whenever you are ready, press (H, U, I, or L) to start.`
      ;
+
+     
  
      if ((session > 1)) {
          instr_rt_old_text_1 = `Now you are going to practice the symbol-key map you learned. Your job is to press the corresponding key as quickly and as accurately as possible.
@@ -3986,10 +4008,8 @@ Press one of (H, U, I, L) to start.`
      if ((grp_stop === 1)) {
          instr_cr_new_text = `Great job.
     
-In next block, you will see the same eight symbols, but the symbol-key association will change again.
-
-Importantly, some of symbols may no longer correspond with a key (H, U, I, L).
-                 
+In next block, you will see the same eight symbols, but this time some of them may no longer correspond with a key (H, U, I, L).
+        
 Your job is to figure out which are those symbols and DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
                  
                  
@@ -7511,8 +7531,10 @@ Whenever you are ready, press (space bar) to start.`
          if (block_count_cr_old == 2) {
            instr_text = instr_cr_old_text_2;
          } else {
-           if (block_count_cr_old >= 3) {
+           if (block_count_cr_old >= 3 && block_count_cr_old <= total_old_block) {
              instr_text = instr_cr_old_text_3;
+           } else if (block_count_cr_old > total_old_block) {
+            instr_text = instr_cr_old_text_4;
            }
          }
      }
@@ -7795,7 +7817,7 @@ Whenever you are ready, press (space bar) to start.`
      psychoJS.experiment.addData("round_num", block_count_cr_old);
      psychoJS.experiment.addData("prep_time", prep_time);
      psychoJS.experiment.addData("session", session);
-     
+     psychoJS.experiment.addData("round_num", round_count);
      // the Routine "Pre_Trial" was not non-slip safe, so reset the non-slip timer
      routineTimer.reset();
      
