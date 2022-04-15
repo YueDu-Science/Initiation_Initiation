@@ -5644,7 +5644,7 @@ Whenever you are ready, press (space bar) to start.`
              count = (count + 1);
          }
      }
-     if ((block_type === "CR") && (remap === 0)) {
+     if ((block_type === "CR") && (remap === 0) && block_count_cr_old <= total_old_block) {
          count = 0;
          while ((count < (num_trials_cr / 40))) {
              util.shuffle(x16);
@@ -5773,6 +5773,43 @@ Whenever you are ready, press (space bar) to start.`
         }
         count = (count + 1);
     }
+}
+
+if ((block_type === "CR") && (remap === 0) && block_count_cr_old > total_old_block) {
+  count = 0;
+  while ((count < (num_trials_cr / 40))) {
+      util.shuffle(x16);
+      for (var i, _pj_c = 0, _pj_a = x16, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+          i = _pj_a[_pj_c];
+          seq_stimnum.push(stimnum[i]);
+          seq_key.push(key[i]);
+          seq_symb.push(symb_creat_seq[i]);
+          seq_symb_g.push(symb_g_creat_seq[i]);
+          seq_symb_r.push(symb_r_creat_seq[i]);
+          seq_keynum.push(keynum[i]);
+      }
+      util.shuffle(x16);
+      for (var i, _pj_c = 0, _pj_a = x16, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+          i = _pj_a[_pj_c];
+          seq_stimnum.push(stimnum[i]);
+          seq_key.push(key[i]);
+          seq_symb.push(symb_creat_seq[i]);
+          seq_symb_g.push(symb_g_creat_seq[i]);
+          seq_symb_r.push(symb_r_creat_seq[i]);
+          seq_keynum.push(keynum[i]);
+      }
+      util.shuffle(x8_new);
+      for (var i, _pj_c = 0, _pj_a = x8_new, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+          i = _pj_a[_pj_c];
+          seq_stimnum.push(stimnum[i]);
+          seq_key.push(key[i]);
+          seq_symb.push(symb_creat_seq[i]);
+          seq_symb_g.push(symb_g_creat_seq[i]);
+          seq_symb_r.push(symb_r_creat_seq[i]);
+          seq_keynum.push(keynum[i]);
+      }
+      count = (count + 1);
+  }
 }
      
      // keep track of which components have finished
@@ -7547,32 +7584,45 @@ Whenever you are ready, press (space bar) to start.`
      block_type = "CR";
      stim_type = "Symb";
      remap = 0;
-     symb_map_rnd = Math.floor(Math.random() * symb_perm.length) // random interger between 0 and num_symb - 1
-     symb_map_ind_shuffle = symb_perm[symb_map_rnd]; // randomize which symbols corresponds to which index 0 to 7
+
+
+     if (block_count_cr_old <= total_old_block){
+      symb_map_rnd = Math.floor(Math.random() * symb_perm.length) // random interger between 0 and num_symb - 1
+      symb_map_ind_shuffle = symb_perm[symb_map_rnd]; // randomize which symbols corresponds to which index 0 to 7
  
-     symb_map = [];
-     symb_g_map = [];
-     symb_r_map = [];
-     for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
+      symb_map = [];
+      symb_g_map = [];
+      symb_r_map = [];
+      for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
        symb_map.push(symb[symb_map_ind_shuffle[i]]);
        symb_g_map.push(symb_g[symb_map_ind_shuffle[i]]);
        symb_r_map.push(symb_r[symb_map_ind_shuffle[i]]);
+      }
+     } else if (block_count_cr_old > total_old_block) {
+      symb_map_rnd = Math.floor(rng1 * symb_perm.length) // random interger between 0 and num_symb - 1
+      symb_map_ind = symb_perm[symb_map_rnd]; // randomize which symbols corresponds to which index 0 to 7
+ 
+      for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
+          symb_map.push(symb[symb_map_ind[i]]);
+          symb_remap.push(symb[symb_remap_ind[i]]);
+          symb_g_map.push(symb_g[symb_map_ind[i]]);
+          symb_g_remap.push(symb_g[symb_remap_ind[i]]);
+          symb_r_map.push(symb_r[symb_map_ind[i]]);
+          symb_r_remap.push(symb_r[symb_remap_ind[i]]);
+      }
      }
+     
      
      symb_creat_seq = symb_map;
      symb_g_creat_seq = symb_g_map;
      symb_r_creat_seq = symb_r_map;
  
 
-     console.log(symb_creat_seq);
-
      key_ind = Math.floor(Math.random() * remap_pairs.length)
 
      key_request[0] = key_list[remap_pairs[key_ind][0]];
      key_request[1] = key_list[remap_pairs[key_ind][1]];
-     console.log(key_request);
-     console.log(key_request[0]);
-     console.log(key_request[1]);
+     
      // keep track of which components have finished
      Instr_CR_OldComponents = [];
      Instr_CR_OldComponents.push(Instr_CR_Old_Text);
