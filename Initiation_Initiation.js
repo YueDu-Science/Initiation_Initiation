@@ -196,6 +196,7 @@ var x16 = x8_new.concat(x8_new);
 var remap_pairs = [[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]];
 var num_pos = 4;
 var num_symb = 8;
+var num_letter = 4;
 var symb_perm = permute(x_symb);
 
 var symb_remap_ind;
@@ -212,7 +213,6 @@ var stop_pair_2 = [];
 var tr_block_hand = 4;
 var num_trials_hand = 4;
 var num_trials_cr = 2000;
-var num_trials_cr_old = 10;
 var num_criterion = 2;
 var num_trials = 108;
 var num_trials_probe = 96;
@@ -2395,13 +2395,13 @@ function CR_Old_BoolLoopBegin(thisScheduler) {
     thisScheduler.add(Creat_StimSeqRoutineEachFrame(snapshot));
     thisScheduler.add(Creat_StimSeqRoutineEnd(snapshot));
     const CR_Grp_Stop_BoolLoopScheduler = new Scheduler(psychoJS);
-     thisScheduler.add(CR_Grp_Stop_BoolLoopBegin, CR_Grp_Stop_BoolLoopScheduler);
-     thisScheduler.add(CR_Grp_Stop_BoolLoopScheduler);
-     thisScheduler.add(CR_Grp_Stop_BoolLoopEnd);
-     const CR_Grp_Swap_BoolLoopScheduler = new Scheduler(psychoJS);
-     thisScheduler.add(CR_Grp_Swap_BoolLoopBegin, CR_Grp_Swap_BoolLoopScheduler);
-     thisScheduler.add(CR_Grp_Swap_BoolLoopScheduler);
-     thisScheduler.add(CR_Grp_Swap_BoolLoopEnd);
+    thisScheduler.add(CR_Grp_Stop_BoolLoopBegin, CR_Grp_Stop_BoolLoopScheduler);
+    thisScheduler.add(CR_Grp_Stop_BoolLoopScheduler);
+    thisScheduler.add(CR_Grp_Stop_BoolLoopEnd);
+    const CR_Grp_Swap_BoolLoopScheduler = new Scheduler(psychoJS);
+    thisScheduler.add(CR_Grp_Swap_BoolLoopBegin, CR_Grp_Swap_BoolLoopScheduler);
+    thisScheduler.add(CR_Grp_Swap_BoolLoopScheduler);
+    thisScheduler.add(CR_Grp_Swap_BoolLoopEnd);
     //const CR_Old_IterLoopScheduler = new Scheduler(psychoJS);
     //thisScheduler.add(CR_Old_IterLoopBegin, CR_Old_IterLoopScheduler);
     //thisScheduler.add(CR_Old_IterLoopScheduler);
@@ -2432,9 +2432,9 @@ function CR_Old_IterLoopBegin(thisScheduler) {
     thisScheduler.add(Pre_TrialRoutineBegin(snapshot));
     thisScheduler.add(Pre_TrialRoutineEachFrame(snapshot));
     thisScheduler.add(Pre_TrialRoutineEnd(snapshot));
-    thisScheduler.add(RT_Enter_Trial_StopRoutineBegin(snapshot));
-    thisScheduler.add(RT_Enter_Trial_StopRoutineEachFrame(snapshot));
-    thisScheduler.add(RT_Enter_Trial_StopRoutineEnd(snapshot));
+    thisScheduler.add(RT_Enter_TrialRoutineBegin(snapshot));
+    thisScheduler.add(RT_Enter_TrialRoutineEachFrame(snapshot));
+    thisScheduler.add(RT_Enter_TrialRoutineEnd(snapshot));
     thisScheduler.add(RT_FeedbackRoutineBegin(snapshot));
     thisScheduler.add(RT_FeedbackRoutineEachFrame(snapshot));
     thisScheduler.add(RT_FeedbackRoutineEnd(snapshot));
@@ -3624,7 +3624,7 @@ function Init_StimRoutineBegin(trials) {
     coin = StimList[0]["Sound_P"];
     beep = StimList[0]["Beep"];
     buzz = StimList[0]["Sound_N"];
-    for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
+    for (var i = 0, _pj_a = num_symb + num_letter; (i < _pj_a); i += 1) {
         stimnum.push(StimList[i]["StimNum"]);
         symb.push(StimList[i]["Symb"]);
         symb_r.push(StimList[i]["Symb_R"]);
@@ -3649,9 +3649,10 @@ function Init_StimRoutineBegin(trials) {
   // remap_pair_1 is two random symbol 0 to 4
      // generate a pair correponding to the same respones and it does not require responses during probe session
     for (i = 0, _pj_a = 4; (i < _pj_a); i += 1) { // probe_pair_1 require responses during practice but not during prob
-    if  (!(remap_pair_1.includes(i))) {
-        probe_pair_1.push((i + 4));
-
+      if  (!(remap_pair_1.includes(i))) {
+          probe_pair_1.push((i + 4));
+      }
+    }
     symb_remap_ind = Object.assign({}, symb_map_ind);
     
     symb_remap_ind[remap_pair_1[0]] = symb_map_ind[remap_pair_1[1]];
@@ -3826,17 +3827,19 @@ Ready? Press (H, U, I, or L) to continue.`
       
 Keep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).
 
-The key to press to those symbols that require a response will be shown on next page.
-
-Letters (1, 2, 3, 4) are still assocaited with (H, U, I, L) respectively.
+When you see symbols that require a response, press a key. Which key to press will be shown on next page.
 
 For symbols that do not correpond to a key, simple wait for 0.5 second. 
 
-Your job is to press the corresponding key as quickly and as accurately as possible within 0.5 second.
+Occasionally, you will also see four letters (1, 2, 3, 4) on the screen, one at a time. Each corresponds to one of (H, U, I, L). 
 
-Try your best!
+For example, press key (H) to letter (1), press key (U) to letter (2), and so on. All letters require a response.
+
+
+Your job is to be as quickly and as accurately as possible. If a key press is needed, it has to be done within 0.5 second.
+
   
-There will be ${rt_block} blocks with short breaks in between.
+There will be ${rt_block} blocks with short breaks in between. It will be hard at the beginning, try you best to improve your performance through these blocks.
   
 
 Whenever you are ready, press (H, U, I, or L) to start.`
@@ -7355,13 +7358,7 @@ Some symbols correspond to key (${key_item_c}).
 Some symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
     
 Your job is to figure out which symbols require a response or not.
-        
 
-Occasionally, you will also see four letters (1, 2, 3, 4) on the screen, one at a time. Each corresponds to one of (H, U, I, L). 
-
-For example, press key (H) to letter (1), press key (U) to letter (2), and so on.
-
-        
 
 ACCURACY is the priority, so go as slowly as you need to. The more mistaks you make, the longer this block will take.
 

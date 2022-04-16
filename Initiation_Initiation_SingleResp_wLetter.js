@@ -2740,8 +2740,8 @@ function RT_IterLoopBegin(thisScheduler) {
     thisScheduler.add(Pre_TrialRoutineEachFrame(snapshot));
     thisScheduler.add(Pre_TrialRoutineEnd(snapshot));
     thisScheduler.add(RT_Enter_Trial_StopRoutineBegin(snapshot));
-    thisScheduler.add(RT_Enter_TrialStopRoutineEachFrame(snapshot));
-    thisScheduler.add(RT_Enter_TrialStopRoutineEnd(snapshot));
+    thisScheduler.add(RT_Enter_Trial_StopRoutineEachFrame(snapshot));
+    thisScheduler.add(RT_Enter_Trial_StopRoutineEnd(snapshot));
     thisScheduler.add(RT_FeedbackRoutineBegin(snapshot));
     thisScheduler.add(RT_FeedbackRoutineEachFrame(snapshot));
     thisScheduler.add(RT_FeedbackRoutineEnd(snapshot));
