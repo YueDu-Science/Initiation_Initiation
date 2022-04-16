@@ -30,7 +30,7 @@ let expInfo = {'participant': ''};
 
 // schedule the experiment:
 psychoJS.schedule(psychoJS.gui.DlgFromDict({
-  text: "Welcome. Please click 'Ok' to continue.",
+  text: "Welcome. Press 'Ok' to the instruction. Please read it carefully.",
   dictionary: expInfo,
   title: expName
 }));
@@ -68,18 +68,18 @@ const CR_Old_BoolLoopScheduler = new Scheduler(psychoJS);
 flowScheduler.add(CR_Old_BoolLoopBegin, CR_Old_BoolLoopScheduler);
 flowScheduler.add(CR_Old_BoolLoopScheduler);
 flowScheduler.add(CR_Old_BoolLoopEnd);
-const TR_Old_Pre_BoolLoopScheduler = new Scheduler(psychoJS);
-flowScheduler.add(TR_Old_Pre_BoolLoopBegin, TR_Old_Pre_BoolLoopScheduler);
-flowScheduler.add(TR_Old_Pre_BoolLoopScheduler);
-flowScheduler.add(TR_Old_Pre_BoolLoopEnd);
+//const TR_Old_Pre_BoolLoopScheduler = new Scheduler(psychoJS);
+//flowScheduler.add(TR_Old_Pre_BoolLoopBegin, TR_Old_Pre_BoolLoopScheduler);
+//flowScheduler.add(TR_Old_Pre_BoolLoopScheduler);
+//flowScheduler.add(TR_Old_Pre_BoolLoopEnd);
 const RT_BoolLoopScheduler = new Scheduler(psychoJS);
 flowScheduler.add(RT_BoolLoopBegin, RT_BoolLoopScheduler);
 flowScheduler.add(RT_BoolLoopScheduler);
 flowScheduler.add(RT_BoolLoopEnd);
-const TR_Old_Post_BoolLoopScheduler = new Scheduler(psychoJS);
-flowScheduler.add(TR_Old_Post_BoolLoopBegin, TR_Old_Post_BoolLoopScheduler);
-flowScheduler.add(TR_Old_Post_BoolLoopScheduler);
-flowScheduler.add(TR_Old_Post_BoolLoopEnd);
+//const TR_Old_Post_BoolLoopScheduler = new Scheduler(psychoJS);
+//flowScheduler.add(TR_Old_Post_BoolLoopBegin, TR_Old_Post_BoolLoopScheduler);
+//flowScheduler.add(TR_Old_Post_BoolLoopScheduler);
+//flowScheduler.add(TR_Old_Post_BoolLoopEnd);
 const CR_New_BoolLoopScheduler = new Scheduler(psychoJS);
 flowScheduler.add(CR_New_BoolLoopBegin, CR_New_BoolLoopScheduler);
 flowScheduler.add(CR_New_BoolLoopScheduler);
@@ -2429,9 +2429,9 @@ function CR_Old_IterLoopBegin(thisScheduler) {
     thisScheduler.add(Pre_TrialRoutineBegin(snapshot));
     thisScheduler.add(Pre_TrialRoutineEachFrame(snapshot));
     thisScheduler.add(Pre_TrialRoutineEnd(snapshot));
-    thisScheduler.add(RT_Enter_TrialRoutineBegin(snapshot));
-    thisScheduler.add(RT_Enter_TrialRoutineEachFrame(snapshot));
-    thisScheduler.add(RT_Enter_TrialRoutineEnd(snapshot));
+    thisScheduler.add(RT_Enter_Trial_StopRoutineBegin(snapshot));
+    thisScheduler.add(RT_Enter_Trial_StopRoutineEachFrame(snapshot));
+    thisScheduler.add(RT_Enter_Trial_StopRoutineEnd(snapshot));
     thisScheduler.add(RT_FeedbackRoutineBegin(snapshot));
     thisScheduler.add(RT_FeedbackRoutineEachFrame(snapshot));
     thisScheduler.add(RT_FeedbackRoutineEnd(snapshot));
@@ -2739,9 +2739,9 @@ function RT_IterLoopBegin(thisScheduler) {
     thisScheduler.add(Pre_TrialRoutineBegin(snapshot));
     thisScheduler.add(Pre_TrialRoutineEachFrame(snapshot));
     thisScheduler.add(Pre_TrialRoutineEnd(snapshot));
-    thisScheduler.add(RT_Enter_TrialRoutineBegin(snapshot));
-    thisScheduler.add(RT_Enter_TrialRoutineEachFrame(snapshot));
-    thisScheduler.add(RT_Enter_TrialRoutineEnd(snapshot));
+    thisScheduler.add(RT_Enter_Trial_StopRoutineBegin(snapshot));
+    thisScheduler.add(RT_Enter_TrialStopRoutineEachFrame(snapshot));
+    thisScheduler.add(RT_Enter_TrialStopRoutineEnd(snapshot));
     thisScheduler.add(RT_FeedbackRoutineBegin(snapshot));
     thisScheduler.add(RT_FeedbackRoutineEachFrame(snapshot));
     thisScheduler.add(RT_FeedbackRoutineEnd(snapshot));

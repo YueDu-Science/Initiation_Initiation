@@ -1,4 +1,4 @@
-/************************** 
+﻿/************************** 
  * Initiation_Symbol Test *
  **************************/
 
@@ -67,22 +67,30 @@
  //flowScheduler.add(CR_Old_BoolLoopBegin, CR_Old_BoolLoopScheduler);
  //flowScheduler.add(CR_Old_BoolLoopScheduler);
  //flowScheduler.add(CR_Old_BoolLoopEnd);
- const TR_Old_Pre_BoolLoopScheduler = new Scheduler(psychoJS);
- flowScheduler.add(TR_Old_Pre_BoolLoopBegin, TR_Old_Pre_BoolLoopScheduler);
- flowScheduler.add(TR_Old_Pre_BoolLoopScheduler);
- flowScheduler.add(TR_Old_Pre_BoolLoopEnd);
+ //const TR_Old_Pre_BoolLoopScheduler = new Scheduler(psychoJS);
+ //flowScheduler.add(TR_Old_Pre_BoolLoopBegin, TR_Old_Pre_BoolLoopScheduler);
+ //flowScheduler.add(TR_Old_Pre_BoolLoopScheduler);
+ //flowScheduler.add(TR_Old_Pre_BoolLoopEnd);
  const Prac_Old_IterLoopScheduler = new Scheduler(psychoJS);
  flowScheduler.add(Prac_Old_IterLoopBegin, Prac_Old_IterLoopScheduler);
  flowScheduler.add(Prac_Old_IterLoopScheduler);
  flowScheduler.add(Prac_Old_IterLoopEnd);
+ //const Test_Old_IterLoopScheduler = new Scheduler(psychoJS);
+ //flowScheduler.add(Test_Old_IterLoopBegin, Test_Old_IterLoopScheduler);
+ //flowScheduler.add(Test_Old_IterLoopScheduler);
+ //flowScheduler.add(Test_Old_IterLoopEnd);
  //const RT_BoolLoopScheduler = new Scheduler(psychoJS);
  //flowScheduler.add(RT_BoolLoopBegin, RT_BoolLoopScheduler);
  //flowScheduler.add(RT_BoolLoopScheduler);
  //flowScheduler.add(RT_BoolLoopEnd);
- const TR_Old_Post_BoolLoopScheduler = new Scheduler(psychoJS);
- flowScheduler.add(TR_Old_Post_BoolLoopBegin, TR_Old_Post_BoolLoopScheduler);
- flowScheduler.add(TR_Old_Post_BoolLoopScheduler);
- flowScheduler.add(TR_Old_Post_BoolLoopEnd);
+ //const TR_Old_Post_BoolLoopScheduler = new Scheduler(psychoJS);
+ //flowScheduler.add(TR_Old_Post_BoolLoopBegin, TR_Old_Post_BoolLoopScheduler);
+ //flowScheduler.add(TR_Old_Post_BoolLoopScheduler);
+ //flowScheduler.add(TR_Old_Post_BoolLoopEnd);
+ const CR_Old_BoolLoopScheduler = new Scheduler(psychoJS);
+ flowScheduler.add(CR_Old_BoolLoopBegin, CR_Old_BoolLoopScheduler);
+ flowScheduler.add(CR_Old_BoolLoopScheduler);
+ flowScheduler.add(CR_Old_BoolLoopEnd);
  const CR_New_BoolLoopScheduler = new Scheduler(psychoJS);
  flowScheduler.add(CR_New_BoolLoopBegin, CR_New_BoolLoopScheduler);
  flowScheduler.add(CR_New_BoolLoopScheduler);
@@ -198,6 +206,7 @@
  var symb_perm = permute(x_symb);
  var symb_perm_resp;
  var n_map = symb_perm.length;
+ var key_ind;
  
  var block_count_cr_old = 0;
  var block_count_rt_old = 0;
@@ -223,23 +232,26 @@
  var tr_block_hand = 4;
  var num_trials_hand = 96;
  var num_trials_cr = 2000;
- var num_criterion = 5;
+ var num_criterion = 1;
  
- var tr_block_old = 0;
  var tr_block_new_swap = 0;
  var tr_block_new_stop = 6;
  
- var prac_old_block = 12;   // set of criterion + practice (rt_blocks)
- var rt_block = 1;
- var num_trials = 96;
+ var prac_old_block = 2;   // set of criterion + practice (rt_blocks)
+ var rt_block = 2;
+ var num_trials = 4;
  
- var tr_hand_yes = 1;
- var rt_hand_yes = 1;
+ var test_old_block = 0;
+ var tr_block_old = 2;
+
+ var total_old_block = prac_old_block + test_old_block;
+ var tr_hand_yes = 0;
+ var rt_hand_yes = 0;
  var cr_old_yes = 1;
  var cr_new_yes = 1;
  var rt_yes = 1;
  var tr_old_pre_yes = 0;
- var tr_old_post_yes = 0;
+ var tr_old_post_yes = 1;
  var tr_new_yes = 1;
  
  var sound_check_yes = 1;
@@ -2402,6 +2414,44 @@
  
    return Scheduler.Event.NEXT;
  }
+
+ var Test_Old_Iter;
+ function Test_Old_IterLoopBegin(thisScheduler) {
+   // set up handler to look after randomisation of conditions etc
+   Test_Old_Iter = new TrialHandler({
+     psychoJS: psychoJS,
+     nReps: test_old_block, method: TrialHandler.Method.SEQUENTIAL,
+     extraInfo: expInfo, originPath: undefined,
+     trialList: undefined,
+     seed: undefined, name: 'Test_Old_Iter'
+   });
+   psychoJS.experiment.addLoop(Test_Old_Iter); // add the loop to the experiment
+   currentLoop = Test_Old_Iter;  // we're now the current loop
+ 
+   // Schedule all the trials in the trialList:
+   for (const thisPrac_Old_Iter of Test_Old_Iter) {
+     const snapshot = Test_Old_Iter.getSnapshot();
+     thisScheduler.add(importConditions(snapshot));
+     const CR_Old_BoolLoopScheduler = new Scheduler(psychoJS);
+     thisScheduler.add(CR_Old_BoolLoopBegin, CR_Old_BoolLoopScheduler);
+     thisScheduler.add(CR_Old_BoolLoopScheduler);
+     thisScheduler.add(CR_Old_BoolLoopEnd);
+     const TR_Old_Post_BoolLoopScheduler = new Scheduler(psychoJS);
+     thisScheduler.add(TR_Old_Post_BoolLoopBegin, TR_Old_Post_BoolLoopScheduler);
+     thisScheduler.add(TR_Old_Post_BoolLoopScheduler);
+     thisScheduler.add(TR_Old_Post_BoolLoopEnd);
+     thisScheduler.add(endLoopIteration(thisScheduler, snapshot));
+     
+   }
+ 
+   return Scheduler.Event.NEXT;
+ }
+ 
+ function Test_Old_IterLoopEnd() {
+   psychoJS.experiment.removeLoop(Test_Old_Iter);
+ 
+   return Scheduler.Event.NEXT;
+ }
  
  var CR_Old_Bool;
  function CR_Old_BoolLoopBegin(thisScheduler) {
@@ -2429,18 +2479,18 @@
      thisScheduler.add(Creat_StimSeqRoutineBegin(snapshot));
      thisScheduler.add(Creat_StimSeqRoutineEachFrame(snapshot));
      thisScheduler.add(Creat_StimSeqRoutineEnd(snapshot));
-     const CR_Grp_Stop_BoolLoopScheduler = new Scheduler(psychoJS);
-     thisScheduler.add(CR_Grp_Stop_BoolLoopBegin, CR_Grp_Stop_BoolLoopScheduler);
-     thisScheduler.add(CR_Grp_Stop_BoolLoopScheduler);
-     thisScheduler.add(CR_Grp_Stop_BoolLoopEnd);
-     const CR_Grp_Swap_BoolLoopScheduler = new Scheduler(psychoJS);
-     thisScheduler.add(CR_Grp_Swap_BoolLoopBegin, CR_Grp_Swap_BoolLoopScheduler);
-     thisScheduler.add(CR_Grp_Swap_BoolLoopScheduler);
-     thisScheduler.add(CR_Grp_Swap_BoolLoopEnd);
-     //const CR_Old_IterLoopScheduler = new Scheduler(psychoJS);
-     //thisScheduler.add(CR_Old_IterLoopBegin, CR_Old_IterLoopScheduler);
-     //thisScheduler.add(CR_Old_IterLoopScheduler);
-     //thisScheduler.add(CR_Old_IterLoopEnd);
+    //  const CR_Grp_Stop_BoolLoopScheduler = new Scheduler(psychoJS);
+    //  thisScheduler.add(CR_Grp_Stop_BoolLoopBegin, CR_Grp_Stop_BoolLoopScheduler);
+    //  thisScheduler.add(CR_Grp_Stop_BoolLoopScheduler);
+    //  thisScheduler.add(CR_Grp_Stop_BoolLoopEnd);
+    //  const CR_Grp_Swap_BoolLoopScheduler = new Scheduler(psychoJS);
+    //  thisScheduler.add(CR_Grp_Swap_BoolLoopBegin, CR_Grp_Swap_BoolLoopScheduler);
+    //  thisScheduler.add(CR_Grp_Swap_BoolLoopScheduler);
+    //  thisScheduler.add(CR_Grp_Swap_BoolLoopEnd);
+     const CR_Old_IterLoopScheduler = new Scheduler(psychoJS);
+     thisScheduler.add(CR_Old_IterLoopBegin, CR_Old_IterLoopScheduler);
+     thisScheduler.add(CR_Old_IterLoopScheduler);
+     thisScheduler.add(CR_Old_IterLoopEnd);
      thisScheduler.add(endLoopIteration(thisScheduler, snapshot));
    }
  
@@ -2743,9 +2793,9 @@
      thisScheduler.add(Creat_StimSeqRoutineBegin(snapshot));
      thisScheduler.add(Creat_StimSeqRoutineEachFrame(snapshot));
      thisScheduler.add(Creat_StimSeqRoutineEnd(snapshot));
-     //thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
-     //thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
-     //thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
+     thisScheduler.add(Instr_Block_NumRoutineBegin(snapshot));
+     thisScheduler.add(Instr_Block_NumRoutineEachFrame(snapshot));
+     thisScheduler.add(Instr_Block_NumRoutineEnd(snapshot));
      const RT_IterLoopScheduler = new Scheduler(psychoJS);
      thisScheduler.add(RT_IterLoopBegin, RT_IterLoopScheduler);
      thisScheduler.add(RT_IterLoopScheduler);
@@ -2777,9 +2827,9 @@
      thisScheduler.add(Pre_TrialRoutineBegin(snapshot));
      thisScheduler.add(Pre_TrialRoutineEachFrame(snapshot));
      thisScheduler.add(Pre_TrialRoutineEnd(snapshot));
-     thisScheduler.add(RT_Enter_Trial_StopRoutineBegin(snapshot));
-     thisScheduler.add(RT_Enter_Trial_StopRoutineEachFrame(snapshot));
-     thisScheduler.add(RT_Enter_Trial_StopRoutineEnd(snapshot));
+     thisScheduler.add(RT_Enter_TrialRoutineBegin(snapshot));
+     thisScheduler.add(RT_Enter_TrialRoutineEachFrame(snapshot));
+     thisScheduler.add(RT_Enter_TrialRoutineEnd(snapshot));
      thisScheduler.add(RT_FeedbackRoutineBegin(snapshot));
      thisScheduler.add(RT_FeedbackRoutineEachFrame(snapshot));
      thisScheduler.add(RT_FeedbackRoutineEnd(snapshot));
@@ -3675,17 +3725,8 @@
  
  
      // randomize prep-time so that prep-time for each symbol spread over a good range
-     
-       
      symb_map_rnd = Math.floor(rng1 * symb_perm.length) // random interger between 0 and num_symb - 1
      symb_map_ind = symb_perm[symb_map_rnd]; // randomize which symbols corresponds to which index 0 to 7
- 
- 
-     symb_perm_resp = permute(x_symb_resp)  // permute those four resp id so can use them later
-     for (var i = 0, _pj_a = symb_perm_resp.length; (i < _pj_a); i += 1) {
-       resp_map_ind.push(i);
-     }
-     util.shuffle(resp_map_ind)
  
      // the below two steps generate two pairs which do not require respones during practice
      // they are basically 0 to 4; but dividing to two pairs for later convenience (feedback section)
@@ -3694,42 +3735,32 @@
  
      for (i = 0, _pj_a = 4; (i < _pj_a); i += 1) { // do not require responses during practice
          if  (!(remap_pair_1.includes(i))) {
-             remap_pair_2.push((i));
+             remap_pair_2.push((i + 4));
          }
      }
+
  
-     // remap_pair_1 is two random symbol 0 to 4
-     // generate a pair correponding to the same respones and it does not require responses during probe session
-     for (i = 0, _pj_a = 4; (i < _pj_a); i += 1) { // probe_pair_1 require responses during practice but not during prob
-       if  (!(remap_pair_1.includes(i))) {
-           probe_pair_1.push((i + 4));
-       }
-   }
- 
-     //symb_remap_ind = Object.assign({}, symb_map_ind);
+     symb_remap_ind = Object.assign({}, symb_map_ind);
      
-     //symb_remap_ind[remap_pair_1[0]] = symb_map_ind[remap_pair_1[1]];
-     //symb_remap_ind[remap_pair_1[1]] = symb_map_ind[remap_pair_1[0]];
-     //symb_remap_ind[remap_pair_2[0]] = symb_map_ind[remap_pair_2[1]];
-     //symb_remap_ind[remap_pair_2[1]] = symb_map_ind[remap_pair_2[0]];
+     symb_remap_ind[remap_pair_1[0]] = symb_map_ind[remap_pair_1[1]];
+     symb_remap_ind[remap_pair_1[1]] = symb_map_ind[remap_pair_1[0]];
+     symb_remap_ind[remap_pair_2[0]] = symb_map_ind[remap_pair_2[1]];
+     symb_remap_ind[remap_pair_2[1]] = symb_map_ind[remap_pair_2[0]];
  
-     //symb_remap_ind = Object.values(symb_remap_ind)
+     symb_remap_ind = Object.values(symb_remap_ind)
  
-     // for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
-     //     symb_map.push(symb[symb_map_ind[i]]);
-     //     symb_remap.push(symb[symb_remap_ind[i]]);
-     //     symb_g_map.push(symb_g[symb_map_ind[i]]);
-     //     symb_g_remap.push(symb_g[symb_remap_ind[i]]);
-     //     symb_r_map.push(symb_r[symb_map_ind[i]]);
-     //     symb_r_remap.push(symb_r[symb_remap_ind[i]]);
-     // }
+      for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
+          symb_map.push(symb[symb_map_ind[i]]);
+          symb_remap.push(symb[symb_remap_ind[i]]);
+          symb_g_map.push(symb_g[symb_map_ind[i]]);
+          symb_g_remap.push(symb_g[symb_remap_ind[i]]);
+          symb_r_map.push(symb_r[symb_map_ind[i]]);
+          symb_r_remap.push(symb_r[symb_remap_ind[i]]);
+      }
      psychoJS.experiment.addData("symb_map", symb_map_ind);
-    // psychoJS.experiment.addData("symb_remap", symb_remap_ind);
-     psychoJS.experiment.addData("stop_ind", x_symb_stop);
-     psychoJS.experiment.addData("resp_ind", x_symb_resp);
+     psychoJS.experiment.addData("symb_remap", symb_remap_ind);
      psychoJS.experiment.addData("Remap_Pair_1", remap_pair_1);
      psychoJS.experiment.addData("Remap_Pair_2", remap_pair_2);
-     psychoJS.experiment.addData("Probe_Pair_1", probe_pair_1);
      
      // keep track of which components have finished
      Init_StimComponents = [];
@@ -3783,9 +3814,12 @@
  var instr_cr_old_text_1;
  var instr_cr_old_text_2;
  var instr_cr_old_text_3;
+ var instr_cr_old_text_4;
  var instr_rt_old_text_1;
  var instr_rt_old_text_2;
  var instr_rt_old_text_3;
+ var instr_tr_old_post_text_1;
+ var instr_tr_old_post_text_2;
  var instr_tr_old_pre_text;
  var instr_tr_old_post_text;
  var instr_cr_new_text;
@@ -3813,187 +3847,199 @@
  
      instr_end_exp_text = `Great job! You have completed the task.
      
- Press (space bar) to proceed so that your data can be saved. The saving process may take up to 1 minute.
+Press (space bar) to proceed so that your data can be saved. The saving process may take up to 1 minute.
  
- After the data are saved, click 'OK' to exit and close the webpage.`
+After the data are saved, click 'OK' to exit and close the webpage.`
      ;
  
      instr_exp_text = `Thank you for participating in our study!
      
- This study will take about 1.5 to 2 hours. 
+This study will take about 1.5 to 2 hours. 
  
- Once you start, you can take a break between rounds, Please DO NOT turn off your web browser until you complete the task, unless you decide to withdraw from this study.
+Once you start, you can take a break between rounds, Please DO NOT turn off your web browser until you complete the task, unless you decide to withdraw from this study.
      
  
  
- Press (space bar) to continue.`
+Press (space bar) to continue.`
      ;
      instr_rt_text_hand = `The upcoming 3 blocks are used to help you get familiar with the task.
      
- With your Right hand, place your Index, Middle, Ring, and Pinky fingers on (H, U, I, L) respectively. Your fingers will rest on these keys for the entirety of the experiment.
+With your Right hand, place your Index, Middle, Ring, and Little fingers on (H, U, I, L) respectively. Your fingers will rest on these keys for the entirety of the experiment.
      
- You will see a hand appear on the screen. One of the fingers on the screen will light up and your job is to press the corresponding finger as quickly and as accurately as possible.
+You will see a hand appear on the screen. One of the fingers on the screen will light up and your job is to press the corresponding finger as quickly and as accurately as possible.
      
  
  
- Press (H, U, I, or L) to start.`
+Press (H, U, I, or L) to start.`
      ;
      instr_tr_text_hand = `Great Job!
      
- In the following blocks, you will hear 4 beeps. You need to press the corresponding finger ON the fourth beep. 
+In the following blocks, you will hear 4 beeps. You need to press the corresponding finger ON the fourth beep. 
  
  
- Sometimes, the finger will light up at the very last second. You will not have enough time to know which finger to press. In this case, MAKE A GUESS. Always press one of your fingers ON the fourth beep.
+Sometimes, the finger will light up at the very last second. You will not have enough time to know which finger to press. In this case, MAKE A GUESS. Always press one of your fingers ON the fourth beep.
      
      
- There will be at least 2 blocks, depending on how well you press ON the fourth beep.
+There will be at least 2 blocks, depending on how well you press ON the fourth beep.
      
      
- Press (H, U, I, or L) to proceed.`
+Press (H, U, I, or L) to proceed.`
      ;
-     instr_cr_old_text_1 = `In the upcoming block, you will see 8 symbols on the screen, one at a time. You job is to figure out the association between symbols and keys.
- 
- 
- Some symbols correspond to (H, U, I, or L). 
- 
- Some symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
- 
- 
- 
- ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
+     instr_cr_old_text_1 = `Here wer are about to start the first round.
+
+There will be 3 blocks with short breaks in between. 
      
+In the upcoming block, you will see eight symbols on the screen, one at a time. Each symbol corresponds to one of (H, U, I, L). Some of these four keys may not be used.
+
+Your job is to figure out which symbol corresponds with which key.
+     
+     
+ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
  
  
- Ready? Press (H, U, I, or L) to start.`
+Ready? Press (H, U, I, or L) to start.`
      ;
  
      instr_cr_old_text_2 = `In the upcoming block, your job is to figure out a NEW association between symbols and keys.
      
  
- Again, some symbols correspond to (H, U, I, or L). 
- 
- Some symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+Again, each symbol corresponds to one of (H, U, I, L). Some of these four keys may not be used.
  
  
- ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
+ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
      
  
  
- Ready? Press (H, U, I, or L) to start.`
+Ready? Press (H, U, I, or L) to start.`
      ;
  
      instr_cr_old_text_3 = `In the next block, take you time to figure out a NEW association again.
    
  
- Again, some symbols correspond to (H, U, I, or L). 
- 
- Some symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+Similarly, each symbol corresponds to one of (H, U, I, L). Some of these four keys may not be used.
  
  
- ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
+ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
      
  
  
- Ready? Press (H, U, I, or L) to start.`
+Ready? Press (H, U, I, or L) to start.`
+     ;
+
+     instr_cr_old_text_4 = `Good job. We are getting close!
+
+In the next block, you will need to figure out a NEW association again.
+
+   
+Each symbol corresponds to one of (H, U, I, L). This time, all 4 keys will be used.
+      
+      
+ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
+          
+      
+      
+Ready? Press (H, U, I, or L) to start.`
      ;
  
-     instr_rt_old_text_1 = `Now, use the symbol-key map you just learned:
+     instr_rt_old_text_1 = `In the upcoming ${rt_block} blocks, use the symbol-key map you just learned.
  
- If you see a symbol that requires a response, press the corresponding key as quickly and as accurately as possible.            
- 
- If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING, and simply wait for 2 second.
+Your job is to press the corresponding key as quickly and as accurately as possible.
      
  
-     
- 
- Whenever you are ready, press (H, U, I, or L) to start.`
+Whenever you are ready, press (H, U, I, or L) to start.`
      ;
  
-     instr_rt_old_text_2 = `In the upcoming task, use the NEW symbol-key map you just learned:
+     instr_rt_old_text_2 = `In the upcoming ${rt_block} blocks, use the NEW symbol-key map you just learned.
  
- If you see a symbol that requires a response, press the corresponding key as quickly and as accurately as possible.            
- 
- If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING, and simply wait for 2 second.
-     
-     
+Your job is to press the corresponding key as quickly and as accurately as possible.     
  
  
- Whenever you are ready, press (H, U, I, or L) to start.`
+Whenever you are ready, press (H, U, I, or L) to start.`
      ;
+
+     
  
      if ((session > 1)) {
          instr_rt_old_text_1 = `Now you are going to practice the symbol-key map you learned. Your job is to press the corresponding key as quickly and as accurately as possible.
      
- There will be ${rt_block} blocks with short breaks in between.
+There will be ${rt_block} blocks with short breaks in between.
      
  
- Whenever you are ready, press one of (H, U, I, L) to start.`
+Whenever you are ready, press one of (H, U, I, L) to start.`
      ;
      } else {
          if ((2 < session)) {
              instr_rt_old_text_1 = `Today, we first continue to practice the symbol-key maps for ${rt_block} blocks.
      
- Remember, your job is to press the corresponding key as quickly and accurately as you can.
+Remember, your job is to press the corresponding key as quickly and accurately as you can.
      
- Whenever you are ready, press (H, U, I, or L) to start.`
+Whenever you are ready, press (H, U, I, or L) to start.`
      ;
          }
      }
      instr_tr_old_pre_text = `Good job so far.
      
- In the following 2 blocks, press the corresponding key ON the fourth beep. Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
+In the following 2 blocks, press the corresponding key ON the fourth beep. 
+
+Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
      
  
- Press (H, U, I, or L) to start.`
+Press (H, U, I, or L) to start.`
      ;
-     instr_tr_old_post_text = `Great job.
-     
- In the following 2 blocks, you will hear four beeps again. Press the corresponding key ON the fourth beep. Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
+     instr_tr_old_post_text_1 = `In the upcoming block, the task is different.
+
+You will hear four beeps again. Use the NEW symbol-key map you just learned and press the corresponding key ON the fourth beep. 
+
+Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
      
  
- Press one of (H, U, I, L) to start.`
+Press one of (H, U, I, L) to start.`
+     ;
+
+     instr_tr_old_post_text_2 = `In the upcoming block, Use the NEW symbol-key map you just learned.
+
+You will hear four beeps again. Press the corresponding key ON the fourth beep. 
+
+Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
+     
+
+Press one of (H, U, I, L) to start.`
      ;
      if ((grp_stop === 1)) {
-         instr_cr_new_text = `Great job. Now we proceed to the next step. In the upcoming block:
- 
- 
- Symbols that previously corresponded to (H, U, I, or L) may NOT require a response any more. 
- 
- Symbols that previously did not correspond with a key may become requiring a response.
- 
- 
- Your job is to figure out the NEW association between the same 8 symbols and (H, U, I, or L) keys.
- 
- For symbols that do not require a response, DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
- 
- 
- ACCURACY is the priority, so go as slowly as you need to. The more mistakes you make, the longer this block will take.
-         
-         
- Press (H, U, I, or L) to start.`
-     ;
+         instr_cr_new_text = `Great job.
+    
+In next block, you will see the same eight symbols, but this time some of them may no longer correspond with a key (H, U, I, L).
+        
+Your job is to figure out which are those symbols and DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
+                 
+                 
+ACCURACY is the priority, so go as slowly as you need to. The more mistaks you make, the longer this block will take.
+                 
+                 
+Press (H, U, I, or L) to start.`
+    ;
      } else {
          if ((grp_swap === 1)) {
              instr_cr_new_text = `Congratulations!
      
- Now, you will see the same eight symbols, but this time they may correspond with different key (H, U, I, L).
+Now, you will see the same eight symbols, but this time they may correspond with different key (H, U, I, L).
  
- Your job is to figure out the new association between the symbols and the keys.
- 
- 
- ACCURACY is the priority, so go as slowly as you need to. The more mistaks you make, the longer this block will take.
+Your job is to figure out the new association between the symbols and the keys.
  
  
- Press one of (H, U, I, or L) to start.`
+ACCURACY is the priority, so go as slowly as you need to. The more mistaks you make, the longer this block will take.
+ 
+ 
+Press one of (H, U, I, or L) to start.`
      ;
          }
      }
      if ((grp_swap === 1)) {
          instr_tr_new_text = `In the following set of blocks, use the NEW symbol-key map you just learned, press the corresponding key on the fourth beep. 
              
- Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
+Remember, the symbol may show up very late. In this case, MAKE A GUESS. This task is designed to be difficult, so it is okay to make a guess.
                
- These are the last 6 blocks for this experiment.
+These are the last 6 blocks for this experiment.
              
          
  Press (H, U, I, or L) to continue.`
@@ -4002,31 +4048,31 @@
          if ((grp_stop === 1)) {
              instr_tr_new_text = `Great job. We are almost there!
              
- In the last ${tr_block_new_stop} blocks, you will hear 4 beeps. Use the NEW symbol-key map you just learned:
+In the last ${tr_block_new_stop} blocks, you will hear 4 beeps. Use the NEW symbol-key map you just learned:
            
- If you see a symbol that requires a response, press the corresponding key ON the fourth beep.             
- If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING.
+If you see a symbol that requires a response, press the corresponding key ON the fourth beep.             
+If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING.
              
              
- Remember, the symbol may show up very late. In this case, MAKE A GUESS. If you decide to press, remember to respond ON the fourth beep.
+Remember, the symbol may show up very late. In this case, MAKE A GUESS. If you decide to press, remember to respond ON the fourth beep.
              
- This task is designed to be difficult, so it is okay to make a guess.
-             
-             
+This task is designed to be difficult, so it is okay to make a guess.
              
              
- Press (H, U, I, or L) to proceed.`
+             
+             
+Press (H, U, I, or L) to proceed.`
      ;
          }
      }
      penalty_toolate_text = `Response was too late.
- 
- Press (H, U, I, or L) to accept a 2 second penalty.`
-     ;
-     penalty_tooearly_text = `Response was too early.
- 
- Press (H, U, I, or L) to accept a 2 second penalty.`
-     ;
+2 second penalty.
+After 2 second, press (H, U, I, or L) to continue.`
+    ;
+    penalty_tooearly_text = `Response was too early.
+2 second penalty.
+After 2 second, press (H, U, I, or L) to continue.`
+    ;
      penalty_countdown_text = `Ready`
      ;
  
@@ -4038,43 +4084,43 @@
  
      instr_sound_quit_text = `It seems that your computer does not play the sound well. 
      
- Please press (Esc) to exit and check your spearker or headphone. 
+Please press (Esc) to exit and check your spearker or headphone. 
+
+Disconnect any Bluetooth headphone as it is NOT allowed.
  
- Disconnect any Bluetooth headphone as it is NOT allowed.
- 
- You may restart the task later.`
+You may restart the task later.`
      ;
      instr_sound_exit_text = `It seems that those sounds were not well identified. 
      
- If you did not hear any sound, please press (Esc) to exit, check you audio, and restart the task later.
+If you did not hear any sound, please press (Esc) to exit, check you audio, and restart the task later.
  
- If you did hear sound but just pressed wrong buttons, press (spce bar) to proceed.`;
+If you did hear sound but just pressed wrong buttons, press (spce bar) to proceed.`;
  
      instr_sound_select_text = ` Press ( f ) if you heared a coin sound; 
  
- Press ( j ) if you heared a buzzer sound; `
+Press ( j ) if you heared a buzzer sound; `
      ;
  
      instr_sound_check_text = `We will first test your audio. Press the corresponding keys to hear different tones.
  
- Press ( f ) to hear the coin sound.
+Press ( f ) to hear the coin sound.
  
- Press ( j ) to hear the buzzer sound.
+Press ( j ) to hear the buzzer sound.
  
- If you do not hear sound, press (Esc) to exist and check if you audio works fine on your computer.
+If you do not hear sound, press (Esc) to exist and check if you audio works fine on your computer.
  
- If you are able to hear the sound, press (space bar) to proceed.`
+If you are able to hear the sound, press (space bar) to proceed.`
    ;
  
    instr_sound_check_text2 = `On next screen, you will hear either the coin sound or the buzzer sound. 
    
- Press ( f ) after hearing the coin sound. 
+Press ( f ) after hearing the coin sound. 
  
- Press ( j ) after hearing the buzzer sound. 
+Press ( j ) after hearing the buzzer sound. 
  
- You must get at least 4 of these correct in a row to proceed.
+You must get at least 4 of these correct in a row to proceed.
  
- Whenever you are ready, press (space bar) to start.`
+Whenever you are ready, press (space bar) to start.`
    ;
      instr_sound_check_feedback_P_text = `Your choice is correct`;
      instr_sound_check_feedback_N_text = `Your choice is not correct`;
@@ -5598,59 +5644,173 @@
              count = (count + 1);
          }
      }
-     if ((block_type === "CR")) {
+     if ((block_type === "CR") && (remap === 0) && block_count_cr_old <= total_old_block) {
          count = 0;
          while ((count < (num_trials_cr / 40))) {
              util.shuffle(x16);
              for (var i, _pj_c = 0, _pj_a = x16, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                  i = _pj_a[_pj_c];
                  seq_stimnum.push(stimnum[i]);
-                 seq_key.push(key[i]);
+                 
                  seq_symb.push(symb_creat_seq[i]);
                  seq_symb_g.push(symb_g_creat_seq[i]);
                  seq_symb_r.push(symb_r_creat_seq[i]);
-                 seq_keynum.push(keynum[i]);
+                if ([0,1,2,3].includes(stimnum[i])) {
+                  seq_key.push(key_request[0]);
+                  seq_keynum.push(key_list.indexOf(key_request[0]));
+                } else {
+                  seq_key.push(key_request[1]);
+                  seq_keynum.push(key_list.indexOf(key_request[1]));
+                }
+
              }
              util.shuffle(x16);
              for (var i, _pj_c = 0, _pj_a = x16, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                  i = _pj_a[_pj_c];
                  seq_stimnum.push(stimnum[i]);
-                 seq_key.push(key[i]);
                  seq_symb.push(symb_creat_seq[i]);
                  seq_symb_g.push(symb_g_creat_seq[i]);
                  seq_symb_r.push(symb_r_creat_seq[i]);
-                 seq_keynum.push(keynum[i]);
+                 if ([0,1,2,3].includes(stimnum[i])) {
+                  seq_key.push(key_request[0]);
+                  seq_keynum.push(key_list.indexOf(key_request[0]));
+                } else {
+                  seq_key.push(key_request[1]);
+                  seq_keynum.push(key_list.indexOf(key_request[1]));
+                }
              }
              util.shuffle(x8_new);
              for (var i, _pj_c = 0, _pj_a = x8_new, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                  i = _pj_a[_pj_c];
                  seq_stimnum.push(stimnum[i]);
-                 seq_key.push(key[i]);
                  seq_symb.push(symb_creat_seq[i]);
                  seq_symb_g.push(symb_g_creat_seq[i]);
                  seq_symb_r.push(symb_r_creat_seq[i]);
-                 seq_keynum.push(keynum[i]);
+                 if ([0,1,2,3].includes(stimnum[i])) {
+                  seq_key.push(key_request[0]);
+                  seq_keynum.push(key_list.indexOf(key_request[0]));
+                } else {
+                  seq_key.push(key_request[1]);
+                  seq_keynum.push(key_list.indexOf(key_request[1]));
+                }
              }
              count = (count + 1);
          }
      }
      
-     if (((block_type !== "CR") && (stim_type === "Symb"))) {
+     if (((block_type !== "CR") && (stim_type === "Symb") && (remap === 0))) {
          count = 0;
          while ((count < (num_trials / 16))) {
              util.shuffle(x16);
              for (var i, _pj_c = 0, _pj_a = x16, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                  i = _pj_a[_pj_c];
                  seq_stimnum.push(stimnum[i]);
-                 seq_key.push(key[i]);
                  seq_symb.push(symb_creat_seq[i]);
                  seq_symb_g.push(symb_g_creat_seq[i]);
                  seq_symb_r.push(symb_r_creat_seq[i]);
-                 seq_keynum.push(keynum[i]);
+                 if ([0,1,2,3].includes(stimnum[i])) {
+                  seq_key.push(key_request[0]);
+                  seq_keynum.push(key_list.indexOf(key_request[0]));
+                } else {
+                  seq_key.push(key_request[1]);
+                  seq_keynum.push(key_list.indexOf(key_request[1]));
+                }
              }
              count = (count + 1);
          }
      }
+
+
+     if (((block_type === "TR") && (remap === 1))) {
+      count = 0;
+      while ((count < (num_trials / 16))) {
+          util.shuffle(x16);
+          for (var i, _pj_c = 0, _pj_a = x16, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+              i = _pj_a[_pj_c];
+              seq_stimnum.push(stimnum[i]);
+              seq_key.push(key[i]);
+              seq_symb.push(symb_creat_seq[i]);
+              seq_symb_g.push(symb_g_creat_seq[i]);
+              seq_symb_r.push(symb_r_creat_seq[i]);
+              seq_keynum.push(keynum[i]);
+          }
+          count = (count + 1);
+      }
+  }
+
+  if ((block_type === "CR") && (remap === 1)) {
+    count = 0;
+    while ((count < (num_trials_cr / 40))) {
+        util.shuffle(x16);
+        for (var i, _pj_c = 0, _pj_a = x16, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+            i = _pj_a[_pj_c];
+            seq_stimnum.push(stimnum[i]);
+            seq_key.push(key[i]);
+            seq_symb.push(symb_creat_seq[i]);
+            seq_symb_g.push(symb_g_creat_seq[i]);
+            seq_symb_r.push(symb_r_creat_seq[i]);
+            seq_keynum.push(keynum[i]);
+        }
+        util.shuffle(x16);
+        for (var i, _pj_c = 0, _pj_a = x16, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+            i = _pj_a[_pj_c];
+            seq_stimnum.push(stimnum[i]);
+            seq_key.push(key[i]);
+            seq_symb.push(symb_creat_seq[i]);
+            seq_symb_g.push(symb_g_creat_seq[i]);
+            seq_symb_r.push(symb_r_creat_seq[i]);
+            seq_keynum.push(keynum[i]);
+        }
+        util.shuffle(x8_new);
+        for (var i, _pj_c = 0, _pj_a = x8_new, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+            i = _pj_a[_pj_c];
+            seq_stimnum.push(stimnum[i]);
+            seq_key.push(key[i]);
+            seq_symb.push(symb_creat_seq[i]);
+            seq_symb_g.push(symb_g_creat_seq[i]);
+            seq_symb_r.push(symb_r_creat_seq[i]);
+            seq_keynum.push(keynum[i]);
+        }
+        count = (count + 1);
+    }
+}
+
+if ((block_type === "CR") && (remap === 0) && block_count_cr_old > total_old_block) {
+  count = 0;
+  while ((count < (num_trials_cr / 40))) {
+      util.shuffle(x16);
+      for (var i, _pj_c = 0, _pj_a = x16, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+          i = _pj_a[_pj_c];
+          seq_stimnum.push(stimnum[i]);
+          seq_key.push(key[i]);
+          seq_symb.push(symb_creat_seq[i]);
+          seq_symb_g.push(symb_g_creat_seq[i]);
+          seq_symb_r.push(symb_r_creat_seq[i]);
+          seq_keynum.push(keynum[i]);
+      }
+      util.shuffle(x16);
+      for (var i, _pj_c = 0, _pj_a = x16, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+          i = _pj_a[_pj_c];
+          seq_stimnum.push(stimnum[i]);
+          seq_key.push(key[i]);
+          seq_symb.push(symb_creat_seq[i]);
+          seq_symb_g.push(symb_g_creat_seq[i]);
+          seq_symb_r.push(symb_r_creat_seq[i]);
+          seq_keynum.push(keynum[i]);
+      }
+      util.shuffle(x8_new);
+      for (var i, _pj_c = 0, _pj_a = x8_new, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+          i = _pj_a[_pj_c];
+          seq_stimnum.push(stimnum[i]);
+          seq_key.push(key[i]);
+          seq_symb.push(symb_creat_seq[i]);
+          seq_symb_g.push(symb_g_creat_seq[i]);
+          seq_symb_r.push(symb_r_creat_seq[i]);
+          seq_keynum.push(keynum[i]);
+      }
+      count = (count + 1);
+  }
+}
      
      // keep track of which components have finished
      Creat_StimSeqComponents = [];
@@ -6474,10 +6634,14 @@
      round_count = round_count + 1
      // update component parameters for each repeat
      if (round_count == 1){
-       Instr_Round_Num_Text.setText(('Good Job! You are now ready for the tasks! \n\nPress (H, U, I, or L) to start Round ' + round_count + '/' + prac_old_block));
-     } else {
-       Instr_Round_Num_Text.setText((('Round ' + round_count + '/' + prac_old_block) + '\nPress (H, U, I, or L) to start'));
-     }
+       Instr_Round_Num_Text.setText(('Good Job! You are now ready for the tasks! \n\n There are ' + total_old_block + ' rounds. Each round has 3 blocks. \n\nPress (H, U, I, or L) to start Round ' + round_count + '/' + total_old_block));
+     } else if (round_count > 1 && round_count <= prac_old_block) {
+       Instr_Round_Num_Text.setText((('Round ' + round_count + '/' + total_old_block) + '\nPress (H, U, I, or L) to start'));
+     } else if (round_count == prac_old_block + 1) {
+      Instr_Round_Num_Text.setText(('There are ' + test_old_block + ' rounds left. \n\n Pay attention to the instruction, some blocks will have different tasks! \n\nPress (H, U, I, or L) to start Round ' + round_count + '/' + total_old_block));
+    }  else if (round_count > prac_old_block + 1) {
+      Instr_Round_Num_Text.setText((('Round ' + round_count + '/' + total_old_block) + '\nPress (H, U, I, or L) to start'));
+    }  
      
      Instr_Round_Num_Press.keys = undefined;
      Instr_Round_Num_Press.rt = undefined;
@@ -7034,17 +7198,10 @@
      t = 0;
      TR_PenaltyClock.reset(); // clock
      frameN = -1;
-     routineTimer.add(2.000000);
-     // update component parameters for each repeat
-     routineTimer.reset(2);
-     countdown = 2;
-     TR_Beep.setVolume(0);
      // update component parameters for each repeat
      TR_Rec_Frame_Penalty.setLineColor(new util.Color(rec_frame_color));
      TR_Rec_Frame_Penalty.setLineWidth(rec_wd);
      TR_Penalty_Text.setText(tr_penalty_text);
-     penalty_countdown.setText(countdown);
-     penalty_countdown.setHeight(0.1);
      TR_Penalty_Press.keys = undefined;
      TR_Penalty_Press.rt = undefined;
      _TR_Penalty_Press_allKeys = [];
@@ -7053,8 +7210,6 @@
      TR_PenaltyComponents.push(TR_Rec_Frame_Penalty);
      TR_PenaltyComponents.push(TR_Penalty_Text);
      TR_PenaltyComponents.push(TR_Penalty_Press);
-     TR_PenaltyComponents.push(penalty_countdown);
-     TR_PenaltyComponents.push(TR_Beep);
      
      for (const thisComponent of TR_PenaltyComponents)
        if ('status' in thisComponent)
@@ -7074,16 +7229,6 @@
      frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
      // update/draw components on each frame
      
- 
-     if (t >= 0.0 && penalty_countdown.status === PsychoJS.Status.NOT_STARTED) {
-       // keep track of start time/frame for later
-       penalty_countdown.tStart = t;  // (not accounting for frame time here)
-       penalty_countdown.frameNStart = frameN;  // exact frame index
-       
-       penalty_countdown.setAutoDraw(true);
-     }
- 
- 
      // *TR_Rec_Frame_Penalty* updates
      if (t >= 0.0 && TR_Rec_Frame_Penalty.status === PsychoJS.Status.NOT_STARTED) {
        // keep track of start time/frame for later
@@ -7105,7 +7250,7 @@
  
      
      // *TR_Penalty_Press* updates
-     if (t >= 0.0 && TR_Penalty_Press.status === PsychoJS.Status.NOT_STARTED) {
+     if (t >= 2 && TR_Penalty_Press.status === PsychoJS.Status.NOT_STARTED) {
        // keep track of start time/frame for later
        TR_Penalty_Press.tStart = t;  // (not accounting for frame time here)
        TR_Penalty_Press.frameNStart = frameN;  // exact frame index
@@ -7123,44 +7268,9 @@
          TR_Penalty_Press.keys = _TR_Penalty_Press_allKeys[0].name;  // just the first key pressed
          TR_Penalty_Press.rt = _TR_Penalty_Press_allKeys[0].rt;
          // a response ends the routine
-        //continueRoutine = false;
+         continueRoutine = false;
        }
      }
-     
-     if (_TR_Penalty_Press_allKeys.length > 0 && penalty_countdown.status === PsychoJS.Status.STARTED){ // only update if being drawn
-       
-       if (((0 <= t - TR_Penalty_Press.rt) && (t - TR_Penalty_Press.rt < 1))) {
-         countdown = 1;
-       } else {
-           if ((1 <= t - TR_Penalty_Press.rt) && (t - TR_Penalty_Press.rt < 2)) {
-               countdown = 0;
-           } 
-       }
-       penalty_countdown.setText(countdown);
-     }
- 
-     if (t - TR_Penalty_Press.rt >= 2 && penalty_countdown.status === PsychoJS.Status.STARTED && _TR_Penalty_Press_allKeys.length > 0) {
-       penalty_countdown.setAutoDraw(false);
-       TR_Penalty_Text.setAutoDraw(false);
-       TR_Rec_Frame_Penalty.setAutoDraw(false);
-       TR_Penalty_Press.status = PsychoJS.Status.FINISHED;
-     }
- 
-     // play sound for warm up
-     if (t - TR_Penalty_Press.rt >= 0.0 && TR_Beep.status === PsychoJS.Status.NOT_STARTED && _TR_Penalty_Press_allKeys.length > 0) {
-       // keep track of start time/frame for later
-       TR_Beep.tStart = t;  // (not accounting for frame time here)
-       TR_Beep.frameNStart = frameN;  // exact frame index
-       psychoJS.window.callOnFlip(function(){ TR_Beep.play(); });  // screen flip
-       TR_Beep.status = PsychoJS.Status.STARTED;
-       
-     }
- 
-     if (t - TR_Penalty_Press.rt >= 2 && TR_Beep.status === PsychoJS.Status.STARTED) {
-       TR_Beep.stop();  // stop the sound (if longer than duration)
-       TR_Beep.status = PsychoJS.Status.FINISHED;
-     } 
- 
  
      // check for quit (typically the Esc key)
      if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
@@ -7204,7 +7314,6 @@
          }
      
      TR_Penalty_Press.stop();
-     penalty_countdown.setAutoDraw(false);
      // the Routine "TR_Penalty" was not non-slip safe, so reset the non-slip timer
      routineTimer.reset();
      
@@ -7440,6 +7549,7 @@
  var _Instr_CR_Old_Press_allKeys;
  var Instr_CR_OldComponents;
  var ind_rnd;
+ var key_request = [];
  function Instr_CR_OldRoutineBegin(trials) {
    return function () {
      //------Prepare to start Routine 'Instr_CR_Old'-------
@@ -7458,8 +7568,10 @@
          if (block_count_cr_old == 2) {
            instr_text = instr_cr_old_text_2;
          } else {
-           if (block_count_cr_old >= 3) {
+           if (block_count_cr_old >= 3 && block_count_cr_old <= total_old_block) {
              instr_text = instr_cr_old_text_3;
+           } else if (block_count_cr_old > total_old_block) {
+            instr_text = instr_cr_old_text_4;
            }
          }
      }
@@ -7472,37 +7584,45 @@
      block_type = "CR";
      stim_type = "Symb";
      remap = 0;
-     
-     //symb_map_rnd_stop = Math.floor(myrng() * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
-     ind_rnd = resp_map_ind[block_count];
-     resp_ind_rnd = symb_perm_resp[ind_rnd] // shuffle index of resp symbols
-     
-     symb_map_ind_shuffle = [];
-     symb_map_ind_shuffle = Object.assign({}, symb_map_ind);
-     
-     symb_map_ind_shuffle[resp_ind_rnd[0]] = symb_map_ind[x_symb_resp[0]];
-     symb_map_ind_shuffle[resp_ind_rnd[1]] = symb_map_ind[x_symb_resp[1]];
-     symb_map_ind_shuffle[resp_ind_rnd[2]] = symb_map_ind[x_symb_resp[2]];
-     symb_map_ind_shuffle[resp_ind_rnd[3]] = symb_map_ind[x_symb_resp[3]];
+
+
+     if (block_count_cr_old <= total_old_block){
+      symb_map_rnd = Math.floor(Math.random() * symb_perm.length) // random interger between 0 and num_symb - 1
+      symb_map_ind_shuffle = symb_perm[symb_map_rnd]; // randomize which symbols corresponds to which index 0 to 7
  
-     symb_map_ind_shuffle = Object.values(symb_map_ind_shuffle);
- 
-     symb_map = [];
-     symb_g_map = [];
-     symb_r_map = [];
-     for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
+      symb_map = [];
+      symb_g_map = [];
+      symb_r_map = [];
+      for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
        symb_map.push(symb[symb_map_ind_shuffle[i]]);
        symb_g_map.push(symb_g[symb_map_ind_shuffle[i]]);
        symb_r_map.push(symb_r[symb_map_ind_shuffle[i]]);
+      }
+     } else if (block_count_cr_old > total_old_block) {
+      symb_map_rnd = Math.floor(rng1 * symb_perm.length) // random interger between 0 and num_symb - 1
+      symb_map_ind = symb_perm[symb_map_rnd]; // randomize which symbols corresponds to which index 0 to 7
+ 
+      for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
+          symb_map.push(symb[symb_map_ind[i]]);
+          symb_remap.push(symb[symb_remap_ind[i]]);
+          symb_g_map.push(symb_g[symb_map_ind[i]]);
+          symb_g_remap.push(symb_g[symb_remap_ind[i]]);
+          symb_r_map.push(symb_r[symb_map_ind[i]]);
+          symb_r_remap.push(symb_r[symb_remap_ind[i]]);
+      }
      }
+     
      
      symb_creat_seq = symb_map;
      symb_g_creat_seq = symb_g_map;
      symb_r_creat_seq = symb_r_map;
  
-     stop_pair_1 = remap_pair_1;
-     stop_pair_2 = remap_pair_2;
- 
+
+     key_ind = Math.floor(Math.random() * remap_pairs.length)
+
+     key_request[0] = key_list[remap_pairs[key_ind][0]];
+     key_request[1] = key_list[remap_pairs[key_ind][1]];
+     
      // keep track of which components have finished
      Instr_CR_OldComponents = [];
      Instr_CR_OldComponents.push(Instr_CR_Old_Text);
@@ -7744,9 +7864,10 @@
      psychoJS.experiment.addData("grp_stop", grp_stop);
      psychoJS.experiment.addData("grp_swap", grp_swap);
      psychoJS.experiment.addData("block_num", block_count);
+     psychoJS.experiment.addData("round_num", block_count_cr_old);
      psychoJS.experiment.addData("prep_time", prep_time);
      psychoJS.experiment.addData("session", session);
-     
+     psychoJS.experiment.addData("round_num", round_count);
      // the Routine "Pre_Trial" was not non-slip safe, so reset the non-slip timer
      routineTimer.reset();
      
@@ -8681,7 +8802,7 @@
      frameN = -1;
      TR_Coin.setVolume(1);
      // update component parameters for each repeat
-     block_count = (block_count_cr_old - 1)*rt_block;
+     block_count = 0;
      stop_tol = 2;
  
      if (block_count_cr_old == 1) {
@@ -8839,7 +8960,17 @@
      Instr_TR_Old_PostClock.reset(); // clock
      frameN = -1;
      // update component parameters for each repeat
-     Instr_TR_Old_Post_text.setText(instr_tr_old_post_text);
+
+     if (block_count_cr_old == prac_old_block + 1) {
+      instr_text = instr_tr_old_post_text_1;
+    } else {
+        if (block_count_cr_old > prac_old_block + 1) {
+          instr_text = instr_tr_old_post_text_2;
+        } 
+    }
+
+
+     Instr_TR_Old_Post_text.setText(instr_text);
      Instr_TR_Old_Post_Press.keys = undefined;
      Instr_TR_Old_Post_Press.rt = undefined;
      _Instr_TR_Old_Post_Press_allKeys = [];
@@ -8975,46 +9106,32 @@
      block_type = "CR";
      stim_type = "Symb";
      block_count = 0;
+     block_count_cr_old = [];
      remap = 1;
      stop_tol = 2;
+    
+
+     symb_map_rnd = Math.floor(rng1 * symb_perm.length) // random interger between 0 and num_symb - 1
+     symb_map_ind = symb_perm[symb_map_rnd]; // randomize which symbols corresponds to which index 0 to 7
  
-     stop_pair_1 = probe_pair_1;
-     stop_pair_2 = remap_pair_1;
- 
+     symb_remap_ind = Object.assign({}, symb_map_ind);
      
-     //symb_map_rnd_stop = Math.floor(myrng() * symb_perm_stop.length) // random interger between 0 and num_symb - 1 
-     ind_rnd = resp_map_ind[symb_perm_resp.length-1];
-     resp_ind_rnd = symb_perm_resp[ind_rnd] // shuffle index of resp symbols
-     
-     symb_map_ind_shuffle = [];
-     symb_map_ind_shuffle = Object.assign({}, symb_map_ind);
-     
-     symb_map_ind_shuffle[resp_ind_rnd[0]] = symb_map_ind[x_symb_resp[0]];
-     symb_map_ind_shuffle[resp_ind_rnd[1]] = symb_map_ind[x_symb_resp[1]];
-     symb_map_ind_shuffle[resp_ind_rnd[2]] = symb_map_ind[x_symb_resp[2]];
-     symb_map_ind_shuffle[resp_ind_rnd[3]] = symb_map_ind[x_symb_resp[3]];
+     symb_remap_ind[remap_pair_1[0]] = symb_map_ind[remap_pair_1[1]];
+     symb_remap_ind[remap_pair_1[1]] = symb_map_ind[remap_pair_1[0]];
+     symb_remap_ind[remap_pair_2[0]] = symb_map_ind[remap_pair_2[1]];
+     symb_remap_ind[remap_pair_2[1]] = symb_map_ind[remap_pair_2[0]];
  
-     symb_map_ind_shuffle = Object.values(symb_map_ind_shuffle);
+     symb_remap_ind = Object.values(symb_remap_ind)
  
-     symb_map = [];
-     symb_g_map = [];
-     symb_r_map = [];
-     for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
-       symb_map.push(symb[symb_map_ind_shuffle[i]]);
-       symb_g_map.push(symb_g[symb_map_ind_shuffle[i]]);
-       symb_r_map.push(symb_r[symb_map_ind_shuffle[i]]);
-     }
- 
- 
-     symb_map = [];
-     symb_g_map = [];
-     symb_r_map = [];
-     for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
-       symb_map.push(symb[symb_map_ind_shuffle[i]]);
-       symb_g_map.push(symb_g[symb_map_ind_shuffle[i]]);
-       symb_r_map.push(symb_r[symb_map_ind_shuffle[i]]);
-     }
- 
+      for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
+          symb_map.push(symb[symb_map_ind[i]]);
+          symb_remap.push(symb[symb_remap_ind[i]]);
+          symb_g_map.push(symb_g[symb_map_ind[i]]);
+          symb_g_remap.push(symb_g[symb_remap_ind[i]]);
+          symb_r_map.push(symb_r[symb_map_ind[i]]);
+          symb_r_remap.push(symb_r[symb_remap_ind[i]]);
+      }
+  
      if (grp_stop === 1) {
          symb_creat_seq = symb_map;
          symb_g_creat_seq = symb_g_map;
@@ -9142,7 +9259,6 @@
      
      Instr_CR_New_Press.stop();
      TR_Coin.stop();
-     psychoJS.experiment.addData("symb_map_shuffle", symb_map_ind_shuffle);
      // the Routine "Instr_CR_New" was not non-slip safe, so reset the non-slip timer
      routineTimer.reset();
      
@@ -9289,7 +9405,7 @@
        }
      }
      sound_vol = 0;
-     if ((stop_pair_1.includes(stimnum_item)) || (stop_pair_2.includes(stimnum_item))) {
+     if ((remap_pair_1.includes(stimnum_item)) || (remap_pair_2.includes(stimnum_item))) {
          if ((RT_Press_Stop.keys === undefined)) {
              corr = 1;
              feedback_image = symb_g_item;
@@ -9377,6 +9493,7 @@
      stim_type = "Symb";
      remap = 1;
      block_count = 0;
+     block_count_cr_old = [];
      
      if (grp_stop === 1) {
          symb_creat_seq = symb_map;
@@ -9662,7 +9779,7 @@
      }
      //TR_Beep_Stop.stop();  // ensure sound has stopped at end of routine
      sound_vol = 0;
-     if ((stop_pair_1.includes(stimnum_item)) || (stop_pair_2.includes(stimnum_item))) {
+     if ((remap_pair_1.includes(stimnum_item)) || (remap_pair_2.includes(stimnum_item))) {
          if ((TR_Press_Stop.keys === undefined)) {
              corr = 1;
              feedback_image = symb_g_item;
