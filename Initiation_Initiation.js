@@ -6350,12 +6350,12 @@ function Instr_Block_NumRoutineBegin(trials) {
       + '\n\n\nPress (' + letter_item_c + ') using the (' +  finger_letter_item + ') finger if a letter appears' 
       + '\n\n\nSimple wait for ' + stop + ' if a symbol does not require a response'
       + '\n\n\nThusm if a response is needed, you have to make it within '+ stop + ' seconds'
-      + '\n\n\n\nPress (H, U, I, or L) to start'));
+      + '\n\n\n\nPress (space) to start'));
     } else if (block_type === "CR"){
       Instr_Block_Num_Text.setText((('Block ' + block_count) +  ('\n\n\nKeep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).') 
       + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') 
       + '\n\n\n Press (' + letter_item_c + ') using the (' +  finger_letter_item + ') finger if a letter appears' 
-      + '\n\n\n\nPress (H, U, I, or L) to start'));
+      + '\n\n\n\nPress (space) to start'));
     } 
     
     
@@ -6411,7 +6411,7 @@ function Instr_Block_NumRoutineEachFrame(trials) {
     }
 
     if (Instr_Block_Num_Press.status === PsychoJS.Status.STARTED) {
-      let theseKeys = Instr_Block_Num_Press.getKeys({keyList: ['h', 'u', 'i', 'l'], waitRelease: false});
+      let theseKeys = Instr_Block_Num_Press.getKeys({keyList: ['space'], waitRelease: false});
       _Instr_Block_Num_Press_allKeys = _Instr_Block_Num_Press_allKeys.concat(theseKeys);
       if (_Instr_Block_Num_Press_allKeys.length > 0) {
         Instr_Block_Num_Press.keys = _Instr_Block_Num_Press_allKeys[0].name;  // just the first key pressed
