@@ -3926,7 +3926,7 @@ Press (H, U, I, or L) to start.`
         if ((grp_stop === 1)) {
             instr_tr_new_text = `Great job. We are almost there!
 
-            Remember to keep resting your Index, Middle, Ring, and Little fingers on keys (H, U, I, L).
+Remember to keep resting your Index, Middle, Ring, and Little fingers on keys (H, U, I, L).
             
 In the last ${tr_block_new_stop} blocks, use the NEW symbol-key map you just learned:
 
@@ -6327,11 +6327,13 @@ function Instr_Block_NumRoutineBegin(trials) {
     if (block_type === "RT") {
       if (block_count == 1) {
         stop_tol = 1;
-      } else if (arrayAverage(rt_stop_tol) < 1) {
+      } else {
+        if (arrayAverage(rt_stop_tol) < 1) {
         stop_tol = Math.round(arrayAverage(rt_stop_tol) *1.1*10)/10;
-      } else if (arrayAverage(rt_stop_tol) >= 1) {
+        } else if (arrayAverage(rt_stop_tol) >= 1) {
         stop_tol = 1;
-      }
+          }
+        }
     }
     
 
@@ -9163,7 +9165,7 @@ function Instr_CR_NewRoutineEnd(trials) {
 
 var _RT_Press_Stop_allKeys;
 var RT_Enter_Trial_StopComponents;
-var rt_stop_tol = [];
+
 function RT_Enter_Trial_StopRoutineBegin(trials) {
   return function () {
     //------Prepare to start Routine 'RT_Enter_Trial_Stop'-------
@@ -9172,6 +9174,8 @@ function RT_Enter_Trial_StopRoutineBegin(trials) {
     frameN = -1;
 
     jitter = 0;
+
+    var rt_stop_tol = [];
     // update component parameters for each repeat
     RT_Rec_Frame_Stop.setOpacity(rec_frame_opacity);
     RT_Rec_Frame_Stop.setLineColor(new util.Color(rec_frame_color));
@@ -9413,6 +9417,35 @@ function Instr_TR_NewRoutineBegin(trials) {
     Instr_TR_NewClock.reset(); // clock
     frameN = -1;
     // update component parameters for each repeat
+    key_item = key_list[key_rnd];
+    key_item_c = key_list_C[key_rnd];
+    finger_item = finger_list[key_rnd];
+
+
+    instr_tr_new_text = `Great job. We are almost there!
+
+Remember to keep resting your Index, Middle, Ring, and Little fingers on keys (H, U, I, L).
+            
+In the last ${tr_block_new_stop} blocks, use the NEW symbol-key map you just learned:
+
+
+If you see a symbol that requires a response, press key (${key_item_c}) using the (${finger_item}) finger ON the fourth beep.      
+
+If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING.
+
+
+
+Remember, the symbol may show up very late. In this case, MAKE A GUESS. If you decide to press, remember to respond ON the fourth beep.
+
+This task is designed to be difficult, so it is okay to make a guess.
+
+
+
+
+Press (space bar) to start.`
+    ;
+
+
     Instr_TR_Old_Post_text_3.setText(instr_tr_new_text);
     Instr_TR_Old_Post_Press_3.keys = undefined;
     Instr_TR_Old_Post_Press_3.rt = undefined;
@@ -9479,7 +9512,7 @@ function Instr_TR_NewRoutineEachFrame(trials) {
     }
 
     if (Instr_TR_Old_Post_Press_3.status === PsychoJS.Status.STARTED) {
-      let theseKeys = Instr_TR_Old_Post_Press_3.getKeys({keyList: ['h', 'u', 'i', 'l'], waitRelease: false});
+      let theseKeys = Instr_TR_Old_Post_Press_3.getKeys({keyList: ['space'], waitRelease: false});
       _Instr_TR_Old_Post_Press_3_allKeys = _Instr_TR_Old_Post_Press_3_allKeys.concat(theseKeys);
       if (_Instr_TR_Old_Post_Press_3_allKeys.length > 0) {
         Instr_TR_Old_Post_Press_3.keys = _Instr_TR_Old_Post_Press_3_allKeys[0].name;  // just the first key pressed
