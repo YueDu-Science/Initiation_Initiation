@@ -216,7 +216,7 @@ var num_trials_cr = 2000;
 var num_criterion = 1;
 var num_trials = 20;
 var num_trials_probe = 96;
-var rt_block = 1;
+var rt_block = 3;
 var tr_block_old = 0;
 var tr_block_new_swap = 0;
 var tr_block_new_stop = 6;
@@ -9327,7 +9327,7 @@ function RT_Enter_Trial_StopRoutineEnd(trials) {
       }
     }
     sound_vol = 0;
-    if ((remap_pair_1.includes(stimnum_item)) || (remap_pair_2.includes(stimnum_item))) {
+    if ((stop_pair_1.includes(stimnum_item)) || (stop_pair_2.includes(stimnum_item))) {
         if ((RT_Press_Stop.keys === undefined)) {
             corr = 1;
             feedback_image = symb_g_item;
@@ -9730,7 +9730,7 @@ function TR_Enter_Trials_StopRoutineEnd(trials) {
     }
     //TR_Beep_Stop.stop();  // ensure sound has stopped at end of routine
     sound_vol = 0;
-    if ((remap_pair_1.includes(stimnum_item)) || (remap_pair_2.includes(stimnum_item))) {
+    if ((stop_pair_1.includes(stimnum_item)) || (stop_pair_2.includes(stimnum_item))) {
         if ((TR_Press_Stop.keys === undefined)) {
             corr = 1;
             feedback_image = symb_g_item;
