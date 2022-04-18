@@ -3829,16 +3829,16 @@ When you see symbols that require a response, press a key. Which key to press wi
 
 Occasionally, you will also see four letters (1, 2, 3, 4) on the screen, one at a time, which also requires a key press, shown on next page.
 
-For symbols that do not correpond to a key, simple let it go. 
+For symbols that do not correpond to a key, simply let it go. 
 
 
-Your job is to be as quickly and as accurately as possible. If a key press is needed, it has to be done within 0.5 second.
+Your job is to be as quickly and as accurately as possible.
 
   
 There will be ${rt_block} blocks with short breaks in between. It will be hard at the beginning, try you best to improve your performance through these blocks.
   
 
-Whenever you are ready, press (H, U, I, or L) to start.`
+Whenever you are ready, press (H, U, I, or L) to proceed.`
   ;
   } else {
       if ((1 < session)) {
@@ -6349,7 +6349,7 @@ function Instr_Block_NumRoutineBegin(trials) {
       + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') 
       + '\n\n\nPress (' + letter_item_c + ') using the (' +  finger_letter_item + ') finger if a letter appears' 
       + '\n\n\nSimple wait for ' + stop + ' if a symbol does not require a response'
-      + '\n\n\nThusm whenever a response is needed, you have to make it within '+ stop + ' seconds'
+      + '\n\n\nThusm if a response is needed, you have to make it within '+ stop + ' seconds'
       + '\n\n\n\nPress (H, U, I, or L) to start'));
     } else if (block_type === "CR"){
       Instr_Block_Num_Text.setText((('Block ' + block_count) +  ('\n\n\nKeep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).') 
@@ -7355,6 +7355,7 @@ function Instr_CR_OldRoutineBegin(trials) {
     // randomly select a key a response key
     key_rnd = Math.floor(rng3 * key_list.length) 
     key_item_c = key_list_C[key_rnd];
+    finger_item = finger_list[key_rnd];
     // use this to set the key in pre_trial routine
 
     instr_cr_old_text = `Good Job! You are now ready for the tasks!
@@ -7363,7 +7364,7 @@ In the upcoming block, rest your Index, Middle, Ring, and Little fingers on keys
 
 You will see eight novel symbols on the screen, one at a time. 
 
-Some symbols correspond to key (${key_item_c}).
+Some symbols correspond to key (${key_item_c}) pressed by (${finger_item}) finger.
 
 Some symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
     
