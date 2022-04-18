@@ -7534,7 +7534,7 @@ function Pre_TrialRoutineBegin(trials) {
     symb_item = seq_symb[trial_count];
     // judge whether the stimnum_item is number or symbol
     if ([1,2,3,4].includes(symb_item)){
-      key_item = seq_key[trial_count];
+      key_item = key_list[letter_rnd];
       symb_type = "number";
     } else {
       key_item = key_list[key_rnd];
