@@ -3827,7 +3827,7 @@ Ready? Press (H, U, I, or L) to continue.`
       
 Your job is to press a key (shown on next page) as quickly and as accurately as possible if a symbol requires a response.
 
-For symbols that do not correpond to a key, simply let it go. 
+For a symbol that does not correpond to a key, simply let it go. 
 
 Occasionally, you will also see four letters (1, 2, 3, 4) on the screen, one at a time, which also requires a key press, shown on next page.
 
@@ -6348,8 +6348,8 @@ function Instr_Block_NumRoutineBegin(trials) {
       Instr_Block_Num_Text.setText((('Block ' + block_count) +  ('\n\n\nKeep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).') 
       + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') 
       + '\n\n\nPress (' + letter_item_c + ') using the (' +  finger_letter_item + ') finger if a letter appears' 
-      + '\n\n\nSimple wait for ' + stop_tol + ' if a symbol does not require a response'
-      + '\n\n\nThusm if a response is needed, you have to make it within '+ stop_tol + ' seconds'
+      + '\n\n\nSimple wait for ' + stop_tol + ' second(s) if a symbol does not require a response'
+      + '\n\n\nThus if a response is needed, you have to make it within '+ stop_tol + ' second(s)'
       + '\n\n\n\nPress (space) to start'));
     } else if (block_type === "CR"){
       Instr_Block_Num_Text.setText((('Block ' + block_count) +  ('\n\n\nKeep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).') 
