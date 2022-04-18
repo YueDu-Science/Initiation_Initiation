@@ -8957,6 +8957,7 @@ function Instr_CR_NewRoutineBegin(trials) {
     // randomly select a key a response key
     key_rnd = Math.floor(rng3 * key_list.length) 
     key_item_c = key_list_C[key_rnd];
+    finger_item = finger_list[key_rnd];
     // use this to set the key in pre_trial routine
 
 
