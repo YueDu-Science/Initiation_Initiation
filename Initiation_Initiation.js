@@ -6325,10 +6325,12 @@ function Instr_Block_NumRoutineBegin(trials) {
 
     
     if (block_type === "RT") {
-      if (block_count == 0) {
+      if (block_count == 1) {
         stop_tol = 1;
-      } else {
-        stop_tol = arrayAverage(rt_stop_tol) *1.2;
+      } else if (arrayAverage(rt_stop_tol) < 1) {
+        stop_tol = Math.round(arrayAverage(rt_stop_tol) *1.1*10)/10;
+      } else if (arrayAverage(rt_stop_tol) >= 1) {
+        stop_tol = 1;
       }
     }
     
