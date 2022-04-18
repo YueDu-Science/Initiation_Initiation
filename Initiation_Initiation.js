@@ -3825,15 +3825,11 @@ Ready? Press (H, U, I, or L) to continue.`
     if ((session === 1)) {
       instr_rt_text = `Now you are going to practice the symbol-key map you learned. 
       
-Keep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).
-
 When you see symbols that require a response, press a key. Which key to press will be shown on next page.
 
-For symbols that do not correpond to a key, simple wait for 0.5 second. 
+Occasionally, you will also see four letters (1, 2, 3, 4) on the screen, one at a time, which also requires a key press, shown on next page.
 
-Occasionally, you will also see four letters (1, 2, 3, 4) on the screen, one at a time. Each corresponds to one of (H, U, I, L). 
-
-For example, press key (H) to letter (1), press key (U) to letter (2), and so on. All letters require a response.
+For symbols that do not correpond to a key, simple let it go. 
 
 
 Your job is to be as quickly and as accurately as possible. If a key press is needed, it has to be done within 0.5 second.
@@ -6287,6 +6283,10 @@ var Instr_Block_NumComponents;
 var key_item_c;
 var finger_item;
 var myrng = new Math.seedrandom(participant);
+var rng5;
+var letter_rnd;
+var letter_item_c;
+var finger_letter_item;
 function Instr_Block_NumRoutineBegin(trials) {
   return function () {
     //------Prepare to start Routine 'Instr_Block_Num'-------
@@ -6309,21 +6309,54 @@ function Instr_Block_NumRoutineBegin(trials) {
           iter = iter + 1;
         }
         key_rnd = Math.floor(rng4 * key_list.length) 
+
+        iter = 0;
+        while (iter < 2000) {
+          rng5 = myrng()
+          if (Math.floor( rng5* key_list.length) !== Math.floor( rng4* key_list.length) ) {
+            break;
+          }
+          iter = iter + 1;
+        }
+        letter_rnd = Math.floor(rng5 * key_list.length)
       } else if (block_type === "TR" && remap === 1) {
         // randomly select a key a response key
         key_rnd = Math.floor(rng3 * key_list.length) 
         // use this to set the key in pre_trial routine
       } 
 
+    
+    if (block_type === "RT") {
+      if (block_count == 0) {
+        stop_tol = 1;
+      } else {
+        stop_tol = rt_stop_tol.mean() *1.2;
+      }
+    }
+    
+
     key_item = key_list[key_rnd];
     key_item_c = key_list_C[key_rnd];
     finger_item = finger_list[key_rnd];
 
+    letter_item_c = key_list_C[letter_rnd];
+    finger_letter_item = finger_list[letter_rnd];
+
     if (block_type === "TR" && remap === 1) {
       Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') + '\n\n\n\nPress ( ' +  key_item_c + ' ) to start'));
-    } else{
-      Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') + '\n\n\n Press (H, U, I, or L) for letters (1, 2, 3, or 4)' + '\n\n\n\nPress ( ' +  key_item_c + ' ) to start'));
-    }
+    } else if (block_type === "RT"){
+      Instr_Block_Num_Text.setText((('Block ' + block_count) +  ('\n\n\nKeep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).') 
+      + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') 
+      + '\n\n\nPress (' + letter_item_c + ') using the (' +  finger_letter_item + ') finger if a letter appears' 
+      + '\n\n\nSimple wait for ' + stop + ' if a symbol does not require a response'
+      + '\n\n\nThusm whenever a response is needed, you have to make it within '+ stop + ' seconds'
+      + '\n\n\n\nPress (H, U, I, or L) to start'));
+    } else if (block_type === "CR"){
+      Instr_Block_Num_Text.setText((('Block ' + block_count) +  ('\n\n\nKeep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).') 
+      + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') 
+      + '\n\n\n Press (' + letter_item_c + ') using the (' +  finger_letter_item + ') finger if a letter appears' 
+      + '\n\n\n\nPress (H, U, I, or L) to start'));
+    } 
     
     
     
@@ -9129,6 +9162,7 @@ function Instr_CR_NewRoutineEnd(trials) {
 
 var _RT_Press_Stop_allKeys;
 var RT_Enter_Trial_StopComponents;
+var rt_stop_tol;
 function RT_Enter_Trial_StopRoutineBegin(trials) {
   return function () {
     //------Prepare to start Routine 'RT_Enter_Trial_Stop'-------
@@ -9329,6 +9363,7 @@ function RT_Enter_Trial_StopRoutineEnd(trials) {
     if ((RT_Press_Stop.keys !== undefined)) {
         actual_press = RT_Press_Stop.keys;
         rt = RT_Press_Stop.rt;
+        rt_stop_tol.push(rt);
         actual_choice = key_list.indexOf(actual_press);
     } else {
         actual_press = "a";
