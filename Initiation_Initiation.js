@@ -6330,7 +6330,7 @@ function Instr_Block_NumRoutineBegin(trials) {
       if (block_count == 0) {
         stop_tol = 1;
       } else {
-        stop_tol = rt_stop_tol.mean() *1.2;
+        stop_tol = arrayAverage(rt_stop_tol) *1.2;
       }
     }
     
@@ -10087,4 +10087,18 @@ function permute(permutation) {
     }
   }
   return result;
+}
+
+//JavaScript function that returns the average / mean
+//value for all numbers in an array.
+function arrayAverage(arr){
+  //Find the sum
+  var sum = 0;
+  for(var i in arr) {
+      sum += arr[i];
+  }
+  //Get the length of the array
+  var numbersCnt = arr.length;
+  //Return the average / mean.
+  return (sum / numbersCnt);
 }
