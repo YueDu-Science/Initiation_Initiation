@@ -7367,7 +7367,7 @@ Some symbols correspond to key (${key_item_c}).
 
 Some symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
     
-Your job is to figure out which symbols require a response or not.
+Your job is to figure out whether a symbol requires a response or not.
 
 
 ACCURACY is the priority, so go as slowly as you need to. The more mistaks you make, the longer this block will take.
@@ -8998,13 +8998,13 @@ function Instr_CR_NewRoutineBegin(trials) {
     
 In next block, keep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).
 
-You will see the same eight symbols, but which symbols require or do not require a response may become different.
+You will see the same eight symbols, but whether each symbol requires a response or not may become different.
 
 If a symbol requires a response, press key (${key_item_c}) using the (${finger_item}) finger. 
 
 For symbols that do not require a response, DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.    
 
-Your job is to figure out which symbols require or do not require a response.
+Your job is to figure out whether a symbol requires a response.
 
 
   
@@ -9162,7 +9162,7 @@ function Instr_CR_NewRoutineEnd(trials) {
 
 var _RT_Press_Stop_allKeys;
 var RT_Enter_Trial_StopComponents;
-var rt_stop_tol;
+var rt_stop_tol = [];
 function RT_Enter_Trial_StopRoutineBegin(trials) {
   return function () {
     //------Prepare to start Routine 'RT_Enter_Trial_Stop'-------
