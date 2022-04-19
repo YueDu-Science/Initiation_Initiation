@@ -9165,7 +9165,7 @@ function Instr_CR_NewRoutineEnd(trials) {
 
 var _RT_Press_Stop_allKeys;
 var RT_Enter_Trial_StopComponents;
-
+var rt_stop_tol = [];
 function RT_Enter_Trial_StopRoutineBegin(trials) {
   return function () {
     //------Prepare to start Routine 'RT_Enter_Trial_Stop'-------
@@ -9175,7 +9175,7 @@ function RT_Enter_Trial_StopRoutineBegin(trials) {
 
     jitter = 0;
 
-    var rt_stop_tol = [];
+    rt_stop_tol = [];
     // update component parameters for each repeat
     RT_Rec_Frame_Stop.setOpacity(rec_frame_opacity);
     RT_Rec_Frame_Stop.setLineColor(new util.Color(rec_frame_color));
