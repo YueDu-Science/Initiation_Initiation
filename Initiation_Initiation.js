@@ -9370,6 +9370,7 @@ function RT_Enter_Trial_StopRoutineEnd(trials) {
         actual_choice = key_list.indexOf(actual_press);
         if (corr === 1){
           rt_stop_tol.push(RT_Press_Stop.rt);
+          console.log(rt_stop_tol)
         }
     } else {
         actual_press = "a";
