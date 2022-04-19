@@ -214,7 +214,7 @@ var tr_block_hand = 4;
 var num_trials_hand = 4;
 var num_trials_cr = 2000;
 var num_criterion = 1;
-var num_trials = 20;
+var num_trials = 16;
 var num_trials_probe = 96;
 var rt_block = 3;
 var tr_block_old = 0;
@@ -5570,8 +5570,6 @@ function Creat_StimSeqRoutineBegin(trials) {
             // for each count/iteration, need only 2 letters
             x16_new = x16.concat(x_letter_3.slice(2*count,2+2*count))
             
-            console.log(symb)
-            console.log(stimnum)
             util.shuffle(x16_new);
             for (var i, _pj_c = 0, _pj_a = x16_new, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                 i = _pj_a[_pj_c];
@@ -6328,6 +6326,7 @@ function Instr_Block_NumRoutineBegin(trials) {
       if (block_count == 1) {
         stop_tol = 1;
       } else {
+        console.log(arrayAverage(rt_stop_tol))
         if (arrayAverage(rt_stop_tol) < 1) {
         stop_tol = Math.round(arrayAverage(rt_stop_tol) *1.1*10)/10;
         } else if (arrayAverage(rt_stop_tol) >= 1) {
@@ -6345,7 +6344,7 @@ function Instr_Block_NumRoutineBegin(trials) {
     finger_letter_item = finger_list[letter_rnd];
 
     if (block_type === "TR" && remap === 1) {
-      Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') + '\n\n\n\nPress ( ' +  key_item_c + ' ) to start'));
+      Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') + '\n\n\n\nPress (space) to start'));
     } else if (block_type === "RT"){
       Instr_Block_Num_Text.setText((('Block ' + block_count) +  ('\n\n\nKeep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).') 
       + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') 
@@ -9001,7 +9000,7 @@ function Instr_CR_NewRoutineBegin(trials) {
     
 In next block, keep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).
 
-You will see the same eight symbols, but whether each symbol requires a response or not may become different.
+You will see the same eight symbols (NO letters), but whether each symbol requires a response or not may become different.
 
 If a symbol requires a response, press key (${key_item_c}) using the (${finger_item}) finger. 
 
