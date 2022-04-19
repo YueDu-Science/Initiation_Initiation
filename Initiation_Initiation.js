@@ -6328,7 +6328,7 @@ function Instr_Block_NumRoutineBegin(trials) {
       } else {
         console.log(arrayAverage(rt_stop_tol))
         if (arrayAverage(rt_stop_tol) < 1) {
-        stop_tol = Math.round(arrayAverage(rt_stop_tol) *1.1*10)/10;
+        stop_tol = Math.round(arrayAverage(rt_stop_tol) *1.1*100)/100;
         } else if (arrayAverage(rt_stop_tol) >= 1) {
         stop_tol = 1;
           }
@@ -9367,8 +9367,10 @@ function RT_Enter_Trial_StopRoutineEnd(trials) {
     if ((RT_Press_Stop.keys !== undefined)) {
         actual_press = RT_Press_Stop.keys;
         rt = RT_Press_Stop.rt;
-        rt_stop_tol.push(rt);
         actual_choice = key_list.indexOf(actual_press);
+        if (corr === 1){
+          rt_stop_tol.push(RT_Press_Stop.rt);
+        }
     } else {
         actual_press = "a";
         rt = 99;
