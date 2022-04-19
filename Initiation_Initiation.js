@@ -3830,7 +3830,8 @@ Your job is to press a key (shown on next page) as quickly and as accurately as 
 
 For a symbol that does not correpond to a key, simply let it go. 
 
-Occasionally, you will also see four letters (1, 2, 3, 4) on the screen, one at a time, which also requires a key press, shown on next page.
+Occasionally, you will also see letters (1, 2, 3, or 4) on the screen, which also requires a key press, shown on next page.
+They are used to confirme that you keep fingers on all four keys.
 
 
   
