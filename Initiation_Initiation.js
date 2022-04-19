@@ -190,6 +190,7 @@ var x_symb_stop = [0,1,2,3];
 var x_symb_resp = [4,5,6,7];
 var x_letter = [8,9,10,11];
 var x_letter_3 = x_letter.concat(x_letter.concat(x_letter))
+var x_letter_2 = x_letter.concat(x_letter)
 var x_hand = [0,1,2,3,0,1,2,3];
 var x8_new = x_symb;
 var x16 = x8_new.concat(x8_new);
@@ -5495,7 +5496,7 @@ function Creat_StimSeqRoutineBegin(trials) {
     tr_timing_good = 0;
     sum_corr = [0, 0, 0, 0, 0, 0, 0, 0];
     trial_count_item = [0, 0, 0, 0, 0, 0, 0, 0];
-    util.shuffle(x_letter_3);
+    util.shuffle(x_letter_2);
 
     if ((stim_type === "Hand")) {
         seq_stimnum_hand = [];
@@ -5565,10 +5566,10 @@ function Creat_StimSeqRoutineBegin(trials) {
     
     if (((block_type !== "CR") && (stim_type === "Symb") && (remap === 0))) {
         count = 0;
-        while ((count < (num_trials / 18))) {
+        while ((count < (num_trials / 17))) {
             // add letter catch trials
             // for each count/iteration, need only 2 letters
-            x16_new = x16.concat(x_letter_3.slice(2*count,2+2*count))
+            x16_new = x16.concat(x_letter_2.slice(1*count,1+1*count))
             
             util.shuffle(x16_new);
             for (var i, _pj_c = 0, _pj_a = x16_new, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
