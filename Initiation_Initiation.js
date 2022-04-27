@@ -214,11 +214,11 @@ var stop_pair_2 = [];
 var tr_block_hand = 4;
 var num_trials_hand = 4;
 var num_trials_cr = 2000;
-var num_criterion = 5;
-var num_trials = 16;
-var num_trials_probe = 16;
+var num_criterion = 2;
+var num_trials = 8;
+var num_trials_probe = 8;
 var rt_block = 4;
-var tr_block_old = 0;
+var tr_block_old = 2;
 var tr_block_new_swap = 0;
 var tr_block_new_stop = 6;
 
@@ -227,8 +227,8 @@ var rt_hand_yes = 0;
 var cr_old_yes = 1;
 var cr_new_yes = 1;
 var rt_yes = 1;
-var tr_old_pre_yes = 0;
-var tr_old_post_yes = 0;
+var tr_old_pre_yes = 1;
+var tr_old_post_yes = 1;
 var tr_new_yes = 1;
 
 var sound_check_yes = 0;
@@ -2551,9 +2551,9 @@ function TR_Iter_Old_PreLoopBegin(thisScheduler) {
     thisScheduler.add(Pre_TrialRoutineBegin(snapshot));
     thisScheduler.add(Pre_TrialRoutineEachFrame(snapshot));
     thisScheduler.add(Pre_TrialRoutineEnd(snapshot));
-    thisScheduler.add(TR_Enter_TrialsRoutineBegin(snapshot));
-    thisScheduler.add(TR_Enter_TrialsRoutineEachFrame(snapshot));
-    thisScheduler.add(TR_Enter_TrialsRoutineEnd(snapshot));
+    thisScheduler.add(TR_Enter_Trials_StopRoutineBegin(snapshot));
+    thisScheduler.add(TR_Enter_Trials_StopRoutineEachFrame(snapshot));
+    thisScheduler.add(TR_Enter_Trials_StopRoutineEnd(snapshot));
     const TR_Feedback_Old_Pre_BoolLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Feedback_Old_Pre_BoolLoopBegin, TR_Feedback_Old_Pre_BoolLoopScheduler);
     thisScheduler.add(TR_Feedback_Old_Pre_BoolLoopScheduler);
@@ -2865,9 +2865,9 @@ function TR_Iter_Old_PostLoopBegin(thisScheduler) {
     thisScheduler.add(Pre_TrialRoutineBegin(snapshot));
     thisScheduler.add(Pre_TrialRoutineEachFrame(snapshot));
     thisScheduler.add(Pre_TrialRoutineEnd(snapshot));
-    thisScheduler.add(TR_Enter_TrialsRoutineBegin(snapshot));
-    thisScheduler.add(TR_Enter_TrialsRoutineEachFrame(snapshot));
-    thisScheduler.add(TR_Enter_TrialsRoutineEnd(snapshot));
+    thisScheduler.add(TR_Enter_Trials_StopRoutineBegin(snapshot));
+    thisScheduler.add(TR_Enter_Trials_StopRoutineEachFrame(snapshot));
+    thisScheduler.add(TR_Enter_Trials_StopRoutineEnd(snapshot));
     const TR_Feedback_Old_Post_BoolLoopScheduler = new Scheduler(psychoJS);
     thisScheduler.add(TR_Feedback_Old_Post_BoolLoopBegin, TR_Feedback_Old_Post_BoolLoopScheduler);
     thisScheduler.add(TR_Feedback_Old_Post_BoolLoopScheduler);
@@ -6324,7 +6324,17 @@ function Instr_Block_NumRoutineBegin(trials) {
         // randomly select a key a response key
         key_rnd = Math.floor(rng3 * key_list.length) 
         // use this to set the key in pre_trial routine
-      } 
+      } else if (block_type === "TR" && remap === 0){
+          iter = 0;
+          while (iter < 2000) {
+            rng4 = myrng()
+            if (Math.floor( rng4* key_list.length) !== Math.floor( rng3* key_list.length) ) {
+              break;
+            }
+            iter = iter + 1;
+          }
+          key_rnd = Math.floor(rng4 * key_list.length) 
+      }
 
     
     if (block_type === "RT") {
@@ -6348,7 +6358,7 @@ function Instr_Block_NumRoutineBegin(trials) {
     letter_item_c = key_list_C[letter_rnd];
     finger_letter_item = finger_list[letter_rnd];
 
-    if (block_type === "TR" && remap === 1) {
+    if (block_type === "TR") {
       Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') + '\n\n\n\nPress (space) to start'));
     } else if (block_type === "RT"){
       Instr_Block_Num_Text.setText((('Block ' + block_count) +  ('\n\n\nKeep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).') 
@@ -8123,6 +8133,31 @@ function Instr_TR_Old_PreRoutineBegin(trials) {
     t = 0;
     Instr_TR_Old_PreClock.reset(); // clock
     frameN = -1;
+
+    key_item = key_list[key_rnd];
+    key_item_c = key_list_C[key_rnd];
+    finger_item = finger_list[key_rnd];
+
+
+    instr_tr_old_pre_text = `In the following ${tr_block_old} blocks, keep resting your Index, Middle, Ring, and Little fingers on keys (H, U, I, L).
+
+You will hear 4 beeps and:
+    
+If you see a symbol that requires a response, press a key (shown on next page) ON the fourth beep.      
+    
+If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING.
+    
+    
+    
+Remember, the symbol may show up very late. In this case, MAKE A GUESS. If you decide to press, remember to respond ON the fourth beep.
+    
+This task is designed to be difficult, so it is okay to make a guess.
+    
+    
+    
+Press (space bar) to start.`
+        ;
+
     // update component parameters for each repeat
     Instr_TR_Old_Pre_text.setText(instr_tr_old_pre_text);
     Instr_TR_Old_Pre_Press.keys = undefined;
@@ -8858,6 +8893,33 @@ function Instr_TR_Old_PostRoutineBegin(trials) {
     t = 0;
     Instr_TR_Old_PostClock.reset(); // clock
     frameN = -1;
+
+    key_item = key_list[key_rnd];
+    key_item_c = key_list_C[key_rnd];
+    finger_item = finger_list[key_rnd];
+
+
+    instr_tr_old_post_text = `In the following ${tr_block_old} blocks, we will do the 4-beep task.
+    
+Remember to keep resting your Index, Middle, Ring, and Little fingers on keys (H, U, I, L).
+
+
+If you see a symbol that requires a response, press a key (shown on next page) ON the fourth beep.      
+
+If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING.
+
+
+
+Remember, the symbol may show up very late. In this case, MAKE A GUESS. If you decide to press, remember to respond ON the fourth beep.
+
+This task is designed to be difficult, so it is okay to make a guess.
+
+
+
+
+Press (space bar) to start.`
+    ;
+
     // update component parameters for each repeat
     Instr_TR_Old_Post_text.setText(instr_tr_old_post_text);
     Instr_TR_Old_Post_Press.keys = undefined;
@@ -9020,7 +9082,7 @@ Press (H, U, I, or L) to start.`
     ;
 
     stop_pair_1 = probe_pair_1;
-    stop_pair_2 = remap_pair_1;
+    stop_pair_2 = probe_pair_2;
     Instr_CR_New_Text.setText(instr_cr_new_text);
     Instr_CR_New_Press.keys = undefined;
     Instr_CR_New_Press.rt = undefined;
