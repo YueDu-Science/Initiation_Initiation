@@ -3611,7 +3611,6 @@ var remap_pair_rnd;
 var remap_pair_1 = [];
 var remap_pair_2 = [];
 var probe_pair_1 = [];
-var probe_pair_2 = [];
 var Init_StimComponents;
 function Init_StimRoutineBegin(trials) {
   return function () {
@@ -3626,7 +3625,7 @@ function Init_StimRoutineBegin(trials) {
     coin = StimList[0]["Sound_P"];
     beep = StimList[0]["Beep"];
     buzz = StimList[0]["Sound_N"];
-    for (var i = 0, _pj_a = num_symb; (i < _pj_a); i += 1) {
+    for (var i = 0, _pj_a = num_symb + num_letter; (i < _pj_a); i += 1) {
         stimnum.push(StimList[i]["StimNum"]);
         symb.push(StimList[i]["Symb"]);
         symb_r.push(StimList[i]["Symb_R"]);
@@ -3655,14 +3654,6 @@ function Init_StimRoutineBegin(trials) {
           probe_pair_1.push((i + 4));
       }
     }
-
-    for (i = 0, _pj_a = 4; (i < _pj_a); i += 1) { // probe_pair_1 require responses during practice but not during prob
-      if  (!(remap_pair_2.includes(i))) {
-          probe_pair_2.push((i + 4));
-      }
-    }
-
-
     symb_remap_ind = Object.assign({}, symb_map_ind);
     
     symb_remap_ind[remap_pair_1[0]] = symb_map_ind[remap_pair_1[1]];
@@ -3697,7 +3688,7 @@ function Init_StimRoutineBegin(trials) {
     psychoJS.experiment.addData("Remap_Pair_1", remap_pair_1);
     psychoJS.experiment.addData("Remap_Pair_2", remap_pair_2);
     psychoJS.experiment.addData("Probe_Pair_1", probe_pair_1);
-    psychoJS.experiment.addData("Probe_Pair_2", probe_pair_2);
+    
     
     // keep track of which components have finished
     Init_StimComponents = [];
@@ -3838,6 +3829,10 @@ Ready? Press (H, U, I, or L) to continue.`
 Your job is to press a key (shown on next page) as quickly and as accurately as possible if a symbol requires a response.
 
 For a symbol that does not correpond to a key, simply let it go. 
+
+Occasionally, you will also see letters (1, 2, 3, or 4) on the screen, which also requires a key press, shown on next page.
+They are used to confirme that you keep fingers on all four keys.
+
 
   
 There will be ${rt_block} blocks with short breaks in between. It will be hard at the beginning, try you best to improve your performance through these blocks.
@@ -5572,11 +5567,13 @@ function Creat_StimSeqRoutineBegin(trials) {
     
     if (((block_type !== "CR") && (stim_type === "Symb") && (remap === 0))) {
         count = 0;
-        while ((count < (num_trials / 16))) {
+        while ((count < (num_trials / 17))) {
             // add letter catch trials
             // for each count/iteration, need only 2 letters
-            util.shuffle(x16);
-            for (var i, _pj_c = 0, _pj_a = x16, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+            x16_new = x16.concat(x_letter_2.slice(1*count,1+1*count))
+            
+            util.shuffle(x16_new);
+            for (var i, _pj_c = 0, _pj_a = x16_new, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                 i = _pj_a[_pj_c];
                 seq_stimnum.push(stimnum[i]);
                 seq_key.push(key[i]);
@@ -6353,12 +6350,14 @@ function Instr_Block_NumRoutineBegin(trials) {
     } else if (block_type === "RT"){
       Instr_Block_Num_Text.setText((('Block ' + block_count) +  ('\n\n\nKeep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).') 
       + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') 
+      + '\n\n\nPress (' + letter_item_c + ') using the (' +  finger_letter_item + ') finger if a letter appears' 
       + '\n\n\nSimple wait for ' + stop_tol + ' second(s) if a symbol does not require a response'
       + '\n\n\nThus if a response is needed, you have to make it within '+ stop_tol + ' second(s)'
       + '\n\n\n\nPress (space) to start'));
     } else if (block_type === "CR"){
       Instr_Block_Num_Text.setText((('Block ' + block_count) +  ('\n\n\nKeep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).') 
       + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') 
+      + '\n\n\n Press (' + letter_item_c + ') using the (' +  finger_letter_item + ') finger if a letter appears' 
       + '\n\n\n\nPress (space) to start'));
     } 
     
