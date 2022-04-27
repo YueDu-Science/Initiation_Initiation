@@ -8155,7 +8155,7 @@ This task is designed to be difficult, so it is okay to make a guess.
     
     
     
-Press (space bar) to start.`
+Press (H, U, I, or L) to start.`
         ;
 
     // update component parameters for each repeat
@@ -8917,7 +8917,7 @@ This task is designed to be difficult, so it is okay to make a guess.
 
 
 
-Press (space bar) to start.`
+Press (H, U, I, or L) to start.`
     ;
 
     // update component parameters for each repeat
