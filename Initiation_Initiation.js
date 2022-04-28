@@ -6341,10 +6341,10 @@ function Instr_Block_NumRoutineBegin(trials) {
       if (block_count == 1) {
         stop_tol = 1.2;
       } else {
-        console.log(Math.quantileSeq(rt_stop_tol,0.6))
-        if (Math.quantileSeq(rt_stop_tol,0.6) < 1.2) {
-        stop_tol = Math.round(Math.quantileSeq(rt_stop_tol,0.6) *1.1*100)/100;
-        } else if (Math.quantileSeq(rt_stop_tol,0.6) >= 1.2) {
+        console.log(calcQuartile(rt_stop_tol,0.6))
+        if (calcQuartile(rt_stop_tol,0.6) < 1.2) {
+        stop_tol = Math.round(calcQuartile(rt_stop_tol,0.6) *1.1*100)/100;
+        } else if (calcQuartile(rt_stop_tol,0.6) >= 1.2) {
         stop_tol = 1.2;
           }
         }
@@ -10201,4 +10201,27 @@ function arrayAverage(arr){
   var numbersCnt = arr.length;
   //Return the average / mean.
   return (sum / numbersCnt);
+}
+
+function calcQuartile(arr,q){
+  var a = arr.slice();
+  // Turn q into a decimal (e.g. 95 becomes 0.95)
+  q = q/100;
+
+  // Sort the array into ascending order
+  data = sortArr(a);
+
+  // Work out the position in the array of the percentile point
+  var p = ((data.length) - 1) * q;
+  var b = Math.floor(p);
+
+  // Work out what we rounded off (if anything)
+  var remainder = p - b;
+
+  // See whether that data exists directly
+  if (data[b+1]!==undefined){
+      return parseFloat(data[b]) + remainder * (parseFloat(data[b+1]) - parseFloat(data[b]));
+  }else{
+      return parseFloat(data[b]);
+  }
 }
