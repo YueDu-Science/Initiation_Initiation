@@ -6343,7 +6343,7 @@ function Instr_Block_NumRoutineBegin(trials) {
       } else {
         console.log(calcQuartile(rt_stop_tol,0.6))
         if (calcQuartile(rt_stop_tol,0.6) < 1.2) {
-        stop_tol = Math.round(calcQuartile(rt_stop_tol,0.6) *1.1*100)/100;
+        stop_tol = Math.round(calcQuartile(rt_stop_tol,0.7) *100)/100;
         } else if (calcQuartile(rt_stop_tol,0.6) >= 1.2) {
         stop_tol = 1.2;
           }
