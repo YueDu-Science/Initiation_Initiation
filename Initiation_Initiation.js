@@ -224,7 +224,7 @@ var tr_block_new_stop = 6;
 
 var tr_hand_yes = 0;
 var rt_hand_yes = 0;
-var cr_old_yes = 0;
+var cr_old_yes = 1;
 var cr_new_yes = 1;
 var rt_yes = 1;
 var tr_old_pre_yes = 0;
@@ -6341,10 +6341,10 @@ function Instr_Block_NumRoutineBegin(trials) {
       if (block_count == 1) {
         stop_tol = 1.2;
       } else {
-        console.log(math.quantileSeq(rt_stop_tol,0.6))
-        if (math.quantileSeq(rt_stop_tol,0.6) < 1.2) {
-        stop_tol = Math.round(math.quantileSeq(rt_stop_tol,0.6) *1.1*100)/100;
-        } else if (math.quantileSeq(rt_stop_tol,0.6) >= 1.2) {
+        console.log(Math.quantileSeq(rt_stop_tol,0.6))
+        if (Math.quantileSeq(rt_stop_tol,0.6) < 1.2) {
+        stop_tol = Math.round(Math.quantileSeq(rt_stop_tol,0.6) *1.1*100)/100;
+        } else if (Math.quantileSeq(rt_stop_tol,0.6) >= 1.2) {
         stop_tol = 1.2;
           }
         }
