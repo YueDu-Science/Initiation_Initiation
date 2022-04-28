@@ -6288,6 +6288,7 @@ var rng5;
 var letter_rnd;
 var letter_item_c;
 var finger_letter_item;
+var rt_stop_tol;
 function Instr_Block_NumRoutineBegin(trials) {
   return function () {
     //------Prepare to start Routine 'Instr_Block_Num'-------
@@ -6497,6 +6498,7 @@ function Instr_Block_NumRoutineEnd(trials) {
     
     Instr_Block_Num_Press.stop();
     TR_Coin.stop();
+    rt_stop_tol = []
     // the Routine "Instr_Block_Num" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -9230,7 +9232,7 @@ function Instr_CR_NewRoutineEnd(trials) {
 
 var _RT_Press_Stop_allKeys;
 var RT_Enter_Trial_StopComponents;
-var rt_stop_tol;
+
 function RT_Enter_Trial_StopRoutineBegin(trials) {
   return function () {
     //------Prepare to start Routine 'RT_Enter_Trial_Stop'-------
@@ -9240,7 +9242,6 @@ function RT_Enter_Trial_StopRoutineBegin(trials) {
 
     jitter = 0;
 
-    rt_stop_tol = [];
     // update component parameters for each repeat
     RT_Rec_Frame_Stop.setOpacity(rec_frame_opacity);
     RT_Rec_Frame_Stop.setLineColor(new util.Color(rec_frame_color));
