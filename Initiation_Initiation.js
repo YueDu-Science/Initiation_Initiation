@@ -6339,13 +6339,13 @@ function Instr_Block_NumRoutineBegin(trials) {
     
     if (block_type === "RT") {
       if (block_count == 1) {
-        stop_tol = 1;
+        stop_tol = 1.2;
       } else {
-        console.log(arrayAverage(rt_stop_tol))
-        if (arrayAverage(rt_stop_tol) < 1) {
-        stop_tol = Math.round(arrayAverage(rt_stop_tol) *1.1*100)/100;
-        } else if (arrayAverage(rt_stop_tol) >= 1) {
-        stop_tol = 1;
+        console.log(math.quantileSeq(rt_stop_tol,0.6))
+        if (math.quantileSeq(rt_stop_tol,0.6) < 1.2) {
+        stop_tol = Math.round(math.quantileSeq(rt_stop_tol,0.6) *1.1*100)/100;
+        } else if (math.quantileSeq(rt_stop_tol,0.6) >= 1.2) {
+        stop_tol = 1.2;
           }
         }
     }
@@ -9410,6 +9410,10 @@ function RT_Enter_Trial_StopRoutineEnd(trials) {
         }
     } else {
         if ((RT_Press_Stop.keys !== undefined)) {
+          
+            rt_stop_tol.push(RT_Press_Stop.rt);
+            console.log(rt_stop_tol)
+
           if (RT_Press_Stop.corr) {
               corr = 1;
               feedback_image = symb_g_item;
@@ -9433,10 +9437,6 @@ function RT_Enter_Trial_StopRoutineEnd(trials) {
         actual_press = RT_Press_Stop.keys;
         rt = RT_Press_Stop.rt;
         actual_choice = key_list.indexOf(actual_press);
-        if (corr === 1){
-          rt_stop_tol.push(RT_Press_Stop.rt);
-          console.log(rt_stop_tol)
-        }
     } else {
         actual_press = "a";
         rt = 99;
