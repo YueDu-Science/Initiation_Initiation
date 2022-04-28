@@ -10209,7 +10209,7 @@ function calcQuartile(arr,q){
   q = q/100;
 
   // Sort the array into ascending order
-  data = sortArr(a);
+  var data = sortArr(a);
 
   // Work out the position in the array of the percentile point
   var p = ((data.length) - 1) * q;
