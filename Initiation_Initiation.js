@@ -10225,3 +10225,9 @@ function calcQuartile(arr,q){
       return parseFloat(data[b]);
   }
 }
+
+function sortArr(arr){
+  var ary = arr.slice();
+  ary.sort(function(a,b){ return parseFloat(a) - parseFloat(b);});
+  return ary;
+}
