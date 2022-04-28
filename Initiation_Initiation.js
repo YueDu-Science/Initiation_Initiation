@@ -9230,7 +9230,7 @@ function Instr_CR_NewRoutineEnd(trials) {
 
 var _RT_Press_Stop_allKeys;
 var RT_Enter_Trial_StopComponents;
-var rt_stop_tol = [];
+var rt_stop_tol;
 function RT_Enter_Trial_StopRoutineBegin(trials) {
   return function () {
     //------Prepare to start Routine 'RT_Enter_Trial_Stop'-------
