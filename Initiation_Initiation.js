@@ -6288,7 +6288,7 @@ var rng5;
 var letter_rnd;
 var letter_item_c;
 var finger_letter_item;
-var rt_stop_tol;
+var rt_stop_tol = [];
 function Instr_Block_NumRoutineBegin(trials) {
   return function () {
     //------Prepare to start Routine 'Instr_Block_Num'-------
