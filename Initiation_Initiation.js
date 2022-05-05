@@ -9056,6 +9056,8 @@ function Instr_CR_NewRoutineBegin(trials) {
     frameN = -1;
     TR_Coin.setVolume(0);
     stop_tol = 2;
+
+    rt_stop_tol = [];
     // update component parameters for each repeat
     // randomly select a key a response key
     key_rnd = Math.floor(rng3 * key_list.length) 
@@ -9495,7 +9497,7 @@ function Instr_TR_NewRoutineBegin(trials) {
 
 Remember to keep resting your Index, Middle, Ring, and Little fingers on keys (H, U, I, L).
             
-In the last ${tr_block_new_stop} blocks, use the NEW symbol-key map you just learned:
+In the last ${tr_block_new_stop} blocks, use the NEW symbol-key map you just learned to do the 4-beep task:
 
 
 If you see a symbol that requires a response, press key (${key_item_c}) using the (${finger_item}) finger ON the fourth beep.      
