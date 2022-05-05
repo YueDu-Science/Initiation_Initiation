@@ -9415,10 +9415,9 @@ function RT_Enter_Trial_StopRoutineEnd(trials) {
     } else {
         if ((RT_Press_Stop.keys !== undefined)) {
           
-            rt_stop_tol.push(RT_Press_Stop.rt);
-            console.log(rt_stop_tol)
-
           if (RT_Press_Stop.corr) {
+              rt_stop_tol.push(RT_Press_Stop.rt);
+              console.log(rt_stop_tol)
               corr = 1;
               feedback_image = symb_g_item;
               feedback_col = color_p;
