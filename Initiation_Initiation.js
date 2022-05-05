@@ -212,26 +212,26 @@ var stop_pair_1 = [];
 var stop_pair_2 = [];
 ////////////////////////////////////
 var tr_block_hand = 4;
-var num_trials_hand = 4;
+var num_trials_hand = 96;
 var num_trials_cr = 2000;
-var num_criterion = 2;
-var num_trials = 8;
-var num_trials_probe = 8;
-var rt_block = 4;
+var num_criterion = 5;
+var num_trials = 96;
+var num_trials_probe = 96;
+var rt_block = 12;
 var tr_block_old = 2;
 var tr_block_new_swap = 0;
 var tr_block_new_stop = 6;
 
-var tr_hand_yes = 0;
-var rt_hand_yes = 0;
+var tr_hand_yes = 1;
+var rt_hand_yes = 1;
 var cr_old_yes = 1;
 var cr_new_yes = 1;
 var rt_yes = 1;
-var tr_old_pre_yes = 0;
-var tr_old_post_yes = 0;
+var tr_old_pre_yes = 1;
+var tr_old_post_yes = 1;
 var tr_new_yes = 1;
 
-var sound_check_yes = 0;
+var sound_check_yes = 1;
 var num_trials_sound_check = 20;
 
 
