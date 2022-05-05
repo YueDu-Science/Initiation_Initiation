@@ -6344,10 +6344,10 @@ function Instr_Block_NumRoutineBegin(trials) {
       } else {
         console.log(rt_stop_tol)
         console.log(calcQuartile(rt_stop_tol,70))
-        if (calcQuartile(rt_stop_tol,70) < 1.2) {
-        stop_tol = Math.round(calcQuartile(rt_stop_tol,70) *100)/100;
-        } else if (calcQuartile(rt_stop_tol,70) >= 1.2) {
-        stop_tol = 1.2;
+        if (rt_stop_tol.length >= (num_trials/2) *0.7) {
+          stop_tol = Math.round(calcQuartile(rt_stop_tol,70) *100)/100;
+        } else if (rt_stop_tol.length < (num_trials/2) *0.7) {
+          stop_tol = stop_tol;
           }
         }
     }
