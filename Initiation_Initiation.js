@@ -6360,7 +6360,7 @@ function Instr_Block_NumRoutineBegin(trials) {
     letter_item_c = key_list_C[letter_rnd];
     finger_letter_item = finger_list[letter_rnd];
 
-    if (block_type === "TR") {
+    if (block_type === "TR" && stim_type === "Symb") {
       Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') + '\n\n\n\nPress (space) to start'));
     } else if (block_type === "RT"){
       Instr_Block_Num_Text.setText((('Block ' + block_count) +  ('\n\n\nKeep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).') 
@@ -6372,9 +6372,9 @@ function Instr_Block_NumRoutineBegin(trials) {
       Instr_Block_Num_Text.setText((('Block ' + block_count) +  ('\n\n\nKeep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).') 
       + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') 
       + '\n\n\n\nPress (space) to start'));
-    } 
-    
-    
+    } else if (block_type === "TR" && stim_type === "Hand") {
+      Instr_Block_Num_Text.setText(('Block ' + block_count));
+    }
     
     
     Instr_Block_Num_Press.keys = undefined;
