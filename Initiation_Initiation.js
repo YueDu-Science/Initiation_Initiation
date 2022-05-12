@@ -212,7 +212,7 @@ var stop_pair_1 = [];
 var stop_pair_2 = [];
 ////////////////////////////////////
 var tr_block_hand = 4;
-var num_trials_hand = 96;
+var num_trials_hand = 20;
 var num_trials_cr = 2000;
 var num_criterion = 5;
 var num_trials = 96;
