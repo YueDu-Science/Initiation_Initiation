@@ -6396,7 +6396,7 @@ function Instr_Block_NumRoutineBegin(trials) {
     }
     
     finger_hint_text = `(${finger_item}) finger on (${key_item_c}).`
-    Finger_Hint_Text.setText(finger_hint_text);
+    
     
     Instr_Block_Num_Press.keys = undefined;
     Instr_Block_Num_Press.rt = undefined;
@@ -7567,6 +7567,7 @@ function Pre_TrialRoutineBegin(trials) {
     Pre_TrialClock.reset(); // clock
     frameN = -1;
     // update component parameters for each repeat
+    Finger_Hint_Text.setText(finger_hint_text);
     Pre_Trial_Rec_Frame.setOpacity(rec_frame_opacity);
     Pre_Trial_Rec_Frame.setLineColor(new util.Color(rec_frame_color));
     Pre_Trial_Rec_Frame.setLineWidth(rec_wd);
@@ -7730,6 +7731,7 @@ function RT_Enter_TrialRoutineBegin(trials) {
     jitter = 0;
 
     // update component parameters for each repeat
+    Finger_Hint_Text.setText(finger_hint_text);
     RT_Rec_Frame.setOpacity(rec_frame_opacity);
     RT_Rec_Frame.setLineColor(new util.Color(rec_frame_color));
     RT_Rec_Frame.setLineWidth(rec_wd);
@@ -7936,7 +7938,7 @@ function RT_FeedbackRoutineBegin(trials) {
     RT_FeedbackClock.reset(); // clock
     frameN = -1;
     // update component parameters for each repeat
-    
+    Finger_Hint_Text.setText(finger_hint_text);
     TR_Coin.setVolume(sound_vol);
     RT_Rec_Frame_Feedback.setOpacity(rec_frame_opacity);
     RT_Rec_Frame_Feedback.setLineColor(new util.Color(rec_frame_color));
@@ -8369,6 +8371,7 @@ function TR_Enter_TrialsRoutineBegin(trials) {
     tr_penalty = 0;
     tr_feedback = 0;
     
+    Finger_Hint_Text.setText(finger_hint_text);
     TR_Rec_Frame.setOpacity(rec_frame_opacity);
     TR_Rec_Frame.setLineColor(new util.Color(rec_frame_color));
     TR_Rec_Frame.setLineWidth(rec_wd);
@@ -8663,7 +8666,7 @@ function TR_FeedbackRoutineBegin(trials) {
     frameN = -1;
     
     // update component parameters for each repeat
-
+    Finger_Hint_Text.setText(finger_hint_text);
     TR_Coin.setVolume(sound_vol);
     Tr_Rec_Frame_Feedback.setOpacity(rec_frame_opacity);
     Tr_Rec_Frame_Feedback.setLineColor(new util.Color(rec_frame_color));
@@ -9348,6 +9351,7 @@ function RT_Enter_Trial_StopRoutineBegin(trials) {
     jitter = 0;
 
     // update component parameters for each repeat
+    Finger_Hint_Text.setText(finger_hint_text);
     RT_Rec_Frame_Stop.setOpacity(rec_frame_opacity);
     RT_Rec_Frame_Stop.setLineColor(new util.Color(rec_frame_color));
     RT_Rec_Frame_Stop.setLineWidth(rec_wd);
@@ -9786,6 +9790,7 @@ function TR_Enter_Trials_StopRoutineBegin(trials) {
     tr_penalty = 0;
     tr_feedback = 0;
     
+    Finger_Hint_Text.setText(finger_hint_text);
     TR_Rec_Frame_Stop.setOpacity(rec_frame_opacity);
     TR_Rec_Frame_Stop.setLineColor(new util.Color(rec_frame_color));
     TR_Rec_Frame_Stop.setLineWidth(rec_wd);
