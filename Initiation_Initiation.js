@@ -1866,7 +1866,7 @@ function experimentInit() {
     text: 'default text',
     font: 'Arial',
     units: undefined, 
-    pos: [0, 0.25], height: 0.03,  wrapWidth: undefined, ori: 0,
+    pos: [-0.48, 0.45], height: 0.03,  wrapWidth: undefined, ori: 0,
     color: new util.Color('white'),  opacity: 1,
     depth: 0.0 
   });
@@ -7415,6 +7415,7 @@ ACCURACY is the priority, so go as slowly as you need to. The more mistaks you m
 Ready? Press (H, U, I, or L) to continue.`
     ;
 
+    finger_hint_text = `(${finger_item}) finger on (${key_item_c}).`
 
     Instr_CR_Old_Text.setText(instr_cr_old_text);
     Instr_CR_Old_Press.keys = undefined;
@@ -9191,6 +9192,9 @@ ACCURACY is the priority, so go as slowly as you need to. The more mistaks you m
         
 Press (H, U, I, or L) to start.`
     ;
+
+
+    finger_hint_text = `(${finger_item}) finger on (${key_item_c}).`
 
     stop_pair_1 = probe_pair_1;
     stop_pair_2 = remap_pair_1;
