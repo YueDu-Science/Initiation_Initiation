@@ -231,7 +231,7 @@ var tr_old_pre_yes = 1;
 var tr_old_post_yes = 1;
 var tr_new_yes = 1;
 
-var sound_check_yes = 1;
+var sound_check_yes = 0;
 var num_trials_sound_check = 20;
 
 
