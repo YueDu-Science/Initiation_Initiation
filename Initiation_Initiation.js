@@ -222,8 +222,8 @@ var tr_block_old = 3;
 var tr_block_new_swap = 0;
 var tr_block_new_stop = 9;
 
-var tr_hand_yes = 1;
-var rt_hand_yes = 1;
+var tr_hand_yes = 0;
+var rt_hand_yes = 0;
 var cr_old_yes = 1;
 var cr_new_yes = 1;
 var rt_yes = 1;
@@ -410,6 +410,8 @@ var CountDownClock;
 var penalty_countdown_text;
 var sample_num;
 var iter;
+var Finger_Hint_Text;
+var finger_hint_text;
 
 function experimentInit() {
   document.body.style.cursor='none';
@@ -1856,6 +1858,20 @@ function experimentInit() {
   globalClock = new util.Clock();  // to track the time since experiment started
   routineTimer = new util.CountdownTimer();  // to track time remaining of each (non-slip) routine
   
+
+  Finger_Hint_Text = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'Finger_Hint_Text',
+    alignHoriz: 'center',
+    text: 'default text',
+    font: 'Arial',
+    units: undefined, 
+    pos: [-0.49, 0.48], height: 0.03,  wrapWidth: undefined, ori: 0,
+    color: new util.Color('white'),  opacity: 1,
+    depth: 0.0 
+  });
+
+
   return Scheduler.Event.NEXT;
 }
 
@@ -6379,6 +6395,8 @@ function Instr_Block_NumRoutineBegin(trials) {
       Instr_Block_Num_Text.setText(('Block ' + block_count));
     }
     
+    finger_hint_text = `(${finger_item}) finger on (${key_item_c}).`
+    Finger_Hint_Text.setText(finger_hint_text);
     
     Instr_Block_Num_Press.keys = undefined;
     Instr_Block_Num_Press.rt = undefined;
@@ -7397,6 +7415,7 @@ ACCURACY is the priority, so go as slowly as you need to. The more mistaks you m
 Ready? Press (H, U, I, or L) to continue.`
     ;
 
+
     Instr_CR_Old_Text.setText(instr_cr_old_text);
     Instr_CR_Old_Press.keys = undefined;
     Instr_CR_Old_Press.rt = undefined;
@@ -7606,6 +7625,15 @@ function Pre_TrialRoutineEachFrame(trials) {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     
+
+    if (t >= 0.0 ) {
+      // keep track of start time/frame for later
+      Finger_Hint_Text.tStart = t;  // (not accounting for frame time here)
+      Finger_Hint_Text.frameNStart = frameN;  // exact frame index
+      
+      Finger_Hint_Text.setAutoDraw(true);
+    }
+
     // *Pre_Trial_Rec_Frame* updates
     if (t >= 0.0 && Pre_Trial_Rec_Frame.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -7619,6 +7647,12 @@ function Pre_TrialRoutineEachFrame(trials) {
     if (Pre_Trial_Rec_Frame.status === PsychoJS.Status.STARTED && t >= frameRemains) {
       Pre_Trial_Rec_Frame.setAutoDraw(false);
     }
+
+    if (t >= frameRemains) {
+      Finger_Hint_Text.setAutoDraw(false);
+    }
+
+
     // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
@@ -7737,6 +7771,15 @@ function RT_Enter_TrialRoutineEachFrame(trials) {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     
+    if (t >= 0.0) {
+      // keep track of start time/frame for later
+      Finger_Hint_Text.tStart = t;  // (not accounting for frame time here)
+      Finger_Hint_Text.frameNStart = frameN;  // exact frame index
+      
+      Finger_Hint_Text.setAutoDraw(true);
+    }
+
+
     // *RT_Rec_Frame* updates
     if (t >= 0.0 && RT_Rec_Frame.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -7932,6 +7975,16 @@ function RT_FeedbackRoutineEachFrame(trials) {
     t = RT_FeedbackClock.getTime();
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
+    if (t >= 0.0) {
+      // keep track of start time/frame for later
+      Finger_Hint_Text.tStart = t;  // (not accounting for frame time here)
+      Finger_Hint_Text.frameNStart = frameN;  // exact frame index
+      
+      Finger_Hint_Text.setAutoDraw(true);
+    }
+
+
+
     // start/stop CR_Feedback_Coin_Old
     if (t >= 0.0 && TR_Coin.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -7961,6 +8014,15 @@ function RT_FeedbackRoutineEachFrame(trials) {
       RT_Rec_Frame_Feedback.setAutoDraw(false);
     }
     
+    if (t >= frameRemains) {
+      // keep track of start time/frame for later
+      Finger_Hint_Text.tStart = t;  // (not accounting for frame time here)
+      Finger_Hint_Text.frameNStart = frameN;  // exact frame index
+      
+      Finger_Hint_Text.setAutoDraw(false);
+    }
+
+
     if (symb_type === "symbol"){
       // *RT_Feedback_Image* updates
       if (t >= 0.0 && RT_Feedback_Image.status === PsychoJS.Status.NOT_STARTED) {
@@ -8164,6 +8226,7 @@ This task is designed to be difficult, so it is okay to make a guess.
 Press (H, U, I, or L) to start.`
         ;
 
+
     // update component parameters for each repeat
     Instr_TR_Old_Pre_text.setText(instr_tr_old_pre_text);
     Instr_TR_Old_Pre_Press.keys = undefined;
@@ -8348,6 +8411,16 @@ function TR_Enter_TrialsRoutineEachFrame(trials) {
     t = TR_Enter_TrialsClock.getTime();
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
+
+    if (t >= 0.0) {
+      // keep track of start time/frame for later
+      Finger_Hint_Text.tStart = t;  // (not accounting for frame time here)
+      Finger_Hint_Text.frameNStart = frameN;  // exact frame index
+      
+      Finger_Hint_Text.setAutoDraw(true);
+    }
+
+
     // start/stop TR_Beep
     if (t >= 0.0 && TR_Beep.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -8376,6 +8449,16 @@ function TR_Enter_TrialsRoutineEachFrame(trials) {
     if (TR_Rec_Frame.status === PsychoJS.Status.STARTED && t >= frameRemains) {
       TR_Rec_Frame.setAutoDraw(false);
     }
+
+
+    if (t >= frameRemains) {
+      // keep track of start time/frame for later
+      Finger_Hint_Text.tStart = t;  // (not accounting for frame time here)
+      Finger_Hint_Text.frameNStart = frameN;  // exact frame index
+      
+      Finger_Hint_Text.setAutoDraw(false);
+    }
+
     
     if (symb_type === "symbol"){
       // *TR_Stim_Image* updates
@@ -8621,6 +8704,14 @@ function TR_FeedbackRoutineEachFrame(trials) {
     t = TR_FeedbackClock.getTime();
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
+    if (t >= 0.0) {
+      // keep track of start time/frame for later
+      Finger_Hint_Text.tStart = t;  // (not accounting for frame time here)
+      Finger_Hint_Text.frameNStart = frameN;  // exact frame index
+      
+      Finger_Hint_Text.setAutoDraw(true);
+    }
+
     // start/stop TR_Feedback_Coin
     if (t >= 0.0 && TR_Coin.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -8649,6 +8740,15 @@ function TR_FeedbackRoutineEachFrame(trials) {
     if (Tr_Rec_Frame_Feedback.status === PsychoJS.Status.STARTED && t >= frameRemains) {
       Tr_Rec_Frame_Feedback.setAutoDraw(false);
     }
+
+    if (t >= frameRemains) {
+      // keep track of start time/frame for later
+      Finger_Hint_Text.tStart = t;  // (not accounting for frame time here)
+      Finger_Hint_Text.frameNStart = frameN;  // exact frame index
+      
+      Finger_Hint_Text.setAutoDraw(false);
+    }
+
     
     // *TR_Feedback_Text* updates
     if (t >= 0.0 && TR_Feedback_Text.status === PsychoJS.Status.NOT_STARTED) {
@@ -9288,7 +9388,14 @@ function RT_Enter_Trial_StopRoutineEachFrame(trials) {
     t = RT_Enter_Trial_StopClock.getTime();
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
-    
+    if (t >= 0.0) {
+      // keep track of start time/frame for later
+      Finger_Hint_Text.tStart = t;  // (not accounting for frame time here)
+      Finger_Hint_Text.frameNStart = frameN;  // exact frame index
+      
+      Finger_Hint_Text.setAutoDraw(true);
+    }
+
     // *RT_Rec_Frame_Stop* updates
     if (t >= 0.0 && RT_Rec_Frame_Stop.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -9302,6 +9409,15 @@ function RT_Enter_Trial_StopRoutineEachFrame(trials) {
     if (RT_Rec_Frame_Stop.status === PsychoJS.Status.STARTED && t >= frameRemains) {
       RT_Rec_Frame_Stop.setAutoDraw(false);
     }
+
+    if (t >= frameRemains) {
+      // keep track of start time/frame for later
+      Finger_Hint_Text.tStart = t;  // (not accounting for frame time here)
+      Finger_Hint_Text.frameNStart = frameN;  // exact frame index
+      
+      Finger_Hint_Text.setAutoDraw(false);
+    }
+
     
     if (symb_type === "symbol"){
       // *RT_Stim_Image_Stop* updates
@@ -9332,6 +9448,8 @@ function RT_Enter_Trial_StopRoutineEachFrame(trials) {
       }
     }
     
+
+
     // *RT_Press_Stop* updates
     if (t >= 0.0 && RT_Press_Stop.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -9709,6 +9827,14 @@ function TR_Enter_Trials_StopRoutineEachFrame(trials) {
     t = TR_Enter_Trials_StopClock.getTime();
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
+    if (t >= 0.0) {
+      // keep track of start time/frame for later
+      Finger_Hint_Text.tStart = t;  // (not accounting for frame time here)
+      Finger_Hint_Text.frameNStart = frameN;  // exact frame index
+      
+      Finger_Hint_Text.setAutoDraw(true);
+    }
+
     // start/stop TR_Beep_Stop
     if (t >= 0.0 && TR_Beep.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -9738,6 +9864,15 @@ function TR_Enter_Trials_StopRoutineEachFrame(trials) {
     if (TR_Rec_Frame_Stop.status === PsychoJS.Status.STARTED && t >= frameRemains) {
       TR_Rec_Frame_Stop.setAutoDraw(false);
     }
+
+    if (t >= frameRemains) {
+      // keep track of start time/frame for later
+      Finger_Hint_Text.tStart = t;  // (not accounting for frame time here)
+      Finger_Hint_Text.frameNStart = frameN;  // exact frame index
+      
+      Finger_Hint_Text.setAutoDraw(false);
+    }
+
     
     if (symb_type === "symbol"){
       // *TR_Stim_Image_Stop* updates
