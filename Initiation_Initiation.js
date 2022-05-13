@@ -218,9 +218,9 @@ var num_criterion = 5;
 var num_trials = 96;
 var num_trials_probe = 96;
 var rt_block = 12;
-var tr_block_old = 2;
+var tr_block_old = 3;
 var tr_block_new_swap = 0;
-var tr_block_new_stop = 6;
+var tr_block_new_stop = 9;
 
 var tr_hand_yes = 1;
 var rt_hand_yes = 1;
@@ -6338,7 +6338,7 @@ function Instr_Block_NumRoutineBegin(trials) {
       }
 
     
-    if (block_type === "RT") {
+    /* if (block_type === "RT") {
       if (block_count == 1) {
         stop_tol = 1.2;
       } else {
@@ -6350,8 +6350,11 @@ function Instr_Block_NumRoutineBegin(trials) {
           stop_tol = stop_tol;
           }
         }
-    }
+    } */
     
+    if (block_type === "RT") {
+        stop_tol = 1;
+    }
 
     key_item = key_list[key_rnd];
     key_item_c = key_list_C[key_rnd];
@@ -9087,7 +9090,7 @@ Press (H, U, I, or L) to start.`
     ;
 
     stop_pair_1 = probe_pair_1;
-    stop_pair_2 = probe_pair_2;
+    stop_pair_2 = remap_pair_1;
     Instr_CR_New_Text.setText(instr_cr_new_text);
     Instr_CR_New_Press.keys = undefined;
     Instr_CR_New_Press.rt = undefined;
