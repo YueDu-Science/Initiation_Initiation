@@ -6396,7 +6396,7 @@ function Instr_Block_NumRoutineBegin(trials) {
     }
     
     finger_hint_text = `(${finger_item}) finger on (${key_item_c}).`
-    
+    console.log(finger_hint_text)
     
     Instr_Block_Num_Press.keys = undefined;
     Instr_Block_Num_Press.rt = undefined;
