@@ -3266,7 +3266,7 @@ function TR_Iter_New_SwapLoopBegin(thisScheduler) {
   // set up handler to look after randomisation of conditions etc
   TR_Iter_New_Swap = new TrialHandler({
     psychoJS: psychoJS,
-    nReps: num_trials_probe, method: TrialHandler.Method.SEQUENTIAL,
+    nReps: num_trials, method: TrialHandler.Method.SEQUENTIAL,
     extraInfo: expInfo, originPath: undefined,
     trialList: undefined,
     seed: undefined, name: 'TR_Iter_New_Swap'
@@ -3423,7 +3423,7 @@ function TR_Iter_New_StopLoopBegin(thisScheduler) {
   // set up handler to look after randomisation of conditions etc
   TR_Iter_New_Stop = new TrialHandler({
     psychoJS: psychoJS,
-    nReps: num_trials_probe, method: TrialHandler.Method.SEQUENTIAL,
+    nReps: num_trials, method: TrialHandler.Method.SEQUENTIAL,
     extraInfo: expInfo, originPath: undefined,
     trialList: undefined,
     seed: undefined, name: 'TR_Iter_New_Stop'
@@ -3850,6 +3850,8 @@ Ready? Press (H, U, I, or L) to continue.`
     ;
     if ((session === 1)) {
       instr_rt_text = `Now you are going to practice the symbol-key map you learned. 
+
+Remember to keep resting your Index, Middle, Ring, and Little fingers on keys (H, U, I, L).
       
 Your job is to press a key (shown on next page) as quickly and as accurately as possible if a symbol requires a response.
 
@@ -6397,9 +6399,8 @@ function Instr_Block_NumRoutineBegin(trials) {
     if (block_type === "TR" && stim_type === "Symb") {
       Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') + '\n\n\n\nPress (space) to start'));
     } else if (block_type === "RT"){
-      Instr_Block_Num_Text.setText((('Block ' + block_count) +  ('\n\n\nKeep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).') 
-      + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') 
-      + '\n\n\nIf a response is needed, press the key as quickly as possible'
+      Instr_Block_Num_Text.setText((('Block ' + block_count) 
+      + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger as quickly as you can if a symbol requires a response')
       + '\n\n\n\nPress (space) to start'));
     } else if (block_type === "CR"){
       Instr_Block_Num_Text.setText((('Block ' + block_count) +  ('\n\n\nKeep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).') 
