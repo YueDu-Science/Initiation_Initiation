@@ -215,16 +215,16 @@ var tr_block_hand = 4;
 var num_trials_hand = 20;
 var num_trials_cr = 2000;
 var num_criterion = 2;
-var num_trials = 16;
+var num_trials = 96;
 var num_trials_probe = 96;
-var rt_block = 12;
-var tr_block_old = 3;
+var rt_block = 2;
+var tr_block_old = 1;
 var tr_block_new_swap = 0;
 var tr_block_new_stop = 9;
 
 var tr_hand_yes = 0;
 var rt_hand_yes = 0;
-var cr_old_yes = 1;
+var cr_old_yes = 0;
 var cr_new_yes = 1;
 var rt_yes = 1;
 var tr_old_pre_yes = 1;
@@ -6379,13 +6379,27 @@ function Instr_Block_NumRoutineBegin(trials) {
     letter_item_c = key_list_C[letter_rnd];
     finger_letter_item = finger_list[letter_rnd];
 
-    if (block_type === "TR" && stim_type === "Symb") {
+    /* if (block_type === "TR" && stim_type === "Symb") {
       Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') + '\n\n\n\nPress (space) to start'));
     } else if (block_type === "RT"){
       Instr_Block_Num_Text.setText((('Block ' + block_count) +  ('\n\n\nKeep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).') 
       + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') 
       + '\n\n\nSimple wait for ' + stop_tol + ' second(s) if a symbol does not require a response'
       + '\n\n\nThus if a response is needed, you have to make it within '+ stop_tol + ' second(s)'
+      + '\n\n\n\nPress (space) to start'));
+    } else if (block_type === "CR"){
+      Instr_Block_Num_Text.setText((('Block ' + block_count) +  ('\n\n\nKeep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).') 
+      + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') 
+      + '\n\n\n\nPress (space) to start'));
+    } else if (block_type === "TR" && stim_type === "Hand") {
+      Instr_Block_Num_Text.setText(('Block ' + block_count));
+    } */
+    if (block_type === "TR" && stim_type === "Symb") {
+      Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') + '\n\n\n\nPress (space) to start'));
+    } else if (block_type === "RT"){
+      Instr_Block_Num_Text.setText((('Block ' + block_count) +  ('\n\n\nKeep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).') 
+      + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') 
+      + '\n\n\nIf a response is needed, press the key as quickly as possible'
       + '\n\n\n\nPress (space) to start'));
     } else if (block_type === "CR"){
       Instr_Block_Num_Text.setText((('Block ' + block_count) +  ('\n\n\nKeep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).') 
