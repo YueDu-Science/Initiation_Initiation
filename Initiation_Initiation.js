@@ -226,9 +226,9 @@ var tr_hand_yes = 0;
 var rt_hand_yes = 0;
 var cr_old_yes = 1;
 var cr_new_yes = 1;
-var rt_yes = 1;
-var tr_old_pre_yes = 1;
-var tr_old_post_yes = 1;
+var rt_yes = 0;
+var tr_old_pre_yes = 0;
+var tr_old_post_yes = 0;
 var tr_new_yes = 1;
 
 var sound_check_yes = 0;
@@ -3861,7 +3861,7 @@ For a symbol that does not correpond to a key, simply let it go.
 There will be ${rt_block} blocks with short breaks in between. It will be hard at the beginning, try you best to improve your performance through these blocks.
   
 
-Whenever you are ready, press (Space bar) to proceed.`
+Whenever you are ready, press (space bar) to proceed.`
   ;
   } else {
       if ((1 < session)) {
@@ -9192,7 +9192,7 @@ function Instr_CR_NewRoutineBegin(trials) {
     
 In next block, keep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).
 
-You will see the same eight symbols (NO letters), but whether each symbol requires a response or not may become different.
+You will see the same eight symbols, but whether each symbol requires a response or not may become different.
 
 If a symbol requires a response, press the (${finger_item}) finger on key (${key_item_c}) . 
 
@@ -9280,7 +9280,7 @@ function Instr_CR_NewRoutineEachFrame(trials) {
     }
 
     if (Instr_CR_New_Press.status === PsychoJS.Status.STARTED) {
-      let theseKeys = Instr_CR_New_Press.getKeys({keyList: ['space bar'], waitRelease: false});
+      let theseKeys = Instr_CR_New_Press.getKeys({keyList: ['space'], waitRelease: false});
       _Instr_CR_New_Press_allKeys = _Instr_CR_New_Press_allKeys.concat(theseKeys);
       if (_Instr_CR_New_Press_allKeys.length > 0) {
         Instr_CR_New_Press.keys = _Instr_CR_New_Press_allKeys[0].name;  // just the first key pressed
