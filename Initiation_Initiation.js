@@ -3266,7 +3266,7 @@ function TR_Iter_New_SwapLoopBegin(thisScheduler) {
   // set up handler to look after randomisation of conditions etc
   TR_Iter_New_Swap = new TrialHandler({
     psychoJS: psychoJS,
-    nReps: num_trials_probe, method: TrialHandler.Method.SEQUENTIAL,
+    nReps: num_trials, method: TrialHandler.Method.SEQUENTIAL,
     extraInfo: expInfo, originPath: undefined,
     trialList: undefined,
     seed: undefined, name: 'TR_Iter_New_Swap'
@@ -3423,7 +3423,7 @@ function TR_Iter_New_StopLoopBegin(thisScheduler) {
   // set up handler to look after randomisation of conditions etc
   TR_Iter_New_Stop = new TrialHandler({
     psychoJS: psychoJS,
-    nReps: num_trials_probe, method: TrialHandler.Method.SEQUENTIAL,
+    nReps: num_trials, method: TrialHandler.Method.SEQUENTIAL,
     extraInfo: expInfo, originPath: undefined,
     trialList: undefined,
     seed: undefined, name: 'TR_Iter_New_Stop'
