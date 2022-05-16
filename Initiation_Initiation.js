@@ -6397,15 +6397,15 @@ function Instr_Block_NumRoutineBegin(trials) {
       Instr_Block_Num_Text.setText(('Block ' + block_count));
     } */
     if (block_type === "TR" && stim_type === "Symb") {
-      Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') + '\n\n\n\nPress (space) to start'));
+      Instr_Block_Num_Text.setText((('Block ' + block_count) + ('\n\n\n\nPress the (' +  finger_item + ') finger on key (' + key_item_c + ') if a symbol requires a response') + '\n\n\n\nPress (space bar) to start'));
     } else if (block_type === "RT"){
       Instr_Block_Num_Text.setText((('Block ' + block_count) 
-      + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger as quickly as you can if a symbol requires a response')
-      + '\n\n\n\nPress (space) to start'));
+      + ('\n\n\n\nPress the (' +  finger_item + ') finger on key (' + key_item_c + ') as quickly as you can if a symbol requires a response')
+      + '\n\n\n\nPress (space bar) to start'));
     } else if (block_type === "CR"){
       Instr_Block_Num_Text.setText((('Block ' + block_count) +  ('\n\n\nKeep resting your Index, Middle, Ring, Little fingers on keys (H, U, I, L).') 
-      + ('\n\n\n\nPress (' + key_item_c + ') using the (' +  finger_item + ') finger if a symbol requires a response') 
-      + '\n\n\n\nPress (space) to start'));
+      + ('\n\n\n\nPress the (' +  finger_item + ') finger on key (' + key_item_c + ') if a symbol requires a response') 
+      + '\n\n\n\nPress (space bar) to start'));
     } else if (block_type === "TR" && stim_type === "Hand") {
       Instr_Block_Num_Text.setText(('Block ' + block_count));
     }
@@ -7427,7 +7427,7 @@ Your job is to figure out whether a symbol requires a response or not.
 ACCURACY is the priority, so go as slowly as you need to. The more mistaks you make, the longer this block will take.
 
     
-Ready? Press (Space bar) to continue.`
+Ready? Press (space bar) to continue.`
     ;
 
     finger_hint_text = `(${finger_item}) finger on (${key_item_c}).`
@@ -8241,7 +8241,7 @@ This task is designed to be difficult, so it is okay to make a guess.
     
     
     
-Press (Space bar) to start.`
+Press (space bar) to start.`
         ;
 
 
@@ -9042,7 +9042,7 @@ This task is designed to be difficult, so it is okay to make a guess.
 
 
 
-Press (Space bar) to start.`
+Press (space bar) to start.`
     ;
 
     // update component parameters for each repeat
