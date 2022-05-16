@@ -7417,7 +7417,7 @@ In the upcoming block, rest your Index, Middle, Ring, and Little fingers on keys
 
 You will see eight novel symbols on the screen, one at a time. 
 
-Some symbols correspond to key (${key_item_c}) pressed by (${finger_item}) finger.
+Some symbols require a response. Press the (${finger_item}) finger on key (${key_item_c}).
 
 Some symbols do NOT correspond with a key. DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.
     
@@ -9194,7 +9194,7 @@ In next block, keep resting your Index, Middle, Ring, Little fingers on keys (H,
 
 You will see the same eight symbols (NO letters), but whether each symbol requires a response or not may become different.
 
-If a symbol requires a response, press key (${key_item_c}) using the (${finger_item}) finger. 
+If a symbol requires a response, press the (${finger_item}) finger on key (${key_item_c}) . 
 
 For symbols that do not require a response, DO NOT PRESS ANY KEY when they appear. Instead, simply wait for 2 seconds.    
 
