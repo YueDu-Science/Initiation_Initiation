@@ -224,7 +224,7 @@ var tr_block_new_stop = 9;
 
 var tr_hand_yes = 0;
 var rt_hand_yes = 0;
-var cr_old_yes = 0;
+var cr_old_yes = 1;
 var cr_new_yes = 1;
 var rt_yes = 1;
 var tr_old_pre_yes = 1;
