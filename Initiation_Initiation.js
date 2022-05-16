@@ -9643,7 +9643,7 @@ Remember to keep resting your Index, Middle, Ring, and Little fingers on keys (H
 In the last ${tr_block_new_stop} blocks, use the NEW symbol-key map you just learned to do the 4-beep task:
 
 
-If you see a symbol that requires a response, press key (${key_item_c}) using the (${finger_item}) finger ON the fourth beep.      
+If you see a symbol that requires a response, press the (${finger_item}) finger on key (${key_item_c}) ON the fourth beep.      
 
 If you see a symbol that does NOT require a response, DO NOT PRESS ANYTHING.
 
