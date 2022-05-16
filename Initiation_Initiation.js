@@ -3861,7 +3861,7 @@ For a symbol that does not correpond to a key, simply let it go.
 There will be ${rt_block} blocks with short breaks in between. It will be hard at the beginning, try you best to improve your performance through these blocks.
   
 
-Whenever you are ready, press (H, U, I, or L) to proceed.`
+Whenever you are ready, press (Space bar) to proceed.`
   ;
   } else {
       if ((1 < session)) {
@@ -7427,7 +7427,7 @@ Your job is to figure out whether a symbol requires a response or not.
 ACCURACY is the priority, so go as slowly as you need to. The more mistaks you make, the longer this block will take.
 
     
-Ready? Press (H, U, I, or L) to continue.`
+Ready? Press (Space bar) to continue.`
     ;
 
     finger_hint_text = `(${finger_item}) finger on (${key_item_c}).`
@@ -7493,7 +7493,7 @@ function Instr_CR_OldRoutineEachFrame(trials) {
     }
 
     if (Instr_CR_Old_Press.status === PsychoJS.Status.STARTED) {
-      let theseKeys = Instr_CR_Old_Press.getKeys({keyList: ['h', 'u', 'i', 'l'], waitRelease: false});
+      let theseKeys = Instr_CR_Old_Press.getKeys({keyList: ['space'], waitRelease: false});
       _Instr_CR_Old_Press_allKeys = _Instr_CR_Old_Press_allKeys.concat(theseKeys);
       if (_Instr_CR_Old_Press_allKeys.length > 0) {
         Instr_CR_Old_Press.keys = _Instr_CR_Old_Press_allKeys[0].name;  // just the first key pressed
@@ -8241,7 +8241,7 @@ This task is designed to be difficult, so it is okay to make a guess.
     
     
     
-Press (H, U, I, or L) to start.`
+Press (Space bar) to start.`
         ;
 
 
@@ -8308,7 +8308,7 @@ function Instr_TR_Old_PreRoutineEachFrame(trials) {
     }
 
     if (Instr_TR_Old_Pre_Press.status === PsychoJS.Status.STARTED) {
-      let theseKeys = Instr_TR_Old_Pre_Press.getKeys({keyList: ['h', 'u', 'i', 'l'], waitRelease: false});
+      let theseKeys = Instr_TR_Old_Pre_Press.getKeys({keyList: ['space'], waitRelease: false});
       _Instr_TR_Old_Pre_Press_allKeys = _Instr_TR_Old_Pre_Press_allKeys.concat(theseKeys);
       if (_Instr_TR_Old_Pre_Press_allKeys.length > 0) {
         Instr_TR_Old_Pre_Press.keys = _Instr_TR_Old_Pre_Press_allKeys[0].name;  // just the first key pressed
@@ -8933,7 +8933,7 @@ function Instr_RTRoutineEachFrame(trials) {
     }
 
     if (Instr_RT_Press.status === PsychoJS.Status.STARTED) {
-      let theseKeys = Instr_RT_Press.getKeys({keyList: ['h', 'u', 'i', 'l'], waitRelease: false});
+      let theseKeys = Instr_RT_Press.getKeys({keyList: ['space'], waitRelease: false});
       _Instr_RT_Press_allKeys = _Instr_RT_Press_allKeys.concat(theseKeys);
       if (_Instr_RT_Press_allKeys.length > 0) {
         Instr_RT_Press.keys = _Instr_RT_Press_allKeys[0].name;  // just the first key pressed
@@ -9042,7 +9042,7 @@ This task is designed to be difficult, so it is okay to make a guess.
 
 
 
-Press (H, U, I, or L) to start.`
+Press (Space bar) to start.`
     ;
 
     // update component parameters for each repeat
@@ -9108,7 +9108,7 @@ function Instr_TR_Old_PostRoutineEachFrame(trials) {
     }
 
     if (Instr_TR_Old_Post_Press.status === PsychoJS.Status.STARTED) {
-      let theseKeys = Instr_TR_Old_Post_Press.getKeys({keyList: ['h', 'u', 'i', 'l'], waitRelease: false});
+      let theseKeys = Instr_TR_Old_Post_Press.getKeys({keyList: ['space'], waitRelease: false});
       _Instr_TR_Old_Post_Press_allKeys = _Instr_TR_Old_Post_Press_allKeys.concat(theseKeys);
       if (_Instr_TR_Old_Post_Press_allKeys.length > 0) {
         Instr_TR_Old_Post_Press.keys = _Instr_TR_Old_Post_Press_allKeys[0].name;  // just the first key pressed
@@ -9205,7 +9205,7 @@ Your job is to figure out whether a symbol requires a response.
 ACCURACY is the priority, so go as slowly as you need to. The more mistaks you make, the longer this block will take.
         
         
-Press (H, U, I, or L) to start.`
+Press (space bar) to start.`
     ;
 
 
@@ -9280,7 +9280,7 @@ function Instr_CR_NewRoutineEachFrame(trials) {
     }
 
     if (Instr_CR_New_Press.status === PsychoJS.Status.STARTED) {
-      let theseKeys = Instr_CR_New_Press.getKeys({keyList: ['h', 'u', 'i', 'l'], waitRelease: false});
+      let theseKeys = Instr_CR_New_Press.getKeys({keyList: ['space bar'], waitRelease: false});
       _Instr_CR_New_Press_allKeys = _Instr_CR_New_Press_allKeys.concat(theseKeys);
       if (_Instr_CR_New_Press_allKeys.length > 0) {
         Instr_CR_New_Press.keys = _Instr_CR_New_Press_allKeys[0].name;  // just the first key pressed
