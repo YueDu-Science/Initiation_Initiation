@@ -218,12 +218,12 @@ var num_criterion = 5;
 var num_trials = 96;
 var num_trials_probe = 96;
 var rt_block = 12;
-var tr_block_old = 3;
+var tr_block_old = 4;
 var tr_block_new_swap = 0;
-var tr_block_new_stop = 9;
+var tr_block_new_stop = 12;
 
 var tr_hand_yes = 1;
-var rt_hand_yes = 1;
+var rt_hand_yes = 0;
 var cr_old_yes = 1;
 var cr_new_yes = 1;
 var rt_yes = 1;
@@ -6407,7 +6407,8 @@ function Instr_Block_NumRoutineBegin(trials) {
       + ('\n\n\n\nPress the (' +  finger_item + ') finger on key (' + key_item_c + ') if a symbol requires a response') 
       + '\n\n\n\nPress (space bar) to start'));
     } else if (block_type === "TR" && stim_type === "Hand") {
-      Instr_Block_Num_Text.setText(('Block ' + block_count));
+      Instr_Block_Num_Text.setText(('Block ' + block_count)
+      + '\n\n\n\nPress (space bar) to start');
     }
     
     finger_hint_text = `(${finger_item}) finger on (${key_item_c}).`
